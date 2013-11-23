@@ -1,5 +1,5 @@
 # 广告系统
-192.168.1.175		www.ads.me ads.me s.ads.me a.ads.me c.ads.me img.ads.me 
+192.168.1.175		www.ads.me ads.me s.ads.me a.ads.me c.ads.me img.ads.me r.ads.me 
 
 
 ############################
@@ -7,19 +7,21 @@
 ############################
 # 主站
 <VirtualHost *:80>
-    DocumentRoot /data/wwwroot/web/ads.cc/Code/Www/Dynamic/
+    DocumentRoot /data/wwwroot/web/ads.cc/Code/Www/Dynamic/Ads/
     ServerName www.ads.me 
     ServerAlias ads.me
 </VirtualHost>
 
 # 管理后台
 <VirtualHost *:80>
-    DocumentRoot /data/wwwroot/web/ads.cc/Code/Www/Dynamic/
-    ServerName a.ads.me  
-        # 站点图片别名设置
-        Alias /statics /data/wwwroot/web/ads.cc/Code/Www/Statics/        
-        # 附件预览
-        Alias /Uploadfile /data/wwwroot/web/ads.cc/Uploadfile/        
+    DocumentRoot /data/wwwroot/web/ads.cc/Code/Www/Dynamic/Zhts/
+    ServerName a.ads.me       
+</VirtualHost>
+
+# 权限系统
+<VirtualHost *:80>
+    DocumentRoot /data/wwwroot/web/ads.cc/Code/Www/Dynamic/Authority/
+    ServerName r.ads.me         
 </VirtualHost>
 
 # 静态文件

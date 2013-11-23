@@ -1,5 +1,5 @@
 <?php
-require_once 'common.php';
+require_once '../common.php';
 //定义项目名称
 define('APP_NAME', 'Ads');
 // 默认模版路径的设置

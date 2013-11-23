@@ -2,3 +2,6 @@
 /Code/Conf/config.global.php
 
 /Code/Data
+/.buildpath
+/.project
+/.settings

@@ -14,4 +14,3 @@ if ($_GET['debug_mode'] != true) {
 @ini_set('session.auto_start',    0);
 
 define('ROOT_PATH', dirname(__FILE__));
-define('ADS_ROOT', ROOT_PATH . '/App/');
