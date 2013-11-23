@@ -5,3 +5,6 @@
 /.buildpath
 /.project
 /.settings
+/Code/Conf/domain.php
+/Code/App/Ads/Conf/domain.php
+/Code/App/Authority/Conf/domain.php
