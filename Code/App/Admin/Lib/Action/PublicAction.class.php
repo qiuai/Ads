@@ -13,7 +13,7 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午9:57:14      todo
  */
-class IndexAction extends CommonAction {
+class PublicAction extends CommonAction {
 	/**
 	 * 检测用户是否登录
 	 *
@@ -30,7 +30,7 @@ class IndexAction extends CommonAction {
 	 * @CreateDate: 2013-11-25 上午10:10:51
 	 */
 	public function login(){
-		
+		$this->display();
 	}
 	/**
 	 * 用户登出

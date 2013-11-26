@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>PHPADU联盟后台登陆</title>
+<style type="text/css">
+body { background-image: url("STATIC_URL/admin/images/login_bg.gif")/*tpa=http://adu.phpad.cn/STATIC_URL/admin/images/login_bg.gif*/;}
+#userlogin { width:730px; height: 270px; background: url("STATIC_URL/admin/images/login_bg2.gif")/*tpa=http://adu.phpad.cn/STATIC_URL/admin/images/login_bg2.gif*/; border-radius: 10px; position: absolute; left:50%; top:25%; margin-left:-365px; border:1px solid #CCC; }
+#userlogin ul { background: url("STATIC_URL/admin/images/logo.png")/*tpa=http://adu.phpad.cn/STATIC_URL/admin/images/logo.png*/ no-repeat 100px 65px; padding:45px 0 0 410px; height: 270px;list-style:none;}
+#userlogin li { padding-bottom: 15px;}
+#userlogin .t_input { width:230px; height:25px; line-height: 25px; padding:8px; background: url("STATIC_URL/admin/images/login_input.gif")/*tpa=http://adu.phpad.cn/STATIC_URL/admin/images/login_input.gif*/ no-repeat; border:0; }
+#userlogin .submit { width:90px; height:30px; background: url("STATIC_URL/admin/images/login_btn.gif")/*tpa=http://adu.phpad.cn/STATIC_URL/admin/images/login_btn.gif*/ no-repeat; text-indent: -9999px; display: block; border:0;}
+#userlogin #vcode {width:90px;}
+</style>
+</head>
+<body>
+
+<div id="userlogin">
+	<form id="loginform" name="loginform" action="" method="post">
+		<ul>
+			<li>
+				<input type="text" name="username" id="username" class="t_input" value="admin" />
+			</li>
+			<li>
+				<input type="password" name="password" id="password" class="t_input" value="123456" />
+			</li>
+			<li>
+				<input type="text" id="vcode" name="code" value="请输入验证码" onclick="this.value = ''" />
+				<img src="STATIC_URL/img/code.php.gif" tppabs="http://adu.phpad.cn/code.php"  onclick="this.src='code.php?'+Math.random();" title="点击图片刷新" style="position:relative;top:5px" />
+		    </li>
+			<li>
+				<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit" />
+			</li>
+
+		</ul>
+	</form>
+</div>
+
+</body>
+</html>
