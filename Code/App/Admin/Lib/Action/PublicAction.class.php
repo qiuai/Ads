@@ -41,4 +41,13 @@ class PublicAction extends CommonAction {
 	public function logout(){
 		
 	}
+	/**
+	 * 左侧菜单
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-11-27 下午7:39:00
+	 */
+	public function menu(){
+		$this->display();
+	}
 }
