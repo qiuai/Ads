@@ -13,33 +13,20 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class IndexAction extends CommonAction {
-	//首页
+class InfoAdsAction extends CommonAction {
+	function _initialize(){
+		$this->assign("flag","info");
+	}
     public function index(){ 
+		$this->assign("title","修改个人信息");
 		$this->display();
     }
-	//计划管理
-	public function plan(){
-		$this->display();
+	public function info_info(){
+		$this->assign("title","修改个人信息");
+		$this->display(index);
 	}
-	//广告管理
-	public function ad(){
-		$this->display();
-	}
-	//查看报表
-	public function report(){
-		$this->display();
-	}
-	//投放申请
-	public function apply(){
-		$this->display();
-	}
-	//财务管理
-	public function money(){
-		$this->display();
-	}
-	//个人信息
-	public function info(){
+	public function info_password(){
+		$this->assign("title","修改密码");
 		$this->display();
 	}
 }

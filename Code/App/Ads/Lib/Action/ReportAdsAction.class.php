@@ -13,33 +13,32 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class IndexAction extends CommonAction {
-	//首页
+class ReportAdsAction extends CommonAction {
+	function _initialize(){
+		$this->assign("flag","report");
+	}
     public function index(){ 
+		$this->assign("title","广告综合报表");
 		$this->display();
     }
-	//计划管理
-	public function plan(){
+	public function report_all(){
+		$this->assign("title","广告综合报表");
+		$this->display(index);
+	}
+	public function report_cps(){
+		$this->assign("title","CPS明细报表");
 		$this->display();
 	}
-	//广告管理
-	public function ad(){
+	public function report_cpa(){
+		$this->assign("title","CPA明细报表");
 		$this->display();
 	}
-	//查看报表
-	public function report(){
+	public function report_cpc(){
+		$this->assign("title","CPC明细报表");
 		$this->display();
 	}
-	//投放申请
-	public function apply(){
-		$this->display();
-	}
-	//财务管理
-	public function money(){
-		$this->display();
-	}
-	//个人信息
-	public function info(){
+	public function report_cpm(){
+		$this->assign("title","CPM明细报表");
 		$this->display();
 	}
 }
