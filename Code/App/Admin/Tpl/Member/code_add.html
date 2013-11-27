@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://adu.phpad.cn/admin.php?m=code&a=code_add -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript">
+	function getcode(){
+		$.get("http://adu.phpad.cn/admin.php?m=code&a=code_save&", function(data){
+			 $("#mycode").val(data); 	
+		});
+		return false;
+	}
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">新增邀请码</div>
+			<div class="listmain setting">
+				<form method="get" onsubmit="return getcode()">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td colspan="2"><div class="onShow">点击确定，您可以获取邀请码来邀请他人注册，每个邀请码只能邀请一人且过期时间为一天！</div></td>
+						</tr>
+						<tr>
+							<td style="width:100px"><span style="color:red">*</span>获取邀请码：</td>
+							<td><input id="mycode" style="width:300px" type="text" name="code" class="textbox"></td>
+						</tr>
+					</tbody></table>
+					 <input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

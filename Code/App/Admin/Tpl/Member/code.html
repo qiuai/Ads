@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0036)http://adu.phpad.cn/admin.php?m=code -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+<div class="wrap">
+ <div class="main">
+  <div class="body_title">邀请码列表</div>
+  <div class="listmain">	
+      <table align="center" class="list" cellspacing="0">
+        <tbody><tr>
+        <td width="40%" style="border-right:none;">
+            <form method="get">
+                <input type="hidden" name="m" value="code">
+                推荐人ID：<input type="text" name="uid" value="">
+                <input type="submit" value="查询" class="button">
+            </form>
+        </td>
+        </tr>
+        <tr>
+            <td style="font-size:13px;height:40px;" colspan="2">状态：
+                                <a href="http://adu.phpad.cn/admin.php?m=code&a=code_list&" class="link-checked">全部状态</a>
+                <a href="http://adu.phpad.cn/admin.php?m=code&a=code_list&status=1&uid=" class="link_before_checked">可使用</a>
+            	<a href="http://adu.phpad.cn/admin.php?m=code&a=code_list&status=0&uid=" class="link_before_checked">已使用</a>
+            </td>
+        </tr>
+    </tbody></table>
+		
+		
+<form method="post" id="sitelist_form">
+<table cellspacing="0" class="list" style="text-align:center">
+    <tbody><tr class="tb_title">
+        <td>邀请码ID</td>
+        <td>推荐人ID</td>
+        <td>推荐人类型</td>
+        <td>邀请码</td>        
+        <td>状态</td>
+        <td>添加时间</td>
+        <td>操作</td>       
+    </tr>
+    <tr class="bgcolor3">        <td>13</td>
+        <td>5</td>
+        <td>管理员</td>
+         <td>c44641f44fdbdc55436a45276e6a1687</td>
+        <td>可使用</td>         
+        <td>2013-10-23</td>        
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=code&a=code_delete&id=13">删除</a>
+        </td></tr>
+    <tr class="bgcolor4">        <td>11</td>
+        <td>5</td>
+        <td>管理员</td>
+         <td>e427dd1be814b994658694d11b418a2f</td>
+        <td>可使用</td>         
+        <td>2013-10-14</td>        
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=code&a=code_delete&id=11">删除</a>
+        </td></tr>
+    </tbody></table>
+</form>
+<div id="show_act" style="display:none;position:absolute"></div>
+</div>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共2 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=code&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=code&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=code&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=code&page=1">尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+</div>
+
+</body></html>
