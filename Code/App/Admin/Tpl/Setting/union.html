@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"setting_union",autotip:true});
+		$("#union_name").formValidator({onshow:"显示在整站会出现联盟名称的地方",onfocus:"输入的联盟名称必须为 中文、字母或数字"}).inputValidator({min:1,onerror:"输入的联盟名称不能为空"}).regexValidator({regexp:"ps_username",datatype:"enum",onerror:"输入的联盟名称格式错误"});
+		$("#union_domain").formValidator({onshow:"联盟域名的根域，比如 www.zyiis.com",onfocus:"请输入正确的联盟域名",oncorrect:"输入正确"}).regexValidator({regexp:"^([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$",onerror:"您输入的联盟域名格式不正确"});
+		$("#union_flag").formValidator({onshow:"联盟广告标识,附加在广告上的一个联盟标志",onfocus:"输入的联盟广告标识必须为 中文、字母或数字"}).inputValidator({min:1,onerror:"输入的联盟广告标识不能为空"}).regexValidator({regexp:"ps_username",datatype:"enum",onerror:"输入的联盟广告标识格式错误"});
+	});
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">基本设置</div>
+			<div class="listmain setting">
+				<form method="post" action="http://adu.phpad.cn/admin.php?m=setting&a=union_save&" id="setting_union">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td style="width:100px"><em class="red">*</em>联盟名称：</td>
+							<td><input id="union_name" class="textbox" type="text" name="union_name" value="phpadu"><div id="union_nameTip" class="onShow">显示在整站会出现联盟名称的地方</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>联盟域名：</td>
+							<td><input id="union_domain" class="textbox" type="text" name="union_domain" value="www.phpadu.cn"><div id="union_domainTip" class="onShow">联盟域名的根域，比如 www.zyiis.com</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>联盟广告标识：</td>
+							<td><input id="union_flag" class="textbox" type="text" name="union_flag" value="PHPADU联盟"><div id="union_flagTip" class="onShow">联盟广告标识,附加在广告上的一个联盟标志</div></td>
+						</tr>
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

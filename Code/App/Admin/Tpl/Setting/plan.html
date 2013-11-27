@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0046)http://adu.phpad.cn/admin.php?m=setting&a=plan -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"setting_plan", autotip:true});
+		$(":input[name='plan_price_min_cps']").formValidator({onshow:"销售类等最低单价，0为不限制",onfocus:"必须为数字"}).inputValidator({type:"number",onerror:"必须为数字"})
+		$(":input[name='plan_price_min_cpa']").formValidator({onshow:"注册类等最低单价，0为不限制",onfocus:"必须为数字"}).inputValidator({type:"number",onerror:"必须为数字"})
+		$(":input[name='plan_price_min_cpc']").formValidator({onshow:"点击类等最低单价，0为不限制",onfocus:"必须为数字"}).inputValidator({type:"number",onerror:"必须为数字"})
+		$(":input[name='plan_price_min_cpm']").formValidator({onshow:"弹窗、展示类等最低单价，0为不限制",onfocus:"必须为数字"}).inputValidator({type:"number",onerror:"必须为数字"})
+	});
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">计划设置</div>
+			<div class="listmain setting">
+				<form method="post" action="http://adu.phpad.cn/admin.php?m=setting&a=plan_save&" id="setting_plan">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td style="width:150px"><em class="red">*</em>CPS最低单价(%)：</td>
+							<td><input class="textbox" type="text" name="plan_price_min_cps" id="plan_price_min_cps" value=""><div id="plan_price_min_cpsTip" class="onShow">销售类等最低单价，0为不限制</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPA最低单价(￥)：</td>
+							<td><input class="textbox" type="text" name="plan_price_min_cpa" id="plan_price_min_cpa" value=""><div id="plan_price_min_cpaTip" class="onShow">注册类等最低单价，0为不限制</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPC最低单价(￥)：</td>
+							<td><input class="textbox" type="text" name="plan_price_min_cpc" id="plan_price_min_cpc" value=""><div id="plan_price_min_cpcTip" class="onShow">点击类等最低单价，0为不限制</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPM最低单价(￥)：</td>
+							<td><input class="textbox" type="text" name="plan_price_min_cpm" id="plan_price_min_cpm" value=""><div id="plan_price_min_cpmTip" class="onShow">弹窗、展示类等最低单价，0为不限制</div></td>
+						</tr>
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

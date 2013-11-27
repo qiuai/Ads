@@ -1,20 +1,20 @@
 <?php
 /**
- * 广告联盟系统  首页
+ * 广告联盟系统  会员管理
  * 
  * @copyright (C)2012 ZHTS Inc.
  * @project project_name
  * @author Vonwey <VonweyWang@gmail.com>
- * @CreateDate: 2013-11-25 上午10:07:57
+ * @CreateDate: 2013-11-25 上午9:58:45
  * @version 1.0
  *
  * @ModificationHistory  
  * Who          When                What 
  * --------     ----------          ------------------------------------------------ 
- * Vonwey   2013-11-25 上午10:07:57      todo
+ * Vonwey   2013-11-25 上午9:58:45      todo
  */
-class IndexAction extends CommonAction {
+class MemberAction extends CommonAction {
     public function index(){
-		
-    }
+    	$this->display();
+	}
 }
