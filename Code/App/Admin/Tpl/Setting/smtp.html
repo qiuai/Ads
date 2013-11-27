@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0046)http://adu.phpad.cn/admin.php?m=setting&a=smtp -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><style type="text/css">
+.b-bottom {
+    border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"setting_smtp",autotip:true});
+		$("#smtp_server").formValidator({onshow:"SMTP服务器为邮件服务器，正确输入保证邮件正常发送",onfocus:"请输入的正确的SMTP服务器"}).regexValidator({regexp:"notempty",datatype:"enum",onerror:"输入的SMTP服务器格式错误"});
+		$("#smtp_port").formValidator({onshow:"SMTP端口，输入的内容必须为数字",onfocus:"请输入正确的SMTP端口",oncorrect:"输入正确"}).regexValidator({regexp:"num",datatype:"enum",onerror:"您输入的SMTP端口格式不正确"});
+		$("#smtp_name").formValidator({onshow:"输入正确的SMTP用户名，正确输入保证邮件正常发送",onfocus:"请输入正确的SMTP用户名"}).regexValidator({regexp:"notempty",datatype:"enum",onerror:"输入的SMTP用户名格式错误"});
+		$("#smtp_passwd").formValidator({onshow:"输入正确的SMTP密码，正确输入保证邮件正常发送",onfocus:"请输入正确的SMTP密码"}).regexValidator({regexp:"notempty",datatype:"enum",onerror:"输入的SMTP密码格式错误"});
+	});
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">邮件设置</div>
+			<div class="listmain setting">
+				<form id="setting_smtp" method="post" action="http://adu.phpad.cn/admin.php?m=setting&a=smtp_save&">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td class="b-bottom" height="60">
+								<strong>
+									发送邮件选项
+								</strong>
+							</td>
+							<td class="b-bottom">
+								<input name="mail_user_reg" value="1" type="checkbox" checked="">
+								会员注册发送邮件通知
+								<br>
+								<input name="mail_user_activate" value="1" type="checkbox" checked="">
+								会员激活发送邮件通知
+								<br>
+								<input name="mail_site_activate" value="1" type="checkbox" checked="">
+								网站激活发送邮件通知
+								<br>
+								<input name="mail_site_apply" value="1" type="checkbox" checked="">
+								网站申请广告投放通过发送邮件
+								<br>
+								<input name="mail_withdraw_apply" value="1" type="checkbox" checked="">
+								网站主提现申请发送邮件
+								<br>
+								<input name="mail_withdraw_done" value="1" type="checkbox" checked="">
+								网站主提现申请处理完毕发送邮件
+								<br>
+							</td>
+						</tr>
+						<tr>
+							<td class="b-bottom" height="60" width="180">
+								<strong>
+									邮件发送方式
+								</strong>
+							</td>
+							<td class="b-bottom">
+								<table border="0" class="list" cellspacing="0" cellpadding="0">
+									<tbody id="smtp1" style="">
+										<tr>
+											<td width="120">
+												SMTP 服务器
+											</td>
+											<td>
+												<input id="smtp_server" name="smtp_server" value="smtp.ym.163.com" class="textbox" type="text">
+											<div id="smtp_serverTip" class="onShow">SMTP服务器为邮件服务器，正确输入保证邮件正常发送</div></td>
+										</tr>
+										<tr>
+											<td>
+												SMTP 端口
+											</td>
+											<td>
+												<input id="smtp_port" name="smtp_port" value="25" size="5" class="textbox" type="text">
+											<div id="smtp_portTip" class="onShow">SMTP端口，输入的内容必须为数字</div></td>
+										</tr>
+									</tbody>
+									<tbody id="smtp2" style="">				
+										<tr>
+											<td>
+												SMTP 用户名
+											</td>
+											<td>
+												<input id="smtp_name" name="smtp_name" value="vip@5adv.com" class="textbox" type="text">
+											<div id="smtp_nameTip" class="onShow">输入正确的SMTP用户名，正确输入保证邮件正常发送</div></td>
+										</tr>
+										<tr>
+											<td>
+												SMTP 密码
+											</td>
+											<td>
+												<input id="smtp_passwd" name="smtp_passwd" value="999999" class="textbox" type="password">										
+											<div id="smtp_passwdTip" class="onShow">输入正确的SMTP密码，正确输入保证邮件正常发送</div></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+				
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

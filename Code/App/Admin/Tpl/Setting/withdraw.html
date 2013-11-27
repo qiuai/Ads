@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0050)http://adu.phpad.cn/admin.php?m=setting&a=withdraw -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"setting_withdraw",autotip:true});
+			$("#withdraw_count_month").formValidator({onshow:"限制网站主提现次数。请填写数字，0为不限制",onfocus:"输入的每月允许提现次数必须为数字，0为不限制"}).inputValidator({min:1,onerror:"输入的每月允许提现次数不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的每月允许提现次数格式错误"});
+			$("#withdraw_day").formValidator({onshow:"限制网站主提现周天。1-7代表星期一至星期天，英文逗号分隔，0为不限制",onfocus:"输入的允许提现的周天必须为数字。1-7代表星期一至星期天，英文逗号分隔，0为不限制"}).inputValidator({min:1,onerror:"输入的允许提现的周天不能为空"}).regexValidator({regexp:"^[1-7]+(,[1-7]+)*|0$",onerror:"输入的允许提现的周天格式错误"});
+			$("#withdraw_time").formValidator({onshow:"限制网站主提现时间段。24小时制，0为不限制，例如：9-18",onfocus:"输入的允许提现的时间必须为数字，24小时制，0为不限制，例如：9-18"}).inputValidator({min:1,onerror:"输入的允许提现的时间不能为空"}).regexValidator({regexp:"^[0-9]{1,2}\-[0-9]{1,2}|0$",onerror:"输入的允许提现的时间格式错误"});
+			$("#withdraw_min").formValidator({onshow:"限制网站主提现最低金额。请填写数字，例如：20",onfocus:"输入的最低提现额必须为数字,例如：20"}).inputValidator({min:1,onerror:"输入的最低提现额不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的最低提现额格式错误"});
+			$("#withdray_tax").formValidator({onshow:"个人所得税税率。以百分比计算，请填写数字，例如：10",onfocus:"输入的个税税率必须为数字，0为无个税"}).inputValidator({min:1,onerror:"输入的个税税率不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的个税税率格式错误"});
+			$("#withdraw_fee").formValidator({onshow:"财务结算根据实付金额(税后)扣除相应手续费",onfocus:"输入的提现手续费必须为数字，0为无手续费"}).inputValidator({min:1,onerror:"输入的提现手续费不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的提现手续费格式错误"});		
+	});
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">提现设置</div>
+			<div class="listmain setting">
+				<form id="setting_withdraw" method="post" action="http://adu.phpad.cn/admin.php?m=setting&a=withdraw_save&">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td style="width:130px"><em class="red">*</em>每月允许提现次数：</td>
+							<td><input id="withdraw_count_month" class="textbox" type="text" name="withdraw_count_month" value="4"><div id="withdraw_count_monthTip" class="onShow">限制网站主提现次数。请填写数字，0为不限制</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>允许提现的周天：</td>
+							<td><input id="withdraw_day" class="textbox" type="text" name="withdraw_day" value="1,2,3,4,5"><div id="withdraw_dayTip" class="onShow">限制网站主提现周天。1-7代表星期一至星期天，英文逗号分隔，0为不限制</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>允许提现的时间：</td>
+							<td><input id="withdraw_time" class="textbox" type="text" name="withdraw_time" value="9-18"><div id="withdraw_timeTip" class="onShow">限制网站主提现时间段。24小时制，0为不限制，例如：9-18</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>最低提现额：</td>
+							<td><input id="withdraw_min" class="textbox" type="text" name="withdraw_min" value="20"><div id="withdraw_minTip" class="onShow">限制网站主提现最低金额。请填写数字，例如：20</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>个税税率：</td>
+							<td><input id="withdray_tax" class="textbox" type="text" name="withdray_tax" value="20">%<div id="withdray_taxTip" class="onShow">个人所得税税率。以百分比计算，请填写数字，例如：10</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>提现手续费计费方式：</td>
+							<td>
+							<input type="radio" checked="checked" name="withdraw_fee_type" value="1">固定额 <input type="radio" name="withdraw_fee_type" value="2">百分比 							</td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>提现手续费：</td>
+							<td><input id="withdraw_fee" class="textbox" type="text" name="withdraw_fee" value="5"><div id="withdraw_feeTip" class="onShow">财务结算根据实付金额(税后)扣除相应手续费</div></td>
+						</tr>									
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

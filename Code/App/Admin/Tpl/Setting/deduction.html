@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0051)http://adu.phpad.cn/admin.php?m=setting&a=deduction -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"setting_deduction",autotip:true});
+		$("#dedu_cpc").formValidator({onshow:"CPC扣量起点，高于起点后开始执行扣量",onfocus:"输入的CPC扣量起点必须为数字"}).inputValidator({min:1,onerror:"输入的CPC扣量起点不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的CPC扣量起点格式错误"});
+		$("#dedu_cpm").formValidator({onshow:"CPM扣量起点，高于起点后开始执行扣量",onfocus:"输入的CPM扣量起点必须为数字"}).inputValidator({min:1,onerror:"输入的CPM扣量起点不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的CPM扣量起点格式错误"});
+		$("#dedu_cpa").formValidator({onshow:"CPA扣量起点，高于起点后开始执行扣量",onfocus:"输入的CPA扣量起点必须为数字"}).inputValidator({min:1,onerror:"输入的CPA扣量起点不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的CPA扣量起点格式错误"});
+		$("#deduction_cpc").formValidator({onshow:"CPC全局扣量，高于起点后执行扣量的比例",onfocus:"输入的CPC全局扣量必须为数字"}).inputValidator({min:1,onerror:"输入的CPC全局扣量不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的CPC全局扣量格式错误"});
+		$("#deduction_cpm").formValidator({onshow:"CPM全局扣量，高于起点后执行扣量的比例",onfocus:"输入的CPM全局扣量必须为数字"}).inputValidator({min:1,onerror:"输入的CPM全局扣量不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的CPM全局扣量格式错误"});
+		$("#deduction_cpa").formValidator({onshow:"CPA全局扣量，高于起点后执行扣量的比例",onfocus:"输入的CPA全局扣量必须为数字"}).inputValidator({min:1,onerror:"输入的CPA全局扣量不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的CPA全局扣量格式错误"});
+	});
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">扣量设置</div>
+			<div class="listmain setting">
+				<form id="setting_deduction" method="post" action="http://adu.phpad.cn/admin.php?m=setting&a=deduction_save&">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td style="width:100px"><em class="red">*</em>CPC扣量起点：</td>
+							<td><input id="dedu_cpc" class="textbox" type="text" name="cpc_deduction_start" value="1000">点击<div id="dedu_cpcTip" class="onShow">CPC扣量起点，高于起点后开始执行扣量</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPM扣量起点：</td>
+							<td><input id="dedu_cpm" class="textbox" type="text" name="cpm_deduction_start" value="5000">PV<div id="dedu_cpmTip" class="onShow">CPM扣量起点，高于起点后开始执行扣量</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPA扣量起点：</td>
+							<td><input id="dedu_cpa" class="textbox" type="text" name="cpa_deduction_start" value="100">效果<div id="dedu_cpaTip" class="onShow">CPA扣量起点，高于起点后开始执行扣量</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPC全局扣量：</td>
+							<td><input id="deduction_cpc" class="textbox" type="text" name="cpc_deduction" value="5">%<div id="deduction_cpcTip" class="onShow">CPC全局扣量，高于起点后执行扣量的比例</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPM全局扣量：</td>
+							<td><input id="deduction_cpm" class="textbox" type="text" name="cpm_deduction" value="5">%<div id="deduction_cpmTip" class="onShow">CPM全局扣量，高于起点后执行扣量的比例</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>CPA全局扣量：</td>
+							<td><input id="deduction_cpa" class="textbox" type="text" name="cpa_deduction" value="5">%<div id="deduction_cpaTip" class="onShow">CPA全局扣量，高于起点后执行扣量的比例</div></td>
+						</tr>
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

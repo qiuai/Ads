@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0049)http://adu.phpad.cn/admin.php?m=setting&a=finance -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"setting_finance",autotip:true});
+		$("#min_charge").formValidator({onshow:"限制广告主最低充值额。请填写数字，0为不限制",onfocus:"输入的最低充值额必须为数字"}).inputValidator({min:1,onerror:"输入的最低充值额不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的最低充值额格式错误"});
+		$("#alipay_name").formValidator({onshow:"请确认您的帐号是否开通支付宝接口服务",onfocus:"请输入正确的的支付宝账号"}).inputValidator({min:1,onerror:"输入的支付宝账号不能为空"}).regexValidator({regexp:"notempty",datatype:"enum",onerror:"输入的支付宝账号格式错误"});
+		$("#alipay_id").formValidator({onshow:"请确认您的支付宝合作ID是否正确",onfocus:"请输入正确的支付宝合作ID"}).inputValidator({min:1,onerror:"输入的支付宝合作ID不能为空"}).regexValidator({regexp:"notempty",datatype:"enum",onerror:"输入的支付宝合作ID格式错误"});
+		$("#alipay_key").formValidator({onshow:"请确认您的支付宝密钥是否正确",onfocus:"请输入正确的支付宝密钥"}).inputValidator({min:1,onerror:"输入的支付宝密钥不能为空"}).regexValidator({regexp:"notempty",datatype:"enum",onerror:"输入的支付宝密钥格式错误"});
+	});
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">财务设置</div>
+			<div class="listmain setting">
+				<form id="setting_finance" method="post" action="http://adu.phpad.cn/admin.php?m=setting&a=finance_save&">
+					<table align="center" cellspacing="0" class="list">
+					    <tbody><tr>
+					        <td colspan="2">基本设置</td>
+					    </tr>
+						<tr>
+							<td style="width:100px"><em class="red">*</em>最低充值额：</td>
+							<td><input id="min_charge" class="textbox" type="text" name="min_charge" value="10">元<div id="min_chargeTip" class="onShow">限制广告主最低充值额。请填写数字，0为不限制</div></td>
+						</tr>
+						
+						<tr>
+					        <td colspan="2">支付宝设置</td>
+					    </tr>
+					    <tr>
+							<td>支付宝开关：</td>
+							<td>
+							<input type="radio" name="alipay_switch" value="1">开启 <input type="radio" checked="checked" name="alipay_switch" value="0">关闭 							</td>
+					    </tr>
+						<tr>
+							<td>支付宝账号：</td>
+							<td><input id="alipay_name" class="textbox" type="text" name="alipay_name" value="ifuijy@QQ.COM"><div id="alipay_nameTip" class="onShow">请确认您的帐号是否开通支付宝接口服务</div></td>
+						</tr>
+						<tr>
+							<td>支付宝合作ID：</td>
+							<td><input id="alipay_id" class="textbox" type="text" name="alipay_id" value="200833445566441122"><div id="alipay_idTip" class="onShow">请确认您的支付宝合作ID是否正确</div></td>
+						</tr>
+						<tr>
+							<td>支付宝密钥：</td>
+							<td><input id="alipay_key" class="textbox" type="password" name="alipay_key" value="qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq2"><div id="alipay_keyTip" class="onShow">请确认您的支付宝密钥是否正确</div></td>
+						</tr>
+						
+						<tr>
+					        <td colspan="2">Paypal设置</td>
+					    </tr>
+					    <tr>
+							<td>Paypal开关：</td>
+							<td>
+							<input type="radio" checked="checked" name="paypal_switch" value="1">开启 <input type="radio" name="paypal_switch" value="0">关闭 							</td>
+					    </tr>
+						<tr>
+							<td>Paypal API用户名：</td>
+							<td><input id="alipay_name" class="textbox" type="text" name="paypal_name" value="wilsum_api1.qq.com"></td>
+						</tr>
+						<tr>
+							<td>Paypal API密码：</td>
+							<td><input id="alipay_id" class="textbox" type="text" name="paypal_key" value="ABN247DPG3PXFQCD"></td>
+						</tr>
+						<tr>
+							<td>Paypal API签名：</td>
+							<td><input id="alipay_key" class="textbox" type="password" name="paypal_sign" value="BFcWxV21C7fd0v3bYYYRCpSSRl31AFZOjWaXKTtbLUDVfznIWDIXqNdL"></td>
+						</tr>
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://adu.phpad.cn/admin.php?m=setting&a=point -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"setting_point",autotip:true});
+		$("#point_money_rule").formValidator({onshow:"每次提现金额超过多少时获得1分",onfocus:"输入的提现积分规则必须为数字"}).inputValidator({min:1,onerror:"输入的提现积分规则不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的提现积分规则格式错误"});
+		$("#point_pv_rule").formValidator({onshow:"一天24小时不间断投放广告PV达到多少时获得1分",onfocus:"输入的PV积分规则必须为数字"}).inputValidator({min:1,onerror:"输入的PV积分规则不能为空"}).regexValidator({regexp:"num",datatype:"enum",onerror:"输入的PV积分规则格式错误"});
+	});
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">积分设置</div>
+			<div class="listmain setting">
+				<form id="setting_point" method="post" action="http://adu.phpad.cn/admin.php?m=setting&a=point_save&">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td style="width:100px"><em class="red">*</em>积分开关：</td>
+							<td>
+							<input type="radio" checked="checked" name="point_switch" value="1">开启 <input type="radio" name="point_switch" value="0">关闭 							</td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>积分商城开关：</td>
+							<td>
+							<input type="radio" checked="checked" name="point_mall_switch" value="1">开启 <input type="radio" name="point_mall_switch" value="0">关闭 							</td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>积分方式：</td>
+							<td>
+							<input type="radio" checked="checked" name="point_type" value="1">提现积分 <input type="radio" name="point_type" value="2">PV积分 <input type="radio" name="point_type" value="3">提现和PV均有积分 							</td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>提现积分规则：</td>
+							<td><input id="point_money_rule" class="textbox" type="text" name="point_money_rule" value="1">提现额 积1分<div id="point_money_ruleTip" class="onShow">每次提现金额超过多少时获得1分</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>PV积分规则：</td>
+							<td><input id="point_pv_rule" class="textbox" type="text" name="point_pv_rule" value="1000">PV 积1分<div id="point_pv_ruleTip" class="onShow">一天24小时不间断投放广告PV达到多少时获得1分</div></td>
+						</tr>
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>
