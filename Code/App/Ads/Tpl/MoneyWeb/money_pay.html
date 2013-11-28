@@ -1,0 +1,58 @@
+<include file="Index:headerWeb" />
+<div class="main clearfix">
+	<div class="huiyuan_change">
+		<div class="huiyuan_change_head">
+			<span>申请提现</span>
+			<div class="cb"></div>
+		</div>
+        <form method="post" action="http://adu.phpad.cn/center.php?m=finance&a=finance_pay_do"> 
+        <div class="huiyuan_change_body">
+			<table border="1" bordercolor="#CCCCCC">
+			  <tbody><tr>
+				<td colspan="2" border="0">
+                        <div class="payee_name">
+						<span><b class="payee_name_font"> 开户银行：　　</b></span>
+						<div class="payee_name_right fl">招商银行</div>
+						<div class="cb"></div>
+					</div>
+                    <div class="payee_name">
+						<span><b class="payee_name_font"> 开户人：　　　</b></span>
+						<div class="payee_name_right fl">1234</div>
+						<div class="cb"></div>
+					</div>
+                    <div class="payee_name">
+						<span><b class="payee_name_font"> 银行卡号：　　</b></span>
+						<div class="payee_name_right fl">12345</div>
+						<div class="cb"></div>
+					</div>
+                    <div class="payee_name">
+                        <span><b class="payee_name_font"> 可提现金额：　</b></span>
+						<div class="payee_name_right fl">￥0.00</div>
+						<span style="color:red">未达到最低提现额度￥20</span>
+                        <div class="cb"></div>
+					</div>
+					  <div class="payee_name">
+                        <span><b class="payee_name_font"> 本月提现次数：</b></span>
+						<div class="payee_name_right fl">0次</div>
+						<span style="color:red"></span>
+						<div class="cb"></div>
+					</div>
+					<div class="payee_name">
+                        <span><b class="payee_name_font"> 提现时间：　　</b></span>
+						<div class="payee_name_right fl">2013-11-28 15:40:29</div>
+						<span style="color:red"></span>
+						<div class="cb"></div>
+					</div>				
+                 </td>
+			  </tr>
+			</tbody></table>
+		</div>
+		<div class="huiyuan_change_foot">
+			<input type="hidden" name="balance" value="0.00"/>
+			<input class="confirm_btn" type="submit" value="" disabled="disabled" />
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);"/>
+		</div>
+       </form>
+	</div>
+</div>
+<include file="Index:footer" />

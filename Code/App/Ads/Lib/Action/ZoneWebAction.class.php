@@ -13,8 +13,20 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class IndexAction extends CommonAction {
+class ZoneWebAction extends CommonAction {
+	function _initialize(){
+		$this->assign("flag","zone");
+	}
     public function index(){ 
+		$this->assign("title","代码位管理");
 		$this->display();
     }
+	public function zone_list(){
+		$this->assign("title","代码位管理");
+		$this->display(index);
+	}
+	public function zone_add(){
+		$this->assign("title","新增代码位");
+		$this->display();
+	}
 }

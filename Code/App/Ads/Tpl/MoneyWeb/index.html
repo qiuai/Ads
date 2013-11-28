@@ -1,0 +1,80 @@
+<include file="Index:headerWeb" />
+<link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/calendar-blue.css">
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/calendar.js"></script>
+<div class="main clearfix">
+	<div class="sidebar fr">
+    	<div class="text_box clearfix">
+        	<h3>小贴士</h3>
+            <ul>
+            	<li class="nobb">
+                	<h4>1.佣金满多少元可以提现？</h4>
+                    <p>佣金只需满20元（含20元）即可申请提现。如果您当月佣金未达到20元，则自动累计到下周。</p>
+                </li>
+                <li class="nobb">
+                	<h4>2.佣金每月允许提现次数？</h4>
+                    <p>佣金每月允许提现次数:4次</p>
+                </li>
+                <li class="nobb">
+                	<h4>3.佣金允许提现周天？</h4>
+                    <p>佣金允许提现周天:星期一,星期二,星期三,星期四,星期五</p>
+                </li>
+                 <li class="nobb">
+                	<h4>3.佣金允许提现时间？</h4>
+                    <p>佣金允许提现时间:从9点到18点</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="main_left">
+		<div class="tixian_detail  gray_box ie6_floatbug">
+        	<div class="gb_t">
+            	<div class="gb_tr"><h3>提现明细</h3></div>
+            </div>
+            <div class="tixian_border">
+				<div class="tixian_detail_body">
+					<table class="table_list">
+                      <tbody>
+                      <tr>
+                      <form action="" method="get"></form>
+                      	<input type="hidden" name="m" value="finance">
+                      	<td colspan="8" style="padding:10px;" class="notb">
+                        <span class="fl" style="margin-left:10px;">支付状态：</span>
+                        <select name="status" class="fl">
+                            <option value="">选择状态</option>
+                            <option value="unpaid">未支付</option>
+                            <option value="paid">已支付</option>
+                            <option value="invalid">无效</option>
+                        </select>
+                        <input type="submit" class="report_searchbtn fr" value="">
+                        </td>                      
+                      </tr>
+                  <tr class="tixian_bcolor">
+                        <td height="28" class="notb">提现时间</td>
+                        <td class="notb">提现金额</td>
+                        <td class="notb">扣税金额</td>
+                        <td class="notb">汇款手续费</td>
+                        <td class="notb">实付金额</td>
+                        <td class="notb">支付状态</td>
+                        <td class="notb">支付时间</td>
+                        <td class="notb">备注</td>
+					  </tr>
+					                        <tr>
+                          <td>2013-08-14</td>
+                          <td>900.00</td>
+                          <td>20</td>
+                          <td>2.00</td>
+                          <td>878.00</td>
+                          <td>待支付</td>
+                          <td>200130821</td>
+                          <td></td>
+                      </tr>
+                                            <tr><td colspan="8"><div class='page_bar fr'><span>共1 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/center.php?m=finance&a=finance_list&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/center.php?m=finance&a=finance_list&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a class='page_next' href='/center.php?m=finance&a=finance_list&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/center.php?m=finance&a=finance_list&page=1'>尾页</a>&nbsp;&nbsp;</div></td></tr>
+                      </tbody>
+                      </table>
+                </div>				
+            </div>
+        </div>		
+    </div>    
+</div>
+<include file="Index:footer" />
