@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+<div class="wrap">
+ <div class="main">
+  <div class='body_title'>flash设置</div>
+		<div class="listmain">
+<table align="center" class="list" cellspacing="0">
+    <tr>
+        <td>
+        <form method="post">
+        <input type="text" name="title" />
+        <input type="submit" value="查询" class="button" />
+        </form>
+        </td>
+    </tr>
+</table>
+
+<form method="post" action="" id="help_form">
+<input type="hidden" name="admin_do" id="admin_do" />
+<table align="center" cellspacing="0" class="list">
+	<tr class="tb_title">
+        <td width="10%">标题</td>
+                <td width="35%">图片</td>
+                <td width="35%">链接</td>
+        <td width="5%">排序</td>
+        <td width="5%">状态</td>
+        <td width="10%">操作</td>
+    </tr>
+    <tr class="bgcolor3"> 
+        <td>flash1</td>
+                <td>http://duomai.com/uploads/2013-07-01/51d0f27bc53c0.jpg</td>
+                <td>http://www.google.com</td>
+        <td>0</td>
+        <td>1</td>
+        <td width="20%">
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_edit&&id=1">编辑</a>|
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_delete&&id=1" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+        </td>
+    </tr><tr class="bgcolor4"> 
+        <td>flash2</td>
+                <td>http://duomai.com/uploads/2013-07-01/51d0f27bc53c0.jpg</td>
+                <td>http://www.google.com</td>
+        <td>0</td>
+        <td>1</td>
+        <td width="20%">
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_edit&&id=2">编辑</a>|
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_delete&&id=2" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+        </td>
+    </tr>	
+</table>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

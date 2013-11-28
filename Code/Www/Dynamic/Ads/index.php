@@ -8,3 +8,6 @@ define('APP_NAME', 'Ads');
 define('APP_PATH', ROOT_PATH . '/App/Ads/');
 
 require_once ROOT_PATH . '/ThinkPHP/ThinkPHP.php';
+
+
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script><script type="text/javascript" src="http://adu.phpad.cn/static/js/default/calendar.js"></script>
+</head>
+
+<body>
+<div class="main">
+	<div class='body_title'>新增优惠券</div>
+	<div class="listmain setting">
+		<form method="post" action="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_insert&">
+			<table class="list" cellspacing="0">
+			   
+			    <tr>
+			        <td style="width:200px">计划ID：</td>
+			        <td>
+			            <input type="text" name="plan_id" class="textbox"/>
+			        </td>
+			    </tr>
+			    <tr>
+			        <td>优惠金额：</td>
+			        <td><input type="text" name="price" class="textbox"/></td>
+			    </tr>
+			    <tr>
+			        <td>有效期开始-有效期结束</td>
+			        <td>
+				        <input type="text" name="start_date" class="textbox" id="start_date"/>
+				        <script type="text/javascript">
+	                            Calendar.setup({
+	                                inputField     :    "start_date",
+	                                ifFormat       :    "%Y%m%d",
+	                            });
+	                	</script>
+				        --
+				        <input type="text" name="end_date" class="textbox" id="end_date"/>
+			        	<script type="text/javascript">
+                            Calendar.setup({
+                                inputField     :    "end_date",
+                                ifFormat       :    "%Y%m%d",
+                            });
+                		</script>
+			        </td>
+			    </tr>
+			    <tr>
+			        <td>是否是通用券：</td>
+			        <td>
+			            <input type="radio" name="is_public" value="0" checked="checked" id="public_false"/> 否
+			            <input type="radio" name="is_public" value="1" style="margin-left:10px" id="public_true"/> 是
+			            	<span id="show_public" style="display:none">券号：<input type="text" name="number" />密码：<input type="text" name="code" />&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">券号，密码二者至少填其一，且通用券最大申请数量为1</span></span>
+			        </td>
+				</tr>
+				<tr>
+			        <td>单次申请最大数量：</td>
+			        <td>
+			            <input type="text" name="apply_once_max" class="textbox" id="apply_once_max"/>
+			        </td>
+				</tr>
+				<tr>
+			        <td>申请间隔天数：</td>
+			        <td>
+			            <input type="text" name="apply_inerval_day" class="textbox"/>
+			        </td>
+				</tr>
+				<tr>
+			        <td>优惠券状态：</td>
+			        <td>
+			            <select name="status">
+			            	<option value="0">不可申请</option>
+			            	<option value="1">可申请</option>
+			            	<option value="2">发放完毕</option>
+			            	<option value="3">已过期</option>
+			            </select>
+			        </td>
+				</tr>
+				<tr>
+			        <td>描述：</td>
+			        <td>
+			            <textarea rows="3" cols="80" name="desc"></textarea>
+			        </td>
+				</tr>
+			</table>
+			<input class="confirm_btn" type="submit" value="" />
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);" />
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('#public_false').click(function(){
+		$('#show_public').hide();
+		$('#apply_once_max').attr('value','');
+		$('#apply_once_max').attr('readonly','');
+	});
+	$('#public_true').click(function(){
+		$('#show_public').show();
+		$('#apply_once_max').attr('value','1');
+		$('#apply_once_max').attr('readonly','readonly');
+	});
+});
+</script>
+</body>
+</html>

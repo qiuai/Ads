@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+<div class="wrap">
+<div class="main">
+<div class='body_title'>邮件模版列表</div>
+<div class="listmain">
+<table align="center" cellspacing="0" class="list">
+	<tr class="tb_title">
+        <td>模版名</td>
+        <td>标题</td>
+        <td>内容</td>
+        <td>操作</td>
+    </tr>
+   <tr>
+   		<td>会员注册发送邮件</td>
+   		<td>PHPADU注册成功</td>
+   		<td>尊敬的<b>$username</b>：<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 您的账户注册成功，请点击<a href=\"\\&quot;\\\\&quot;$url\\\\&quot;\\&quot;\">$url</a>登录本系统。</td>
+   		<td><a href="http://adu.phpad.cn/admin.php?m=mail&a=mail_edit&name=mail_user_reg.html">编辑</a></td>
+   </tr>
+   <tr>
+   		<td>会员激活发送邮件</td>
+   		<td>PHPADU会员已激活</td>
+   		<td>尊敬的<b>$username</b>：<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 您的账号$username已通过审核，请记住我们的网站<a href=\"$url\">$url</a>。</td>
+   		<td><a href="http://adu.phpad.cn/admin.php?m=mail&a=mail_edit&name=mail_user_activate.html">编辑</a></td>
+   </tr>
+   <tr>
+   		<td>网站激活发送邮件</td>
+   		<td>PHPADU网站已激活</td>
+   		<td>尊敬的<b>$username</b>：<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 您的网站<a href=\"http://localhost/Zend_workspaces/phpadu2/%5C%22%5C%5C%22$url%5C%5C%22%5C%22\">$url</a>已被激活，请确认查收，如有问题请与我们客服联系，谢谢合作！<br /></td>
+   		<td><a href="http://adu.phpad.cn/admin.php?m=mail&a=mail_edit&name=mail_site_activate.html">编辑</a></td>
+   </tr>
+   <tr>
+   		<td>网站申请广告投放通过发送邮件</td>
+   		<td>PHPADU申请广告投放成功</td>
+   		<td>尊敬的<b>$username</b>：<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 您的网站申请广告投放成功，请点击<a href=\"$url\">$url</a>确认。</td>
+   		<td><a href="http://adu.phpad.cn/admin.php?m=mail&a=mail_edit&name=mail_site_apply.html">编辑</a></td>
+   </tr>
+   <tr>
+   		<td>网站主提现申请发送邮件</td>
+   		<td>PHPADU提现申请已收到</td>
+   		<td>尊敬的<b>$username</b>：<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 您已提交提现申请，我们会尽快确认是否符合要求。</td>
+   		<td><a href="http://adu.phpad.cn/admin.php?m=mail&a=mail_edit&name=mail_withdraw_apply.html">编辑</a></td>
+   </tr>
+   <tr>
+   		<td>网站主提现申请处理完毕发送邮件</td>
+   		<td>PHPADU提现申请处理完毕</td>
+   		<td>尊敬的<b>$username</b>：<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 您提交的提现申请处理完毕，请点击<a href=\"$url\">$url</a>确认。</td>
+   		<td><a href="http://adu.phpad.cn/admin.php?m=mail&a=mail_edit&name=mail_withdraw_done.html">编辑</a></td>
+   </tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

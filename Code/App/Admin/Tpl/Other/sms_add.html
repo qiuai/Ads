@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script><script src="http://adu.phpad.cn/static/js/default/editor/kindeditor.js"></script>
+<script type="text/javascript">
+        KindEditor.ready(function(K) {
+                window.editor = K.create('#content',
+                		{uploadJson : 'admin.php?ac=file_manage&action=upload',
+                        fileManagerJson : 'admin.php?ac=file_manage&action=manage',
+                        allowFileManager : true
+                		}
+                        );
+        });
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>新增站内信</div>
+			<div class="listmain setting">
+				<form method="post" action="http://adu.phpad.cn/admin.php?m=sms&a=sms_insert&">
+					<table align="center" cellspacing="0" class="list">
+						<tr class="title1">
+							<th colspan="2">发布站内信</th>
+						</tr>
+						<tr>
+							<td><span style="color:red">*</span>标题：</td>
+							<td><input type="text" name="title" size="56px" value="" class="textbox"/><div class="onShow">填写的标题不能为空</div></td>
+						</tr>
+						<tr>
+							<td><span style="color:red">*</span>接收者:</td>
+							<td>
+							   <input size="56px" type="text" name="username" class="textbox"/>
+							   <div class="onShow">请填写正确的接收者</div>	
+							</td>							
+					    </tr>
+					    <tr>
+							<td><span style="color:red">*</span>是否显示：</td>
+							<td>
+								<input type="radio" name="is_display" value="显示" checked/>显示
+								<input type="radio" name="is_display" value="隐藏"/>隐藏
+							</td>
+						</tr>		    		   
+						<tr>
+							<td><span style="color:red">*</span>内容：</td>
+							<td><textarea id="content" name="content" style="width:90%; height:400px;"></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input class="confirm_btn" type="submit" value="" />
+								<input class="back_btn" type="button" onclick="javascript:history.back(-1);" />
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		</div>
+</body>
+</html>

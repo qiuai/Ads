@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+    <div class="main">
+   <div class='body_title'>优惠券申请列表</div>
+   <div class="listmain">
+	<table align="center" class="list" cellspacing="0">
+        <tr>
+        <td width="40%" style="border-right:none;">
+            <form method="get">
+                <input type="hidden" name="m" value="coupon" />
+                <input type="hidden" name="a" value="coupon_apply" />
+                <input type="text" name="content" />
+                <select name="condition">
+                    <option value="coupon_id">优惠券ID</option>
+                    <option value="uid">UID</option>                   
+                </select>
+                <input type="submit" value="查询" class="button" />
+            </form>
+        </td>
+                <td align="right">
+            <input type="button" value="导出报表" class="button1" onclick="location.href='http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply_export&content=&condition=&status='" />
+        </td>
+        </tr>
+        <tr>
+            <td style="font-size:13px;height:40px;" colspan="2">申请状态：
+                <a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply&" class="link-checked">全部状态</a>
+                <a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply&status=0"  class="link_before_checked">未批准</a>
+                <a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply&status=1"  class="link_before_checked">已批准</a>
+            </td>
+        </tr>
+        
+    </table>	
+<table align="center" cellspacing="0" class="list" style="text-align:center">
+	<tr class="tb_title">
+        <td>优惠券申请ID</td>
+        <td>UID</td> 
+        <td>优惠券ID</td>     
+        <td>申请张数</td>
+        <td>申请日期</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    <tr class="bgcolor3">    	<td>5</td>
+    	<td>300020</td>
+    	<td>7</td>
+        <td>1</td>
+        <td>2013-11-25</td>
+        <td><span style="color:red">未批准</span></td>
+        <td>
+        	<a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply_edit&id=5">处理申请</a>
+        </td>
+        </tr>
+        <tr class="bgcolor4">    	<td>4</td>
+    	<td>300020</td>
+    	<td>9</td>
+        <td>3</td>
+        <td>2013-11-20</td>
+        <td><span style="color:green">已批准</span></td>
+        <td>
+        	<a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply_edit&id=4">处理申请</a>
+        </td>
+        </tr>
+        <tr class="bgcolor3">    	<td>3</td>
+    	<td>300021</td>
+    	<td>6</td>
+        <td>1</td>
+        <td>1970-01-01</td>
+        <td><span style="color:red">未批准</span></td>
+        <td>
+        	<a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply_edit&id=3">处理申请</a>
+        </td>
+        </tr>
+        <tr class="bgcolor4">    	<td>2</td>
+    	<td>300020</td>
+    	<td>6</td>
+        <td>2</td>
+        <td>2013-11-20</td>
+        <td><span style="color:green">已批准</span></td>
+        <td>
+        	<a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply_edit&id=2">处理申请</a>
+        </td>
+        </tr>
+        <tr class="bgcolor3">    	<td>1</td>
+    	<td>300020</td>
+    	<td>7</td>
+        <td>1</td>
+        <td>2013-11-20</td>
+        <td><span style="color:red">未批准</span></td>
+        <td>
+        	<a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_apply_edit&id=1">处理申请</a>
+        </td>
+        </tr>
+        </table>
+<div class="admin_do index_page" style="text-align:center;"><div class='page_bar fr'><span>共5 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/admin.php?m=coupon&a=coupon_apply&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/admin.php?m=coupon&a=coupon_apply&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a class='page_next' href='/admin.php?m=coupon&a=coupon_apply&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/admin.php?m=coupon&a=coupon_apply&page=1'>尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+</div>
+</body>
+</html>

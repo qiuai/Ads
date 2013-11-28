@@ -1,0 +1,241 @@
+<include file="Index:header" />
+<link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/ads.css">
+<div class="main clearfix">
+	<div class="huiyuan_change">
+    	<form action="http://adu.phpad.cn/center.php?m=plan&a=plan_save" method="post" enctype="multipart/form-data">
+		<div class="huiyuan_change_head">
+			<span>新增计划</span>
+			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
+			<div class="cb"></div>
+		</div>
+		<div class="huiyuan_change_body">
+			<table class="table_list">
+			  <tr>
+				<td class="w155"><em class="red">*</em>计划名称：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="plan_name">				
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>目标网址：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="jump_url" value="http://">				
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>LOGO：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="file" name="plan_logo">
+				</td>
+			  </tr>	
+			  <tr>
+				<td class="w155">行业类别：</td>
+				<td class="textbox_td">
+				    <select name="category_id">
+				    <option value="1">综合商城</option><option value="2">服装服饰</option><option value="3">手机/数码/家电</option><option value="4">美容化妆</option><option value="5">家居家饰</option><option value="6">女性/内衣</option><option value="7">母婴/儿童用品</option><option value="8">图书音像</option><option value="9">鲜花礼品</option><option value="10">珠宝首饰</option>				    </select>	
+				</td>
+			  </tr>			  
+			  <tr>
+				<td class="w155"><em class="red">*</em>计费形式：</td>
+				<td class="textbox_td">
+					<select class="newsite_select" name="pay_type">
+					                    	<option value="cps">cps</option>
+                                        	<option value="cpa">cpa</option>
+                                        	<option value="cpc">cpc</option>
+                                        	<option value="cpm">cpm</option>
+                                        </select>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>审核方式：</td>
+				<td class="textbox_td">
+					<input type="radio" name="plan_check" value="自动审核" checked="checked">自动审核	
+					<input type="radio" name="plan_check" value="手动审核">手动审核		
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>结算周期：</td>
+				<td class="textbox_td">
+				    <input type="radio" name="clearing_form" value="日结">日结					
+					<input type="radio" name="clearing_form" value="周结">周结
+					<input type="radio" name="clearing_form" value="月结" checked="checked">月结					
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>计划周期：</td>
+				<td class="textbox_td">
+					开始时间：<input type="text" name="start_date" id="start_date" class="input_text" size="12" value="2013-11-27">
+					<script>
+                            Calendar.setup({
+                                inputField     :    "start_date",
+                                ifFormat       :    "%Y-%m-%d",
+                            });
+                     </script>
+                     - 结束时间：<input type="text" name="end_date" id="end_date" class="input_text" size="12" value="">
+					<script>
+                            Calendar.setup({
+                                inputField     :    "end_date",
+                                ifFormat       :    "%Y-%m-%d",
+                            });
+                     </script>
+				</td>
+			  </tr>	
+			  			  
+			  <tbody id="cps" class="price">
+			  <tr>
+			      <td class="w155"><em class="red">*</em>数据返回机制：</td>
+			      <td class="textbox_td">
+			          <input type="radio" name="cps_data_return" value="0" onclick="returnDate1('cps')"  checked="checked" />实时返回
+			          <input type="radio" name="cps_data_return" value="1" onclick="returnDate2('cps')" />延时返回
+			          <span style="display:none" id="cps_return_date_span">
+			              延时 <input type="text" name="cps_data_return" style="width:20px" value="0" /> 天
+			          </span>
+			      </td>
+			  </tr>
+			  <tr>
+			      <td class="w155"><em class="red">*</em>效果认定期：</td>
+			      <td class="textbox_td">
+			          <input type="text" name="cps_return_day" style="width:30px"> 天
+			      </td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>费用设置：</td>
+				<td class="textbox_td">
+					<table style="width:99%;margin:5px auto;text-align:center" id="price_area">
+					    <tr style="height:27px"><th><em class="red">*</em>类目标识</th><th><em class="red">*</em>类目名称</th><th><em class="red">*</em>佣金比率</th><th>佣金说明</th><th>操作</th></tr>
+					    <tr>
+					        <td style="width:20%"><input type="text" name="cps_category_id[]" /></td>
+					        <td style="width:20%"><input type="text" name="cps_category_name[]" /></td>
+					        <td style="width:10%"><input type="text" name="cps_real_price[]" style="width:30px" /> %</td>
+					        <td style="width:20%"><input type="text" name="cps_remark[]" /></td>
+					        <td style="width:20%">
+					            <a class="add_price">添加一项 </a>
+					            <a class="remove_price">移除</a>
+					        </td>
+					    </tr>
+					</table>
+				</td>
+			  </tr>	
+			  </tbody>	
+			  
+			  <tbody id="cpa" class="price" style="display:none;">
+			  <tr>
+			      <td class="w155"><em class="red">*</em>数据返回机制：</td>
+			      <td class="textbox_td">
+			          <input type="radio" name="cpa_data_return" value="0" onclick="returnDate1('cpa')" />实时返回
+			          <input type="radio" name="cpa_data_return" value="1" onclick="returnDate2('cpa')" />延时返回
+			          <span style="display:none" id="cpa_return_date_span">
+			              延时 <input type="text" name="cpa_data_return" style="width:20px" value="0" /> 天
+			          </span>
+			      </td>
+			  </tr>
+			  <tr>
+			      <td class="w155"><em class="red">*</em>效果认定期：</td>
+			      <td class="textbox_td">
+			          <input type="text" name="cpa_return_day" style="width:30px"> 天
+			      </td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>价格：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="cpa_price">	
+				</td>
+			  </tr>	
+			  <tr>
+				<td class="w155"><em class="red">*</em>价格描述：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="cpa_price_desc">	
+				</td>
+			  </tr>	
+			  </tbody>
+			  
+			  <tbody id="cpm" class="price" style="display:none;">
+			  <tr>
+				<td class="w155"><em class="red">*</em>千次价格：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="cpm_price">	
+				</td>
+			  </tr>	
+			  <tr>
+				<td class="w155">每日pv限额：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="max_pv_one_day" value="0" /> 0为不限制
+				</td>
+			  </tr>	
+			  <tr>
+				<td class="w155">总pv限额：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="max_pv" value="0" /> 0为不限制
+				</td>
+			  </tr>
+			  </tbody>
+			  
+			  <tbody id="cpc" class="price" style="display:none;">
+			  <tr>
+				<td class="w155"><em class="red">*</em>价格：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="cpc_price">	
+				</td>
+			  </tr>			  
+			  <tr>
+				<td class="w155">每日pv限额：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="max_pv_one_day" value="0" /> 0为不限制
+				</td>
+			  </tr>	
+			  <tr>
+				<td class="w155">总pv限额：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="max_pv" value="0" /> 0为不限制
+				</td>
+			  </tr>
+			  </tbody>
+			  			  	  			  			  		  
+			  <tr>
+				<td class="newsite_w155">计划介绍：</td>
+				<td class="textbox_td">
+					<textarea rows="5" class="site_about" name="description"></textarea>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<div class="huiyuan_change_foot">
+			<input class="confirm_btn" type="submit" name="dosubmit" value=" ">
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);" value=" ">
+		</div>
+       </form>
+	</div>
+</div>
+<script>
+$("select[name='pay_type']").change(
+		function(){
+			var pay_type = $(this).val();
+			$(".price").hide();
+			$("#"+pay_type).show();
+		}
+);
+
+$(".add_price").live('click',
+	    function(){
+		    $(this).parent().parent().after($(this).parent().parent().clone());
+	    }
+);
+$(".remove_price").live('click',
+	    function(){
+		    $(this).parent().parent().remove();
+	    }
+);
+
+function returnDate1(pay_type){
+	var span_id = '#'+pay_type+'_return_date_span';
+	$(span_id).hide();
+	$("input[name='"+pay_type+"_data_return']").val("0");
+}
+
+function returnDate2(pay_type){
+	var span_id = '#'+pay_type+'_return_date_span';
+	$("input[name='"+pay_type+"_data_return']").val("");
+	$(span_id).show();
+}
+</script>
+<include file="Index:footer" />

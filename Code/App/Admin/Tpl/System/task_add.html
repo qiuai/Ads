@@ -10,18 +10,28 @@
 <body>
 	<div class="wrap">
 		<div class="main">
-			<div class='body_title'>接口设置</div>
-			<div class="listmain">
-				<form method="post" action="http://adu.phpad.cn/admin.php?m=site_type&a=site_type_save&">
+			<div class='body_title'>添加任务</div>
+			<div class="listmain setting">
+				<form method="post" action="http://adu.phpad.cn/admin.php?m=task&a=task_save&">
 					<table align="center" cellspacing="0" class="list">
 						<tr>
-							<td>站点ID：</td>
-							<td><input type="text" name="site_id" value="23307" class="textbox"/></td>
+							<td style="width:150px">选择任务：</td>
+							<td>
+							<select name="action">
+							<option selected="selected" value="updateAllZoneJs">更新所有代码位JS(updateAllZoneJs)</option><option selected="selected" value="updateAllAdjs">更新所有广告JS(updateAllAdjs)</option><option selected="selected" value="createZoneJs">创建代码位JS(createZoneJs)</option><option selected="selected" value="createAdJs">创建广告JS(createAdJs)</option>							</select>
+							</td>
 						</tr>
 						<tr>
-							<td>接口密钥：</td>
-							<td><input type="text" name="hash" value="681c4cabba773763c8496a787ca9785f" class="textbox"/></td>
+							<td>参数：</td>
+							<td><input type="text" name="param" value="" class="textbox"/></td>
 						</tr>
+					    <tr>
+							<td>执行周期：</td>
+							<td>
+							     <input type="radio" name="cycle" value="now" checked="checked" />单次计划
+							    <input type="radio" name="cycle" value="day" />每 日计划
+							</td>
+					    </tr>
 					</table>
 					<input class="confirm_btn" type="submit" value="" />
 					<input class="back_btn" type="button" onclick="javascript:history.back(-1);" />

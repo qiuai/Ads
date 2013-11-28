@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script><script src="http://adu.phpad.cn/static/js/default/editor/kindeditor.js"></script>
+<script>
+        KindEditor.ready(function(K) {
+                window.editor = K.create('#content',
+                		{uploadJson : 'admin.php?ac=file_manage&action=upload',
+                        fileManagerJson : 'admin.php?ac=file_manage&action=manage',
+                        allowFileManager : true
+                		}
+                        );
+        });
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>新增公告</div>
+			<div class="listmain setting">
+				<form method="post" action="http://adu.phpad.cn/admin.php?m=site_content&a=notice_save&">
+					<table align="center" cellspacing="0" class="list">
+						<tr class="title1">
+							<th colspan="2">发布公告</th>
+						</tr>
+						<tr>
+							<td>标题：</td>
+							<td><input type="text" name="title" size="56px" value="" class="textbox"/><div class="onShow">填写的标题不能为空</div></td>
+						</tr>
+						<tr>
+							<td>作者：</td>
+							<td><input type="text" name="author" size="56px" value="" class="textbox"/><div class="onShow">填写的作者不能为空</div></td>
+						</tr>
+						<tr>
+							<td>类别：</td>
+							<td>
+							    <select name="category_id">
+							    <!---->
+							    <option value='3' >赚钱教程</option><option value='4' disabled>消息中心</option><option value='10' >&nbsp;&nbsp;广告主公告</option><option value='11' >&nbsp;&nbsp;最新活动</option><option value='12' >&nbsp;&nbsp;推荐活动</option><option value='13' >&nbsp;&nbsp;活动变更</option><option value='8' >&nbsp;&nbsp;全体公告</option><option value='9' >&nbsp;&nbsp;网站主公告</option>							    </select>
+							</td>
+					    </tr>
+					    <tr>
+							<td>排序：</td>
+							<td><input type="text" name="sort" value="0" class="textbox"/><div class="onShow">填写的排序必须为数字</div></td>
+					    </tr>
+					    <tr>
+							<td>是否显示：</td>
+							<td>
+							<input type="radio" checked="checked" name="is_display" value="0">隐藏 <input type="radio" name="is_display" value="1">显示 							</td>
+						</tr>
+						<tr>
+							<td>内容：</td>
+							<td><textarea id="content" name="content" style="width:90%; height:400px;"></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input class="confirm_btn" type="submit" value="" />
+							<input class="back_btn" type="button" onclick="javascript:history.back(-1);" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>新增nav</div>
+			<div class="listmain setting">
+				<form method="post" action="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_save&">
+				<input type="hidden" name="position" value="nav" />
+					<table align="center" cellspacing="0" class="list">
+					    						<tr class="title1">
+							<th colspan="2">新增nav</th>
+						</tr>
+						<tr>
+							<td>标题：</td>
+							<td><input type="text" name="title" size="56px" value="" class="textbox"/><div class="onShow">填写的标题不能为空</div></td>
+						</tr>
+												<tr>
+							<td>跳转URL：</td>
+							<td><input type="text" name="url" size="56px" value="" class="textbox"/><div class="onShow">请填写正确的跳转URL</div></td>
+						</tr>
+						<tr>
+							<td>排序：</td>
+							<td><input type="text" name="sort" value="" class="textbox"/><div class="onShow">填写的排序必须为数字</div></td>
+						</tr>
+						<tr>
+							<td>状态：</td>
+							<td>
+							    <input type="radio" name="status" value="0">隐藏 <input type="radio" name="status" value="1">显示 							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><input class="confirm_btn" type="submit" value="" />
+							<input class="back_btn" type="button" onclick="javascript:history.back(-1);" /></td>
+						</tr>
+					</table>					
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
