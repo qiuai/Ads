@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0053)http://adu.phpad.cn/admin.php?m=balance&a=balance_add -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+
+ <div class="main">
+   <div class="body_title">新增余额修改</div>
+		<div class="listmain setting">
+		
+<form method="post" action="http://adu.phpad.cn/admin.php?m=balance&a=balance_insert&">
+<table align="center" class="list" width="95%" cellspacing="0">
+    <tbody><tr>
+    	<td style="width:120px"><em class="red">*</em>用&nbsp;&nbsp;户&nbsp;&nbsp;ID：</td>
+    	<td class="textbox_td">
+    		<input class="textbox" type="text" name="uid" value="">
+    		<div class="onShow">请填写正确的用户ID</div>				
+    	</td>
+    </tr>
+    <tr>
+    	<td style="width:120px"><em class="red">*</em>修改金额（￥）：</td>
+    	<td class="textbox_td">
+    		<input class="textbox" type="text" name="money">
+    		<div class="onShow">填写的修改金额必须为数字</div>				
+    	</td>
+    </tr>
+          <tr>
+        	<td class="newsite_w155"><em class="red">*</em>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
+        	<td class="textbox_td">
+        		<textarea rows="5" cols="80" class="site_about" name="remark"></textarea>
+        		<div class="onShow">请填写正确的备注信息，备注信息不能为空</div>
+        	</td>
+          </tr>	
+</tbody></table>           
+  	<input class="confirm_btn" type="submit" value="">
+	<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+</form>
+</div>
+</div>
+
+</body></html>
