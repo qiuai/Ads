@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+ <div class="main">
+   <div class='body_title'>服务器列表</div>
+		<div class="listmain">
+
+<table align="center" cellspacing="0" class="list">
+    <tr class="tb_title">
+        <td>ID</td>
+        <td>服务器名称</td>
+        <td>服务器地址</td>
+        <td>服务器类型</td>
+        <td>该类型默认服务器</td>   
+        <td>操作</td>   
+    </tr>
+    <tr class="bgcolor3">    <td>1</td>
+    <td>JS服务器1</td>
+    <td>http://adu.phpad.cn</td>
+    <td>js</td>
+    <td>是</td>
+    <td>
+        <a href="http://adu.phpad.cn/admin.php?m=server&a=server_edit&id=1">编辑</a>
+        <a href="http://adu.phpad.cn/admin.php?m=server&a=server_delete&id=1" onclick="return confirm('确定删除该服务器')">删除</a>
+    </td>
+    <tr class="bgcolor4">    <td>2</td>
+    <td>统计服务器</td>
+    <td>http://adu.phpad.cn</td>
+    <td>count</td>
+    <td>否</td>
+    <td>
+        <a href="http://adu.phpad.cn/admin.php?m=server&a=server_edit&id=3">编辑</a>
+        <a href="http://adu.phpad.cn/admin.php?m=server&a=server_delete&id=3" onclick="return confirm('确定删除该服务器')">删除</a>
+    </td>
+    <tr class="bgcolor3">    <td>3</td>
+    <td>图片服务器</td>
+    <td>http://adu.phpad.cn</td>
+    <td>img</td>
+    <td>否</td>
+    <td>
+        <a href="http://adu.phpad.cn/admin.php?m=server&a=server_edit&id=4">编辑</a>
+        <a href="http://adu.phpad.cn/admin.php?m=server&a=server_delete&id=4" onclick="return confirm('确定删除该服务器')">删除</a>
+    </td>
+    </table>
+
+</div>
+</div>
+</body>
+</html>
