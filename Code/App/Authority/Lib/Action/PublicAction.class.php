@@ -1,9 +1,9 @@
 <?php
 class PublicAction extends Action {
     // 检查用户是否登录
-    protected function checkUser() {
+    public function checkUser() {
         if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
-            $this->error('没有登录','Public/login');
+            $this->error('没有登录','/?m=Public&a=login');
         }
     }
 
@@ -168,7 +168,7 @@ class PublicAction extends Action {
 
             // 缓存访问权限
             RBAC::saveAccessList();
-            $this->success('登录成功！',__APP__.'/Index/index');
+            $this->redirect('/?m=Index&a=index');
 
         }
     }

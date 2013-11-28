@@ -16,17 +16,17 @@ body { background-image: url("STATIC_URL/admin/images/login_bg.gif")/*tpa=http:/
 <body>
 
 <div id="userlogin">
-	<form id="loginform" name="loginform" action="" method="post">
+	<form id="loginform" name="loginform" action="/?m=Agent&a=checkLogin" method="post">
 		<ul>
 			<li>
-				<input type="text" name="username" id="username" class="t_input" value="admin" />
+				<input type="text" name="account" id="username" class="t_input" value="admin" />
 			</li>
 			<li>
-				<input type="password" name="password" id="password" class="t_input" value="123456" />
+				<input type="password" name="password" id="password" class="t_input" value="admin" />
 			</li>
 			<li>
-				<input type="text" id="vcode" name="code" value="请输入验证码" onclick="this.value = ''" />
-				<img src="STATIC_URL/img/code.php.gif" tppabs="http://adu.phpad.cn/code.php"  onclick="this.src='code.php?'+Math.random();" title="点击图片刷新" style="position:relative;top:5px" />
+				<input type="text" id="verify" name="verify" value="请输入验证码" onclick="this.value = ''" />
+				<img src="/?m=Public&a=verify" onclick="this.src='/?m=Public&a=verify&' + Math.random();" title="点击图片刷新" style="position:relative;top:5px" />
 		    </li>
 			<li>
 				<input type="submit" id="loginsubmit" name="loginsubmit" value="登录" class="submit" />

@@ -21,6 +21,17 @@ class CommonAction extends Action {
 	 * @CreateDate: 2013-11-25 上午10:06:53
 	 */
     function _initialize(){
-    	
+    	$this->checkUser();
+    }
+    
+    /**
+     * 检测用户是否登录
+     *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-11-25 上午10:10:26
+     */
+    public function checkUser(){
+    	$Public = A('Agent');
+		$Public->checkUser();
     }
 }
