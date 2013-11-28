@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)http://adu.phpad.cn/admin.php?m=site_type&a=site_type_add -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">新增网站分类</div>
+			<div class="listmain setting">
+				<form method="post" action="http://adu.phpad.cn/admin.php?m=site_type&a=site_type_save&">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td>分类名称：</td>
+							<td><input type="text" name="code_name_zh" size="56px" value="" class="textbox"><div class="onShow">请填写正确的分类名称，分类名称不能为空</div></td>
+						</tr>
+						<tr>
+							<td>英文名称：</td>
+							<td><input type="text" name="code_value" size="56px" value="" class="textbox"><div class="onShow">请填写正确的英文名称，英文名称必须为字母</div></td>
+						</tr>
+					    <tr>
+							<td>排序：</td>
+							<td><input type="text" name="sort" value="0" class="textbox"><div class="onShow">填写的排序内容必须为数字</div></td>
+					    </tr>
+					    <tr>
+							<td>是否显示：</td>
+							<td>
+							    <input type="radio" name="status" value="1" checked="checked">显示
+							    <input type="radio" name="status" value="0">不显示
+							</td>
+						</tr>
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

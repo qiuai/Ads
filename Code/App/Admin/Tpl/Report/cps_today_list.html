@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0054)http://adu.phpad.cn/admin.php?m=cps_order&a=today_list -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript" src="STATIC_URL/admin/js/calendar.js"></script><link href="./admin.php_files/calendar-blue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="main">
+   <div class="body_title">CPS今日订单列表</div>
+		<div class="listmain">
+<table align="center" class="list" cellspacing="0">
+    <tbody><tr>
+        <td style="border-right:none;">
+            <form method="get">
+                <input type="hidden" name="m" value="cps_order">
+                <input type="hidden" name="a" value="today_list">
+                计划ID：
+                <input type="text" name="plan_id">
+             
+                <input type="submit" value="查询" class="button">
+            </form>
+        </td> 
+        <td align="right">
+            <input type="button" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=cps_order&amp;a=today_export&amp;&#39;" class="button1" value="导出数据">
+        </td>
+    </tr>
+    <!--  
+    <tr>
+        <td colspan="2" id="css1" style="font-size:13px;">支付状态：
+            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=" class="link-checked">全部</a>
+            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=待支付"  class="link_before_checked">未支付</a>
+            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=已支付"  class="link_before_checked">已支付</a>
+            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=异常"  class="link_before_checked">异常</a>
+        </td>
+    </tr>
+    -->
+</tbody></table>		
+<table align="center" cellspacing="0" class="list" style="text-align:center">
+	<tbody><tr class="tb_title">
+        <td>计划名称</td>
+        <td>网站主</td>
+        <td>订单编号</td>
+        <td>订单时间</td>
+        <td>确认时间</td>
+        <td>订单价格</td>      
+        <td>佣金比例</td> 
+        <td>佣金</td>     
+        <td>API时间</td>
+        <td>API状态</td>
+        <td>联盟状态</td>
+    </tr>
+            <tr><td colspan="10">没有数据</td></tr>
+        </tbody></table>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共0 条记录 1/0 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=cps_order&a=today_list&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=cps_order&a=today_list&page=0">上一页</a>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=cps_order&a=today_list&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=cps_order&a=today_list&page=0">尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+</div>
+
+</body></html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0048)http://adu.phpad.cn/admin.php?m=menu&s_name=zone -->
+<!-- saved from url=(0050)http://adu.phpad.cn/admin.php?m=menu&s_name=report -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title></title>
@@ -50,7 +50,7 @@ $(function(){
 
 </head>
 <body>
-<input type="hidden" id="s_name" value="zone">
+<input type="hidden" id="s_name" value="report">
 <div class="son_men_box">
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">系统设置</li>
@@ -107,7 +107,7 @@ $(function(){
 		</div>
 		
 	</ul>
-	<ul class="son_ul" style="">
+	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">网站管理</li>
 		<div class="li_box">
 			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=site" target="main"><em>●</em>网站列表</a></li>
@@ -122,18 +122,16 @@ $(function(){
 			<li><a href="http://adu.phpad.cn/admin.php?m=zone" target="main"><em>●</em>代码位列表</a></li>
 		</div>
 	</ul>
-	<ul class="son_ul" style="display:none">
+	<ul class="son_ul" style="">
 		<li name="son_title" class="son_sum_down">报表管理</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=report&a=report_plan" target="main"><em>●</em>计划报表</a></li>
-			<!--  
-			<li><a href='admin.php?m=report&a=report_adv' target='main'>广告主报表</a></li>
-			-->
-			<li><a href="http://adu.phpad.cn/admin.php?m=report&a=report_web" target="main"><em>●</em>网站主报表</a></li>
+			<li class="li_select"><a href="SITE_URL?m=Report&a=report_plan" target="main"><em>●</em>计划报表</a></li>
+			<li><a href='SITE_URL?m=Report&a=report_adv' target='main'><em>●</em>广告主报表</a></li>
+			<li><a href="SITE_URL?m=Report&a=report_web" target="main"><em>●</em>网站主报表</a></li>
 		</div>
 		<li name="son_title" class="son_sum_down">订单管理</li>
 		<div class="li_box">
-			<li><a href="http://adu.phpad.cn/admin.php?m=cps_order&a=today_list" target="main"><em>●</em>CPS今日订单</a></li>
+			<li><a href="SITE_URL?m=Report&a=cps_today_list" target="main"><em>●</em>CPS今日订单</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=cps_order&a=history_list" target="main"><em>●</em>CPS历史订单</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=cpa_order&a=today_list" target="main"><em>●</em>CPA今日列表</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=cpa_order&a=history_list" target="main"><em>●</em>CPA历史订单</a></li>

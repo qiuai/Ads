@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0050)http://adu.phpad.cn/admin.php?m=cpa_order&a=import -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">导入CPA订单</div>
+			<div class="listmain setting">
+			<form action="http://adu.phpad.cn/admin.php?m=cpa_order&a=import_do&" method="post" enctype="multipart/form-data">
+				<table align="center" cellspacing="0" class="list">
+					<tbody><tr>
+						<td style="width: 120px"><em class="red">*</em>计划ID：</td>
+						<td class="textbox_td"><input type="text" name="plan_id"></td>
+					</tr>
+					<tr>
+						<td class="newsite_w155"><em class="red">*</em>是否有表头：</td>
+						<td class="textbox_td">
+						  <input type="radio" name="cpa_excel_is_header" value="0" checked="checked">否
+						  <input type="radio" name="cpa_excel_is_header" value="1" checked="checked">是
+						</td>
+					</tr>
+					<tr>
+						<td class="newsite_w155"><em class="red">*</em>订单号EXCEL列号：</td>
+						<td class="textbox_td"><input type="text" name="cpa_excel_order_number_column" value="C"></td>
+					</tr>
+					<tr>
+						<td class="newsite_w155"><em class="red">*</em>佣金列号：</td>
+						<td class="textbox_td"><input type="text" name="cpa_excel_commission_column" value="G"></td>
+					</tr>
+					<tr>
+						<td class="newsite_w155"><em class="red">*</em>订单状态列号：</td>
+						<td class="textbox_td"><input type="text" name="cpa_excel_status_column" value="K"></td>
+					</tr>
+					<tr>
+						<td class="newsite_w155"><em class="red">*</em>有效订单标识：</td>
+						<td class="textbox_td">
+						  <input type="text" name="cpa_excel_status_valid" value="有效">
+						<!-- 
+						 无效-><input type="text" name="cpa_excel_status_invalid" value="无效" />
+						-->
+						</td>
+					</tr>
+					<tr>
+						<td><em class="red">*</em>EXCEL：</td>
+						<td class="textbox_td"><input type="file" name="excel"></td>
+					</tr>
+				</tbody></table>
+
+				<table align="center">
+					<tbody>
+						<tr>
+							<td colspan="2" align="center"><input type="submit" value="确定" class="button"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>	
+			</div>
+		</div>
+	</div>
+
+</body></html>

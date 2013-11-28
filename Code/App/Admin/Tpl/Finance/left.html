@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0048)http://adu.phpad.cn/admin.php?m=menu&s_name=zone -->
+<!-- saved from url=(0058)http://adu.phpad.cn/admin.php?m=menu&s_name=finance_report -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title></title>
@@ -50,7 +50,7 @@ $(function(){
 
 </head>
 <body>
-<input type="hidden" id="s_name" value="zone">
+<input type="hidden" id="s_name" value="finance_report">
 <div class="son_men_box">
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">系统设置</li>
@@ -70,7 +70,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">会员管理</li>
 		<div class="li_box">
-		<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=member&status=0" target="main"><em>●</em>全部会员</a></li>
+		<li class=""><a href="http://adu.phpad.cn/admin.php?m=member&status=0" target="main"><em>●</em>全部会员</a></li>
 		<li><a href="http://adu.phpad.cn/admin.php?m=member&user_type=web" target="main"><em>●</em>网站主</a></li>
 		<li><a href="http://adu.phpad.cn/admin.php?m=member&user_type=adv" target="main"><em>●</em>广告主</a></li>
 		</div>
@@ -92,7 +92,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">计划管理</li>
 		<div class="li_box">
-		    <li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_list" target="main"><em>●</em>计划列表</a></li>
+		    <li class=""><a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_list" target="main"><em>●</em>计划列表</a></li>
 		    <li><a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_add" target="main"><em>●</em>新增计划</a></li>
 		</div>
 		<li name="son_title" class="son_sum_down">广告管理</li>
@@ -107,10 +107,10 @@ $(function(){
 		</div>
 		
 	</ul>
-	<ul class="son_ul" style="">
+	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">网站管理</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=site" target="main"><em>●</em>网站列表</a></li>
+			<li class=""><a href="http://adu.phpad.cn/admin.php?m=site" target="main"><em>●</em>网站列表</a></li>
 		</div>
 		<li name="son_title" class="son_sum_down">站点分类管理</li>
 		<div class="li_box">
@@ -125,7 +125,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">报表管理</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=report&a=report_plan" target="main"><em>●</em>计划报表</a></li>
+			<li class=""><a href="http://adu.phpad.cn/admin.php?m=report&a=report_plan" target="main"><em>●</em>计划报表</a></li>
 			<!--  
 			<li><a href='admin.php?m=report&a=report_adv' target='main'>广告主报表</a></li>
 			-->
@@ -155,25 +155,25 @@ $(function(){
 		</div>
 	</ul>
 	
-	<ul class="son_ul" style="display:none">
+	<ul class="son_ul" style="">
 		<li name="son_title" class="son_sum_down">提现管理</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=report_finance" target="main"><em>●</em>提现申请列表</a></li>
+			<li class="li_select"><a href="SITE_URL?m=Finance" target="main"><em>●</em>提现申请列表</a></li>
 		</div>
 		<li name="son_title" class="son_sum_down">结算管理</li>
 		<div class="li_box">
-			<li><a href="http://adu.phpad.cn/admin.php?m=report_income" target="main"><em>●</em>结算明细列表</a></li>
+			<li><a href="SITE_URL?m=Finance&a=report_finance" target="main"><em>●</em>结算明细列表</a></li>
 		</div>
 		<li name="son_title" class="son_sum_down">客服业绩管理</li>
 		<div class="li_box">
-			<li><a href="http://adu.phpad.cn/admin.php?m=report_manager" target="main"><em>●</em>客服业绩统计列表</a></li>
+			<li><a href="SITE_URL?m=Finance&a=report_manager" target="main"><em>●</em>客服业绩统计列表</a></li>
 		</div>
 	</ul>
 	
 	<ul class="son_ul" style="display:none">
 	    <li name="son_title" class="son_sum_down">管理员管理</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=user&a=user_list" target="main"><em>●</em>管理员列表</a></li>
+			<li class=""><a href="http://adu.phpad.cn/admin.php?m=user&a=user_list" target="main"><em>●</em>管理员列表</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=user&a=user_add" target="main"><em>●</em>新增管理员</a></li>
 		</div>
 		<li name="son_title" class="son_sum_down">管理员组管理</li>
@@ -195,7 +195,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">商品管理</li>
 		<div class="li_box">
-		    <li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=goods&a=goods_list" target="main"><em>●</em>商品列表</a></li>
+		    <li class=""><a href="http://adu.phpad.cn/admin.php?m=goods&a=goods_list" target="main"><em>●</em>商品列表</a></li>
 		    <li><a href="http://adu.phpad.cn/admin.php?m=goods&a=goods_add" target="main"><em>●</em>新增商品</a></li>
 		</div>
 		
@@ -217,7 +217,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">任务计划</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=task" target="main"><em>●</em>任务列表</a></li>
+			<li class=""><a href="http://adu.phpad.cn/admin.php?m=task" target="main"><em>●</em>任务列表</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=task&a=task_log_list" target="main"><em>●</em>任务日志</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=task&a=task_add" target="main"><em>●</em>添加任务</a></li>
 		</div>
@@ -235,7 +235,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">第三方联盟</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=third_part_union&a=yiqifa" target="main"><em>●</em>亿起发联盟</a></li>
+			<li class=""><a href="http://adu.phpad.cn/admin.php?m=third_part_union&a=yiqifa" target="main"><em>●</em>亿起发联盟</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=third_part_union&a=linktech" target="main"><em>●</em>领克特联盟</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=third_part_union&a=chanet" target="main"><em>●</em>成果联盟</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=third_part_union&a=duomai" target="main"><em>●</em>多麦联盟</a></li>
@@ -254,7 +254,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">优惠券管理</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=coupon" target="main"><em>●</em>优惠券列表</a></li>
+			<li class=""><a href="http://adu.phpad.cn/admin.php?m=coupon" target="main"><em>●</em>优惠券列表</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=coupon&a=coupon_add" target="main"><em>●</em>新增优惠券</a></li>	
 		</div>
 		<li name="son_title" class="son_sum_down">优惠券申请管理</li>
@@ -266,7 +266,7 @@ $(function(){
 	<ul class="son_ul" style="display:none">
 		<li name="son_title" class="son_sum_down">站内信管理</li>
 		<div class="li_box">
-			<li class="li_select"><a href="http://adu.phpad.cn/admin.php?m=sms&a=sms_list" target="main"><em>●</em>站内信列表</a></li>
+			<li class=""><a href="http://adu.phpad.cn/admin.php?m=sms&a=sms_list" target="main"><em>●</em>站内信列表</a></li>
 			<li><a href="http://adu.phpad.cn/admin.php?m=sms&a=sms_add" target="main"><em>●</em>新增站内信</a></li>
 	    </div>
 	    <li name="son_title" class="son_sum_down">联盟公告管理</li>

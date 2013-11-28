@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0044)http://adu.phpad.cn/admin.php?m=goods_orders -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+<div class="wrap1">
+ <div class="main">
+   <div class="body_title">订单列表</div>
+		<div class="listmain">
+		
+<table align="center" class="list" cellspacing="0">
+    <tbody><tr>
+        <td style="border-right:none">
+        <form method="get">
+        <input type="hidden" name="m" value="goods_orders">
+        <input type="text" name="keyword" value="">
+        <select name="search_type">
+            <option value="detail_id">订单详情ID</option>
+            <option value="goods">商品名称</option>
+        </select>
+        <input type="submit" value="查询" class="button">
+        </form>
+        </td>
+                <td align="right">
+            <input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=goods_orders&amp;a=goods_orders_export&amp;keyword=&amp;search_type=&amp;status=&#39;">
+        </td>
+    </tr>
+     <tr>
+        <td style="font-size:13px;height:40px;" colspan="2">订单状态：
+                    <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_list&keyword=&search_type=" class="link-checked">全部</a>
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_list&status=%E6%9C%AA%E5%A4%84%E7%90%86&keyword=&search_type=" class="link_before_checked">未处理</a>
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_list&status=%E5%B7%B2%E7%A1%AE%E8%AE%A4&keyword=&search_type=" class="link_before_checked">已确认</a>
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_list&status=%E5%B7%B2%E5%8F%91%E8%B4%A7&keyword=&search_type=" class="link_before_checked">已发货</a>            
+        </td>
+    </tr>
+</tbody></table>
+
+<form method="post">
+<table cellspacing="0" class="list" style="text-align:center">
+    <tbody><tr class="tb_title">       
+        <td>订单详情ID</td>
+        <td>联系人</td>
+        <td>地址</td>
+        <td>移动电话</td>       
+        <td>商品名称</td>
+        <td>价格</td>
+        <td>购买数量</td>
+        <td>所需总积分</td>  
+        <td>状态</td>  
+        <td>下单时间</td>        
+        <td>操作</td>
+    </tr>
+    <tr class="bgcolor3">        <td>10</td>
+        <td></td>       
+        <td>-</td>
+        <td></td>
+        <td>三星（SAMSUNG） WB151 数码相机</td>
+        <td>139875</td>
+        <td>2</td>
+        <td>279750</td>
+        <td>未处理</td>
+        <td>2013-10-18 10:08:43</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=10">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=10" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr><tr class="bgcolor4">        <td>9</td>
+        <td>张三</td>       
+        <td>北京市 市辖区 宣武区-西三旗</td>
+        <td>13121816099</td>
+        <td>100Q币</td>
+        <td>12500</td>
+        <td>1</td>
+        <td>12500</td>
+        <td>未处理</td>
+        <td>2013-10-17 10:24:34</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=9">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=9" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr><tr class="bgcolor3">        <td>8</td>
+        <td>张三</td>       
+        <td>北京市 市辖区 宣武区-西三旗</td>
+        <td>13121816099</td>
+        <td>联想 乐Pad A1 7英寸平板电脑</td>
+        <td>142255</td>
+        <td>1</td>
+        <td>142255</td>
+        <td>已确认</td>
+        <td>2013-10-16 12:32:57</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=8">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=8" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr><tr class="bgcolor4">        <td>7</td>
+        <td>张三</td>       
+        <td>北京市 市辖区 宣武区-西三旗</td>
+        <td>13121816099</td>
+        <td>iPad2 16G(黑)</td>
+        <td>376000</td>
+        <td>2</td>
+        <td>752000</td>
+        <td>已发货</td>
+        <td>2013-10-16 12:31:18</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=7">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=7" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr><tr class="bgcolor3">        <td>6</td>
+        <td>丽丽</td>       
+        <td>河北省 石家庄市 长安区-长安街</td>
+        <td>15922934278</td>
+        <td>苹果（Apple）MacBook Pro MD212CH/A 1</td>
+        <td>1563500</td>
+        <td>1</td>
+        <td>1563500</td>
+        <td>已发货</td>
+        <td>2013-10-16 12:05:29</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=6">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=6" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr><tr class="bgcolor4">        <td>5</td>
+        <td>张三</td>       
+        <td>北京市 市辖区 海淀区-西三旗</td>
+        <td>15922934278</td>
+        <td>iPad2 16G(黑)</td>
+        <td>376000</td>
+        <td>4</td>
+        <td>1504000</td>
+        <td>已发货</td>
+        <td>2013-10-16 12:02:00</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=5">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=5" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr><tr class="bgcolor3">        <td>3</td>
+        <td></td>       
+        <td>-</td>
+        <td></td>
+        <td>Midea 美的 搅拌机 BM255</td>
+        <td>27375</td>
+        <td>1</td>
+        <td>27375</td>
+        <td>已发货</td>
+        <td>2013-10-14 17:31:45</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=3">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=3" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr><tr class="bgcolor4">        <td>1</td>
+        <td>张三</td>       
+        <td>北京市 市辖区 宣武区-西三旗</td>
+        <td>13121816099</td>
+        <td>联想 乐Pad A1 7英寸平板电脑</td>
+        <td>142255</td>
+        <td>1</td>
+        <td>142255</td>
+        <td>未处理</td>
+        <td>2013-10-14 17:31:45</td>       
+        <td>                          
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_edit&detail_id=1">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;         
+            <a href="http://adu.phpad.cn/admin.php?m=goods_orders&a=goods_orders_delete&detail_id=1" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>      
+        </td>
+    </tr></tbody></table>
+</form>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共8 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=goods_orders&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=goods_orders&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=goods_orders&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=goods_orders&page=1">尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+</div>
+</div>
+
+</body></html>

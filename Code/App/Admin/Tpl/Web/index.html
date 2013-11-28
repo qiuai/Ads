@@ -1,913 +1,289 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0047)http://adu.phpad.cn/admin.php?m=member&status=0 -->
+<!-- saved from url=(0036)http://adu.phpad.cn/admin.php?m=site -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title></title>
 <link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
 <script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
-<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><style type="text/css">
-.list td{
-	border:0px;
-}
-.td_b_m td {
-    border-bottom: 2px solid #DDDDDD;
-}
-a{
-	cursor: pointer;
-}
-</style>
-<link rel="stylesheet" href="http://adu.phpad.cn/static/js/default/artdialog/skins/black.css?4.1.7"><script language="javascript" src="STATIC_URL/admin/images/artDialog.js"></script>
-</head>
-<body><div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move; display: block;"></div><a class="aui_close" href="javascript:/*artDialog*/;" style="display: block;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background-image: none; background-position: initial initial; background-repeat: initial initial;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
 <div class="wrap">
  <div class="main">
-  <div class="body_title">会员列表</div>
+  <div class="body_title">网站列表</div>
   <div class="listmain">	
       <table align="center" class="list" cellspacing="0">
         <tbody><tr>
-        <td width="40%" style="border-right:none;border-top:1px solid #ccc">
+        <td width="40%" style="border-right:none;">
             <form method="get">
-                <input type="hidden" name="m" value="member">
-                <input type="text" name="content" value="">
+                <input type="hidden" name="m" value="site">
+                <input type="text" name="content">
                 <select name="condition">
-                    <option value="uid">用户UID</option>
-                    <option value="name">用户名</option>
+                    <option value="site_id">网站ID</option>
+                    <option value="site_domain">网站域名</option>
+                    <option value="uid">用户UID</option>                    
                 </select>
                 <input type="submit" value="查询" class="button">
             </form>
         </td>
-                <td align="right" style="border-top:1px solid #ccc">
-            <input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=member&amp;a=member_export&amp;content=&amp;condition=&amp;user_status=&amp;user_type=&#39;">
+                <td align="right">
+            <input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=site&amp;a=site_export&amp;content=&amp;condition=&amp;status=&#39;">
         </td>
         </tr>
         <tr>
-            <td style="font-size:13px;height:40px;border-top: 1px solid #CECECE;" colspan="2">用户状态：
-                                <a href="http://adu.phpad.cn/admin.php?m=member&a=member_list&" class="link-checked">全部状态</a>
-                <a href="http://adu.phpad.cn/admin.php?m=member&a=member_list&user_status=0&user_type=" class="link_before_checked">正常</a>
-                <a href="http://adu.phpad.cn/admin.php?m=member&a=member_list&user_status=1&user_type=" class="link_before_checked">待审核</a>
-                <a href="http://adu.phpad.cn/admin.php?m=member&a=member_list&user_status=2&user_type=" class="link_before_checked">锁定</a>
-                <a href="http://adu.phpad.cn/admin.php?m=member&a=member_list&user_status=3&user_type=" class="link_before_checked">拒绝</a>
-                <a href="http://adu.phpad.cn/admin.php?m=member&a=member_list&user_status=4&user_type=" class="link_before_checked">未激活邮件</a>
+            <td style="font-size:13px;height:40px;" colspan="2">网站状态：
+                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&" class="link-checked">全部状态</a>
+                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E6%9C%AA%E9%AA%8C%E8%AF%81" class="link_before_checked">未验证</a>
+                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E5%AE%A1%E6%A0%B8%E4%B8%AD" class="link_before_checked">审核中</a>
+                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E6%AD%A3%E5%B8%B8" class="link_before_checked">正常</a>
+                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E9%94%81%E5%AE%9A" class="link_before_checked">锁定</a>
+                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E6%8B%92%E7%BB%9D" class="link_before_checked">拒绝</a>
             </td>
         </tr>
+        
     </tbody></table>
 		
 		
 <form method="post" id="sitelist_form">
-<table cellspacing="0" cellpadding="0" border="0" class="list" style="text-align:center;">
+<table align="center" cellspacing="0" class="list">
     <tbody><tr class="tb_title">
-        <td>UID</td>
-        <td>用户名</td>
-        <td>类型</td>
-        <td>真实姓名</td>
-        <td>QQ</td>
-        <td>移动电话</td>
-        <td>法律身份</td>
-        <td>注册时间</td>
-        <td>上次登录</td>
-        <td>状态</td>       
+    	<td>
+    		<input id="check_box" class="selall fl" type="checkbox">
+			<label class="fl" for="selall">全选</label>
+		</td>
+        <td>网站ID</td>
+        <td>网站主ID</td>
+        <td>网站名称</td>
+        <td>网站域名</td>
+        <td>网站类型</td>
+        <td>联盟网站登记</td>
+        <td>谷歌PR</td>
+        <td>Alexa排名</td>
+        <td>百度权重</td>
+        <td>添加时间</td>
+        <td>状态</td>
+        <td>操作</td>       
     </tr>
-    <tr class="bgcolor3">        <td>300020</td>
-        <td>web</td>
-        <td>网站主</td>
-        <td>李四</td>
-        <td>123456789</td>
-        <td>13838143800</td>
-        <td>个人</td>
-        <td>2012-03-10</td>
-        <td>2013-07-02</td>
-        <td><span style="color:green">正常</span></td>
-        </tr>
-                <!-- 网站主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_300020&#39;).show()" onmouseout="$(&#39;#quick_300020&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/active.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_300020">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=300020" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(300020)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(300020)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(300020)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=300020" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=300020" title="查看报表">
-						报表
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=300020" title="查看网站">
-						网站
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=300020" title="查看广告位">
-						广告位
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=300020" title="发送邮件">
-						发送邮件
-					</a>
-					<!-- 
-					|
-					<a href="" title="最近一星期走势图" class="">
-						一星期走势图
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="地区分布" class="">
-						地区分布
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="24小时走势图" class="">
-						24小时走势图
-					</a> 
-					-->
-					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(300020,11,0.00,0.00,0.00,0.00)">
-						扣量等设置
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=300020" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 网站主快捷操作结束 -->
-            <tr class="bgcolor4">        <td>600043</td>
-        <td>adv</td>
-        <td>广告主</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>个人</td>
-        <td>2013-07-02</td>
-        <td>2013-07-16</td>
-        <td><span style="color:green">正常</span></td>
-        </tr>
-                <!-- 广告主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600043&#39;).show()" onmouseout="$(&#39;#quick_600043&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/active.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600043">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600043" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600043)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600043)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600043)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600043" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_list&uid=600043" title="广告计划">
-						广告计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_add&" title="新建计划">
-						新建计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&uid=600043" title="查看广告">
-						广告
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600043" title="发送邮件">
-						发送邮件
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600043" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 广告主快捷操作结束 -->
-            <tr class="bgcolor3">        <td>600051</td>
-        <td>hhh@ncist.com</td>
-        <td>网站主</td>
-        <td>张三</td>
-        <td>123456789</td>
-        <td>12345678901</td>
-        <td>个人</td>
-        <td>2012-03-10</td>
-        <td>2013-07-16</td>
-        <td><span style="color:red">锁定</span></td>
-        </tr>
-                <!-- 网站主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600051&#39;).show()" onmouseout="$(&#39;#quick_600051&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/inactive.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600051">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600051" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600051)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600051)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600051)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600051" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=600051" title="查看报表">
-						报表
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=600051" title="查看网站">
-						网站
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=600051" title="查看广告位">
-						广告位
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600051" title="发送邮件">
-						发送邮件
-					</a>
-					<!-- 
-					|
-					<a href="" title="最近一星期走势图" class="">
-						一星期走势图
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="地区分布" class="">
-						地区分布
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="24小时走势图" class="">
-						24小时走势图
-					</a> 
-					-->
-					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(600051,11,0.00,0.00,0.00,0.00)">
-						扣量等设置
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600051" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 网站主快捷操作结束 -->
-            <tr class="bgcolor4">        <td>600054</td>
-        <td>111@hh.com</td>
-        <td>广告主</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>个人</td>
-        <td>2013-07-02</td>
-        <td>2013-08-07</td>
-        <td><span style="color:orange">待审</span></td>
-        </tr>
-                <!-- 广告主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600054&#39;).show()" onmouseout="$(&#39;#quick_600054&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/inactive.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600054">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600054" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600054)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600054)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600054)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600054" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_list&uid=600054" title="广告计划">
-						广告计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_add&" title="新建计划">
-						新建计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&uid=600054" title="查看广告">
-						广告
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600054" title="发送邮件">
-						发送邮件
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600054" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 广告主快捷操作结束 -->
-            <tr class="bgcolor3">        <td>600053</td>
-        <td>2013915655@qq.com</td>
-        <td>网站主</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>个人</td>
-        <td>2013-07-02</td>
-        <td>2013-08-07</td>
-        <td><span style="color:orange">待审</span></td>
-        </tr>
-                <!-- 网站主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600053&#39;).show()" onmouseout="$(&#39;#quick_600053&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/inactive.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600053">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600053" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600053)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600053)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600053)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600053" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=600053" title="查看报表">
-						报表
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=600053" title="查看网站">
-						网站
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=600053" title="查看广告位">
-						广告位
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600053" title="发送邮件">
-						发送邮件
-					</a>
-					<!-- 
-					|
-					<a href="" title="最近一星期走势图" class="">
-						一星期走势图
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="地区分布" class="">
-						地区分布
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="24小时走势图" class="">
-						24小时走势图
-					</a> 
-					-->
-					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(600053,12,0.00,0.00,0.00,0.00)">
-						扣量等设置
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600053" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 网站主快捷操作结束 -->
-            <tr class="bgcolor4">        <td>600055</td>
-        <td>222@hh.com</td>
-        <td>网站主</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>个人</td>
-        <td>2013-07-02</td>
-        <td>2013-08-07</td>
-        <td><span style="color:red">锁定</span></td>
-        </tr>
-                <!-- 网站主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600055&#39;).show()" onmouseout="$(&#39;#quick_600055&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/inactive.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600055">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600055" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600055)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600055)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600055)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600055" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=600055" title="查看报表">
-						报表
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=600055" title="查看网站">
-						网站
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=600055" title="查看广告位">
-						广告位
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600055" title="发送邮件">
-						发送邮件
-					</a>
-					<!-- 
-					|
-					<a href="" title="最近一星期走势图" class="">
-						一星期走势图
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="地区分布" class="">
-						地区分布
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="24小时走势图" class="">
-						24小时走势图
-					</a> 
-					-->
-					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(600055,11,0.00,0.00,0.00,0.00)">
-						扣量等设置
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600055" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 网站主快捷操作结束 -->
-            <tr class="bgcolor3">        <td>600056</td>
-        <td>333@hh.com</td>
-        <td>网站主</td>
-        <td></td>
-        <td></td>
-        <td>12346</td>
-        <td>个人</td>
-        <td>2013-07-02</td>
-        <td>2013-08-07</td>
-        <td><span style="color:gray">拒绝</span></td>
-        </tr>
-                <!-- 网站主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600056&#39;).show()" onmouseout="$(&#39;#quick_600056&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/inactive.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600056">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600056" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600056)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600056)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600056)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600056" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=600056" title="查看报表">
-						报表
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=600056" title="查看网站">
-						网站
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=600056" title="查看广告位">
-						广告位
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600056" title="发送邮件">
-						发送邮件
-					</a>
-					<!-- 
-					|
-					<a href="" title="最近一星期走势图" class="">
-						一星期走势图
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="地区分布" class="">
-						地区分布
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="24小时走势图" class="">
-						24小时走势图
-					</a> 
-					-->
-					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(600056,12,0.00,0.00,0.00,0.00)">
-						扣量等设置
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600056" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 网站主快捷操作结束 -->
-            <tr class="bgcolor4">        <td>600057</td>
-        <td>444@hh.com</td>
-        <td>广告主</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>个人</td>
-        <td>2013-07-02</td>
-        <td>2013-08-07</td>
-        <td><span style="color:orange">邮件未激活</span></td>
-        </tr>
-                <!-- 广告主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600057&#39;).show()" onmouseout="$(&#39;#quick_600057&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/inactive.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600057">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600057" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600057)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600057)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600057)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600057" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_list&uid=600057" title="广告计划">
-						广告计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_add&" title="新建计划">
-						新建计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&uid=600057" title="查看广告">
-						广告
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600057" title="发送邮件">
-						发送邮件
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600057" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 广告主快捷操作结束 -->
-            <tr class="bgcolor3">        <td>1</td>
-        <td>admin</td>
-        <td>广告主</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>个人</td>
+    <tr class="bgcolor3">    	<td>
+			<input class="check_act_id" type="checkbox" value="41" name="site_id[]">
+		</td>
+        <td>41</td>
+        <td>300020</td>
+        <td>好乐享</td>
+        <td><a href="http://www.haolexiang.com/" target="_blank">www.haolexiang.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
         <td>1970-01-01</td>
-        <td>1970-01-01</td>
-        <td><span style="color:green">正常</span></td>
+        <td><span style="color:green">正常</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=41">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=41" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=41">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.haolexiang.com&#39;)">快捷查询网站</a>
+        </td>
         </tr>
-                <!-- 广告主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_1&#39;).show()" onmouseout="$(&#39;#quick_1&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/active.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_1">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=1" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(1)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(1)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(1)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=1" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_list&uid=1" title="广告计划">
-						广告计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&a=plan_add&" title="新建计划">
-						新建计划
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&uid=1" title="查看广告">
-						广告
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=1" title="发送邮件">
-						发送邮件
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=1" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 广告主快捷操作结束 -->
-            <tr class="bgcolor4">        <td>600058</td>
-        <td>394410571@qq.com</td>
-        <td>网站主</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>个人</td>
+    <tr class="bgcolor4">    	<td>
+			<input class="check_act_id" type="checkbox" value="39" name="site_id[]">
+		</td>
+        <td>39</td>
+        <td>300020</td>
+        <td>我的测试2</td>
+        <td><a href="http://www.mytesttesttest.com/" target="_blank">www.mytesttesttest.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
         <td>1970-01-01</td>
-        <td>2013-11-25</td>
-        <td><span style="color:green">正常</span></td>
+        <td><span style="color:gray">未验证</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=39">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=39" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=39">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.mytesttesttest.com&#39;)">快捷查询网站</a>
+        </td>
         </tr>
-                <!-- 网站主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$(&#39;#quick_600058&#39;).show()" onmouseout="$(&#39;#quick_600058&#39;).hide()">
-			<td>
-				&nbsp;
-				<img src="STATIC_URL/admin/images/active.png" alt="活跃/不活跃" align="middle">
-			</td>
-			<td colspan="9" style="text-align:left;width:900px">
-				<span style="display: none;" id="quick_600058">
-					<a href="http://adu.phpad.cn/admin.php?m=member&a=member_edit&uid=600058" title="编辑这个会员">
-						编辑
-					</a>
-					|
-					<a title="激活这个会员" onclick="activate(600058)">
-						激活
-					</a>
-					|
-					<a title="锁定这个会员" onclick="locks(600058)">
-						锁定
-					</a>
-					<a>
-						|
-					</a>
-					<a title="删除这个会员" onclick="delete_member(600058)">
-						删除
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=balance&a=balance_add&uid=600058" title="手动充值" class="">
-						增/扣款项
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=600058" title="查看报表">
-						报表
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=600058" title="查看网站">
-						网站
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=600058" title="查看广告位">
-						广告位
-					</a>
-					|
-					<a href="http://adu.phpad.cn/admin.php?m=send_email&a=send_email_list&uid=600058" title="发送邮件">
-						发送邮件
-					</a>
-					<!-- 
-					|
-					<a href="" title="最近一星期走势图" class="">
-						一星期走势图
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="地区分布" class="">
-						地区分布
-					</a>
-					&nbsp;|&nbsp;
-					<a href="" title="24小时走势图" class="">
-						24小时走势图
-					</a> 
-					-->
-					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(600058,10,0.00,0.00,0.00,0.00)">
-						扣量等设置
-					</a>
-					&nbsp;|&nbsp;
-					<a target="_blank" href="http://adu.phpad.cn/admin.php?m=member&a=member_login&uid=600058" title="进入后台">
-						进入后台
-					</a>
-				</span>
-			</td>		
-		</tr>
-        <!-- 网站主快捷操作结束 -->
-            </tbody></table>
+    <tr class="bgcolor3">    	<td>
+			<input class="check_act_id" type="checkbox" value="33" name="site_id[]">
+		</td>
+        <td>33</td>
+        <td>300020</td>
+        <td>一淘</td>
+        <td><a href="http://www.etao.com/" target="_blank">www.etao.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1970-01-01</td>
+        <td><span style="color:green">正常</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=33">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=33" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=33">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.etao.com&#39;)">快捷查询网站</a>
+        </td>
+        </tr>
+    <tr class="bgcolor4">    	<td>
+			<input class="check_act_id" type="checkbox" value="34" name="site_id[]">
+		</td>
+        <td>34</td>
+        <td>300020</td>
+        <td>爱返现</td>
+        <td><a href="http://www.aifanxian.com/" target="_blank">www.aifanxian.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1970-01-01</td>
+        <td><span style="color:green">正常</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=34">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=34" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=34">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.aifanxian.com&#39;)">快捷查询网站</a>
+        </td>
+        </tr>
+    <tr class="bgcolor3">    	<td>
+			<input class="check_act_id" type="checkbox" value="26" name="site_id[]">
+		</td>
+        <td>26</td>
+        <td>300020</td>
+        <td>怎么样</td>
+        <td><a href="http://www.zenmeyang.com/" target="_blank">www.zenmeyang.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1970-01-01</td>
+        <td><span style="color:green">正常</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=26">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=26" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=26">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.zenmeyang.com&#39;)">快捷查询网站</a>
+        </td>
+        </tr>
+    <tr class="bgcolor4">    	<td>
+			<input class="check_act_id" type="checkbox" value="35" name="site_id[]">
+		</td>
+        <td>35</td>
+        <td>300020</td>
+        <td>青番茄</td>
+        <td><a href="http://www.qfanqie.com/" target="_blank">www.qfanqie.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1970-01-01</td>
+        <td><span style="color:green">正常</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=35">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=35" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=35">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.qfanqie.com&#39;)">快捷查询网站</a>
+        </td>
+        </tr>
+    <tr class="bgcolor3">    	<td>
+			<input class="check_act_id" type="checkbox" value="37" name="site_id[]">
+		</td>
+        <td>37</td>
+        <td>300020</td>
+        <td>test</td>
+        <td><a href="http://www.test.com/" target="_blank">www.test.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1970-01-01</td>
+        <td><span style="color:green">正常</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=37">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=37" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=37">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.test.com&#39;)">快捷查询网站</a>
+        </td>
+        </tr>
+    <tr class="bgcolor4">    	<td>
+			<input class="check_act_id" type="checkbox" value="38" name="site_id[]">
+		</td>
+        <td>38</td>
+        <td>300020</td>
+        <td>我的测试网站</td>
+        <td><a href="http://www.mytest.com/" target="_blank">www.mytest.com</a></td>
+        <td>电商</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1970-01-01</td>
+        <td><span style="color:gray">未验证</span>&nbsp;</td>
+        <td>
+            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=38">修改</a>&nbsp;|&nbsp;-->
+            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=38" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=38">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;www.mytest.com&#39;)">快捷查询网站</a>
+        </td>
+        </tr>
+        	<tr>
+            <td style="font-size:13px;height:40px;" colspan="13">批量操作：
+                <a href="javascript:muti_apply('未验证')" class="link_before_checked">未验证</a>
+                <a href="javascript:muti_apply('审核中')" class="link_before_checked">审核中</a>
+                <a href="javascript:muti_apply('正常')" class="link_before_checked">正常</a>
+                <a href="javascript:muti_apply('锁定')" class="link_before_checked">锁定</a>
+                <a href="javascript:muti_apply('拒绝')" class="link_before_checked">拒绝</a>
+            </td>
+        </tr>
+</tbody></table>
 </form>
 <div id="show_act" style="display:none;position:absolute"></div>
 </div>
-<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共10 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=member&status=0&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=member&status=0&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=member&status=0&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=member&status=0&page=1">尾页</a>&nbsp;&nbsp;</div></div>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共8 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=site&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=site&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=site&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=site&page=1">尾页</a>&nbsp;&nbsp;</div></div>
 </div>
 </div>
-<div id="deduction" style="display:none">
-	<form action="http://adu.phpad.cn/admin.php?m=member&a=member_set_deduction&" method="post">
-	<input type="hidden" name="uid" id="uid" value="">
-		<p style="margin:10px 0">CPS扣量：<input type="text" name="cps" id="cps" value="" class="textbox">%</p>
-		<p style="margin:10px 0">CPA扣量：<input type="text" name="cpa" id="cpa" value="" class="textbox">效果</p>
-		<p style="margin:10px 0">CPC扣量：<input type="text" name="cpc" id="cpc" value="" class="textbox">点击</p>
-		<p style="margin:10px 0">CPM扣量：<input type="text" name="cpm" id="cpm" value="" class="textbox">%</p>
-		<p style="margin:10px 0">
-		属于客服：<select name="mid">
-					<option value="0">--请选择客服--</option>
-										<option value="10" class="mid">admintest</option>
-									</select>
-		<input style="margin-left:80px" type="submit" value="修改" class="button">
-		</p>
-	</form>
-</div>
-<script type="text/javascript">
-function activate(uid){
-	var psub = confirm("是否确认激活？");
-    if (psub) {
-        $.post("http://adu.phpad.cn/admin.php?m=member&a=member_active&", {
-            "uid": uid,
-            "status":"0",
-            "action":"active",
-        },function(data) {
-            if (data == 'ok') {
-                document.location.reload();
-            } else {
-                alert('提交失败');
-            }
-        });
-    }
-}
-function locks(uid){
-	var psub = confirm("是否确认锁定？");
-    if (psub) {
-        $.post("http://adu.phpad.cn/admin.php?m=member&a=member_active&", {
-            "uid": uid,
-            "status":"2",
-            "action":"active",
-        },function(data) {
-            if (data == 'ok') {
-                document.location.reload();
-            } else {
-                alert('提交失败');
-            }
-        });
-    }
-}
-function delete_member(uid){
-	var psub = confirm("是否确认删除？");
-    if (psub) {
-        $.post("http://adu.phpad.cn/admin.php?m=member&a=member_active&", {
-            "uid": uid,
-            "action":"delete",
-        },function(data) {
-            if (data == 'ok') {
-                document.location.reload();
-            } else {
-                alert('提交失败');
-            }
-        });
-    }
-}
-//扣量设置
-function doDeduction(uid,mid,cps,cpa,cpc,cpm)
+<div id="layer" style="display:none;"></div>
+<script language="javascript" type="text/javascript">
+//全选、全不选
+$('#check_box').toggle(function(){
+		$(this).attr('checked','checked');
+		$(".check_act_id").attr('checked','checked');
+	},function(){
+		$(this).attr('checked','');
+		$(".check_act_id").attr('checked','');
+});
+//批量申请
+function muti_apply(status)
 {
-	$('#uid').val(uid);
-	$('#cps').val(cps);
-	$('#cpa').val(cpa);
-	$('#cpc').val(cpc);
-	$('#cpm').val(cpm);
-	$('.mid').each(function(){
-			if($(this).val()==mid){
-				$(this).attr('selected','selected');
+	var ids = '';
+	$(".check_act_id:checked").each(function(){
+		ids += $(this).val() + ',';
+		
+	});
+
+	if(ids=='') {
+		alert('请选择要操作的网站！');
+	}else{	
+		$.post("admin.php?m=site&a=site_multi", {'ids':ids,'status':status}, function(data){
+			if(data==1){
+				alert('批量操作成功');
+				window.location.reload();
+			}else{
+				alert('批量操作失败');
+				window.location.reload();
 			}
 		});
-    art.dialog({  
-        content: document.getElementById("deduction"),    
-        title:uid+'的扣量等设置',  
-        id:'withdras',
-        width:'350px',
-        height:'230px',
-        padding:'5px'
-    }); 	
+	}
+}
+function quick_open(site){
+	window.open('http://'+site,"siteblank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=yes, copyhistory=yes, width=800, height=450, left:50, top:50");
+	
 }
 </script>
 
