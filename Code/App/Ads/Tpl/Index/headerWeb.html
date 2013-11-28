@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{$title}</title>
+<link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/style.css" />
+<link href="http://adu.phpad.cn/static/css/default/orange_dialog.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="http://adu.phpad.cn/static/js/default/dialog.js"></script>
+<style type="text/css">.ui_dialog_wrap{visibility:hidden}.ui_title_icon,.ui_content,.ui_dialog_icon,.ui_btns span{display:inline-block;*zoom:1;*display:inline}.ui_dialog{text-align:left;position:absolute;top:0}.ui_dialog table{border:0;margin:0;border-collapse:collapse}.ui_dialog td{padding:0}.ui_title_icon,.ui_dialog_icon{vertical-align:middle;_font-size:0}.ui_title_text{overflow:hidden;cursor:default}.ui_close{display:block;position:absolute;outline:none}.ui_content_wrap{text-align:center}.ui_content{margin:10px;text-align:left}.ui_iframe .ui_content{margin:0;*padding:0;display:block;height:100%;position:relative}.ui_iframe .ui_content iframe{border:none;overflow:auto}.ui_content_mask {visibility:hidden;width:100%;height:100%;position:absolute;top:0;left:0;background:#FFF;filter:alpha(opacity=0);opacity:0}.ui_bottom{position:relative}.ui_resize{position:absolute;right:0;bottom:0;z-index:1;cursor:nw-resize;_font-size:0}.ui_btns{text-align:right;white-space:nowrap}.ui_btns span{margin:5px 10px}.ui_btns button{cursor:pointer}* .ui_ie6_select_mask{position:absolute;top:0;left:0;z-index:-1;filter:alpha(opacity=0)}.ui_loading .ui_content_wrap{position:relative;min-width:9em;min-height:3.438em}.ui_loading .ui_btns{display:none}.ui_loading_tip{visibility:hidden;width:5em;height:1.2em;text-align:center;line-height:1.2em;position:absolute;top:50%;left:50%;margin:-0.6em 0 0 -2.5em}.ui_loading .ui_loading_tip,.ui_loading .ui_content_mask{visibility:visible}.ui_loading .ui_content_mask{filter:alpha(opacity=100);opacity:1}.ui_move .ui_title_text{cursor:move}.ui_page_move .ui_content_mask{visibility:visible}.ui_move_temp{visibility:hidden;position:absolute;cursor:move}.ui_move_temp div{height:100%}html>body .ui_fixed .ui_move_temp{position:fixed}html>body .ui_fixed .ui_dialog{position:fixed}* .ui_ie6_fixed{background:url(*) fixed}* .ui_ie6_fixed body{height:100%}* html .ui_fixed{width:100%;height:100%;position:absolute;left:expression(documentElement.scrollLeft+documentElement.clientWidth-this.offsetWidth);top:expression(documentElement.scrollTop+documentElement.clientHeight-this.offsetHeight)}* .ui_page_lock select,* .ui_page_lock .ui_ie6_select_mask{visibility:hidden}* .ui_page_lock .ui_content select{visibility:visible;}.ui_overlay{visibility:hidden;_display:none;position:fixed;top:0;left:0;width:100%;height:100%;filter:alpha(opacity=0);opacity:0;_overflow:hidden}.ui_lock .ui_overlay{visibility:visible;_display:block}.ui_overlay div{height:100%}* html body{margin:0}</style>
+</head>
+<body>
+<div class="siter_header">
+	<div class="header_info">
+		<a href="http://adu.phpad.cn/center.php" class="logo">PHPADU广告联盟</a>
+        <ul class="user_info">
+            <li>欢迎您：<a href="" class="orange">web</a></li>
+            <li>用户ID：<a href="" class="orange">300020</a></li>
+            <li>专属媒介：暂无</li>         
+            <li class="msg"><a href="http://adu.phpad.cn/center.php?m=sms&a=sms_list" class="orange">站内信</a></li>
+            <li class="last"><a href="http://adu.phpad.cn/index.php?m=index&a=login_out&" class="orange">退出</a></li>
+        </ul>
+    </div>
+    <div class="siter_nav">
+    	<div class="main_nav clearfix">
+        <div class="mn_l fl"></div>
+    	<ul class="fl" id="nav_list">
+			<li <if condition="$flag eq 'index'">class="selected"</if>><a href="/index.php?m=HomeWeb&a=index">首页</a></li>
+			<li <if condition="$flag eq 'plan'">class="selected"</if>><a href="/index.php?m=PlanWeb&a=index">广告计划</a></li>
+			<li <if condition="$flag eq 'report'">class="selected"</if>><a href="/index.php?m=ReportWeb&a=index">查看报表</a></li>
+			<li <if condition="$flag eq 'site'">class="selected"</if>><a href="/index.php?m=SiteWeb&a=index">网站管理</a></li>
+			<li <if condition="$flag eq 'zone'">class="selected"</if>><a href="/index.php?m=ZoneWeb&a=index">代码位管理</a></li>
+			<li <if condition="$flag eq 'money'">class="selected"</if>><a href="/index.php?m=MoneyWeb&a=index">财务管理</a></li>
+			<li <if condition="$flag eq 'info'">class="selected"</if>><a href="/index.php?m=InfoWeb&a=index">个人信息</a></li>
+			<li ><a href="#"></a></li>
+		</ul>
+        <div class="mn_r fr"></div>
+        </div>
+        <!--二级导航-->
+		<if condition="$flag eq 'plan'">
+		<!--计划管理-->
+		<div class="sub_nav clearfix">
+        	<div class="sn_l fl"></div>
+            <ul class="fl">
+				<li ><a href="/index.php?m=PlanWeb&a=plan_list">计划列表</a></li> 
+				<li ><a href="/index.php?m=PlanWeb&a=plan_mine">我申请的计划</a></li> 
+				<li ><a href="/index.php?m=PlanWeb&a=plan_coupon_my">我的优惠券</a></li> 
+				<li ><a href="/index.php?m=PlanWeb&a=&a=plan_coupon_list">申请优惠券</a></li>            	
+            </ul>
+            <div class="sn_r fr"></div>
+        </div>
+		<elseif condition="$flag eq 'report'"/>
+		<!--广告管理-->
+		<div class="sub_nav clearfix">
+        	<div class="sn_l fl"></div>
+            <ul class="fl">
+				<li ><a href="/index.php?m=ReportWeb&a=report_all">综合报表</a></li> 
+				<li ><a href="/index.php?m=ReportWeb&a=report_cps">CPS明细报表</a></li> 
+				<li ><a href="/index.php?m=ReportWeb&a=report_cpa">CPA明细报表</a></li> 
+				<li ><a href="/index.php?m=ReportWeb&a=report_cpc">CPC明细报表</a></li> 
+				<li ><a href="/index.php?m=ReportWeb&a=report_cpm">CPM明细报表</a></li>            	
+            </ul>
+            <div class="sn_r fr"></div>
+        </div>
+		<elseif condition="$flag eq 'site'"/>
+		<!--查看网站-->
+		 <div class="sub_nav clearfix">
+        	<div class="sn_l fl"></div>
+            <ul class="fl">
+				<li ><a href="/index.php?m=SiteWeb&a=site_list">网站列表</a></li> 
+				<li ><a href="/index.php?m=SiteWeb&a=site_add">新增网站</a></li> 
+            </ul>
+            <div class="sn_r fr"></div>
+        </div>
+		<elseif condition="$flag eq 'zone'"/>
+		<!--投放申请-->
+		<div class="sub_nav clearfix">
+        	<div class="sn_l fl"></div>
+            <ul class="fl">
+                <li ><a href="/index.php?m=ZoneWeb&a=zone_list">代码位管理</a></li> 
+				<li ><a href="/index.php?m=ZoneWeb&a=zone_add">新增代码位</a></li>      	
+            </ul>
+            <div class="sn_r fr"></div>
+        </div>
+		<elseif condition="$flag eq 'money'"/>
+		<!--财务管理-->
+		<div class="sub_nav clearfix">
+        	<div class="sn_l fl"></div>
+            <ul class="fl">
+				<li ><a href="/index.php?m=MoneyWeb&a=money_list">提现明细</a></li> 
+				<li ><a href="/index.php?m=MoneyWeb&a=money_pay">申请提现</a></li> 
+				<li ><a href="/index.php?m=MoneyWeb&a=money_detail">结算明细</a></li> 
+				<li ><a href="/index.php?m=MoneyWeb&a=money_bank">银行信息</a></li>
+            </ul>
+            <div class="sn_r fr"></div>
+        </div>
+		<elseif condition="$flag eq 'info'"/>
+		<!--个人信息-->
+		<div class="sub_nav clearfix">
+        	<div class="sn_l fl"></div>
+            <ul class="fl">
+				<li ><a href="/index.php?m=InfoWeb&a=info_info">个人信息</a></li> 
+				<li ><a href="/index.php?m=InfoWeb&a=info_password">修改密码</a></li> 
+				<li ><a href="/index.php?m=InfoWeb&a=info_orderlist">我的兑换订单</a></li> 
+				<li ><a href="/index.php?m=InfoWeb&a=info_address">收货地址管理</a></li> 
+				<li ><a href="/index.php?m=InfoWeb&a=info_goods">兑换物品</a></li> 				
+            </ul>
+            <div class="sn_r fr"></div>
+        </div>
+		</if>
+    </div>
+</div>

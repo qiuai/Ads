@@ -13,8 +13,20 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class IndexAction extends CommonAction {
+class SiteWebAction extends CommonAction {
+	function _initialize(){
+		$this->assign("flag","site");
+	}
     public function index(){ 
+		$this->assign("title","网站列表");
 		$this->display();
     }
+	public function site_list(){
+		$this->assign("title","网站列表");
+		$this->display(index);
+	}
+	public function site_add(){
+		$this->assign("title","新增网站");
+		$this->display();
+	}
 }
