@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+<div class="wrap">
+ <div class="main">
+  <div class='body_title'>nav设置</div>
+		<div class="listmain">
+<table align="center" class="list" cellspacing="0">
+    <tr>
+        <td>
+        <form method="post">
+        <input type="text" name="title" />
+        <input type="submit" value="查询" class="button" />
+        </form>
+        </td>
+    </tr>
+</table>
+
+<form method="post" action="" id="help_form">
+<input type="hidden" name="admin_do" id="admin_do" />
+<table align="center" cellspacing="0" class="list">
+	<tr class="tb_title">
+        <td width="10%">标题</td>
+                <td width="35%">链接</td>
+        <td width="5%">排序</td>
+        <td width="5%">状态</td>
+        <td width="10%">操作</td>
+    </tr>
+    <tr class="bgcolor3"> 
+        <td>首页</td>
+                <td>/index.php?m=index</td>
+        <td>1</td>
+        <td>1</td>
+        <td width="20%">
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_edit&&id=3">编辑</a>|
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_delete&&id=3" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+        </td>
+    </tr><tr class="bgcolor4"> 
+        <td>网站主</td>
+                <td>/index.php?m=web</td>
+        <td>2</td>
+        <td>1</td>
+        <td width="20%">
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_edit&&id=4">编辑</a>|
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_delete&&id=4" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+        </td>
+    </tr><tr class="bgcolor3"> 
+        <td>广告主</td>
+                <td>/index.php?m=adv</td>
+        <td>3</td>
+        <td>1</td>
+        <td width="20%">
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_edit&&id=5">编辑</a>|
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_delete&&id=5" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+        </td>
+    </tr><tr class="bgcolor4"> 
+        <td>积分商城</td>
+                <td>/index.php?m=scoremall</td>
+        <td>4</td>
+        <td>1</td>
+        <td width="20%">
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_edit&&id=6">编辑</a>|
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_delete&&id=6" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+        </td>
+    </tr><tr class="bgcolor3"> 
+        <td>消息中心</td>
+                <td>/index.php?m=notice&a=notice_list&category_id=4</td>
+        <td>5</td>
+        <td>1</td>
+        <td width="20%">
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_edit&&id=7">编辑</a>|
+            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=site_ad_delete&&id=7" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+        </td>
+    </tr>	
+</table>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>
