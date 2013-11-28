@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://adu.phpad.cn/admin.php?m=user&a=user_add -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+
+<body>
+		<div class="main">
+			<div class="body_title">新增管理员</div>
+			<div class="listmain setting">
+
+<form method="post" action="http://adu.phpad.cn/admin.php?m=user&a=user_save&">
+<table class="list" cellspacing="0">
+   
+    <tbody><tr>
+        <td style="width:80px">管理组：</td>
+        <td>
+            <select name="group_id">
+            <option value="1">媒介组</option><option value="2">客服组</option><option value="3">商务组</option><option value="4">财务组</option><option value="5">运营组</option>            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>名称：</td>
+        <td><input type="text" name="username" class="textbox"><div class="onShow">请填写正确的管理员名，管理员名不能为空</div>	</td>
+    </tr>
+    <tr>
+        <td>密码：</td>
+        <td><input type="text" name="password" class="textbox"><div class="onShow">填写的管理员密码不能为空</div>	</td>
+    </tr>
+    <tr>
+        <td>确认密码：</td>
+        <td><input type="text" name="repassword" class="textbox"><div class="onShow">填写的管理员确认密码必须与密码一致</div>	</td>
+    </tr>
+    <tr>
+        <td>是否启用：</td>
+        <td>
+            <input type="radio" name="status" value="1" checked="checked"> 启用
+            <input type="radio" name="status" value="0" style="margin-left:10px"> 不启用
+        </td>
+	</tr>
+</tbody></table>
+<input class="confirm_btn" type="submit" value="">
+<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+</form>
+
+</div>
+</div>
+
+</body></html>
