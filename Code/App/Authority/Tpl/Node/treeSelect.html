@@ -4,8 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>节点挑选</title>
-<load href ="../Public/Css/style.css" />
-<import file="Js.Util.JTree" /> 
+<load href ="../Public/css/style.css" />
+<import file="js.Util.JTree" /> 
 <script language="JavaScript">
 <!--
 function ok(){
@@ -73,7 +73,7 @@ function ok(){
 	}
 	parm	=	location.href.replace('http://'+location.hostname+'__ACTION__','');
 	var myTree=new JTree("showTree","__URL__/tree/title/{:urlencode('选择节点')}/caption/title/"+parm,false);
-	myTree.setPicPath("__ROOT__/Public/Images/JTreePic/")
+	myTree.setPicPath("__ROOT__/Public/images/JTreePic/")
 	myTree.onclick=function(){
 		if(getNodeAtt(myTree.selectNode,"id")==undefined){
 			if (myTree.EXPANDALL == false)
