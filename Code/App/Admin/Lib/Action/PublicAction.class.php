@@ -15,15 +15,6 @@
  */
 class PublicAction extends Action {
 	/**
-	 * 检测用户是否登录
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-25 上午10:10:26
-	 */
-	public function checkUser(){
-		
-	}
-	/**
 	 * 用户登录
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
@@ -31,23 +22,6 @@ class PublicAction extends Action {
 	 */
 	public function login(){
 		$this->display();
-	}
-	/**
-	 * 用户登出
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-25 上午10:11:13
-	 */
-	public function logout(){
-		
-	}
-	/**
-	 * 检测登录
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-28 下午5:24:04
-	 */
-	public function checkLogin(){
 	}
 	/**
 	 * 左侧菜单
