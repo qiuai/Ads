@@ -1,6 +1,6 @@
 <?php
 /**
- * 广告联盟系统  会员管理
+ * 广告联盟系统 节点管理
  * 
  * @copyright (C)2012 ZHTS Inc.
  * @project project_name
@@ -13,26 +13,23 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午9:58:45      todo
  */
-class UserAction extends CommonAction {
-    public function index(){
-    	$this->userList();
-	}
+class NodeAction extends CommonAction {
 	/**
-	 * 用户列表
+	 * 新增节点
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-29 下午3:27:42
+	 * @CreateDate: 2013-11-29 下午4:03:38
 	 */
-	public function userList(){
-		$this->display();
+	public function nodeSave(){
+		$this->insert();
 	}
 	/**
-	 * 用户增加
+	 * 节点列表
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-29 下午3:28:09
+	 * @CreateDate: 2013-11-29 下午4:22:34
 	 */
-	public function userAdd(){
-		$this->display();
+	public function nodeList(){
+		$this->index();
 	}
 }

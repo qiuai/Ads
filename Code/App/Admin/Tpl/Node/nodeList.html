@@ -1,0 +1,2886 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0042)http://adu.phpad.cn/admin.php?m=permission -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+ <div class="main">
+    <div class="body_title">权限列表</div>
+		<div class="listmain">
+		
+<table cellspacing="0" class="list">
+    <tbody><tr class="tb_title">
+        <td>ID</td>
+        <td>PID</td>
+        <td>模块名称</td>
+        <td>model</td>
+        <td>action</td>
+        <td>操作记录</td>
+        <td>操作</td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>1</td>
+        <td>0</td>
+        <td>会员管理</td>
+        <td>member</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=1">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=1">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>2</td>
+        <td>1</td>
+        <td style="padding-left:80px">会员列表</td>
+        <td>member</td>
+        <td>member_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=2">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=2" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>3</td>
+        <td>1</td>
+        <td style="padding-left:80px">会员修改</td>
+        <td>member</td>
+        <td>member_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=3">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=3" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>4</td>
+        <td>1</td>
+        <td style="padding-left:80px">保存会员修改</td>
+        <td>member</td>
+        <td>member_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=4">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=4" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>113</td>
+        <td>1</td>
+        <td style="padding-left:80px">会员激活、锁定、删除操作</td>
+        <td>member</td>
+        <td>member_active</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=113">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=113" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>114</td>
+        <td>1</td>
+        <td style="padding-left:80px">会员修改扣量</td>
+        <td>member</td>
+        <td>member_set_deduction</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=114">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=114" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>115</td>
+        <td>1</td>
+        <td style="padding-left:80px">进入会员后台</td>
+        <td>member</td>
+        <td>member_login</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=115">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=115" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>116</td>
+        <td>1</td>
+        <td style="padding-left:80px">会员导出execl</td>
+        <td>member</td>
+        <td>member_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=116">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=116" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>117</td>
+        <td>1</td>
+        <td style="padding-left:80px">投放申请列表</td>
+        <td>member</td>
+        <td>apply_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=117">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=117" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>118</td>
+        <td>1</td>
+        <td style="padding-left:80px">处理投放申请</td>
+        <td>member</td>
+        <td>apply_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=118">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=118" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>119</td>
+        <td>1</td>
+        <td style="padding-left:80px">投放申请导出execl</td>
+        <td>member</td>
+        <td>apply_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=119">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=119" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>5</td>
+        <td>0</td>
+        <td>计划管理</td>
+        <td>plan</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=5">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=5">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>6</td>
+        <td>5</td>
+        <td style="padding-left:80px">计划列表</td>
+        <td>plan</td>
+        <td>plan_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=6">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=6" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>7</td>
+        <td>5</td>
+        <td style="padding-left:80px">新增计划</td>
+        <td>plan</td>
+        <td>plan_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=7">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=7" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>8</td>
+        <td>5</td>
+        <td style="padding-left:80px">修改计划</td>
+        <td>plan</td>
+        <td>plan_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=8">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=8" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>9</td>
+        <td>5</td>
+        <td style="padding-left:80px">保存计划</td>
+        <td>plan</td>
+        <td>plan_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=9">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=9" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>10</td>
+        <td>5</td>
+        <td style="padding-left:80px">计划详情</td>
+        <td>plan</td>
+        <td>plan_detail</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=10">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=10" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>12</td>
+        <td>5</td>
+        <td style="padding-left:80px">计划审核</td>
+        <td>plan</td>
+        <td>plan_verify</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=12">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=12" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>11</td>
+        <td>5</td>
+        <td style="padding-left:80px">处理计划审核</td>
+        <td>plan</td>
+        <td>plan_verify_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=11">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=11" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>13</td>
+        <td>5</td>
+        <td style="padding-left:80px">计划高级选项</td>
+        <td>plan</td>
+        <td>plan_admin</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=13">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=13" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>91</td>
+        <td>5</td>
+        <td style="padding-left:80px">计划导出excel</td>
+        <td>plan</td>
+        <td>plan_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=91">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=91" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>130</td>
+        <td>5</td>
+        <td style="padding-left:80px">计划激活、锁定、删除操作</td>
+        <td>plan</td>
+        <td>plan_active</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=130">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=130" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>131</td>
+        <td>5</td>
+        <td style="padding-left:80px">计划高级设置</td>
+        <td>plan</td>
+        <td>plan_advanced</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=131">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=131" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>132</td>
+        <td>5</td>
+        <td style="padding-left:80px">处理计划高级设置</td>
+        <td>plan</td>
+        <td>plan_advanced_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=132">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=132" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>16</td>
+        <td>0</td>
+        <td>网站管理</td>
+        <td>site</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=16">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=16">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>17</td>
+        <td>16</td>
+        <td style="padding-left:80px">网站列表</td>
+        <td>site</td>
+        <td>site_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=17">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=17" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>18</td>
+        <td>16</td>
+        <td style="padding-left:80px">新增网站</td>
+        <td>site</td>
+        <td>site_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=18">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=18" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>19</td>
+        <td>16</td>
+        <td style="padding-left:80px">修改网站</td>
+        <td>site</td>
+        <td>site_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=19">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=19" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>20</td>
+        <td>16</td>
+        <td style="padding-left:80px">保存网站</td>
+        <td>site</td>
+        <td>site_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=20">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=20" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>21</td>
+        <td>16</td>
+        <td style="padding-left:80px">删除网站</td>
+        <td>site</td>
+        <td>site_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=21">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=21" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>22</td>
+        <td>16</td>
+        <td style="padding-left:80px">网站导出execl</td>
+        <td>site</td>
+        <td>site_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=22">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=22" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>135</td>
+        <td>16</td>
+        <td style="padding-left:80px">批量处理网站状态</td>
+        <td>site</td>
+        <td>site_multi</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=135">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=135" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>23</td>
+        <td>0</td>
+        <td>广告管理</td>
+        <td>webad</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=23">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=23">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>24</td>
+        <td>23</td>
+        <td style="padding-left:80px">广告列表</td>
+        <td>webad</td>
+        <td>ad_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=24">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=24" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>25</td>
+        <td>23</td>
+        <td style="padding-left:80px">广告详情</td>
+        <td>webad</td>
+        <td>ad_detail</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=25">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=25" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>26</td>
+        <td>23</td>
+        <td style="padding-left:80px">广告审核</td>
+        <td>webad</td>
+        <td>ad_verify</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=26">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=26" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>27</td>
+        <td>23</td>
+        <td style="padding-left:80px">处理广告审核</td>
+        <td>webad</td>
+        <td>ad_verify_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=27">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=27" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>28</td>
+        <td>23</td>
+        <td style="padding-left:80px">新增广告</td>
+        <td>webad</td>
+        <td>ad_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=28">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=28" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>29</td>
+        <td>23</td>
+        <td style="padding-left:80px">修改广告</td>
+        <td>webad</td>
+        <td>ad_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=29">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=29" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>30</td>
+        <td>23</td>
+        <td style="padding-left:80px">保存广告</td>
+        <td>webad</td>
+        <td>ad_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=30">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=30" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>133</td>
+        <td>23</td>
+        <td style="padding-left:80px">广告导出execl</td>
+        <td>webad</td>
+        <td>webad_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=133">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=133" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>31</td>
+        <td>0</td>
+        <td>广告类型管理</td>
+        <td>adsize</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=31">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=31">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>32</td>
+        <td>31</td>
+        <td style="padding-left:80px">广告类型列表</td>
+        <td>adsize</td>
+        <td>size_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=32">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=32" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>33</td>
+        <td>31</td>
+        <td style="padding-left:80px">新增广告尺寸</td>
+        <td>adsize</td>
+        <td>size_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=33">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=33" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>34</td>
+        <td>31</td>
+        <td style="padding-left:80px">修改广告尺寸</td>
+        <td>adsize</td>
+        <td>size_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=34">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=34" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>35</td>
+        <td>31</td>
+        <td style="padding-left:80px">保存广告尺寸</td>
+        <td>adsize</td>
+        <td>size_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=35">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=35" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>134</td>
+        <td>31</td>
+        <td style="padding-left:80px">广告尺寸导出execl</td>
+        <td>adsize</td>
+        <td>adsize_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=134">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=134" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>36</td>
+        <td>0</td>
+        <td>网站分类管理</td>
+        <td>site_type</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=36">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=36">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>37</td>
+        <td>36</td>
+        <td style="padding-left:80px">分类列表</td>
+        <td>site_type</td>
+        <td>site_type_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=37">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=37" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>38</td>
+        <td>36</td>
+        <td style="padding-left:80px">新增分类</td>
+        <td>site_type</td>
+        <td>site_type_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=38">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=38" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>39</td>
+        <td>36</td>
+        <td style="padding-left:80px">修改分类</td>
+        <td>site_type</td>
+        <td>site_type_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=39">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=39" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>40</td>
+        <td>36</td>
+        <td style="padding-left:80px">保存分类</td>
+        <td>site_type</td>
+        <td>site_type_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=40">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=40" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>41</td>
+        <td>0</td>
+        <td>代码位管理</td>
+        <td>zone</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=41">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=41">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>42</td>
+        <td>41</td>
+        <td style="padding-left:80px">代码位列表</td>
+        <td>zone</td>
+        <td>zone_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=42">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=42" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>136</td>
+        <td>41</td>
+        <td style="padding-left:80px">编辑代码位</td>
+        <td>zone</td>
+        <td>zone_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=136">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=136" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>137</td>
+        <td>41</td>
+        <td style="padding-left:80px">代码位导出execl</td>
+        <td>zone</td>
+        <td>zone_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=137">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=137" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>43</td>
+        <td>0</td>
+        <td>提现管理</td>
+        <td>report_finance</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=43">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=43">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>44</td>
+        <td>43</td>
+        <td style="padding-left:80px">提现申请列表</td>
+        <td>report_finance</td>
+        <td>withdraw_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=44">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=44" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>45</td>
+        <td>43</td>
+        <td style="padding-left:80px">提现详情</td>
+        <td>report_finance</td>
+        <td>withdraw_detail</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=45">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=45" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>46</td>
+        <td>43</td>
+        <td style="padding-left:80px">处理提现</td>
+        <td>report_finance</td>
+        <td>withdraw_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=46">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=46" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>138</td>
+        <td>43</td>
+        <td style="padding-left:80px">提现申请导出execl</td>
+        <td>report_finance</td>
+        <td>withdraw_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=138">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=138" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>47</td>
+        <td>0</td>
+        <td>结算管理</td>
+        <td>report_income</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=47">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=47">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>48</td>
+        <td>47</td>
+        <td style="padding-left:80px">结算明细列表</td>
+        <td>report_income</td>
+        <td>income_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=48">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=48" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>49</td>
+        <td>47</td>
+        <td style="padding-left:80px">处理结算</td>
+        <td>report_income</td>
+        <td>income_block</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=49">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=49" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>139</td>
+        <td>47</td>
+        <td style="padding-left:80px">结算明细导出execl</td>
+        <td>report_income</td>
+        <td>income_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=139">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=139" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>50</td>
+        <td>0</td>
+        <td>访问明细管理</td>
+        <td>report_detail</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=50">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=50">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>51</td>
+        <td>50</td>
+        <td style="padding-left:80px">选择广告计划</td>
+        <td>report_detail</td>
+        <td>choose_plan</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=51">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=51" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>52</td>
+        <td>50</td>
+        <td style="padding-left:80px">处理广告计划</td>
+        <td>report_detail</td>
+        <td>choose_plan_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=52">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=52" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>53</td>
+        <td>50</td>
+        <td style="padding-left:80px">今日明细</td>
+        <td>report_detail</td>
+        <td>report_detail_today</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=53">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=53" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>54</td>
+        <td>50</td>
+        <td style="padding-left:80px">历史明细</td>
+        <td>report_detail</td>
+        <td>report_detail_history</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=54">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=54" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>55</td>
+        <td>50</td>
+        <td style="padding-left:80px">独立IP明细</td>
+        <td>report_detail</td>
+        <td>report_detail_unique</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=55">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=55" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>56</td>
+        <td>50</td>
+        <td style="padding-left:80px">访问者分析</td>
+        <td>report_detail</td>
+        <td>report_analyse</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=56">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=56" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>57</td>
+        <td>50</td>
+        <td style="padding-left:80px">是否选择计划</td>
+        <td>report_detail</td>
+        <td>isChosePlan</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=57">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=57" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>163</td>
+        <td>50</td>
+        <td style="padding-left:80px">访问明细导出execl</td>
+        <td>report_detail</td>
+        <td>report_detail_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=163">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=163" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>58</td>
+        <td>0</td>
+        <td>前台内容管理</td>
+        <td>site_content</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=58">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=58">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>59</td>
+        <td>58</td>
+        <td style="padding-left:80px">公告列表</td>
+        <td>site_content</td>
+        <td>notice_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=59">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=59" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>60</td>
+        <td>58</td>
+        <td style="padding-left:80px">新增公告</td>
+        <td>site_content</td>
+        <td>notice_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=60">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=60" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>61</td>
+        <td>58</td>
+        <td style="padding-left:80px">修改公告</td>
+        <td>site_content</td>
+        <td>notice_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=61">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=61" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>62</td>
+        <td>58</td>
+        <td style="padding-left:80px">保存公告</td>
+        <td>site_content</td>
+        <td>notice_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=62">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=62" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>63</td>
+        <td>58</td>
+        <td style="padding-left:80px">删除公告</td>
+        <td>site_content</td>
+        <td>notice_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=63">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=63" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>64</td>
+        <td>58</td>
+        <td style="padding-left:80px">公告分类列表</td>
+        <td>site_content</td>
+        <td>notice_category_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=64">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=64" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>65</td>
+        <td>58</td>
+        <td style="padding-left:80px">新增公告分类</td>
+        <td>site_content</td>
+        <td>notice_category_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=65">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=65" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>66</td>
+        <td>58</td>
+        <td style="padding-left:80px">修改公告分类</td>
+        <td>site_content</td>
+        <td>notice_category_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=66">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=66" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>67</td>
+        <td>58</td>
+        <td style="padding-left:80px">保存公告分类</td>
+        <td>site_content</td>
+        <td>notice_category_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=67">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=67" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>68</td>
+        <td>58</td>
+        <td style="padding-left:80px">删除公告分类</td>
+        <td>site_content</td>
+        <td>notice_category_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=68">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=68" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>69</td>
+        <td>58</td>
+        <td style="padding-left:80px">FLASH及导航列表</td>
+        <td>site_content</td>
+        <td>site_ad_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=69">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=69" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>70</td>
+        <td>58</td>
+        <td style="padding-left:80px">新增FLASH及导航</td>
+        <td>site_content</td>
+        <td>site_ad_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=70">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=70" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>71</td>
+        <td>58</td>
+        <td style="padding-left:80px">修改FLASH及导航</td>
+        <td>site_content</td>
+        <td>site_ad_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=71">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=71" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>72</td>
+        <td>58</td>
+        <td style="padding-left:80px">保存FLASH及导航</td>
+        <td>site_content</td>
+        <td>site_ad_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=72">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=72" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>73</td>
+        <td>58</td>
+        <td style="padding-left:80px">删除FLASH及导航</td>
+        <td>site_content</td>
+        <td>site_ad_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=73">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=73" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>74</td>
+        <td>0</td>
+        <td>管理员管理</td>
+        <td>user</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=74">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=74">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>75</td>
+        <td>74</td>
+        <td style="padding-left:80px">管理员列表</td>
+        <td>user</td>
+        <td>user_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=75">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=75" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>76</td>
+        <td>74</td>
+        <td style="padding-left:80px">新增管理员</td>
+        <td>user</td>
+        <td>user_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=76">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=76" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>77</td>
+        <td>74</td>
+        <td style="padding-left:80px">修改管理员</td>
+        <td>user</td>
+        <td>user_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=77">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=77" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>78</td>
+        <td>74</td>
+        <td style="padding-left:80px">保存管理员</td>
+        <td>user</td>
+        <td>user_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=78">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=78" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>79</td>
+        <td>74</td>
+        <td style="padding-left:80px">删除管理员</td>
+        <td>user</td>
+        <td>user_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=79">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=79" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>80</td>
+        <td>0</td>
+        <td>管理员组管理</td>
+        <td>user_group_list</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=80">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=80">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>81</td>
+        <td>80</td>
+        <td style="padding-left:80px">管理员组列表</td>
+        <td>user_group_list</td>
+        <td>user_group_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=81">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=81" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>82</td>
+        <td>80</td>
+        <td style="padding-left:80px">新增管理员组</td>
+        <td>user_group_list</td>
+        <td>user_group_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=82">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=82" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>83</td>
+        <td>80</td>
+        <td style="padding-left:80px">修改管理员组</td>
+        <td>user_group_list</td>
+        <td>user_group_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=83">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=83" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>84</td>
+        <td>80</td>
+        <td style="padding-left:80px">保存管理员组</td>
+        <td>user_group_list</td>
+        <td>user_group_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=84">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=84" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>85</td>
+        <td>0</td>
+        <td>权限管理</td>
+        <td>permission</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=85">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=85">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>86</td>
+        <td>85</td>
+        <td style="padding-left:80px">权限列表</td>
+        <td>permission</td>
+        <td>permission_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=86">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=86" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>87</td>
+        <td>85</td>
+        <td style="padding-left:80px">新增权限</td>
+        <td>permission</td>
+        <td>permission_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=87">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=87" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>88</td>
+        <td>85</td>
+        <td style="padding-left:80px">修改权限</td>
+        <td>permission</td>
+        <td>permission_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=88">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=88" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>89</td>
+        <td>85</td>
+        <td style="padding-left:80px">保存权限</td>
+        <td>permission</td>
+        <td>permission_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=89">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=89" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>90</td>
+        <td>85</td>
+        <td style="padding-left:80px">删除权限</td>
+        <td>permission</td>
+        <td>permission_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=90">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=90" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>94</td>
+        <td>0</td>
+        <td>基本设置</td>
+        <td>setting</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=94">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=94">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>95</td>
+        <td>94</td>
+        <td style="padding-left:80px">全局设置</td>
+        <td>setting</td>
+        <td>all</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=95">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=95" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>96</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存全局设置</td>
+        <td>setting</td>
+        <td>all_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=96">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=96" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>97</td>
+        <td>94</td>
+        <td style="padding-left:80px">基本设置</td>
+        <td>setting</td>
+        <td>union</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=97">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=97" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>98</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存基本设置</td>
+        <td>setting</td>
+        <td>union_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=98">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=98" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>99</td>
+        <td>94</td>
+        <td style="padding-left:80px">提现设置</td>
+        <td>setting</td>
+        <td>withdraw</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=99">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=99" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>100</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存提现设置</td>
+        <td>setting</td>
+        <td>withdraw_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=100">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=100" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>101</td>
+        <td>94</td>
+        <td style="padding-left:80px">注册设置</td>
+        <td>setting</td>
+        <td>reg</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=101">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=101" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>102</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存注册设置</td>
+        <td>setting</td>
+        <td>reg_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=102">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=102" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>103</td>
+        <td>94</td>
+        <td style="padding-left:80px">邮件设置</td>
+        <td>setting</td>
+        <td>smtp</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=103">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=103" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>104</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存邮件设置</td>
+        <td>setting</td>
+        <td>smtp_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=104">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=104" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>105</td>
+        <td>94</td>
+        <td style="padding-left:80px">扣量设置</td>
+        <td>setting</td>
+        <td>deduction</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=105">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=105" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>106</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存扣量设置</td>
+        <td>setting</td>
+        <td>deduction_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=106">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=106" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>107</td>
+        <td>94</td>
+        <td style="padding-left:80px">财务设置</td>
+        <td>setting</td>
+        <td>finance</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=107">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=107" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>108</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存财务设置</td>
+        <td>setting</td>
+        <td>finance_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=108">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=108" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>109</td>
+        <td>94</td>
+        <td style="padding-left:80px">积分设置</td>
+        <td>setting</td>
+        <td>point</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=109">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=109" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>110</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存积分设置</td>
+        <td>setting</td>
+        <td>point_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=110">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=110" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>111</td>
+        <td>94</td>
+        <td style="padding-left:80px">模板设置</td>
+        <td>setting</td>
+        <td>template</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=111">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=111" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>112</td>
+        <td>94</td>
+        <td style="padding-left:80px">保存模板设置</td>
+        <td>setting</td>
+        <td>template_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=112">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=112" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>120</td>
+        <td>0</td>
+        <td>会员余额管理</td>
+        <td>balance</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=120">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=120">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>121</td>
+        <td>120</td>
+        <td style="padding-left:80px">会员余额列表</td>
+        <td>balance</td>
+        <td>balance_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=121">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=121" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>122</td>
+        <td>120</td>
+        <td style="padding-left:80px">新增余额</td>
+        <td>balance</td>
+        <td>balance_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=122">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=122" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>123</td>
+        <td>120</td>
+        <td style="padding-left:80px">执行新增余额</td>
+        <td>balance</td>
+        <td>balance_insert</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=123">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=123" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>124</td>
+        <td>120</td>
+        <td style="padding-left:80px">会员余额导出execl</td>
+        <td>balance</td>
+        <td>balance_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=124">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=124" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>125</td>
+        <td>0</td>
+        <td>邀请码管理</td>
+        <td>code</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=125">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=125">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>126</td>
+        <td>125</td>
+        <td style="padding-left:80px">邀请码列表</td>
+        <td>code</td>
+        <td>code_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=126">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=126" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>127</td>
+        <td>125</td>
+        <td style="padding-left:80px">新增邀请码</td>
+        <td>code</td>
+        <td>code_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=127">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=127" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>128</td>
+        <td>125</td>
+        <td style="padding-left:80px">保存邀请码</td>
+        <td>code</td>
+        <td>code_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=128">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=128" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>129</td>
+        <td>125</td>
+        <td style="padding-left:80px">删除邀请码</td>
+        <td>code</td>
+        <td>code_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=129">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=129" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>140</td>
+        <td>0</td>
+        <td>客服业绩管理</td>
+        <td>report_manager</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=140">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=140">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>141</td>
+        <td>140</td>
+        <td style="padding-left:80px">客服业绩统计列表</td>
+        <td>report_manager</td>
+        <td>withdraw_manager_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=141">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=141" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>142</td>
+        <td>140</td>
+        <td style="padding-left:80px">我的业绩</td>
+        <td>report_manager</td>
+        <td>withdraw_one</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=142">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=142" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>143</td>
+        <td>140</td>
+        <td style="padding-left:80px">客服业绩导出execl</td>
+        <td>report_manager</td>
+        <td>withdraw_manager_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=143">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=143" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>144</td>
+        <td>0</td>
+        <td>报表管理</td>
+        <td>report</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=144">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=144">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>145</td>
+        <td>144</td>
+        <td style="padding-left:80px">计划报表列表</td>
+        <td>report</td>
+        <td>report_plan</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=145">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=145" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>146</td>
+        <td>144</td>
+        <td style="padding-left:80px">计划报表导出execl</td>
+        <td>report</td>
+        <td>report_plan_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=146">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=146" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>147</td>
+        <td>144</td>
+        <td style="padding-left:80px">网站主报表列表</td>
+        <td>report</td>
+        <td>report_web</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=147">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=147" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>148</td>
+        <td>144</td>
+        <td style="padding-left:80px">网站主报表导出execl</td>
+        <td>report</td>
+        <td>report_web_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=148">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=148" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>149</td>
+        <td>0</td>
+        <td>CPS订单管理</td>
+        <td>cps_order</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=149">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=149">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>150</td>
+        <td>149</td>
+        <td style="padding-left:80px">CPS今日订单列表</td>
+        <td>cps_order</td>
+        <td>today_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=150">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=150" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>151</td>
+        <td>149</td>
+        <td style="padding-left:80px">CPS今日订单导出execl</td>
+        <td>cps_order</td>
+        <td>today_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=151">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=151" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>152</td>
+        <td>149</td>
+        <td style="padding-left:80px">CPS历史订单列表</td>
+        <td>cps_order</td>
+        <td>history_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=152">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=152" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>153</td>
+        <td>149</td>
+        <td style="padding-left:80px">CPS历史订单导出execl</td>
+        <td>cps_order</td>
+        <td>history_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=153">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=153" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>154</td>
+        <td>149</td>
+        <td style="padding-left:80px">CPS订单导入execl</td>
+        <td>cps_order</td>
+        <td>import</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=154">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=154" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>155</td>
+        <td>149</td>
+        <td style="padding-left:80px">处理CPS订单导入execl</td>
+        <td>cps_order</td>
+        <td>import_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=155">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=155" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>156</td>
+        <td>0</td>
+        <td>CPA订单管理</td>
+        <td>cpa_order</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=156">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=156">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>157</td>
+        <td>156</td>
+        <td style="padding-left:80px">CPA今日订单列表</td>
+        <td>cpa_order</td>
+        <td>today_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=157">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=157" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>158</td>
+        <td>156</td>
+        <td style="padding-left:80px">CPA今日订单导出execl</td>
+        <td>cpa_order</td>
+        <td>today_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=158">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=158" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>159</td>
+        <td>156</td>
+        <td style="padding-left:80px">CPA历史订单列表</td>
+        <td>cpa_order</td>
+        <td>history_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=159">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=159" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>160</td>
+        <td>156</td>
+        <td style="padding-left:80px">CPA历史订单导出execl</td>
+        <td>cpa_order</td>
+        <td>history_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=160">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=160" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>161</td>
+        <td>156</td>
+        <td style="padding-left:80px">CPA订单导入execl</td>
+        <td>cpa_order</td>
+        <td>import</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=161">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=161" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>162</td>
+        <td>156</td>
+        <td style="padding-left:80px">处理CPA订单导入execl</td>
+        <td>cpa_order</td>
+        <td>import_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=162">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=162" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>164</td>
+        <td>0</td>
+        <td>管理员操作记录管理</td>
+        <td>user_log</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=164">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=164">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>165</td>
+        <td>164</td>
+        <td style="padding-left:80px">操作记录列表</td>
+        <td>user_log</td>
+        <td>user_log_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=165">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=165" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>166</td>
+        <td>164</td>
+        <td style="padding-left:80px">清除操作记录</td>
+        <td>user_log</td>
+        <td>user_log_clean</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=166">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=166" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>167</td>
+        <td>0</td>
+        <td>商品管理</td>
+        <td>goods</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=167">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=167">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>168</td>
+        <td>167</td>
+        <td style="padding-left:80px">商品列表</td>
+        <td>goods</td>
+        <td>goods_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=168">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=168" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>169</td>
+        <td>167</td>
+        <td style="padding-left:80px">新增商品</td>
+        <td>goods</td>
+        <td>goods_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=169">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=169" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>170</td>
+        <td>167</td>
+        <td style="padding-left:80px">处理新增商品</td>
+        <td>goods</td>
+        <td>goods_insert</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=170">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=170" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>171</td>
+        <td>167</td>
+        <td style="padding-left:80px">修改商品</td>
+        <td>goods</td>
+        <td>goods_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=171">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=171" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>172</td>
+        <td>167</td>
+        <td style="padding-left:80px">处理修改商品</td>
+        <td>goods</td>
+        <td>goods_update</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=172">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=172" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>173</td>
+        <td>167</td>
+        <td style="padding-left:80px">删除商品</td>
+        <td>goods</td>
+        <td>goods_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=173">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=173" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>174</td>
+        <td>167</td>
+        <td style="padding-left:80px">商品导出execl</td>
+        <td>goods</td>
+        <td>goods_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=174">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=174" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>175</td>
+        <td>0</td>
+        <td>商品订单管理</td>
+        <td>goods_orders</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=175">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=175">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>176</td>
+        <td>175</td>
+        <td style="padding-left:80px">商品订单列表</td>
+        <td>goods_orders</td>
+        <td>goods_orders_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=176">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=176" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>177</td>
+        <td>175</td>
+        <td style="padding-left:80px">未处理订单列表</td>
+        <td>goods_orders</td>
+        <td>goods_orders_untreate</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=177">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=177" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>178</td>
+        <td>175</td>
+        <td style="padding-left:80px">已确认订单列表</td>
+        <td>goods_orders</td>
+        <td>goods_orders_recognize</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=178">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=178" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>179</td>
+        <td>175</td>
+        <td style="padding-left:80px">已发货订单列表</td>
+        <td>goods_orders</td>
+        <td>goods_orders_shipped</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=179">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=179" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>180</td>
+        <td>175</td>
+        <td style="padding-left:80px">修改订单状态</td>
+        <td>goods_orders</td>
+        <td>goods_orders_status</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=180">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=180" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>181</td>
+        <td>175</td>
+        <td style="padding-left:80px">订单详情页显示</td>
+        <td>goods_orders</td>
+        <td>goods_orders_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=181">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=181" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>182</td>
+        <td>175</td>
+        <td style="padding-left:80px">详情页中对订单状态修改</td>
+        <td>goods_orders</td>
+        <td>goods_orders_update</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=182">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=182" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>183</td>
+        <td>175</td>
+        <td style="padding-left:80px">删除订单</td>
+        <td>goods_orders</td>
+        <td>goods_orders_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=183">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=183" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>184</td>
+        <td>175</td>
+        <td style="padding-left:80px">订单导出execl</td>
+        <td>goods_orders</td>
+        <td>goods_orders_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=184">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=184" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>185</td>
+        <td>0</td>
+        <td>商品分类管理</td>
+        <td>goods_type</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=185">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=185">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>186</td>
+        <td>185</td>
+        <td style="padding-left:80px">商品分类列表</td>
+        <td>goods_type</td>
+        <td>goods_type_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=186">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=186" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>187</td>
+        <td>185</td>
+        <td style="padding-left:80px">新增商品分类</td>
+        <td>goods_type</td>
+        <td>goods_type_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=187">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=187" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>188</td>
+        <td>185</td>
+        <td style="padding-left:80px">处理新增商品分类</td>
+        <td>goods_type</td>
+        <td>goods_type_insert</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=188">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=188" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>189</td>
+        <td>185</td>
+        <td style="padding-left:80px">修改商品分类</td>
+        <td>goods_type</td>
+        <td>goods_type_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=189">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=189" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>190</td>
+        <td>185</td>
+        <td style="padding-left:80px">处理修改商品分类</td>
+        <td>goods_type</td>
+        <td>goods_type_update</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=190">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=190" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>191</td>
+        <td>0</td>
+        <td>任务计划管理</td>
+        <td>task</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=191">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=191">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>192</td>
+        <td>191</td>
+        <td style="padding-left:80px">任务列表</td>
+        <td>task</td>
+        <td>task_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=192">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=192" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>193</td>
+        <td>191</td>
+        <td style="padding-left:80px">新增任务</td>
+        <td>task</td>
+        <td>task_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=193">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=193" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>194</td>
+        <td>191</td>
+        <td style="padding-left:80px">保存任务</td>
+        <td>task</td>
+        <td>task_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=194">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=194" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>195</td>
+        <td>0</td>
+        <td>服务器配置管理</td>
+        <td>server</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=195">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=195">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>196</td>
+        <td>195</td>
+        <td style="padding-left:80px">服务器列表</td>
+        <td>server</td>
+        <td>server_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=196">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=196" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>197</td>
+        <td>195</td>
+        <td style="padding-left:80px">新增服务器</td>
+        <td>server</td>
+        <td>server_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=197">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=197" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>198</td>
+        <td>195</td>
+        <td style="padding-left:80px">修改服务器</td>
+        <td>server</td>
+        <td>server_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=198">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=198" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>199</td>
+        <td>195</td>
+        <td style="padding-left:80px">保存服务器</td>
+        <td>server</td>
+        <td>server_save</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=199">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=199" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>200</td>
+        <td>195</td>
+        <td style="padding-left:80px">删除服务器</td>
+        <td>server</td>
+        <td>server_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=200">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=200" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>201</td>
+        <td>0</td>
+        <td>邮件模版管理</td>
+        <td>mail</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=201">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=201">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>202</td>
+        <td>201</td>
+        <td style="padding-left:80px">邮件模版列表</td>
+        <td>mail</td>
+        <td>mail_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=202">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=202" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>203</td>
+        <td>201</td>
+        <td style="padding-left:80px">修改邮件模版</td>
+        <td>mail</td>
+        <td>mail_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=203">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=203" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>204</td>
+        <td>201</td>
+        <td style="padding-left:80px">处理修改邮件模版</td>
+        <td>mail</td>
+        <td>mail_update</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=204">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=204" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>205</td>
+        <td>0</td>
+        <td>第三方联盟管理</td>
+        <td>third_part_union</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=205">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=205">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>206</td>
+        <td>205</td>
+        <td style="padding-left:80px">亿起发联盟</td>
+        <td>third_part_union</td>
+        <td>yiqifa</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=206">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=206" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>207</td>
+        <td>205</td>
+        <td style="padding-left:80px">领克特联盟</td>
+        <td>third_part_union</td>
+        <td>linktech</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=207">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=207" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>208</td>
+        <td>205</td>
+        <td style="padding-left:80px">成果联盟</td>
+        <td>third_part_union</td>
+        <td>chanet</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=208">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=208" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>209</td>
+        <td>205</td>
+        <td style="padding-left:80px">多麦联盟</td>
+        <td>third_part_union</td>
+        <td>duomai</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=209">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=209" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>210</td>
+        <td>205</td>
+        <td style="padding-left:80px">淘宝联盟</td>
+        <td>third_part_union</td>
+        <td>taobao</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=210">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=210" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>211</td>
+        <td>0</td>
+        <td>开放平台管理</td>
+        <td>open_platform</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=211">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=211">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>212</td>
+        <td>211</td>
+        <td style="padding-left:80px">腾讯开放平台</td>
+        <td>open_platform</td>
+        <td>tecent</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=212">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=212" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>213</td>
+        <td>211</td>
+        <td style="padding-left:80px">淘宝开放平台</td>
+        <td>open_platform</td>
+        <td>taobao</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=213">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=213" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>214</td>
+        <td>211</td>
+        <td style="padding-left:80px">新浪开放平台联盟</td>
+        <td>open_platform</td>
+        <td>sina</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=214">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=214" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>215</td>
+        <td>211</td>
+        <td style="padding-left:80px">百度开放平台</td>
+        <td>open_platform</td>
+        <td>baidu</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=215">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=215" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>216</td>
+        <td>211</td>
+        <td style="padding-left:80px">腾讯电商开放平台</td>
+        <td>open_platform</td>
+        <td>paipai</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=216">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=216" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>217</td>
+        <td>0</td>
+        <td>优惠券管理</td>
+        <td>coupon</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=217">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=217">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>218</td>
+        <td>217</td>
+        <td style="padding-left:80px">优惠券列表</td>
+        <td>coupon</td>
+        <td>coupon_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=218">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=218" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>219</td>
+        <td>217</td>
+        <td style="padding-left:80px">新增优惠券</td>
+        <td>coupon</td>
+        <td>coupon_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=219">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=219" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>220</td>
+        <td>217</td>
+        <td style="padding-left:80px">执行新增操作</td>
+        <td>coupon</td>
+        <td>coupon_insert</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=220">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=220" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>221</td>
+        <td>217</td>
+        <td style="padding-left:80px">修改优惠券</td>
+        <td>coupon</td>
+        <td>coupon_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=221">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=221" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>222</td>
+        <td>217</td>
+        <td style="padding-left:80px">执行修改操作</td>
+        <td>coupon</td>
+        <td>coupon_update</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=222">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=222" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>223</td>
+        <td>217</td>
+        <td style="padding-left:80px">删除优惠券</td>
+        <td>coupon</td>
+        <td>coupon_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=223">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=223" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>224</td>
+        <td>217</td>
+        <td style="padding-left:80px">优惠券导出execl</td>
+        <td>coupon</td>
+        <td>coupon_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=224">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=224" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>225</td>
+        <td>217</td>
+        <td style="padding-left:80px">优惠券导入execl</td>
+        <td>coupon</td>
+        <td>coupon_import</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=225">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=225" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>226</td>
+        <td>217</td>
+        <td style="padding-left:80px">执行优惠券导入execl</td>
+        <td>coupon</td>
+        <td>coupon_import_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=226">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=226" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>227</td>
+        <td>217</td>
+        <td style="padding-left:80px">申请优惠券列表</td>
+        <td>coupon</td>
+        <td>coupon_apply</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=227">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=227" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>228</td>
+        <td>217</td>
+        <td style="padding-left:80px">申请优惠券处理页面</td>
+        <td>coupon</td>
+        <td>coupon_apply_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=228">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=228" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>229</td>
+        <td>217</td>
+        <td style="padding-left:80px">执行申请优惠券处理</td>
+        <td>coupon</td>
+        <td>coupon_apply_do</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=229">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=229" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>230</td>
+        <td>217</td>
+        <td style="padding-left:80px">申请优惠券导出execl</td>
+        <td>coupon</td>
+        <td>coupon_apply_export</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=230">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=230" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>231</td>
+        <td>0</td>
+        <td>联盟后台首页管理</td>
+        <td>start</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=231">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=231">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>232</td>
+        <td>231</td>
+        <td style="padding-left:80px">联盟后台首页</td>
+        <td>start</td>
+        <td>start_index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=232">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=232" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>233</td>
+        <td>231</td>
+        <td style="padding-left:80px">版本信息</td>
+        <td>start</td>
+        <td>start_system</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=233">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=233" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>234</td>
+        <td>231</td>
+        <td style="padding-left:80px">版权所有</td>
+        <td>start</td>
+        <td>start_copyright</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=234">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=234" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>235</td>
+        <td>231</td>
+        <td style="padding-left:80px">服务器负载</td>
+        <td>start</td>
+        <td>start_server</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=235">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=235" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr class="bgcolor3" style="text-align:left">
+        <td>236</td>
+        <td>0</td>
+        <td>站内信管理</td>
+        <td>sms</td>
+        <td>index</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=236">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=236">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>237</td>
+        <td>236</td>
+        <td style="padding-left:80px">站内信列表</td>
+        <td>sms</td>
+        <td>sms_list</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=237">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=237" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>238</td>
+        <td>236</td>
+        <td style="padding-left:80px">新增站内信</td>
+        <td>sms</td>
+        <td>sms_add</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=238">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=238" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>239</td>
+        <td>236</td>
+        <td style="padding-left:80px">修改站内信</td>
+        <td>sms</td>
+        <td>sms_edit</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=239">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=239" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>240</td>
+        <td>236</td>
+        <td style="padding-left:80px">执行新增操作</td>
+        <td>sms</td>
+        <td>sms_insert</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=240">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=240" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>241</td>
+        <td>236</td>
+        <td style="padding-left:80px">执行修改操作</td>
+        <td>sms</td>
+        <td>sms_update</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=241">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=241" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+        <tr>
+        <td>242</td>
+        <td>236</td>
+        <td style="padding-left:80px">删除站内信</td>
+        <td>sms</td>
+        <td>sms_delete</td>
+        <td>否</td>
+        <td>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=242">编辑</a>
+            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=242" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
+        </td>
+    </tr>
+    </tbody></table>
+
+</div>
+</div>
+
+</body></html>

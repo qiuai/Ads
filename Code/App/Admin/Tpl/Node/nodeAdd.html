@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)http://adu.phpad.cn/admin.php?m=permission&a=permission_add -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">新增权限</div>
+			<div class="listmain setting">
+				<form method="post" action="{:U(MODULE_NAME.'/nodeSave')}">
+				<input id="input_pid" type="hidden" name="pid" value="">
+					<table align="center" cellspacing="0" class="list">
+						<tbody><tr>
+							<td style="width:150px"><em class="red">*</em>权限模块名称：</td>
+							<td><input type="text" name="module_name" value="" class="textbox"><div class="onShow">填写的权限模块名称不能为空</div></td>
+						</tr>
+						<tr>
+							<td><em class="red">*</em>父模块(Model)：</td>
+							<td><input type="text" name="module" class="textbox"><div class="onShow">填写的父模块不能为空</div></td>
+						</tr>
+					    <tr>
+							<td><em class="red">*</em>操作(Action)：</td>
+							<td><input type="text" name="action" class="textbox"><div class="onShow">填写的操作不能为空</div></td>
+					    </tr>
+					    <tr>
+							<td>是否记录操作：</td>
+							<td>
+							    <input type="radio" name="record" value="1" checked="checked"> 是
+							    <input type="radio" name="record" value="0" style="margin-left:10px"> 否
+							    </td>
+					    </tr>
+					</tbody></table>
+					<input class="confirm_btn" type="submit" value="">
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+				</form>
+			</div>
+		</div>
+		</div>
+
+</body></html>

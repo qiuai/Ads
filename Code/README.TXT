@@ -1,6 +1,12 @@
 # 广告系统
 192.168.1.175		www.ads.me ads.me s.ads.me a.ads.me c.ads.me img.ads.me r.ads.me 
 
+# 账号 / 密码
+# 管理员 admin / 123456
+# 广告主 admin / 123456
+# 网站主 admin / 123456
+# 测试   demo  / 123456
+
 
 ############################
 # ads.me   广告系统	   #
