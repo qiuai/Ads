@@ -3,7 +3,7 @@ class PublicAction extends Action {
     // 检查用户是否登录
     public function checkUser() {
         if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
-            $this->error('没有登录','/?m=Public&a=login');
+            $this->redirect('/?m=Public&a=login');
         }
     }
 
@@ -115,7 +115,7 @@ class PublicAction extends Action {
             unset($_SESSION[C('USER_AUTH_KEY')]);
             unset($_SESSION);
             session_destroy();
-            $this->success('登出成功！',__URL__.'/login/');
+            $this->redirect(__URL__.'/login/');
         }else {
             $this->error('已经登出！');
         }
