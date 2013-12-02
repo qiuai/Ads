@@ -30,6 +30,23 @@ class NodeAction extends CommonAction {
 	 * @CreateDate: 2013-11-29 下午4:22:34
 	 */
 	public function nodeList(){
-		$this->index();
+		$model	=	M("");
+		
+		$sql = 'select n.*,g.title as gtitle from '.C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g where g.id = n.group_id and n.status = 1';
+		$sqln = 'select count(*) from '.C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g where g.id = n.group_id and n.status = 1';
+
+		$this->assign('list',$list);
+		$this->assign('location',"权限列表");
+		$this->display();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

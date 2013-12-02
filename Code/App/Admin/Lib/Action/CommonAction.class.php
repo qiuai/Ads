@@ -34,7 +34,7 @@ class CommonAction extends Action {
     	$Public = A('Agent');
 		$Public->checkUser();
     }
-public function index() {
+	public function index() {
         //列表过滤器，生成查询Map对象
         $map = $this->_search();
         if (method_exists($this, '_filter')) {
