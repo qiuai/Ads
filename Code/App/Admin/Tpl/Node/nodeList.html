@@ -16,57 +16,48 @@
     <tr class="tb_title">
         <td>ID</td>
         <td>PID</td>
-        <td>所属应用</td>
         <td>模块名称</td>
         <td>module</td>
         <td>action</td>
+        <td>所属应用</td>
         <td>操作记录</td>
         <td>操作</td>
     </tr>
     
     <Volist name='list' id='vo'>
-		<tr class="bgcolor3" style="text-align:left">
+    	<tr class="bgcolor3" style="text-align:left">
 			<td>{$vo.id}</td>
 	        <td>{$vo.pid}</td>
-	        <td>{$vo.gtitle}</td>
 	        <td>{$vo.module_name}</td>
 	        <td>{$vo.module}</td>
 	        <td>{$vo.action}</td>
-	        <td><if condition="status eq 1">是<else>否</if></td>
+	        <td>{$vo.gtitle}</td>
+	        <td><if condition="$vo.status eq 1">是<else />否</if></td>
 	        <td>
 	            <a href="SITE_URL?m=Node&a=edit&id={$vo.id}">编辑</a>
 	            <a href="SITE_URL?m=Node&a=delete&id={$vo.id}">删除</a>
 	        </td>
 		</tr>
+		<if condition="$vo.item neq null">
+		<Volist name="vo[item]" id='item'>
+		<tr class="bgcolor3" style="text-align:left">
+			<td>{$item.id}</td>
+	        <td>{$item.pid}</td>
+	        <td style="padding-left:80px">{$item.module_name}</td>
+	        <td>{$item.module}</td>
+	        <td>{$item.action}</td>
+	        <td>{$item.gtitle}</td>
+	        <td><if condition="$item.status eq 1">是<else />否</if></td>
+	        <td>
+	            <a href="SITE_URL?m=Node&a=edit&id={$item.id}">编辑</a>
+	            <a href="SITE_URL?m=Node&a=delete&id={$item.id}">删除</a>
+	        </td>
+		</tr>
+		</Volist>
+		</if>
 	</Volist>
-		
-    <tr class="bgcolor3" style="text-align:left">
-        <td>1</td>
-        <td>0</td>
-        <td>后台管理</td>
-        <td>会员管理</td>
-        <td>member</td>
-        <td>index</td>
-        <td>否</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=1">编辑</a>
-            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=1">删除</a>
-        </td>
-    </tr>
-        <tr>
-        <td>2</td>
-        <td>1</td>
-        <td style="padding-left:80px">会员列表</td>
-        <td>member</td>
-        <td>member_list</td>
-        <td>否</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_edit&permission_id=2">编辑</a>
-            <a href="http://adu.phpad.cn/admin.php?m=permission&a=permission_delete&permission_id=2" onclick="return confirm(&#39;确认删除？&#39;);">删除</a>
-        </td>
-    </tr>
+	
 </table>
-
 </div>
 </div>
 

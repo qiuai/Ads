@@ -32,50 +32,25 @@ class NodeAction extends CommonAction {
 	public function nodeList(){
 		$model	=	M("");
 		
-		$sql = 'select n.*,g.title as gtitle from '.C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g where g.id = n.group_id and n.status = 1';
-		$sqlcount = 'select count(*) from '.C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g where g.id = n.group_id and n.status = 1';
+		$where = " where g.id = n.group_id and level = 2 order by id ";
+		$select =" n.*,g.title as gtitle ";
+		$table = " ".C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g ';
+		
+		$sql = "select $select from $table $where";
 		
 		$list = $model->query($sql);
+		
+		foreach($list as $key=>$value){
+			$where = " where g.id = n.group_id and level = 3 and n.pid = ". $value[id] ." order by id ";
+			$sql = "select $select from $table $where";
+			
+			$item = $model->query($sql);
+			$list[$key]['item'] = $item;
+		}
+		
 		$this->assign('list',$list);
 		$this->assign('location',"权限列表");
 		$this->display();
-	}
-	public function _list($model,$sql,$sqlcount){
-		//取得满足条件的记录数
-		$count = $model->query($sqlcount);
-		if ($count > 0) {
-			import("@.ORG.Util.Page");
-			//创建分页对象
-			if (!empty($_REQUEST ['listRows'])) {
-				$listRows = $_REQUEST ['listRows'];
-			} else {
-				$listRows = '';
-			}
-			$p = new Page($count, $listRows);
-			//分页查询数据
-		
-			$voList = $model->where($map)->order("`" . $order . "` " . $sort)->limit($p->firstRow . ',' . $p->listRows)->select();
-			//echo $model->getlastsql();
-			//分页跳转的时候保证查询条件
-			foreach ($map as $key => $val) {
-				if (!is_array($val)) {
-					$p->parameter .= "$key=" . urlencode($val) . "&";
-				}
-			}
-			//分页显示
-			$page = $p->show();
-			//列表排序显示
-			$sortImg = $sort; //排序图标
-			$sortAlt = $sort == 'desc' ? '升序排列' : '倒序排列'; //排序提示
-			$sort = $sort == 'desc' ? 1 : 0; //排序方式
-			//模板赋值显示
-			$this->assign('list', $voList);
-			$this->assign('sort', $sort);
-			$this->assign('order', $order);
-			$this->assign('sortImg', $sortImg);
-			$this->assign('sortType', $sortAlt);
-			$this->assign("page", $page);
-		}
 	}
 	
 	
