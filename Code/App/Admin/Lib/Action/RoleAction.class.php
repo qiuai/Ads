@@ -45,8 +45,75 @@ class RoleAction extends CommonAction {
 		
 		$this->getName();
 		
-		$this->getRole();
+		$accesses = D("Access")->where("role_id=".$id)->field("node_id")->select();
+		$node_ids = array();
+		foreach($accesses as $access)
+		{
+			array_push($node_ids,$access['node_id']);
+		}
+		 
+		//取出模块授权
+		$Node	 = M('Node');
+		$list	 = $Node->select();
+		foreach($list as $value){
+			// level = 2 导航管理
+			// level = 3 模块管理
+			// level = 4 方法管理
+			$module[$value[level]][] = $value;
+			$action[$value[nav_id]][] = $value;
+		}
+		foreach ($module[1] as $key=>$value){
+			$module[1][$key]['action'] = $action[$value[id]];
+		}
+		$nav	= $module[0];
+		$module = $module[1];
+		 
+		if(in_array(0,$node_ids)){
+			$this->assign("nav_checked",1);
+		}
+		$checkall = true;
+		foreach($nav as $nk=>$nd){
+			if(in_array($nd['id'],$node_ids)){
+				$nav[$nk]['checked'] = true;
+			}else{
+				$checkall = false;
+				$nav[$nk]['checked'] = false;
+			}
+		}
+		if($checkall){
+			$this->assign("nav_checked_all",1);
+		}
+		 
+		foreach($module as $mk=>$md)
+		{
+			if(in_array($md['id'],$node_ids))
+				$module[$mk]['checked'] = true;
+			else
+				$module[$mk]['checked'] = false;
+			 
+			foreach($md['action'] as $ak=>$action)
+			{
+				$checkall = true;
+				if(in_array($action['id'],$node_ids))
+				{
+					$module[$mk]['action'][$ak]['checked'] = true;
+				}
+				else
+				{
+					$checkall = false;
+					$module[$mk]['action'][$ak]['checked'] = false;
+				}
+			}
+			 
+			if($checkall)
+				$module[$mk]['checkall'] = true;
+			else
+				$module[$mk]['checkall'] = false;
+		}
 		
+		var_dump($module);
+		
+		$this->assign('modules',$module);
 		$this->assign("location","修改管理员组");
 		$this->display();
 	}
