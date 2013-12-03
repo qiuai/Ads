@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0048)http://adu.phpad.cn/admin.php?m=user&a=user_list -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+
+ <div class="main">
+   <div class="body_title">管理员列表</div>
+		<div class="listmain">
+			<table class="list" cellspacing="0">
+				<tr>
+		            <td style="font-size:13px;height:40px;" colspan="2">管理员组：
+		            <a href="SITE_URL?m=User&a=userList" class="link-checked">全部</a>
+		            
+		            <Volist name="roleList" id="vo">
+		            <a href="SITE_URL?m=User&a=userList&roleId={$vo.id}" class="link_before_checked">{$vo.name}</a>
+					</Volist>
+					
+				</td>
+		        </tr>
+	        </table>
+	
+			<table align="center" cellspacing="0" class="list">
+			    <tr class="tb_title">
+			        <td>UID</td>
+			        <td>管理组</td>
+			        <td>用户名</td>
+			        <td>状态</td>
+			        <td>操作</td>
+			    </tr>
+			    
+			    <Volist name="userList" id="vo">
+			    <tr class="bgcolor3">        
+			    	<td>{$vo.id}</td>
+			        <td>{$vo.group_name}</td>
+			        <td>{$vo.account}</td>
+			        <td>
+			        	<if condition="$vo.status eq 1">
+			        	<span style="color:green">正常</span>
+			        	<else />
+			        	<span style="color:red">冻结</span>
+			        	</if>
+			        </td>
+			        <td>
+			            <a href="SITE_URL?m=User&a=userEdit&id={$vo.id}">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			            <a href="SITE_URL?m=User&a=delete&id={$vo.id}" onclick="return confirm('确认删除？');">删除</a>
+			        </td>
+			    </tr>
+			    </Volist>
+			    
+			</table>
+		</div>
+
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共3 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=1">尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+
+</body></html>
