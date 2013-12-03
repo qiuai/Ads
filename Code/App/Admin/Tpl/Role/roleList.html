@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0060)http://adu.phpad.cn/admin.php?m=user_group&a=user_group_list -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+<div class="main">
+    <div class="body_title">管理员组列表</div>
+	<div class="listmain">
+
+		<table align="center" cellspacing="0" class="list">
+		    <tbody><tr class="tb_title">
+		        <td>ID</td>
+		        <td>组名</td>
+		        <td>操作</td>
+		    </tr>
+		    
+		    <Volist name="roleList" id="vo">
+		    	<tr class="bgcolor3">  
+					<td>{$vo.id}</td>
+			        <td>{$vo.name}</td>
+			        <td><a href="SITE_URL?m=Role&a=roleEdit&id={$vo.id}">修改</a></td>
+			    </tr>
+			</Volist>
+		    
+		</table>
+
+	</div>
+</div>
+
+</body>
+</html>
