@@ -232,7 +232,7 @@ class CommonAction extends Action {
             $id = $_REQUEST [$pk];
             if (isset($id)) {
                 $condition = array($pk => array('in', explode(',', $id)));
-                $list = $model->where($condition)->setField('status', - 1);
+                $list = $model->where($condition)->delete();
                 if ($list !== false) {
                     $this->success('删除成功！');
                 } else {
