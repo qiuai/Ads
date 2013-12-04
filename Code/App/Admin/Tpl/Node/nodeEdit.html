@@ -10,22 +10,22 @@
 <body>
 	<div class="wrap">
 		<div class="main">
-			<div class="body_title">新增权限</div>
+			<div class="body_title">{$location}</div>
 			<div class="listmain setting">
-				<form method="post" action="http://adu.phpad.cn/admin.php?m=permission&a=permission_save&">
+				<form method="post" action="{:U(MODULE_NAME.'/update')}">
 				<input id="input_pid" type="hidden" name="pid" value="">
 					<table align="center" cellspacing="0" class="list">
 						<tbody><tr>
 							<td style="width:150px"><em class="red">*</em>权限模块名称：</td>
-							<td><input type="text" name="name" value="" class="textbox"><div class="onShow">填写的权限模块名称不能为空</div></td>
+							<td><input type="text" name="module_name" value="{$list.module_name}" class="textbox"><div class="onShow">填写的权限模块名称不能为空</div></td>
 						</tr>
 						<tr>
 							<td><em class="red">*</em>父模块(Model)：</td>
-							<td><input type="text" name="model" class="textbox"><div class="onShow">填写的父模块不能为空</div></td>
+							<td><input type="text" name="module" value="{$list.module}" class="textbox"><div class="onShow">填写的父模块不能为空</div></td>
 						</tr>
 					    <tr>
 							<td><em class="red">*</em>操作(Action)：</td>
-							<td><input type="text" name="action" class="textbox"><div class="onShow">填写的操作不能为空</div></td>
+							<td><input type="text" name="action" value="{$list.action}" class="textbox"><div class="onShow">填写的操作不能为空</div></td>
 					    </tr>
 					    <tr>
 							<td>是否记录操作：</td>

@@ -20,8 +20,9 @@ class NodeAction extends CommonAction {
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-11-29 下午4:03:38
 	 */
-	public function nodeSave(){
-		$this->insert();
+	public function nodeAdd(){
+		$this->assign('location',"新增权限");
+		$this->display();
 	}
 	/**
 	 * 节点列表
@@ -50,6 +51,21 @@ class NodeAction extends CommonAction {
 		
 		$this->assign('list',$list);
 		$this->assign('location',"权限列表");
+		$this->display();
+	}
+	/**
+	 * 编辑节点
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-3 上午10:23:04
+	 */
+	public function nodeEdit(){
+		$model	=	M("");
+		$sql = "select * from ".C('DB_PREFIX')."node where id = ".$_GET['id'];
+		$list = $model->query($sql);
+		
+		$this->assign('list',$list[0]);
+		$this->assign('location',"修改权限");
 		$this->display();
 	}
 	
