@@ -29,4 +29,8 @@ class AdAction extends CommonAction {
 	public function right(){
 		$this->display();
 	}
+	public function ad_list(){
+		$this->display();
+		
+	}
 }
