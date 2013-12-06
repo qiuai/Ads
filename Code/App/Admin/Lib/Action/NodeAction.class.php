@@ -21,8 +21,16 @@ class NodeAction extends CommonAction {
 	 * @CreateDate: 2013-11-29 下午4:03:38
 	 */
 	public function nodeAdd(){
-		$this->assign('location',"新增权限");
-		$this->display();
+		if($this->isPost()){
+			$model = M("Node");
+			$level = $this->getLevel($_POST['pid']);
+			$_POST['level'] = ($level+1) ? ($level+1) : 1;
+			$this->insert();
+		}else{
+			$this->getGroup();
+			$this->assign('location',"新增权限");
+			$this->display();
+		}
 	}
 	/**
 	 * 节点列表
@@ -68,14 +76,37 @@ class NodeAction extends CommonAction {
 		$this->assign('location',"修改权限");
 		$this->display();
 	}
+	/**
+	 * 返回节点
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-5 上午10:51:17
+	 */
+	public function getCat(){
+		$Node	 = M('Node');
+		$where = " level = 2 or level = 3";
+		$nodeList	 = $Node->where($where)->select();
+		
+		foreach ($nodeList as $value){
+			$data[$value['group_id']][] = $value;
+		}
+		
+// 		var_dump($data);
 	
+		$this->assign("noleList",$data);
+		
+		echo json_encode($data);
+	}
+	/**
+	 * 获得Level
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-6 上午10:48:29
+	 */
+	public function getLevel($id=0){
+		$model	=	M("Node");
+		$data  = $model->where("id=$id")->find();
 	
-	
-	
-	
-	
-	
-	
-	
-	
+		return $data['level'];
+	}
 }
