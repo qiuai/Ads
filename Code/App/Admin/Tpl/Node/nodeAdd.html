@@ -19,7 +19,11 @@ $(document).ready(function(){
 				level = $("#group").val();
 				item = data[level];
 				for(i=0; i<item.length; i++){
-					$("#menu").append("<option value='" + item[i]['id'] + "'>" + item[i]['module_name'] + "</option>");   //为Select追
+					str = "-- ";
+					for(j=0; j<item[i]['level'] - 1; j++){
+						str += str;
+					}
+					$("#menu").append("<option value='" + item[i]['id'] + "'>" + str + item[i]['module_name'] + "</option>");   //为Select追
 				}
 			}
 		});

@@ -28,11 +28,15 @@ class RoleAction extends CommonAction {
 	}
 	/**
 	 * 角色添加
+	 * 
+	 * level
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-12-3 下午3:06:26
 	 */
 	public function roleAdd(){
+		$nodeList = R('Node/getNode');
+		
 		$this->display();
 	}
 	/**
@@ -110,8 +114,6 @@ class RoleAction extends CommonAction {
 			else
 				$module[$mk]['checkall'] = false;
 		}
-		
-		var_dump($module);
 		
 		$this->assign('modules',$module);
 		$this->assign("location","修改管理员组");
