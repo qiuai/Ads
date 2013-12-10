@@ -139,14 +139,11 @@ function muti_apply(status)
 		ids += $(this).val() + ',';
 		
 	});
-	alert(ids);
-	alert(status);
-	alert($CONFIG['url']+"/?m=Web&a=site_multi");
 	if(ids=='') {
 		alert('请选择要操作的网站！');
 	}else{	
 		$.post($CONFIG['url']+"/?m=Web&a=site_multi", {'ids':ids,'status':status}, function(data){
-			if(data==1){
+			if(data==0){
 				alert('批量操作成功');
 				window.location.reload();
 			}else{

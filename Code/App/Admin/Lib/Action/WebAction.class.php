@@ -84,10 +84,16 @@ class WebAction extends CommonAction {
 		$this->display(index);
 	}
 	public function site_multi(){
-		$ids = $_POST["ids"];
+		$ids 	= $_POST["ids"];
+		$ids 	= rtrim($ids,",");
 		$status = $_POST["status"];
 		$st 	= M("site");
-		$st ->query('update zhts_site set status ='.$status.' where id in'.$ids);
+		$num = $st->where("id in (".$ids.")")->setField("status",$status);
+		if(empty($num)){
+			echo "1";
+		}else{
+			echo "0";
+		}
 	}
 	public function site_type_edit(){
 		$id = $_GET["code_id"];
