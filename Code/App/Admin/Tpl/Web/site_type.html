@@ -14,16 +14,26 @@
 <form method="post" action="" id="sitetype_list">
 <input type="hidden" name="admin_do" value="del">
 <table align="center" cellspacing="0" class="list">
-    <tbody><tr class="tb_title">
-        <td width="30%">分类名称</td>
-        <td width="30%">英文名称</td>
-        <td>排序</td>
-        <td>状态</td>
-        <td>操作</td>
-    </tr>
-    <tr class="bgcolor3"><td>电商</td><td>e-commerce</td><td>0</td><td>显示&nbsp;</td><td><a href="http://adu.phpad.cn/admin.php?m=site_type&a=site_type_edit&code_id=13">修改</a></td></tr><tr class="bgcolor4"><td>博客</td><td>blog</td><td>0</td><td>显示&nbsp;</td><td><a href="http://adu.phpad.cn/admin.php?m=site_type&a=site_type_edit&code_id=14">修改</a></td></tr><tr class="bgcolor3"><td>论坛</td><td>forum</td><td>0</td><td>显示&nbsp;</td><td><a href="http://adu.phpad.cn/admin.php?m=site_type&a=site_type_edit&code_id=15">修改</a></td></tr><tr class="bgcolor4"><td>新闻</td><td>news</td><td>0</td><td>显示&nbsp;</td><td><a href="http://adu.phpad.cn/admin.php?m=site_type&a=site_type_edit&code_id=16">修改</a></td></tr></tbody></table>
+    <tbody>
+		<tr class="tb_title">
+			<th width="30%">分类名称</th>
+			<th width="30%">英文名称</th>
+			<th>排序</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		<volist name="sitetype" id="vo">
+		<tr class="bgcolor3">
+			<td>{$vo.name}</td>
+			<td>{$vo.ename}</td>
+			<td>{$vo.sort}</td>
+			<td><if condition="$vo['status'] eq 0">显示<else />不显示</if></td>
+			<td><a href="SITE_URL/?m=Web&a=site_type_edit&code_id={$vo.id}">修改</a></td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
 </form>
 </div>
 </div>
-
 </body></html>

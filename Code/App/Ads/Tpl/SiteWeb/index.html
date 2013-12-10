@@ -16,100 +16,33 @@
 				<span>网站管理</span>
 				<div class="add_newsite fr">
 					<em class="add">+</em>
-					<a href="http://adu.phpad.cn/center.php?m=site&a=site_add">添加新网站</a>
+					<a href="SITE_URL/?m=SiteWeb&a=site_add">添加新网站</a>
 				</div>
 				<div class="cb"></div>
 			</div>
 			<div class="website_manage_body">
 				<table class="table_list">
-				  <tbody><tr class="color_td">
-					<td>网站名称</td>
-                    <td>网站ID</td>
-					<td>网站URL</td>
-					<td>网站类别</td>
-					<td>网站状态</td>
-					<td>操作</td>
-				  </tr>
-                  <tr>
-                                          <td>51淘</td>
-                        <td>31</td>
-                        <td>www.51tao.com</td>
-                        <td>电商</td>
-                        <td><em class="green">正常</em></td>                                                             
-                        <td>
-                                                        <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=31" class="blue">修改</a>
-                            	&nbsp;|&nbsp;
-                            <a href="http://adu.phpad.cn/center.php?m=site&a=site_delete&site_id=31" class="red" onclick="return confirm('确认删除网站？');">删除</a>
-                        </td>
-				  	</tr>	
-				  	                        <td>我爱返利网</td>
-                        <td>19</td>
-                        <td>www.52fl.com</td>
-                        <td>电商</td>
-                        <td><em class="green">正常</em></td>                                                             
-                        <td>
-                                                        <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=19" class="blue">修改</a>
-                            	&nbsp;|&nbsp;
-                            <a href="http://adu.phpad.cn/center.php?m=site&a=site_delete&site_id=19" class="red" onclick="return confirm('确认删除网站？');">删除</a>
-                        </td>
-				  	</tr>	
-				  	                        <td>一淘</td>
-                        <td>33</td>
-                        <td>www.etao.com</td>
-                        <td>电商</td>
-                        <td><em class="green">正常</em></td>                                                             
-                        <td>
-                                                        <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=33" class="blue">修改</a>
-                            	&nbsp;|&nbsp;
-                            <a href="http://adu.phpad.cn/center.php?m=site&a=site_delete&site_id=33" class="red" onclick="return confirm('确认删除网站？');">删除</a>
-                        </td>
-				  	</tr>	
-				  	                        <td>爱返现</td>
-                        <td>34</td>
-                        <td>www.aifanxian.com</td>
-                        <td>电商</td>
-                        <td><em class="green">正常</em></td>                                                             
-                        <td>
-                                                        <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=34" class="blue">修改</a>
-                            	&nbsp;|&nbsp;
-                            <a href="http://adu.phpad.cn/center.php?m=site&a=site_delete&site_id=34" class="red" onclick="return confirm('确认删除网站？');">删除</a>
-                        </td>
-				  	</tr>	
-				  	                        <td>怎么样</td>
-                        <td>26</td>
-                        <td>www.zenmeyang.com</td>
-                        <td>电商</td>
-                        <td><em class="green">正常</em></td>                                                             
-                        <td>
-                                                        <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=26" class="blue">修改</a>
-                            	&nbsp;|&nbsp;
-                            <a href="http://adu.phpad.cn/center.php?m=site&a=site_delete&site_id=26" class="red" onclick="return confirm('确认删除网站？');">删除</a>
-                        </td>
-				  	</tr>	
-				  	                        <td>青番茄</td>
-                        <td>35</td>
-                        <td>www.qfanqie.com</td>
-                        <td>电商</td>
-                        <td><em class="green">正常</em></td>                                                             
-                        <td>
-                                                        <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=35" class="blue">修改</a>
-                            	&nbsp;|&nbsp;
-                            <a href="http://adu.phpad.cn/center.php?m=site&a=site_delete&site_id=35" class="red" onclick="return confirm('确认删除网站？');">删除</a>
-                        </td>
-				  	</tr>	
-				  	                        <td>test</td>
-                        <td>37</td>
-                        <td>www.test.com</td>
-                        <td>电商</td>
-                        <td><em class="green">正常</em></td>                                                             
-                        <td>
-                                                        <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=37" class="blue">修改</a>
-                            	&nbsp;|&nbsp;
-                            <a href="http://adu.phpad.cn/center.php?m=site&a=site_delete&site_id=37" class="red" onclick="return confirm('确认删除网站？');">删除</a>
-                        </td>
-				  	</tr>	
-				  				
-				  </tbody></table>
+					<tbody>
+						<tr class="color_td">
+							<td>网站名称</td>
+							<td>网站ID</td>
+							<td>网站URL</td>
+							<td>网站类别</td>
+							<td>网站状态</td>
+							<td>操作</td>
+						</tr>
+						<volist name="site" id="vo">
+						<tr>
+							<td>{$vo.sitename}</td>
+							<td>{$vo.id}</td>
+							<td>{$vo.domain}</td>
+							<td>{$vo.type}</td>
+							<td><em <if condition="$vo.status eq 0">style="color:gray"<elseif condition="$vo.status eq 1"/>style="color:red"<elseif condition="$vo.status eq 2"/>style="color:green"<else />style="color:orange"</if>><if condition="$vo.status eq 0">未验证<elseif condition="$vo.status eq 1"/>审核中<elseif condition="$vo.status eq 2"/>正常<elseif condition="$vo.status eq 3"/>锁定<else />拒绝</if></em></td>   <td><a href="SITE_URL/?m=SiteWeb&a=site_edit&site_id={$vo.id}" class="blue">修改</a>&nbsp;|&nbsp;<a href="SITE_URL/?m=SiteWeb&a=site_delete&site_id={$vo.id}" class="red" onclick="return confirm('确认删除网站？');">删除</a>
+							</td>
+						</tr>
+						</volist>
+					</tbody>
+				</table>
 			</div>
 		</div>
 </div>

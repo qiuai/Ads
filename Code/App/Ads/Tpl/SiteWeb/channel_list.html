@@ -1,0 +1,56 @@
+<include file="Index:headerWeb" />
+<style>
+.website_manage table{
+	width:980px;
+}
+.website_manage_head {
+    background: #eee;
+    border:1px solid #ccc;
+    height: 24px;
+    padding: 7px 10px 0;
+}
+</style>
+<div class="main clearfix">    
+		<div class="website_manage">
+			<div class="website_manage_head">
+				<span>频道管理</span>
+				<div class="add_newsite fr">
+					<em class="add">+</em>
+					<a href="SITE_URL/?m=SiteWeb&a=channel_add">新增频道</a>
+				</div>
+				<div class="cb"></div>
+			</div>
+			<div class="website_manage_body">
+				<table class="table_list">
+				  <tbody>
+					<tr class="color_td">
+						<th>频道ID</th>
+						<th>频道名称</th>
+						<th>排序</th>
+						<th>状态</th>
+						<th>描述</th>
+						<th>操作</th>
+					  </tr>
+					  <volist name="channel" id="vo">
+					  <tr class="color_td">
+						<td>{$vo.id}</td>
+						<td>{$vo.name}</td>
+						<td>{$vo.sort}</td>
+						<td>{$vo.status}</td>
+						<td>{$vo.desc}</td>
+						<td>
+							<a href="SITE_URL/?m=SiteWeb&a=channel_edit&channel_id={$vo.id}" class="blue">修改</a>&nbsp;|&nbsp;
+							<a href="SITE_URL/?m=SiteWeb&a=channel_delete&channel_id={$vo.id}" class="red" onclick="return confirm('确认删除网站？');">删除</a>
+						</td>
+					  <tr>
+					  </volist>
+					<td class="br_none" colspan="12">
+						<div class='page_bar fr'><span>共0 条记录 1/0 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/center.php?m=site&a=adm_channel&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/center.php?m=site&a=adm_channel&page=0'>上一页</a>&nbsp;&nbsp;<a class='page_next' href='/center.php?m=site&a=adm_channel&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/center.php?m=site&a=adm_channel&page=0'>尾页</a>&nbsp;&nbsp;</div>
+					</td>
+	                </tr>
+					</tbody>
+				  </table>
+			</div>
+		</div>
+</div>
+<include file="Index:footer" />

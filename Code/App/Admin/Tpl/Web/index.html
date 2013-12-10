@@ -12,41 +12,46 @@
  <div class="main">
   <div class="body_title">网站列表</div>
   <div class="listmain">	
-      <table align="center" class="list" cellspacing="0">
-        <tbody><tr>
-        <td width="40%" style="border-right:none;">
-            <form method="get">
-                <input type="hidden" name="m" value="site">
-                <input type="text" name="content">
-                <select name="condition">
-                    <option value="site_id">网站ID</option>
-                    <option value="site_domain">网站域名</option>
-                    <option value="uid">用户UID</option>                    
-                </select>
-                <input type="submit" value="查询" class="button">
-            </form>
-        </td>
+	<table align="center" class="list" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="40%" style="border-right:none;">
+					<form method="get">
+						<input type="hidden" value="Web" name="m">
+						<input type="hidden" value="site_search" name="a">
+						<input type="text" name="content">
+						<select name="condition">
+							<option value="site_id">网站ID</option>
+							<option value="site_domain">网站域名</option>
+							<option value="uid">用户UID</option>                    
+						</select>
+						<input type="submit" value="查询" class="button">
+					</form>
+				</td>
                 <td align="right">
-            <input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=site&amp;a=site_export&amp;content=&amp;condition=&amp;status=&#39;">
-        </td>
-        </tr>
-        <tr>
-            <td style="font-size:13px;height:40px;" colspan="2">网站状态：
-                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&" class="link-checked">全部状态</a>
-                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E6%9C%AA%E9%AA%8C%E8%AF%81" class="link_before_checked">未验证</a>
-                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E5%AE%A1%E6%A0%B8%E4%B8%AD" class="link_before_checked">审核中</a>
-                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E6%AD%A3%E5%B8%B8" class="link_before_checked">正常</a>
-                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E9%94%81%E5%AE%9A" class="link_before_checked">锁定</a>
-                <a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&status=%E6%8B%92%E7%BB%9D" class="link_before_checked">拒绝</a>
-            </td>
-        </tr>
-        
-    </tbody></table>
+					<input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=site&amp;a=site_export&amp;content=&amp;condition=&amp;status=&#39;">
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size:13px;height:40px;" colspan="2">网站状态：
+					<a href="SITE_URL/?m=Web&a=site_list&" class="link-checked">全部状态</a>
+					<a href="SITE_URL/?m=Web&a=site_list&status=0" class="link_before_checked">未验证</a>
+					<a href="SITE_URL/?m=Web&a=site_list&status=1" class="link_before_checked">审核中</a>
+					<a href="SITE_URL/?m=Web&a=site_list&status=2" class="link_before_checked">正常</a>
+					<a href="SITE_URL/?m=Web&a=site_list&status=3" class="link_before_checked">锁定</a>
+					<a href="SITE_URL/?m=Web&a=site_list&status=4" class="link_before_checked">拒绝</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 		
 		
 <form method="post" id="sitelist_form">
+<input type="hidden" value="Web" name="m">
+<input type="hidden" value="site_multi" name="a">
 <table align="center" cellspacing="0" class="list">
-    <tbody><tr class="tb_title">
+    <tbody>
+	<tr class="tb_title">
     	<td>
     		<input id="check_box" class="selall fl" type="checkbox">
 			<label class="fl" for="selall">全选</label>
@@ -64,191 +69,59 @@
         <td>状态</td>
         <td>操作</td>       
     </tr>
-    <tr class="bgcolor3">    	<td>
-			<input class="check_act_id" type="checkbox" value="41" name="site_id[]">
+	<volist name="site" id="vo">
+    <tr class="bgcolor3">    	
+		<td>
+			<input class="check_act_id" type="checkbox" value="{$vo.id}" name="site_id[]">
 		</td>
-        <td>41</td>
-        <td>300020</td>
-        <td>好乐享</td>
-        <td><a href="http://www.haolexiang.com/" target="_blank">www.haolexiang.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:green">正常</span>&nbsp;</td>
+        <td>{$vo.id}</td>
+        <td>{$vo.uid}</td>
+        <td>{$vo.sitename}</td>
+        <td><a href="http://{$vo.domain}" target="_blank">{$vo.domain}</a></td>
+        <td>{$sitetype}</td>
+        <td>{$vo.register}</td>
+        <td>{$vo.pr}</td>
+        <td>{$vo.rank}</td>
+        <td>{$vo.weight}</td>
+        <td>{$vo.addtime}</td>
+        <td><span <if condition="$vo.status eq 0">style="color:gray"<elseif condition="$vo.status eq 1"/>style="color:red"<elseif condition="$vo.status eq 2"/>style="color:green"<else />style="color:orange"</if>><if condition="$vo.status eq 0">未验证<elseif condition="$vo.status eq 1"/>审核中<elseif condition="$vo.status eq 2"/>正常<elseif condition="$vo.status eq 3"/>锁定<else />拒绝</if></span></td>
         <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=41">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=41" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=41">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.haolexiang.com&#39;)">快捷查询网站</a>
+            <a href="SITE_URL/?m=Web&a=site_delete&site_id={$vo.id}" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;
+            <a href="SITE_URL/?m=Web&a=zone&site_id={$vo.id}">查看广告位</a>&nbsp;&nbsp;
+            <a href="javascript:void(0);" onclick="quick_open(&#39;{$vo.domain}&#39;)">快捷查询网站</a>
         </td>
-        </tr>
-    <tr class="bgcolor4">    	<td>
-			<input class="check_act_id" type="checkbox" value="39" name="site_id[]">
+    </tr>
+	</volist>
+	<tr>
+		<td style="font-size:13px;height:40px;" colspan="13">批量操作：
+			<a href="javascript:muti_apply('0')" class="link_before_checked">未验证</a>
+			<a href="javascript:muti_apply('1')" class="link_before_checked">审核中</a>
+			<a href="javascript:muti_apply('2')" class="link_before_checked">正常</a>
+			<a href="javascript:muti_apply('3')" class="link_before_checked">锁定</a>
+			<a href="javascript:muti_apply('4')" class="link_before_checked">拒绝</a>
 		</td>
-        <td>39</td>
-        <td>300020</td>
-        <td>我的测试2</td>
-        <td><a href="http://www.mytesttesttest.com/" target="_blank">www.mytesttesttest.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:gray">未验证</span>&nbsp;</td>
-        <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=39">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=39" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=39">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.mytesttesttest.com&#39;)">快捷查询网站</a>
-        </td>
-        </tr>
-    <tr class="bgcolor3">    	<td>
-			<input class="check_act_id" type="checkbox" value="33" name="site_id[]">
-		</td>
-        <td>33</td>
-        <td>300020</td>
-        <td>一淘</td>
-        <td><a href="http://www.etao.com/" target="_blank">www.etao.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:green">正常</span>&nbsp;</td>
-        <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=33">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=33" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=33">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.etao.com&#39;)">快捷查询网站</a>
-        </td>
-        </tr>
-    <tr class="bgcolor4">    	<td>
-			<input class="check_act_id" type="checkbox" value="34" name="site_id[]">
-		</td>
-        <td>34</td>
-        <td>300020</td>
-        <td>爱返现</td>
-        <td><a href="http://www.aifanxian.com/" target="_blank">www.aifanxian.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:green">正常</span>&nbsp;</td>
-        <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=34">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=34" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=34">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.aifanxian.com&#39;)">快捷查询网站</a>
-        </td>
-        </tr>
-    <tr class="bgcolor3">    	<td>
-			<input class="check_act_id" type="checkbox" value="26" name="site_id[]">
-		</td>
-        <td>26</td>
-        <td>300020</td>
-        <td>怎么样</td>
-        <td><a href="http://www.zenmeyang.com/" target="_blank">www.zenmeyang.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:green">正常</span>&nbsp;</td>
-        <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=26">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=26" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=26">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.zenmeyang.com&#39;)">快捷查询网站</a>
-        </td>
-        </tr>
-    <tr class="bgcolor4">    	<td>
-			<input class="check_act_id" type="checkbox" value="35" name="site_id[]">
-		</td>
-        <td>35</td>
-        <td>300020</td>
-        <td>青番茄</td>
-        <td><a href="http://www.qfanqie.com/" target="_blank">www.qfanqie.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:green">正常</span>&nbsp;</td>
-        <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=35">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=35" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=35">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.qfanqie.com&#39;)">快捷查询网站</a>
-        </td>
-        </tr>
-    <tr class="bgcolor3">    	<td>
-			<input class="check_act_id" type="checkbox" value="37" name="site_id[]">
-		</td>
-        <td>37</td>
-        <td>300020</td>
-        <td>test</td>
-        <td><a href="http://www.test.com/" target="_blank">www.test.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:green">正常</span>&nbsp;</td>
-        <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=37">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=37" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=37">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.test.com&#39;)">快捷查询网站</a>
-        </td>
-        </tr>
-    <tr class="bgcolor4">    	<td>
-			<input class="check_act_id" type="checkbox" value="38" name="site_id[]">
-		</td>
-        <td>38</td>
-        <td>300020</td>
-        <td>我的测试网站</td>
-        <td><a href="http://www.mytest.com/" target="_blank">www.mytest.com</a></td>
-        <td>电商</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1970-01-01</td>
-        <td><span style="color:gray">未验证</span>&nbsp;</td>
-        <td>
-            <!--  <a href="http://adu.phpad.cn/center.php?m=site&a=site_edit&site_id=38">修改</a>&nbsp;|&nbsp;-->
-            <a href="http://adu.phpad.cn/admin.php?m=site&a=site_delete&site_id=38" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&site_id=38">查看广告位</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" onclick="quick_open(&#39;www.mytest.com&#39;)">快捷查询网站</a>
-        </td>
-        </tr>
-        	<tr>
-            <td style="font-size:13px;height:40px;" colspan="13">批量操作：
-                <a href="javascript:muti_apply('未验证')" class="link_before_checked">未验证</a>
-                <a href="javascript:muti_apply('审核中')" class="link_before_checked">审核中</a>
-                <a href="javascript:muti_apply('正常')" class="link_before_checked">正常</a>
-                <a href="javascript:muti_apply('锁定')" class="link_before_checked">锁定</a>
-                <a href="javascript:muti_apply('拒绝')" class="link_before_checked">拒绝</a>
-            </td>
-        </tr>
-</tbody></table>
+	</tr>
+</tbody>
+</table>
 </form>
 <div id="show_act" style="display:none;position:absolute"></div>
 </div>
-<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共8 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=site&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=site&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=site&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=site&page=1">尾页</a>&nbsp;&nbsp;</div></div>
+<div class="admin_do index_page" style="text-align:center;">
+	<div class="page_bar fr"><span>共8 条记录 1/1 页</span>
+		<a class="page_first" href="http://adu.phpad.cn/admin.php?m=site&page=1">首页</a>
+		<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=site&page=0">上一页</a>
+		<span class="current"> 1 </span>
+		<a class="page_next" href="http://adu.phpad.cn/admin.php?m=site&page=2">下一页</a>
+		<a class="page_last" href="http://adu.phpad.cn/admin.php?m=site&page=1">尾页</a>
+	</div>
+</div>
 </div>
 </div>
 <div id="layer" style="display:none;"></div>
+<script type="text/javascript">
+var $CONFIG={};
+$CONFIG['url'] = "http://a.ads.me";
+</script>
 <script language="javascript" type="text/javascript">
 //全选、全不选
 $('#check_box').toggle(function(){
@@ -266,11 +139,13 @@ function muti_apply(status)
 		ids += $(this).val() + ',';
 		
 	});
-
+	alert(ids);
+	alert(status);
+	alert($CONFIG['url']+"/?m=Web&a=site_multi");
 	if(ids=='') {
 		alert('请选择要操作的网站！');
 	}else{	
-		$.post("admin.php?m=site&a=site_multi", {'ids':ids,'status':status}, function(data){
+		$.post($CONFIG['url']+"/?m=Web&a=site_multi", {'ids':ids,'status':status}, function(data){
 			if(data==1){
 				alert('批量操作成功');
 				window.location.reload();
@@ -283,8 +158,7 @@ function muti_apply(status)
 }
 function quick_open(site){
 	window.open('http://'+site,"siteblank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=yes, copyhistory=yes, width=800, height=450, left:50, top:50");
-	
 }
 </script>
-
-</body></html>
+</body>
+</html>
