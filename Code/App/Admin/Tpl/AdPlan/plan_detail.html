@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+
+ <div class="main">
+       <div class="body_title">查看计划详情</div>
+		<div class="listmain setting">
+		
+<table class="list" cellspacing="0">
+    <tr>
+    	<td width="130px">计划名称：</td>
+    	<td class="textbox_td">{$AdPlanInfo['plan_name']}</td>
+    </tr>
+    <tr>
+    	<td>广告主UID：</td>
+    	<td class="textbox_td">{$AdPlanInfo['uid']}</td>
+    </tr>
+    <tr>
+    	<td>接入网址：</td>
+    	<td class="textbox_td">{$AdPlanInfo['track_url']}</td>
+    </tr>
+     <tr>
+    	<td>目标网址：</td>
+    	<td class="textbox_td"><a href="{$AdPlanInfo['jump_url']}" target="_blank">{$AdPlanInfo['jump_url']}</a></td>
+    </tr>
+	<tr>
+    	<td >计划LOGO：</td>
+    	<td class="textbox_td"><img src="UPLOAD_URL/{$AdPlanInfo['plan_logo']}" width="120" height="45" /></td>
+    </tr>
+    <tr>
+		<td>行业类别：</td>
+		<td class="textbox_td">{$AdPlanInfo['name']}</td>
+	 </tr>	
+	 <tr>
+		<td>计费形式：</td>
+		<td class="textbox_td">{$AdPlanInfo['pay_type']}</td>
+	</tr>
+	<tr>
+		<td>审核方式：</td>
+		<td>{$AdPlanInfo['plan_check']}</td>
+	</tr>
+		<tr>
+		<td>结算周期：</td>
+		<td class="textbox_td">{$AdPlanInfo['clearing_form']}</td>
+	</tr>
+    <tr>
+    	<td>计划周期：</td>
+    	<td class="textbox_td">$AdPlanInfo['start_date']} 至  {$AdPlanInfo['end_date']}</td>
+    </tr>	
+    
+        <tbody id="cps" class="price">
+          <tr>
+              <td>数据返回机制(时间)：</td>
+              <td class="textbox_td">{$AdPlanInfo['cps_data_return']}</td>
+          </tr>
+          <tr>
+              <td>效果认定期：</td>
+              <td class="textbox_td">{$AdPlanInfo['cpa_return_day']}天</td>
+          </tr>
+          <tr>
+              <td>网站主显示价格：</td>
+              <td class="textbox_td">$AdPlanInfo['price_desc']}</td>
+          </tr>
+          <tr>
+        	<td>费用设置：</td>
+        	<td class="textbox_td">
+        		<table style="width:99%;margin:5px auto;text-align:center" id="price_area">
+        		    <tr style="height:27px;"><th>类目标识</th><th>类目名称</th><th>真实价格</th><th>网站主结算价格</th><th>佣金说明</th></tr>
+        		            		    <tr style="background-color:#eee">
+        		        <td>A</td>
+        		        <td>a cateory</td>
+        		        <td>5.00%</td>
+        		        <td>2.00%</td>
+        		        <td></td>       		        
+        		    </tr>
+        		            		    <tr>
+        		      <td>阶梯类型：当日PV</td>
+        		      <td>10000 ~ 0</td>
+        		      <td>7.00%</td>
+        		      <td>2.00%</td>
+        		      <td></td>
+        		    </tr>
+        		            		</table>
+        	</td>
+          </tr>	
+	</tbody>
+		
+		  
+        
+                
+        	
+          <tr>
+        	<td class="newsite_w155">计划介绍：</td>
+        	<td class="textbox_td">{$AdPlanInfo['description']}</td>
+          </tr>	
+          <tr>
+            <td colspan="2" style="background-color:#fdf9f1;">定向投放</td>
+          </tr>
+          <tr>
+            <td>网站类型定向：</td>
+			<td class="textbox_td">无</td>
+		</tr>
+		<tr>
+            <td>地区定向：</td>
+			<td class="textbox_td">
+			否	
+			</td>
+		</tr>
+		<tr>
+            <td>星期定向：</td>
+			<td class="textbox_td">
+			无	
+			</td>
+		</tr>
+		<tr>
+            <td>时间定向：</td>
+			<td class="textbox_td">
+			否	
+			</td>
+		</tr>    
+    </table>
+                 
+</div>
+</div>
+</body>
+</html>

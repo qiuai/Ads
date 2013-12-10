@@ -6,7 +6,8 @@
 <link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
 <script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
-<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript" src="STATIC_URL/admin/js/calendar.js"></script><link href="./admin.php_files/calendar-blue.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/calendar.js"></script><link href="./admin.php_files/calendar-blue.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -63,26 +64,26 @@
 		<td><em class="red">*</em>计费形式：</td>
 		<td class="textbox_td">
 			<select class="newsite_select" name="pay_type">
-			            	<option value="cps">cps</option>
-                        	<option value="cpa">cpa</option>
-                        	<option value="cpc">cpc</option>
-                        	<option value="cpm">cpm</option>
+			            	<option value="1">cps</option>
+                        	<option value="2">cpa</option>
+                        	<option value="3">cpc</option>
+                        	<option value="4">cpm</option>
                         </select>
 		</td>
 	</tr>
 	<tr>
 		<td><em class="red">*</em>审核方式：</td>
 		<td>
-			<input type="radio" name="plan_check" value="自动审核" checked="checked">自动审核	
-			<input type="radio" name="plan_check" value="手动审核">手动审核		
+			<input type="radio" name="plan_check" value="0" checked="checked">自动审核	
+			<input type="radio" name="plan_check" value="1">手动审核		
 		</td>
 	</tr>
 	<tr>
 		<td><em class="red">*</em>结算周期：</td>
 		<td class="textbox_td">
-		    <input type="radio" name="clearing_form" value="日结">日结					
-			<input type="radio" name="clearing_form" value="周结">周结
-			<input type="radio" name="clearing_form" value="月结" checked="checked">月结					
+		    <input type="radio" name="clearing_form" value="1">日结					
+			<input type="radio" name="clearing_form" value="2">周结
+			<input type="radio" name="clearing_form" value="3" checked="checked">月结					
 		</td>
 	</tr>
     <tr>
@@ -164,8 +165,8 @@
 			  <tr>
 			      <td>数据返回机制：</td>
 			      <td class="textbox_td">
-			          <input type="radio" name="cpa_data_return" value="0" onclick="returnDate1(&#39;cpa&#39;)">实时返回
-			          <input type="radio" name="cpa_data_return" value="1" onclick="returnDate2(&#39;cpa&#39;)">延时返回
+			          <input type="radio" name="cpa_data_return" value="1" onclick="returnDate1(&#39;cpa&#39;)">实时返回
+			          <input type="radio" name="cpa_data_return" value="2" onclick="returnDate2(&#39;cpa&#39;)">延时返回
 			          <span style="display:none" id="cpa_return_date_span">
 			              延时 <input type="text" name="cpa_data_return" style="width:20px" value="0"> 天
 			          </span>
