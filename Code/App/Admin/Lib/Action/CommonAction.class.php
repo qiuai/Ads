@@ -34,6 +34,18 @@ class CommonAction extends Action {
     	$Public = A('Agent');
 		$Public->checkUser();
     }
+    /**
+     * 获取应用信息
+     *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-12-4 上午11:30:43
+     */
+    public function getGroup(){
+    	$model = M("Group");
+    	$list = $model->select();
+    	
+    	$this->assign("groupList",$list);
+    }
 	public function index() {
         //列表过滤器，生成查询Map对象
         $map = $this->_search();
@@ -166,7 +178,7 @@ class CommonAction extends Action {
         return;
     }
 
-    function insert() {
+    function insert($data=array()) {
         $name = $this->getActionName();
         $model = D($name);
         if (false === $model->create()) {

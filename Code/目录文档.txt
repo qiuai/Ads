@@ -1,0 +1,4 @@
+后台访问地址：a.ads.me
+前端访问地址：www.ads.me
+广告主访问地址：www.ads.me/adv.php
+网站主访问地址：www.ads.me/web.php

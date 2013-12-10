@@ -7,15 +7,34 @@
 <script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
 <script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<script>
+$(document).ready(function(){
+	$("#group").change(function(){
+		$.ajax({
+			url:"SITE_URL/?m=Node&a=getCat",
+			dataType: "json",
+			async: false,
+			success:function(data){
+				$("#menu").empty();
+				level = $("#group").val();
+				item = data[level];
+				for(i=0; i<item.length; i++){
+					$("#menu").append("<option value='" + item[i]['id'] + "'>" + item[i]['module_name'] + "</option>");   //为Select追
+				}
+			}
+		});
+	});
+});
+</script>
 <body>
 	<div class="wrap">
 		<div class="main">
 			<div class="body_title">{$location}</div>
 			<div class="listmain setting">
-				<form method="post" action="{:U(MODULE_NAME.'/insert')}">
+				<form method="post" action="{:U(MODULE_NAME.'/nodeAdd')}">
 				<input id="input_pid" type="hidden" name="pid" value="">
 					<table align="center" cellspacing="0" class="list">
-						<tbody><tr>
+						<tr>
 							<td style="width:150px"><em class="red">*</em>权限模块名称：</td>
 							<td><input type="text" name="module_name" value="" class="textbox"><div class="onShow">填写的权限模块名称不能为空</div></td>
 						</tr>
@@ -28,13 +47,40 @@
 							<td><input type="text" name="action" class="textbox"><div class="onShow">填写的操作不能为空</div></td>
 					    </tr>
 					    <tr>
-							<td>是否记录操作：</td>
+							<td>所属栏目：</td>
+							<td>
+								<select id="group" name="group_id">
+									<option value="0">所属应用</option>
+									<Volist name="groupList" id="vo">
+						            	<option value="{$vo.id}">{$vo.title}</option>
+									</Volist>
+								</select>
+								
+								<select id="menu" name="pid">
+									<option value="0">顶级栏目</option>
+								</select>
+							</td>
+					    </tr>
+					    <tr>
+							<td>节点排序：</td>
+							<td><input type="text" name="sort" class="textbox"><div class="onShow">填写的操作不能为空</div></td>
+					    </tr>
+					    <tr>
+							<td>菜单显示：</td>
+							<td>
+							    <input type="radio" name="is_menu" value="1" checked="checked"> 是
+							    <input type="radio" name="is_menu" value="0" style="margin-left:10px"> 否
+							    </td>
+					    </tr>
+					    <tr>
+							<td>记录操作：</td>
 							<td>
 							    <input type="radio" name="record" value="1" checked="checked"> 是
 							    <input type="radio" name="record" value="0" style="margin-left:10px"> 否
 							    </td>
 					    </tr>
-					</tbody></table>
+					</table>
+					<input type="hidden" name="status" value="1">
 					<input class="confirm_btn" type="submit" value="">
 					<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
 				</form>
