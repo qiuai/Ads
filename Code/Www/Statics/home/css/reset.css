@@ -1,0 +1,59 @@
+﻿@charset "utf-8";
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,li, dl, dt, dd, form, a, fieldset, input, th, td{margin: 0; padding: 0; border: 0; outline: none;}
+body {
+	font-family:Arial, "宋体";
+	font-size:12px;
+	color:#666;
+	line-height:150%;
+}
+em{font-style:normal;}
+ul{list-style-type:none;}
+.f333,.f333 a:link,.f333 a:visited{color:#333;}
+img{display:block;border:0 none;vertical-align:middle;}
+a,a:focus{ outline:none; } 
+a,a:link,a:visited{color:#666;text-decoration:none;}
+a:hover{color:#ff7200;text-decoration:underline}
+.clear {clear:both;height:0;overflow:hidden;line-height:0;font-size:0;}
+.fl {float:left;}
+.fr {float:right;}
+.f999,.f999:link,.f999:visited {color:#999}
+.f666 {color:#666;}
+.f333 {color:#333;}
+.f000 {color:#000;}
+.fs10 {font-size:10px}
+.fs11 {font-size:11px;}
+.fs14 {font-size:14px;}
+.m0 {margin:0;}
+.mr3 {margin: 0 5px 5px 0;}
+.mt0 {margin-top:0;}
+.ml0 {margin-left:0;}
+.mb0{margin-bottom:0;}
+.ml5{margin-left:5px;}
+.mr5{margin-right:5px;}
+.mb10 {margin-bottom:10px;}
+.mt10 {margin-top:10px;}
+.mt5 {margin-top:5px;}
+.ml20{margin-left:20px;}
+.pb5 {padding-bottom:5px;}
+.pb10 {padding-bottom:10px;}
+.pt3 {padding-top:3px;}
+.green, .green:link, .green:visited {color:#00cc00;}
+.orange, .orange:link,.orange:hover, .orange:visited{color:#ff7200}
+.blue,.blue:link,.blue:visited{color:#0000ff}
+.red,.red:link,.red:visited{color:red}
+.content .tdhover_back{background:#fffef2}
+.nodisplay {display:none;}
+.display {display:block;}
+.point {color:#CCC;font-size:12px;font-family:"宋体";margin:0 3px;}
+.underline{text-decoration:underline;}
+.btn{border:none 0;cursor:pointer;text-align:center;}
+.select{border:1px solid #dcdcdc;height:18px;padding:4px;}
+.select_box{overflow:hidden;height:18px;}
+select{color:#666;border:1px solid #dcdcdc;vertical-align:bottom;clip:rect(2 80 20 2);margin:-2px;_height:26px;*height:26px;height:22px;line-height:26px;}
+textarea{border:1px solid #dcdcdc;padding:0 4px;}
+.input{color:#666;border:1px solid #dcdcdc;height:26px;line-height:26px;padding:0 4px;}
+.orange_btn{width:79px;height:28px;line-height:28px;font-weight:bold;background:url(../images/fin_btn.gif) no-repeat;color:#fff;}
+.width220{width:220px;}
+.width150{width:150px;}
+.width100{width:100px;}
+.width120{width:120px;}
