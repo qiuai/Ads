@@ -273,7 +273,7 @@ class AdPlanAction extends CommonAction{
 		if(!$this->AdPlan->create()){
 			
 			//echo $this->AdPlan->getError();
-			$this->error($this->AdPlan->getError(),$this->actionName.'/add');			
+			$this->error($this->AdPlan->getError(),C('SITE_URL')."?m=".$this->actionName.'&a=add');			
 		}else{
 			
 			
