@@ -15,37 +15,6 @@
  */
 class PublicAction extends CommonAction {
 	/**
-	 * 检测用户是否登录
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-25 上午10:10:26
-	 */
-	public function checkUser(){
-	
-	}
-	/**
-	 * 用户登录
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-25 上午10:10:51
-	 */
-	public function login() {
-        if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
-            $this->display();
-        }else{
-            $this->redirect('Index/index');
-        }
-    }
-	/**
-	 * 用户登出
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-11-25 上午10:11:13
-	 */
-	public function logout(){
-	
-	}
-	/**
 	 * 用户注册
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
