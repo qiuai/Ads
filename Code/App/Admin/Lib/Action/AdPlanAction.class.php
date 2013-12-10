@@ -98,15 +98,12 @@ class AdPlanAction extends CommonAction{
 		if($this->AdPlan->save($_POST)){
 			
 			// 审核成功调转到列表页面
-			$this->success('审核成功',$this->actionName.'/index');
+			$this->success('审核成功',C('SITE_URL')."?m=".$this->actionName.'&a=index');
 		}else{
 			
 			// 审核失败跳转到审核的页面
-			$this->error('审核失败',$this->actionName.'/plan_verify');
-			
-		}
-		
-		
+			$this->error('审核失败',C('SITE_URL')."?m=".$this->actionName.'&a=plan_verify');			
+		}				
 	}
 	
 	/**
@@ -293,16 +290,16 @@ class AdPlanAction extends CommonAction{
 				}else{
 				
 					// 提示图片上传失败
-					$this->error("图片上传失败".$info['message'],$this->actionName.'/add');
+					$this->error("图片上传失败".$info['message'],C('SITE_URL')."?m=".$this->actionName.'&a=add');
 				}
 			}
 			
 			//  往数据库中添加
 			if($this->AdPlan->add()){
 							
-				$this->success('数据添加成功',$this->actionName.'/index');
+				$this->success('数据添加成功',C('SITE_URL')."?m=".$this->actionName.'&a=index');
 			}else{
-				$this->error("数据添加失败",$this->actionName.'/add');
+				$this->error("数据添加失败",C('SITE_URL')."?m=".$this->actionName.'&a=add');
 			}
 
 		}
