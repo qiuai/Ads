@@ -1,0 +1,928 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns ="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>phpadu</title>
+    <link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/reset.css" />
+    <link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/stylea.css" />
+    <link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/newstyle.css" />
+	<link href="http://adu.phpad.cn/static/css/default/styleaw.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="http://adu.phpad.cn/static/js/default/commona.js"></script>
+    
+</head>
+<body>
+<div class="index_header">
+		<div class="header_info">
+			<a href="" class="logo" alt="PHPAD广告联盟">PHPAD广告联盟</a>
+			<div class="top_nav">
+			    <div class="fl" style="height:20px;margin-right:5px;"></div>
+ 			</div>
+		</div>
+		<div id="nav">
+			<div class="overall">
+				<ul id="add">
+                                     
+						<li 
+                        >
+					        <a href="/index.php?m=index" title="首页">首页</a>
+				         </li>
+						                 
+						<li 
+                        >
+					        <a href="/index.php?m=web" title="网站主">网站主</a>
+				         </li>
+						                 
+						<li 
+                        >
+					        <a href="/index.php?m=adv" title="广告主">广告主</a>
+				         </li>
+						                 
+						<li 
+                        >
+					        <a href="/index.php?m=scoremall" title="积分商城">积分商城</a>
+				         </li>
+						                 
+						<li 
+                        >
+					        <a href="/index.php?m=notice&a=notice_list&category_id=4" title="消息中心">消息中心</a>
+				         </li>
+										</ul>
+
+			</div>
+		</div>
+	</div><script type="text/javascript">
+	//促销商品鼠标经过出现橙色边框
+	$(document).ready(function() {
+		showtabs($("#index_login"))
+		showtabs($("#index_act"))
+
+		$(".sales_con dl").hover(function() {
+			$(this).addClass("dl_hover")
+		})
+		$(".sales_con dl").mouseleave(function() {
+			$(this).removeClass("dl_hover")
+		})
+	});
+</script>
+<script type="text/javascript">
+	//首页促销7页广告图
+	$(function() {
+		var len = $(".adv_num_nav li").length;
+		var index = 0;
+		var adTimer;
+		$(".adv_num_nav li").mouseover(function() {
+			index = $(".adv_num_nav li").index(this);
+			showImg(index);
+		}).eq(0).mouseover();
+		//滑入 停止动画，滑出开始动画.
+		$('#adv_show').hover(function() {
+			clearInterval(adTimer);
+		}, function() {
+			adTimer = setInterval(function() {
+				showImg(index)
+				index++;
+				if (index == len) {
+					index = 0;
+				}
+			}, 4000);
+		}).trigger("mouseleave");
+	})
+	// 通过控制top ，来显示不同的幻灯片
+	function showImg(index) {
+		var adHeight = $("#adv_show").height();
+		$(".adv_pic").stop(true, false).animate({
+			top : -adHeight * index
+		}, 1000);
+		$(".adv_num_nav li").removeClass("on").eq(index).addClass("on");
+	}
+
+	//网站主登录
+	function dologin_web(){
+		var fm = document.getElementById('siterform');
+		var username = fm.username.value;
+		var password = fm.password.value;
+		if(username == ""){
+			$('#check_web_username').html('用户名不能为空');
+		}else if(password == ""){
+			$('#check_web_password').html('密码不能为空');
+		}else{
+			$("#siterform").submit();
+		}
+	}
+
+	//广告主登录
+	function dologin_adv(){
+		var fm2 = document.getElementById('siterform2');
+		var username = fm2.username.value;
+		var password = fm2.password.value;
+		if(username == ""){
+			$('#check_adv_username').html('用户名不能为空');
+		}else if(password == ""){
+			$('#check_adv_password').html('密码不能为空');
+		}else{
+			$("#siterform2").submit();
+		}
+	}
+</script>
+
+
+
+<div class="clearfix">
+	<!--登陆注册-->
+	<div class="throughbar">
+		
+		<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/slideimg.js"></script>
+		<div class="banner fl">
+        	<div id="J_SlidePlayer_510" class="tb-slide">
+              <ul class="img-box" style="top: 0px;">
+              <li><a href="http://www.google.com" target="_blank"><img src="http://duomai.com/uploads/2013-07-01/51d0f27bc53c0.jpg" alt="flash1" border="0" width="690" height="270"></a></li><li><a href="http://www.google.com" target="_blank"><img src="http://duomai.com/uploads/2013-07-01/51d0f27bc53c0.jpg" alt="flash2" border="0" width="690" height="270"></a></li>              </ul>
+             </div>
+            <script type="text/javascript">
+    			$("#J_SlidePlayer_510").slideImg({
+                    speed: "normal",
+                    timer: 3000
+                });
+			</script>
+        </div>
+        
+		<div class="login" id="index_login">
+			<ul class="tabs">
+				<li class="selected">网站主登陆</li>
+				<li>广告主登录</li>
+			</ul>
+			<div class="clear"></div>
+			<!--网站主登陆  -->
+			<div class="tabs_con" style="display: block;">
+				<form action="SITE_URL?m=Public&a=login" method="post" id="siterform">
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr height="52" >
+								<th>用户名:&nbsp;</th>
+								<td align="left">
+									<input type="text" name="username" id="username" class="input_text" value="web">
+									<span style="color:red" id="check_web_username"></span>
+								</td>
+							</tr>
+							<tr height="53">
+								<th>密&nbsp;&nbsp;&nbsp;&nbsp;码:</th>
+								<td align="left">
+									<input type="password" class="input_text" id="password" name="password" value="123456">
+									<span style="color:red" id="check_web_password"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td align="left">
+									<label>
+										<input type="checkbox" name="weeklogin" id="weeklogin">
+										一周内自动登录
+									</label>
+									<a href="http://adu.phpad.cn/index.php?m=user&a=forget_pwd&" class="f999">忘记密码?</a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">
+									<a class="login_btn" href="javascript:dologin_web()">立即登录</a>
+								</td>
+							</tr>
+					</table>
+				</form>
+				<div class="reg_btn">
+					<a href="SITE_URL?m=Public&a=register">10秒钟免费注册</a>
+					<!--<a style="float:left;margin-left:45px;width:50px;" href="http://adu.phpad.cn/index.php?m=user&a=register_code&">邀请注册</a>-->
+				</div>
+			</div>
+			
+			
+			<!--广告主登录  -->
+			<div class="tabs_con" style="display: none;">
+					<form action="http://adu.phpad.cn/index.php?m=user&a=dologin&" method="post" id="siterform2">
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr height="52" >
+								<th>用户名:&nbsp;</th>
+								<td align="left">
+									<input type="text" name="username" id="username" class="input_text" value="adv">
+									<span style="color:red" id="check_adv_username"></span>
+								</td>
+							</tr>
+							<tr height="53">
+								<th>密&nbsp;&nbsp;&nbsp;&nbsp;码:</th>
+								<td align="left">
+									<input type="password" class="input_text" id="password" name="password" value="123456">
+									<span style="color:red" id="check_adv_password"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td align="left">
+									<label>
+										<input type="checkbox" name="weeklogin" id="weeklogin">
+										一周内自动登录
+									</label>
+									<a href="http://adu.phpad.cn/index.php?m=user&a=forget_pwd&" class="f999">忘记密码?</a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">
+									<a class="login_btn" href="javascript:dologin_adv()">立即登录</a>
+								</td>
+							</tr>
+					</table>
+				</form>
+				<div class="reg_btn">
+					<a href="http://adu.phpad.cn/index.php?m=user&a=register&">10秒钟免费注册</a>
+					<!-- <a style="float:left;margin-left:45px;width:50px;" href="http://adu.phpad.cn/index.php?m=user&a=register_code&">邀请注册</a> -->
+				</div>					
+            </div>
+			<!--圆角底部-->
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+
+<div class="clearfix">
+	<!--公告、咨询和详情-->
+		<div class="throughbar news">
+		<div class="news_box">
+			<h3>
+				<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=8">更多&gt;&gt;</a>
+				全部公告
+			</h3>
+			<ul>
+			  
+			    <li>
+					<em class="orange_bg">1</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=53">
+						<font color="red">					&nbsp;&nbsp;〖广告主〗广告投放之后可以进行修改吗					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="orange_bg">2</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=52">
+						<font color="red">					&nbsp;&nbsp;〖广告主〗联盟有哪些广告类型					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="orange_bg">3</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=51">
+						<font color="red">					&nbsp;&nbsp;联盟于12月8号满10元日付更新为满50元日付					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">4</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=50">
+						<font color="red">					&nbsp;&nbsp;获取广告代码的时候，请选智能代码					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">5</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=49">
+						<font color="red">					&nbsp;&nbsp;关于联盟网站模版错位					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">6</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=48">
+						<font color="red">					&nbsp;&nbsp;联盟新上线50%高提成CPS广告					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+					    </ul>
+		</div>
+		<div class="news_box">
+			<h3>
+				<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=9">更多&gt;&gt;</a>
+				网站主公告
+			</h3>
+            <ul>
+			  
+			    <li>
+					<em class="orange_bg">1</em> 
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=51">
+						<font color="red">					&nbsp;&nbsp;联盟于12月8号满10元日付更新为满50元日付					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="orange_bg">2</em> 
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=50">
+						<font color="red">					&nbsp;&nbsp;获取广告代码的时候，请选智能代码					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="orange_bg">3</em> 
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=49">
+						<font color="red">					&nbsp;&nbsp;关于联盟网站模版错位					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">4</em> 
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=45">
+						<font color="red">					&nbsp;&nbsp;网站主注意：网站被删除说明					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">5</em> 
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=9">
+						<font color="red">					&nbsp;&nbsp;”专栏“的制作					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">6</em> 
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=7">
+						<font color="red">					&nbsp;&nbsp;27号佣金已经发放完毕					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+					    </ul>
+		</div>
+		<div class="news_box last">
+			<h3>
+				<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=10">更多&gt;&gt;</a>
+				广告主公告
+			</h3>
+             <ul>
+			  
+			    <li>
+					<em class="orange_bg">1</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=53">
+						<font color="red">					&nbsp;&nbsp;〖广告主〗广告投放之后可以进行修改吗					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="orange_bg">2</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=52">
+						<font color="red">					&nbsp;&nbsp;〖广告主〗联盟有哪些广告类型					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="orange_bg">3</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=48">
+						<font color="red">					&nbsp;&nbsp;联盟新上线50%高提成CPS广告					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">4</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=44">
+						<font color="red">					&nbsp;&nbsp;富媒体右下角CPV广告代码暂停两天					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">5</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=37">
+						<font color="red">					&nbsp;&nbsp;排版方法					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+			  
+			    <li>
+					<em class="blue_bg">6</em>
+										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=26">
+						<font color="red">					&nbsp;&nbsp;2013秋季服饰7折上新满249返50					</font>					</a>
+					<span class="fl">07-12</span>
+				</li>
+					    </ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div class="clearfix">
+	<!--活动-->
+	<div id="index_act" class="throughbar">
+		<ul class="tabs">
+			<li class="selected">推荐活动</li>
+			<li>最新活动</li>
+		</ul>
+		<div class="clear"></div>
+		<!-- 推荐活动-->
+		<div class="tabs_con" style="display: block;">
+		
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=88">
+    						<img src="ad/plan/88/13758410672727.jpg" width="150" height="53" alt="yougou cps">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=88">
+    														yougou cps													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：全部商品14.5% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=120">
+    						<img src="ad/plan/20/13839071896193.jpg" width="150" height="53" alt="step_plan4">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=120">
+    														step_plan4													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：最高3.5% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=108">
+    						<img src="ad/plan/8/13839058871026.jpg" width="150" height="53" alt="step_plan2">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=108">
+    														step_plan2													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：最高15% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=102">
+    						<img src="ad/plan/2/13782672422870.jpg" width="150" height="53" alt="admin plan test1">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=102">
+    														admin plan test1													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：0.8% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=101">
+    						<img src="ad/plan/1/13782680953605.jpg" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=101">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：0.5% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=100">
+    						<img src="ad/plan/0/13782680776029.jpg" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=100">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：0.75% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=99">
+    						<img src="ad/plan/99/13778294204820.png" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=99">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：1.8% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=98">
+    						<img src="ad/plan/98/13781133296853.jpg" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=98">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：最高1.75% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=97">
+    						<img src="ad/plan/97/13777693994588.jpg" width="150" height="53" alt="test1">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=97">
+    														test1													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：1% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=96">
+    						<img src="ad/plan/96/13776764973551.jpg" width="150" height="53" alt="test">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=96">
+    														test													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：所有商品0.8% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=94">
+    						<img src="ad/plan/94/13758416452558.jpg" width="150" height="53" alt="lf cps">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=94">
+    														lf cps													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金： </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>		
+					        					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/93/13758416119268.jpg" width="150" height="53" alt="1hao cps">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														1hao cps													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金： </p>
+    				</dd>
+    			</dl>
+    		 			<div class="clear"></div>
+		</div>
+		
+		<!--最新活动  -->
+		<div class="tabs_con" style="display: none;">
+		            			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/21/13839073292565.jpg" width="150" height="53" alt="step_plan5">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														step_plan5													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：最高3.8% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/20/13839071896193.jpg" width="150" height="53" alt="step_plan4">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														step_plan4													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：最高3.5% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/8/13839058871026.jpg" width="150" height="53" alt="step_plan2">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														step_plan2													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：最高15% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/2/13782672422870.jpg" width="150" height="53" alt="admin plan test1">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														admin plan test1													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：0.8% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/1/13782680953605.jpg" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：0.5% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/0/13782680776029.jpg" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：0.75% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/99/13778294204820.png" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：1.8% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/98/13781133296853.jpg" width="150" height="53" alt="test11">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														test11													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：最高1.75% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/97/13777693994588.jpg" width="150" height="53" alt="test1">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														test1													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：1% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/96/13776764973551.jpg" width="150" height="53" alt="test">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														test													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金：所有商品0.8% </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/94/13758416452558.jpg" width="150" height="53" alt="lf cps">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														lf cps													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金： </p>
+    				</dd>
+    			</dl>
+    		    			<dl>
+    				<dt>
+    					<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    						<img src="ad/plan/93/13758416119268.jpg" width="150" height="53" alt="1hao cps">
+    					</a>
+    				</dt>
+    				<dd>
+    					<p>
+    						<a href="http://adu.phpad.cn/index.php?m=plan&a=plan_detail&plan_id=93">
+    														1hao cps													</a>
+    					</p>
+    					<p>类型：cps</p>
+    					<p style="height: 20px;overflow:hidden;">佣金： </p>
+    				</dd>
+    			</dl>
+    				    <div class="clear"></div>
+		</div>
+	</div>
+	<!--活动结束-->
+</div>
+<!--积分奖励和优惠券-->
+<div class="clearfix">
+	<div class="throughbar">
+		<div class="jf_reward">
+			<h2>
+				<span>积分奖励</span>
+			</h2>
+				<ul>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=6">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13818096182928.jpg" alt="iPhone4 16G（白）">
+						</a>
+					</li>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=1">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13818096748423.jpg" alt="联想 乐Pad A1 7英寸平板电脑">
+						</a>
+					</li>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=15">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13820634038148.jpg" alt="SSK 飚王 SFD199 K5 16G U盘">
+						</a>
+					</li>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=8">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13818095735668.jpg" alt="50元中国移动手机充值卡">
+						</a>
+					</li>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=10">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13818095417544.jpg" alt="100Q币">
+						</a>
+					</li>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=13">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13818097327364.jpg" alt="三星（SAMSUNG） WB151 数码相机">
+						</a>
+					</li>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=3">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13818096479441.jpg" alt="Midea 美的 搅拌机 BM255">
+						</a>
+					</li>
+									<li>
+						<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_detail&goods_id=5">
+							<img width="65" height="65" src="static/image/default/shop_upload/s_13818096305882.jpg" alt="iPad2 16G(黑)">
+						</a>
+					</li>
+							</ul>
+			<div class="clear"></div>
+			<p align="right">
+					<a href="http://adu.phpad.cn/index.php?m=scoremall&a=scoremall_list&">更多&gt;&gt;</a>
+			</p>
+		</div>
+		<div class="index_yhq">
+			<h2>
+				<a href="http://adu.phpad.cn/center.php?m=plan&a=plan_coupon_list" target="_blank">更多&gt;&gt;</a>
+				<span>优惠劵</span>
+			</h2>
+			<div class="index_yhq_con">
+							<dl>
+					<dt>
+						<img src="ad/plan/92/13758415307488.gif" width="110" height="39" alt="amazon cps">
+					</dt>
+					<dd>
+						<span>20无限制</span>
+					</dd>
+				</dl>	
+							<dl>
+					<dt>
+						<img src="ad/plan/91/13758414867664.gif" width="110" height="39" alt="dd cps">
+					</dt>
+					<dd>
+						<span>100-50</span>
+					</dd>
+				</dl>	
+							<dl>
+					<dt>
+						<img src="ad/plan/83/13758398711154.jpg" width="110" height="39" alt="htc cps">
+					</dt>
+					<dd>
+						<span>200-100</span>
+					</dd>
+				</dl>	
+							<dl>
+					<dt>
+						<img src="ad/plan/82/13758395845395.jpg" width="110" height="39" alt="test plan">
+					</dt>
+					<dd>
+						<span>50-10</span>
+					</dd>
+				</dl>	
+							<dl>
+					<dt>
+						<img src="ad/plan/86/13758407924097.jpg" width="110" height="39" alt="vancl cpa">
+					</dt>
+					<dd>
+						<span>100-20</span>
+					</dd>
+				</dl>	
+							<dl>
+					<dt>
+						<img src="ad/plan/85/13758406475370.jpg" width="110" height="39" alt="DHC CPS">
+					</dt>
+					<dd>
+						<span>10-5</span>
+					</dd>
+				</dl>	
+							<dl>
+					<dt>
+						<img src="ad/plan/85/13758406475370.jpg" width="110" height="39" alt="DHC CPS">
+					</dt>
+					<dd>
+						<span>300-150</span>
+					</dd>
+				</dl>	
+				
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<!--积分奖励和优惠券结束-->
+<div class="clearfix">
+</div>
+<div class="clearfix">
+</div>
+    <div class="footer">
+        <div class="overall">
+    	    <ul class="footer_nav clearfix">
+    	    	<li><a href="http://www.phpad.cn/index.php?mod=about&id=77&lid=78">关于慧舟普度</a></li>
+    	        <li>|</li>
+    	        <li><a href="http://www.phpad.cn/index.php?mod=case">客户案例</a></li>
+    	        <li>|</li>
+    	        <li><a href="http://www.phpad.cn/index.php?mod=solution&sid=94n">解决方案</a></li>
+    	        <li>|</li>
+    	        <li><a href="http://www.phpad.cn/phpad_try.php">产品体验</a></li>
+    	        <li>|</li>
+    	        <li><a href="http://www.phpad.cn/index.php?mod=product&sid=90">产品中心</a></li>
+    	    </ul>
+             <div class="tc clearfix">
+            	    	copyright phpad.cn  北京慧舟普度科技有限公司<br>
+             </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<include file="Index:header" />
+<div class="main clearfix">
+	<div class="huiyuan_change">
+    	<form action="http://adu.phpad.cn/center.php?m=ad&a=ad_save" method="post" enctype="multipart/form-data">
+		<div class="huiyuan_change_head">
+			<span>新增广告</span>
+			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
+			<div class="cb"></div>
+		</div>
+		<div class="huiyuan_change_body">
+			<table class="table_list">
+			  <tr>
+				<td class="w155"><em class="red">*</em>所属计划：</td>
+				<td class="textbox_td">
+					<select class="newsite_select" name="plan_id">
+                    <option value="86">vancl cpa</option><option value="88">yougou cps</option><option value="90">zdf cps</option><option value="92">amazon cps</option><option value="93">1hao cps</option><option value="94">lf cps</option>                    </select>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>广告标题：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="title">				
+				</td>
+			  </tr>			  
+			  <tr>
+				<td class="w155"><em class="red">*</em>展示形式：</td>
+				<td class="textbox_td">
+					<select class="newsite_select" name="show_type">
+					<optgroup label="图片广告" style="background-color:#ccc"></optgroup><option value='6' show_type='image'>960*90&nbsp;图片横幅</option>
+<option value='7' show_type='image'>200*200&nbsp;方形</option>
+<optgroup label="漂浮广告" style="background-color:#ccc"></optgroup><option value='10' show_type='pf'>50*50&nbsp;小块漂浮</option>
+<optgroup label="对联广告" style="background-color:#ccc"></optgroup><option value='11' show_type='dl'>100*400&nbsp;对联</option>
+<option value='19' show_type='dl'>50*200&nbsp;小对联</option>
+<optgroup label="文本广告" style="background-color:#ccc"></optgroup><option value='20' show_type='txt'>240*60&nbsp;首页文字横幅</option>
+<optgroup label="右下角悬浮广告" style="background-color:#ccc"></optgroup><option value='21' show_type='yxj'>300*300&nbsp;右下角视窗</option>
+<optgroup label="弹窗广告" style="background-color:#ccc"></optgroup><option value='22' show_type='pop'>50*50&nbsp;弹窗</option>
+<option value='39' show_type='image'>100*100&nbsp;小图块</option>
+                    </select>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>目标网址：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="jump_url" value="http://" style="width:400px" />	
+				</td>
+			  </tr>
+			  <tbody id="file">	
+			  <tr>
+				<td class="w155"><em class="red">*</em>图片/FLASH：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="file" name="content" />
+				</td>
+			  </tr>			  			  		  
+			  </tbody>
+			  <tbody id="text" style="display:none">	
+			  <tr>
+				<td class="w155"><em class="red">*</em>文字内容：</td>
+				<td class="textbox_td">
+					<textarea rows="5" cols="80" name="content" style="margin:5px"></textarea>
+				</td>
+			  </tr>			  			  		  
+			  </tbody>
+		</table>
+		</div>
+		<div class="huiyuan_change_foot">
+			<input class="confirm_btn" type="submit" name="dosubmit" value=" ">
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);" value=" ">
+		</div>
+       </form>
+	</div>
+</div>
+<script>
+$("select[name='show_type']").change(
+		function(){
+			var show_type = $(this).find("option:selected").attr("show_type");
+			if (show_type == 'txt')
+			{
+				$("#file").hide();
+				$("#text").show();
+			}
+			else
+			{
+				$("#text").hide();
+				$("#file").show();
+			}		
+		}
+);
+</script>
+<include file="Index:footer" />
