@@ -117,6 +117,6 @@ class ZoneWebAction extends CommonAction {
 		}else{
 			$zone 	= $zo->query('update zhts_zone set status =0 where id='.$id);
 		}
-		$this	->success('状态修改成功','ZoneWeb/index');
+		$this	->success('状态修改成功','SITE_URL/?m=ZoneWeb&a=index');
 	}
 }
