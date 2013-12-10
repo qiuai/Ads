@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><style>
+.require {
+	color:red;
+	font-size:18px
+}
+</style>
+</head>
+<body>
+<div class="main">
+   <div class="body_title">计划审核</div>
+		<div class="listmain">
+		
+<form method="post" action="SITE_URL?m=AdPlan&a=plan_verify_do">
+<input type="hidden" name="id" value="{$AdPlanInfo['id']}" />
+<table class="list" cellspacing="0">
+    <tr>
+    	<td width="130px">计划名称：</td>
+    	<td class="textbox_td">{$AdPlanInfo['plan_name']}</td>
+    </tr>
+    <tr>
+    	<td>目标网址：</td>
+    	<td class="textbox_td"><a href="{$AdPlanInfo['jump_url']}" target="_blank">{$AdPlanInfo['jump_url']}</a></td>
+    </tr>
+	<tr>
+    	<td >计划LOGO：</td>
+    	<td class="textbox_td"><img src="UPLOAD_URL/{$AdPlanInfo['plan_logo']}" width="120" height="45" /></td>
+    </tr>
+    <tr>
+		<td>行业类别：</td>
+		<td class="textbox_td">{$AdPlanInfo['name']}</td>
+	 </tr>	
+	 <tr>
+		<td>计费形式：</td>
+		<td class="textbox_td">{$AdPlanInfo['pay_type']}</td>
+	</tr>
+	<tr>
+		<td>审核方式：</td>
+		<td>{$AdPlanInfo['plan_check']}</td>
+	</tr>
+	<tr>
+		<td>结算周期：</td>
+		<td class="textbox_td">{$AdPlanInfo['clearing_form']}</td>
+	</tr>
+    <tr>
+    	<td>计划周期：</td>
+    	<td class="textbox_td">{$AdPlanInfo['start_date']} 至  {$AdPlanInfo['end_date']}</td>
+    </tr>	
+    
+    	
+		<tbody id="cpa" class="price">
+			  <tr>
+			      <td>数据返回机制：</td>
+			      <td class="textbox_td">{$AdPlanInfo['cps_data_return']}</td>
+			  </tr>
+			  <tr>
+			      <td>效果认定期：</td>
+			      <td class="textbox_td">{$AdPlanInfo['cpa_return_day']} 天</td>
+			  </tr>
+			  <tr>
+				<td>真实价格：</td>
+				<td class="textbox_td">￥{$AdPlanInfo['real_price']}</td>
+			  </tr>	
+			 <!--  <tr>
+				<td>真实价格描述：</td>
+				<td class="textbox_td">df</td>
+			  </tr>	-->
+			  <tr>
+				<td>网站主结算价格：<em class="require">*</em></td>
+				<td class="textbox_td">￥<input type="text" name="price" value="{$AdPlanInfo['price']}" /></td>
+			  </tr>	
+			  <tr>
+				<td>网站主显示价格：<em class="require">*</em></td>
+				<td class="textbox_td"><input type="text" name="price_desc" value="{$AdPlanInfo['price_desc']}"  /></td>
+			  </tr>	
+		</tbody>
+	       <tr>
+        	<td class="newsite_w155">计划介绍：</td>
+        	<td class="textbox_td">{$AdPlanInfo['description']}</td>
+          </tr>	
+</table>
+             
+
+<table align="center">
+    <tr>
+        <td colspan="2" align="center"><input type="submit" value="确认" class="button" /></td>
+    </tr>
+</table>
+</form>
+</div>
+</div>
+</body>
+</html>

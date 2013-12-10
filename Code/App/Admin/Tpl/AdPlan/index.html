@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://adu.phpad.cn/admin.php?m=plan&a=plan_add -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+<style type="text/css">
+.list td{
+	border:0px;
+}
+.td_b_m td {
+    border-bottom: 2px solid #DDDDDD;
+}
+a{
+	cursor: pointer;
+}
+.quick_operation a {
+	margin:auto 5px;
+}
+</style>
+<link href="STATIC_URL/admin/css/black.css" rel="stylesheet"><script language="javascript" src="STATIC_URL/admin/js/artDialog.js"></script>
+</head>
+<body>
+<div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div style="cursor: move; display: block;" class="aui_title"></div><a style="display: block;" class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td style="display: none;" class="aui_icon"><div style="background: none repeat scroll 0% 0% transparent;" class="aui_iconBg"></div></td><td style="width: auto; height: auto;" class="aui_main"><div style="padding: 20px 25px;" class="aui_content"></div></td></tr><tr><td colspan="2" class="aui_footer"><div style="display: none;" class="aui_buttons"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td style="cursor: se-resize;" class="aui_se"></td></tr></tbody></table></div></div>
+<div class="wrap1">
+ <div class="main">
+   <div class="body_title">广告计划列表</div>
+		<div class="listmain">
+		
+<table class="list" align="center" cellspacing="0">
+    <tbody><tr>
+        <td style="border-right:none;border-top:1px solid #ccc">
+        <form method="get">
+        <input name="m" value="plan" type="hidden">
+        <input name="keyword" type="text">
+        <select name="search_type">
+            <option selected="selected" value="plan_id">计划ID</option>
+            <option value="plan_name">计划名称</option>
+        </select>
+        <input value="查询" class="button" type="submit">
+        </form>
+        </td>
+                <td style="border-top:1px solid #ccc" align="right">
+            <input value="导出报表" class="button1" onclick="location.href='http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_export&amp;keyword=&amp;search_type=&amp;status=&amp;pay_type=&amp;uid='" type="button">
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:13px;height:40px;border-top:1px solid #ccc" colspan="2">计划状态：
+                    <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;" class="link-checked">全部</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=0&amp;pay_type=&amp;uid=" class="link_before_checked">待审核</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=1&amp;pay_type=&amp;uid=" class="link_before_checked">待投放</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=2&amp;pay_type=&amp;uid=" class="link_before_checked">投放中</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=3&amp;pay_type=&amp;uid=" class="link_before_checked">已停止</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=4&amp;pay_type=&amp;uid=" class="link_before_checked">已过期</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:13px;height:40px;border-top:1px solid #ccc" colspan="2">计费方式：
+                    <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=" class="link-checked">全部</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cps&amp;status=&amp;uid=" class="link_before_checked">CPS</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cpa&amp;status=&amp;uid=" class="link_before_checked">CPA</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cpc&amp;status=&amp;uid=" class="link_before_checked">CPC</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cpm&amp;status=&amp;uid=" class="link_before_checked">CPM</a>
+        </td>
+    </tr>
+</tbody></table>
+
+<form method="post">
+<table class="list" style="text-align:center" cellspacing="0">
+    <tbody>
+    <tr class="tb_title">
+        <td>计划LOGO</td>
+        <td>计划ID</td>
+        <td>计划名称</td>
+        <td>广告主ID</td>
+        <td>计划分类</td>
+        <td>计费方式</td>
+        <td>显示价格</td>
+        <td>真实价格</td>
+        <td>审核方式</td>
+        <td>结算方式</td>
+        <td>开始日期</td>
+        <td>结束日期</td>
+        <td>计划状态</td> 
+        <td>计算业绩</td>      
+    </tr>
+    <volist name="AdPlanInfo" id="vo" key="k" >
+    <tr <if condition="$k%2 neq 0 ">class="bgcolor3"<else /> class="bgcolor4" </if> >        <td><img src="UPLOAD_URL/{$vo['plan_logo']}" height="45" width="120"></td>
+        <td>{$vo['id']}</td>
+        <td>{$vo['plan_name']}</td>
+        <td>{$vo['uid']}</td>
+        <td>{$vo['name']}</td>
+        <td>{$vo['pay_type']}</td>
+        <td>{$vo['display']}</td>
+        <td>{$vo['real_price']}</td>
+        <td>{$vo['plan_check']}</td>
+        <td>{$vo['clearing_form']}</td>
+        <td>{$vo['start_date']}</td>
+        <td>{$vo['end_date']}</td>
+        <td><span style="color:orange">{$vo['plan_status']}</span></td>
+        <td>是</td>
+    </tr>  
+    
+    
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+{$vo['id']}).show()" onmouseout="$('#quick_'+{$vo['id']}).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_{$vo['id']}" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display: none;" id="quick_{$vo['id']}" class="quick_operation">
+					<if condition="$vo['auditflag'] eq 0">
+				    <a href="SITE_URL?m=AdPlan&a=plan_verify&id={$vo['id']}" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+					</if>					
+					<a href="SITE_URL?m=AdPlan&a=plan_detail&id={$vo['id']}" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id={$vo['id']}" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id={$vo['id']}" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate({$vo['id']})">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks({$vo['id']})">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(134)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(134)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id={$vo['id']}" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id={$vo['id']}" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(134)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>  	    
+    </volist>
+        <!-- 计划快捷操作结束 -->  
+    </tbody></table>
+</form>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共39 条记录 1/3 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=2"> 2 </a>&nbsp;&nbsp;<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=3"> 3 </a>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=3">尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+</div>
+</div>
+<div id="track_code" style="display:none;width:560px;height:240px;">
+   	<p style="margin:5px 6px;">二次点击代码：</p> 
+	<p style="margin:5px 6px;"><textarea name="ck2" id="ck2" rows="1" cols="65"></textarea></p>
+  	<p style="margin:5px 6px;">效果跟踪代码：</p> 
+	<p style="margin:5px 6px;"><textarea name="eff" id="eff" rows="1" cols="65"></textarea></p>
+	<p style="margin:15px 6px 5px;">二次点击：检测网民在点击或是弹出，到达广告页后是否有点击网页动作,简称二次点击。</p>
+	<p style="margin:5px 6px;">效果跟踪：比如跟踪广告到达页像弹出1000次是否有真实到达到广告页1000次，如弹出后统计注册量。</p>
+	<p style="margin:5px 6px;color:red;">如需要的话将以上代码发给广告商，嵌入到广告页中进行跟踪。</p>
+</div>
+<script type="text/javascript">
+function trackCode()
+{
+    art.dialog({  
+        content: document.getElementById("track_code"),    
+        title:'辅助代码',  
+        id:'withdras',
+        width:'570px',
+        height:'250px',
+        padding:'5px'
+    }); 	
+}
+
+function activate(plan_id){
+	var psub = confirm("是否确认激活？");
+    if (psub) {
+        $.post("SITE_URL?m=AdPlan&a=plan_active&", {
+            "plan_id": plan_id,
+            "status":"2",
+            "action":"active",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('提交失败');
+            }
+        });
+    }
+}
+function locks(plan_id){
+	var psub = confirm("是否确认锁定？");
+    if (psub) {
+        $.post("http://adu.phpad.cn/admin.php?m=plan&a=plan_active&", {
+            "plan_id": plan_id,
+            "status":"3",
+            "action":"active",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('提交失败');
+            }
+        });
+    }
+}
+function delete_plan(plan_id){
+	var psub = confirm("是否确认删除？");
+    if (psub) {
+        $.post("http://adu.phpad.cn/admin.php?m=plan&a=plan_active&", {
+            "plan_id": plan_id,
+            "action":"delete",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('该计划运行中，不能删除！ 如需删除，请先暂停计划');
+            }
+        });
+    }
+}
+//标记计划
+function mark_plan(plan_id){
+	var status = $('.img_'+plan_id).css('display');
+	if(status == 'none'){
+		$('.img_'+plan_id).show();
+	}else{
+		$('.img_'+plan_id).hide();
+	}
+}
+</script>
+
+</body></html>

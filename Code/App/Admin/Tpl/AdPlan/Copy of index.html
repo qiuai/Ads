@@ -1,0 +1,1272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://adu.phpad.cn/admin.php?m=plan&a=plan_add -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+<style type="text/css">
+.list td{
+	border:0px;
+}
+.td_b_m td {
+    border-bottom: 2px solid #DDDDDD;
+}
+a{
+	cursor: pointer;
+}
+.quick_operation a {
+	margin:auto 5px;
+}
+</style>
+<link href="STATIC_URL/admin/css/black.css" rel="stylesheet"><script language="javascript" src="STATIC_URL/admin/js/artDialog.js"></script>
+</head>
+<body>
+<div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div style="cursor: move; display: block;" class="aui_title"></div><a style="display: block;" class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td style="display: none;" class="aui_icon"><div style="background: none repeat scroll 0% 0% transparent;" class="aui_iconBg"></div></td><td style="width: auto; height: auto;" class="aui_main"><div style="padding: 20px 25px;" class="aui_content"></div></td></tr><tr><td colspan="2" class="aui_footer"><div style="display: none;" class="aui_buttons"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td style="cursor: se-resize;" class="aui_se"></td></tr></tbody></table></div></div>
+<div class="wrap1">
+ <div class="main">
+   <div class="body_title">广告计划列表</div>
+		<div class="listmain">
+		
+<table class="list" align="center" cellspacing="0">
+    <tbody><tr>
+        <td style="border-right:none;border-top:1px solid #ccc">
+        <form method="get">
+        <input name="m" value="plan" type="hidden">
+        <input name="keyword" type="text">
+        <select name="search_type">
+            <option selected="selected" value="plan_id">计划ID</option>
+            <option value="plan_name">计划名称</option>
+        </select>
+        <input value="查询" class="button" type="submit">
+        </form>
+        </td>
+                <td style="border-top:1px solid #ccc" align="right">
+            <input value="导出报表" class="button1" onclick="location.href='http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_export&amp;keyword=&amp;search_type=&amp;status=&amp;pay_type=&amp;uid='" type="button">
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:13px;height:40px;border-top:1px solid #ccc" colspan="2">计划状态：
+                    <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;" class="link-checked">全部</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=0&amp;pay_type=&amp;uid=" class="link_before_checked">待审核</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=1&amp;pay_type=&amp;uid=" class="link_before_checked">待投放</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=2&amp;pay_type=&amp;uid=" class="link_before_checked">投放中</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=3&amp;pay_type=&amp;uid=" class="link_before_checked">已停止</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=4&amp;pay_type=&amp;uid=" class="link_before_checked">已过期</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:13px;height:40px;border-top:1px solid #ccc" colspan="2">计费方式：
+                    <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;status=" class="link-checked">全部</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cps&amp;status=&amp;uid=" class="link_before_checked">CPS</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cpa&amp;status=&amp;uid=" class="link_before_checked">CPA</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cpc&amp;status=&amp;uid=" class="link_before_checked">CPC</a>
+            <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;pay_type=cpm&amp;status=&amp;uid=" class="link_before_checked">CPM</a>
+        </td>
+    </tr>
+</tbody></table>
+
+<form method="post">
+<table class="list" style="text-align:center" cellspacing="0">
+    <tbody><tr class="tb_title">
+        <td>计划LOGO</td>
+        <td>计划ID</td>
+        <td>计划名称</td>
+        <td>广告主ID</td>
+        <td>计划分类</td>
+        <td>计费方式</td>
+        <td>显示价格</td>
+        <td>真实价格</td>
+        <td>审核方式</td>
+        <td>结算方式</td>
+        <td>开始日期</td>
+        <td>结束日期</td>
+        <td>计划状态</td> 
+        <td>计算业绩</td>      
+    </tr>
+    <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/13861482434968.htm" height="45" width="120"></td>
+        <td>134</td>
+        <td>xtmall-uat</td>
+        <td>600043</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td></td>
+        <td>5%</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-12-04</td>
+        <td>2014-01-31</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+134).show()" onmouseout="$('#quick_'+134).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_134" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display: none;" id="quick_134" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=134" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=134" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=134" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=134" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(134)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(134)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(134)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(134)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=134" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=134" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(134)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor4">        <td><img src="STATIC_URL/admin/images/13861227846532.htm" height="45" width="120"></td>
+        <td>133</td>
+        <td>cpc test</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cpc</td>
+        <td></td>
+        <td>￥0.3</td>
+        <td>无需审核</td>
+        <td>月结</td>
+        <td>2013-12-04</td>
+        <td>0000-00-00</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+133).show()" onmouseout="$('#quick_'+133).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_133" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display: none;" id="quick_133" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=133" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=133" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=133" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=133" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(133)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(133)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(133)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(133)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=133" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=133" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(133)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/13858748746239.jpg" height="45" width="120"></td>
+        <td>132</td>
+        <td>一号店</td>
+        <td>600043</td>
+        <td>手机/数码/家电</td>
+        <td>cps</td>
+        <td></td>
+        <td>1.00%-2.00</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-12-01</td>
+        <td>2014-10-22</td>
+        <td><span style="color:red">暂停/停止</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+132).show()" onmouseout="$('#quick_'+132).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_132" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display: none;" id="quick_132" class="quick_operation">
+				    					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=132" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=132" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=132" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(132)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(132)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(132)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(132)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=132" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=132" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(132)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor4">        <td><img src="STATIC_URL/admin/images/13858136639366.jpg" height="45" width="120"></td>
+        <td>131</td>
+        <td>sdfsfsdfdsf</td>
+        <td>600043</td>
+        <td>综合商城</td>
+        <td>cpa</td>
+        <td></td>
+        <td>df</td>
+        <td>自动审核</td>
+        <td>日结</td>
+        <td>2013-11-30</td>
+        <td>0000-00-00</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+131).show()" onmouseout="$('#quick_'+131).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_131" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_131" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=131" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=131" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=131" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=131" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(131)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(131)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(131)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(131)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=131" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=131" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(131)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/a.htm" height="45" width="120"></td>
+        <td>130</td>
+        <td>sdfsfsdfdsf</td>
+        <td>600043</td>
+        <td>综合商城</td>
+        <td>cpa</td>
+        <td>每个注册1.5</td>
+        <td>df</td>
+        <td>自动审核</td>
+        <td>日结</td>
+        <td>2013-11-30</td>
+        <td>0000-00-00</td>
+        <td><span style="color:green">投放中</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+130).show()" onmouseout="$('#quick_'+130).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_130" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_130" class="quick_operation">
+				    					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=130" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=130" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=130" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(130)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(130)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(130)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(130)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=130" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=130" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(130)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor4">        <td><img src="STATIC_URL/admin/images/13858094426095.jpg" height="45" width="120"></td>
+        <td>129</td>
+        <td>jd</td>
+        <td>600043</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td></td>
+        <td>11%-333%</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-30</td>
+        <td>2013-12-30</td>
+        <td><span style="color:green">投放中</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+129).show()" onmouseout="$('#quick_'+129).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_129" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_129" class="quick_operation">
+				    					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=129" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=129" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=129" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(129)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(129)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(129)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(129)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=129" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=129" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(129)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/13857971937543.htm" height="45" width="120"></td>
+        <td>128</td>
+        <td>directional_test</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cpc</td>
+        <td>点击两毛</td>
+        <td>￥0.3</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-30</td>
+        <td>0000-00-00</td>
+        <td><span style="color:red">暂停/停止</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+128).show()" onmouseout="$('#quick_'+128).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_128" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_128" class="quick_operation">
+				    					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=128" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=128" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=128" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(128)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(128)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(128)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(128)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=128" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=128" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(128)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor4">        <td><img src="STATIC_URL/admin/images/a_002.htm" height="45" width="120"></td>
+        <td>127</td>
+        <td>directional_test</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cpc</td>
+        <td></td>
+        <td>￥0.3</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-30</td>
+        <td>0000-00-00</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+127).show()" onmouseout="$('#quick_'+127).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_127" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_127" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=127" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=127" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=127" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=127" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(127)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(127)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(127)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(127)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=127" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=127" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(127)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/13854574716171.htm" height="45" width="120"></td>
+        <td>122</td>
+        <td>test12</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td></td>
+        <td>1.00%</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-26</td>
+        <td>0000-00-00</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+122).show()" onmouseout="$('#quick_'+122).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_122" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_122" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=122" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=122" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=122" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=122" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(122)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(122)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(122)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(122)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=122" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=122" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(122)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor4">        <td><img src="STATIC_URL/admin/images/13839073292565.jpg" height="45" width="120"></td>
+        <td>121</td>
+        <td>step_plan5</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td>最高3.8%</td>
+        <td>1.00%-2.00</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-08</td>
+        <td>0000-00-00</td>
+        <td><span style="color:green">投放中</span></td>
+        <td>否</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+121).show()" onmouseout="$('#quick_'+121).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_121" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_121" class="quick_operation">
+				    					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=121" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=121" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=121" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(121)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(121)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(121)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(121)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=121" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=121" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(121)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/13839071896193.jpg" height="45" width="120"></td>
+        <td>120</td>
+        <td>step_plan4</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td>最高3.5%</td>
+        <td>2.00%-4.00</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-08</td>
+        <td>0000-00-00</td>
+        <td><span style="color:green">投放中</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+120).show()" onmouseout="$('#quick_'+120).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_120" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_120" class="quick_operation">
+				    					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=120" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=120" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=120" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(120)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(120)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(120)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(120)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=120" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=120" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(120)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor4">        <td><img src="STATIC_URL/admin/images/13839070751736.jpg" height="45" width="120"></td>
+        <td>119</td>
+        <td>step_plan3</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td></td>
+        <td>6.00%</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-08</td>
+        <td>0000-00-00</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+119).show()" onmouseout="$('#quick_'+119).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_119" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_119" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=119" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=119" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=119" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=119" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(119)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(119)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(119)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(119)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=119" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=119" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(119)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/13839058871026.jpg" height="45" width="120"></td>
+        <td>108</td>
+        <td>step_plan2</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td>最高15%</td>
+        <td>10.00%-20.</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-08</td>
+        <td>0000-00-00</td>
+        <td><span style="color:green">投放中</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+108).show()" onmouseout="$('#quick_'+108).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_108" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_108" class="quick_operation">
+				    					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=108" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=108" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=108" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(108)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(108)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(108)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(108)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=108" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=108" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(108)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor4">        <td><img src="STATIC_URL/admin/images/13839052993550.jpg" height="45" width="120"></td>
+        <td>107</td>
+        <td>step_plan1</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td></td>
+        <td>5.00%</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-08</td>
+        <td>0000-00-00</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+107).show()" onmouseout="$('#quick_'+107).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_107" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_107" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=107" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=107" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=107" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=107" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(107)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(107)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(107)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(107)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=107" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=107" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(107)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       <tr class="bgcolor3">        <td><img src="STATIC_URL/admin/images/13839048404958.jpg" height="45" width="120"></td>
+        <td>106</td>
+        <td>step_plan</td>
+        <td>1</td>
+        <td>综合商城</td>
+        <td>cps</td>
+        <td></td>
+        <td>5%</td>
+        <td>自动审核</td>
+        <td>月结</td>
+        <td>2013-11-08</td>
+        <td>0000-00-00</td>
+        <td><span style="color:orange">待审核</span></td>
+        <td>是</td>
+    </tr>
+        <!-- 计划快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_'+106).show()" onmouseout="$('#quick_'+106).hide()">
+         	<td>
+				&nbsp;
+				<img src="STATIC_URL/admin/images/ico-bj.jpg" alt="标记" style="display:none" class="img_106" align="middle">
+			</td>
+			<td colspan="13" style="text-align:left;">
+				<span style="display:none" id="quick_106" class="quick_operation">
+				    					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_verify&amp;plan_id=106" title="审核计划" style="color: red">
+						审核计划
+					</a>
+					|
+										
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_detail&amp;plan_id=106" title="查看计划">
+						查看
+					</a>
+					|					
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_edit&amp;plan_id=106" title="编辑计划">
+						编辑
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id=106" title="编辑计划">
+						高级设置
+					</a>					
+					|
+					<a title="激活计划" onclick="activate(106)">
+						激活
+					</a>
+					|
+					<a title="暂停计划" onclick="locks(106)">
+						暂停
+					</a>					
+					|
+					<!--  					
+					<a title="删除计划" onclick="delete_plan(106)">
+						删除
+					</a>
+					|
+					<a title="标记" onclick="mark_plan(106)">
+						标记
+					</a>
+					|
+					-->
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id=106" title="新增广告">
+						新增广告
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id=106" title="查看广告">
+						查看广告
+					</a>
+				
+					<!-- 
+					|
+					<a title="获取二次点击或跟踪代码" onclick="trackCode(106)">
+						获取二次点击或跟踪代码 
+					</a> -->
+				</span>
+			</td>		
+		</tr>
+        <!-- 计划快捷操作结束 -->  
+       </tbody></table>
+</form>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共39 条记录 1/3 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=2"> 2 </a>&nbsp;&nbsp;<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=3"> 3 </a>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_list&amp;page=3">尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+</div>
+</div>
+<div id="track_code" style="display:none;width:560px;height:240px;">
+   	<p style="margin:5px 6px;">二次点击代码：</p> 
+	<p style="margin:5px 6px;"><textarea name="ck2" id="ck2" rows="1" cols="65"></textarea></p>
+  	<p style="margin:5px 6px;">效果跟踪代码：</p> 
+	<p style="margin:5px 6px;"><textarea name="eff" id="eff" rows="1" cols="65"></textarea></p>
+	<p style="margin:15px 6px 5px;">二次点击：检测网民在点击或是弹出，到达广告页后是否有点击网页动作,简称二次点击。</p>
+	<p style="margin:5px 6px;">效果跟踪：比如跟踪广告到达页像弹出1000次是否有真实到达到广告页1000次，如弹出后统计注册量。</p>
+	<p style="margin:5px 6px;color:red;">如需要的话将以上代码发给广告商，嵌入到广告页中进行跟踪。</p>
+</div>
+<script type="text/javascript">
+function trackCode()
+{
+    art.dialog({  
+        content: document.getElementById("track_code"),    
+        title:'辅助代码',  
+        id:'withdras',
+        width:'570px',
+        height:'250px',
+        padding:'5px'
+    }); 	
+}
+
+function activate(plan_id){
+	var psub = confirm("是否确认激活？");
+    if (psub) {
+        $.post("http://adu.phpad.cn/admin.php?m=plan&a=plan_active&", {
+            "plan_id": plan_id,
+            "status":"2",
+            "action":"active",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('提交失败');
+            }
+        });
+    }
+}
+function locks(plan_id){
+	var psub = confirm("是否确认锁定？");
+    if (psub) {
+        $.post("http://adu.phpad.cn/admin.php?m=plan&a=plan_active&", {
+            "plan_id": plan_id,
+            "status":"3",
+            "action":"active",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('提交失败');
+            }
+        });
+    }
+}
+function delete_plan(plan_id){
+	var psub = confirm("是否确认删除？");
+    if (psub) {
+        $.post("http://adu.phpad.cn/admin.php?m=plan&a=plan_active&", {
+            "plan_id": plan_id,
+            "action":"delete",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('该计划运行中，不能删除！ 如需删除，请先暂停计划');
+            }
+        });
+    }
+}
+//标记计划
+function mark_plan(plan_id){
+	var status = $('.img_'+plan_id).css('display');
+	if(status == 'none'){
+		$('.img_'+plan_id).show();
+	}else{
+		$('.img_'+plan_id).hide();
+	}
+}
+</script>
+
+</body></html>
