@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>修改网站分类</div>
+			<div class="listmain setting">
+				<form method="post" action="SITE_URL/?m=Web&a=editCheck">
+					<volist name="sitetype" id="vo">
+				    <input type="hidden" name="code_id" value="{$vo.id}" />
+					<table align="center" cellspacing="0" class="list">
+						<tr>
+							<td>分类名称：</td>
+							<td><input type="text" name="code_name_zh" size="56px" value="{$vo.name}" class="textbox"/><div class="onShow">请填写正确的分类名称，分类名称不能为空</div></td>
+						</tr>
+						<tr>
+							<td>英文名称：</td>
+							<td><input type="text" name="code_value" size="56px" value="{$vo.ename}" class="textbox"/><div class="onShow">请填写正确的英文名称，英文名称必须为字母</div></td>
+						</tr>
+					    <tr>
+							<td>排序：</td>
+							<td><input type="text" name="sort" value="{$vo.sort}" class="textbox"/><div class="onShow">填写的排序内容必须为数字</div></td>
+					    </tr>
+					    <tr>
+							<td>是否显示：</td>
+							<td>
+							    <input type="radio" name="status" value="0" <if condition="$status eq 0">checked="checked"</if> /> 显示
+							    <input type="radio" name="status" value="1" <if condition="$status eq 1">checked="checked"</if> /> 不显示
+							</td>
+						</tr>
+					</table>
+					</volist>
+					<input class="confirm_btn" type="submit" value="" />
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);" />
+				</form>
+			</div>
+		</div>
+		</div>
+</body>
+</html>

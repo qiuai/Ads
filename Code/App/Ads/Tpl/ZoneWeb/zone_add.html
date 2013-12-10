@@ -13,7 +13,7 @@
 </script>
 <div class="main clearfix">
 	<div class="huiyuan_change">
-    	<form id="zone_add" action="http://adu.phpad.cn/center.php?m=zone&a=zone_add_do" method="post">
+    	<form id="zone_add" action="SITE_URL/?m=ZoneWeb&a=addCheck" method="post">
 		<div class="huiyuan_change_head">
 			<span>新建代码位</span>
 			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
@@ -32,7 +32,9 @@
 				<td class="w155"><em class="red">*</em>所属站点：</td>
 				<td class="textbox_td">
 				    <select name="site_id">
-					<option value="31">www.51tao.com</option><option value="19">www.52fl.com</option><option value="33">www.etao.com</option><option value="34">www.aifanxian.com</option><option value="26">www.zenmeyang.com</option><option value="35">www.qfanqie.com</option><option value="37">www.test.com</option>		
+						<volist name="site" id="list">
+						<option value="{$list.id}">{$list.domain}</option>
+						</volist>
 					</select>
 				</td>
 			  </tr>
@@ -40,26 +42,32 @@
 				<td class="w155"><em class="red">*</em>计费类型：</td>
 				<td class="textbox_td">
 					<select name="pay_type">
-					                    	<option value="cps">cps</option>
-                                        	<option value="cpa">cpa</option>
-                                        	<option value="cpc">cpc</option>
-                                        	<option value="cpm">cpm</option>
-                                        </select>		
+						<option value="1">cps</option>
+						<option value="2">cpa</option>
+						<option value="3">cpc</option>
+						<option value="4">cpm</option>
+					</select>			
 				</td>
 			  </tr>
 			  <tr>
 				<td class="w155"><em class="red">*</em>代码位尺寸：</td>
 				<td class="textbox_td">
-				    <select class="newsite_select" name="show_type">
-					<optgroup label="图片广告" style="background-color:#ccc"></optgroup><option value='6' show_type='image'>960*90&nbsp;图片横幅</option>
-<option value='7' show_type='image'>200*200&nbsp;方形</option>
-<optgroup label="漂浮广告" style="background-color:#ccc"></optgroup><option value='10' show_type='pf'>50*50&nbsp;小块漂浮</option>
-<optgroup label="对联广告" style="background-color:#ccc"></optgroup><option value='11' show_type='dl'>100*400&nbsp;对联</option>
-<option value='19' show_type='dl'>50*200&nbsp;小对联</option>
-<optgroup label="文本广告" style="background-color:#ccc"></optgroup><option value='20' show_type='txt'>240*60&nbsp;首页文字横幅</option>
-<optgroup label="右下角悬浮广告" style="background-color:#ccc"></optgroup><option value='21' show_type='yxj'>300*300&nbsp;右下角视窗</option>
-<optgroup label="弹窗广告" style="background-color:#ccc"></optgroup><option value='22' show_type='pop'>50*50&nbsp;弹窗</option>
-<option value='39' show_type='image'>100*100&nbsp;小图块</option>
+					<select class="newsite_select" name="show_type">
+						<optgroup label="图片广告" style="background-color:#ccc"></optgroup>
+							<option value='1' show_type='image'>960*90&nbsp;图片横幅</option>
+							<option value='2' show_type='image'>200*200&nbsp;方形</option>
+						<optgroup label="漂浮广告" style="background-color:#ccc"></optgroup>
+							<option value='3' show_type='pf'>50*50&nbsp;小块漂浮</option>
+						<optgroup label="对联广告" style="background-color:#ccc"></optgroup>
+							<option value='4' show_type='dl'>100*400&nbsp;对联</option>
+							<option value='5' show_type='dl'>50*200&nbsp;小对联</option>
+						<optgroup label="文本广告" style="background-color:#ccc"></optgroup>
+							<option value='6' show_type='txt'>240*60&nbsp;首页文字横幅</option>
+						<optgroup label="右下角悬浮广告" style="background-color:#ccc"></optgroup>
+							<option value='7' show_type='yxj'>300*300&nbsp;右下角视窗</option>
+						<optgroup label="弹窗广告" style="background-color:#ccc"></optgroup>
+							<option value='8' show_type='pop'>50*50&nbsp;弹窗</option>
+							<option value='9' show_type='image'>100*100&nbsp;小图块</option>
                     </select>
 				</td>
 			  </tr>
