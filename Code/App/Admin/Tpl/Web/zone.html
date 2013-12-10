@@ -58,23 +58,14 @@
 			<td><if condition="$vo.display eq 1">漂浮<elseif condition="$vo.display eq 2"/>弹窗<elseif condition="$vo.display eq 3"/>图片<elseif condition="$vo.display eq 4"/>文字</else>视窗</if></td>
 			<td>{$vo.size}</td>
 			<td>{$vo.status}</td>
-			<td><a target="_blank" href="#">编辑</a></td>
+			<td><a target="_blank" href="http://www.ads.me/web.php/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}">编辑</a></td>
 		</tr>
 		</volist>
 	</tbody>
 </table>
 </form>
 </div>
-<div class="admin_do index_page" style="text-align:center;">
-	<div class="page_bar fr">
-		<span>共18 条记录 1/1 页</span>
-		<a class="page_first" href="http://adu.phpad.cn/admin.php?m=zone&page=1">首页</a>
-		<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=zone&page=0">上一页</a>
-		<span class="current"> 1 </span>
-		<a class="page_next" href="http://adu.phpad.cn/admin.php?m=zone&page=2">下一页</a>
-		<a class="page_last" href="http://adu.phpad.cn/admin.php?m=zone&page=1">尾页</a>
-	</div>
-</div>
+<div class="admin_do index_page" style="text-align:center;">{$page}</div>
 </div>
 </body>
 </html>

@@ -18,23 +18,53 @@ class SiteWebAction extends CommonAction {
 		$this->assign("flag","site");
 	}
     public function index(){ 
-		$this->assign("title","网站列表");
-		$st 		= M("site");
-		$site 		= $st->select();
+		$this		->assign("title","网站列表");
+		$st 		= M('site');
+		import('ORG.Util.Page');
+		$count		= $st->count();
+		$Page     	= new Page($count,15);
+		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
+		$Page 		-> setConfig("first","首页");
+		$Page 		-> setConfig("last", "尾页");
+		$Page 		-> setConfig("prev","上一页");
+		$Page 		-> setConfig("next","下一页");
+		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
+		$show     	= $Page->show();
+		if($count<16){
+			$show 	= '';
+		}
+		$site     	= $st->order('id')->page($nowPage.','.$Page->listRows)->select();
+		$this		->assign('page',$show);
+		$this		->assign('count',$count);
+		$this		->assign("site",$site);
 		$stp 		= M("sitetype");
 		$sitetype   = $stp->select();
 		$this		->assign("sitetype",$sitetype);
-		$this		->assign("site",$site);
 		$this		->display();
     }
 	public function site_list(){
-		$this->assign("title","网站列表");
-		$st 		= M("site");
-		$site 		= $st->select();
+		$this		->assign("title","网站列表");
+		$st 		= M('site');
+		import('ORG.Util.Page');
+		$count		= $st->count();
+		$Page     	= new Page($count,15);
+		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
+		$Page 		-> setConfig("first","首页");
+		$Page 		-> setConfig("last", "尾页");
+		$Page 		-> setConfig("prev","上一页");
+		$Page 		-> setConfig("next","下一页");
+		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
+		$show     	= $Page->show();
+		if($count<16){
+			$show 	= '';
+		}
+		$site     	= $st->order('id')->page($nowPage.','.$Page->listRows)->select();
+		$this		->assign('page',$show);
+		$this		->assign('count',$count);
+		$this		->assign("site",$site);
 		$stp 		= M("sitetype");
 		$sitetype   = $stp->select();
 		$this		->assign("sitetype",$sitetype);
-		$this		->assign("site",$site);
 		$this		->display(index);
 	}
 	public function site_add(){
@@ -92,9 +122,24 @@ class SiteWebAction extends CommonAction {
 	public function channel_list(){
 		// 创建数据库对象
 		$ch			= M('channel');
-		$channel	= $ch->select();
-		$this->assign("channel",$channel);
-		$this->display();
+		import('ORG.Util.Page');
+		$count		= $ch->count();
+		$Page     	= new Page($count,15);
+		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
+		$Page 		-> setConfig("first","首页");
+		$Page 		-> setConfig("last", "尾页");
+		$Page 		-> setConfig("prev","上一页");
+		$Page 		-> setConfig("next","下一页");
+		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
+		$show     	= $Page->show();
+		if($count<16){
+			$show 	= '';
+		}
+		$channel    = $ch->order('id')->page($nowPage.','.$Page->listRows)->select();
+		$this		->assign('page',$show);
+		$this		->assign('count',$count);
+		$this		->assign("channel",$channel);
+		$this		->display();
 	}
 	public function channel_add(){
 		// 创建数据库对象

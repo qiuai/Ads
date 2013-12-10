@@ -15,13 +15,28 @@
  */
 class WebAction extends CommonAction {
     public function index(){
-		$st 	= M("site");
-		$site	= $st ->select();
+		$st			= M('site');
+		import('ORG.Util.Page');
+		$count		= $st->count();
+		$Page     	= new Page($count,15);
+		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
+		$Page 		-> setConfig("first","首页");
+		$Page 		-> setConfig("last", "尾页");
+		$Page 		-> setConfig("prev","上一页");
+		$Page 		-> setConfig("next","下一页");
+		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
+		$show     	= $Page->show();
+		if($count<16){
+			$show 	= '';
+		}
+		$site     	= $st->order('id')->page($nowPage.','.$Page->listRows)->select();
+		$this		->assign('page',$show);
+		$this		->assign('count',$count);
+		$this		->assign("site",$site);
 		$stp 		= M("sitetype");
 		$sitetype   = $stp->where("id =".$site[0]['type'])->select();
-		$this		->assign("sitetype",$sitetype[0]['name']);
-		$this->assign("site",$site);
-		$this->display();
+		$this		->assign("sitetype",$sitetype[0]['name']);	
+		$this		->display();
 	}
 	public function header(){
 		$this->display();
@@ -57,7 +72,7 @@ class WebAction extends CommonAction {
 		$sitetype   = $stp->where("id =".$site[0]['type'])->select();
 		$this		->assign("sitetype",$sitetype[0]['name']);
 		$this		->assign("site",$site);
-		$this->display(index);
+		$this		->display(index);
 	}
 	public function site_delete(){
 		$id		= $_GET["site_id"];
@@ -104,10 +119,25 @@ class WebAction extends CommonAction {
 	}
 	public function zone(){
 		// 创建数据库对象
-		$zone = M('zone');
-		$zone = $zone ->order("id asc")->select();
-		$this->assign("zone",$zone);
-		$this->display();
+		$zo 		= M('zone');
+		import('ORG.Util.Page');
+		$count		= $zo->count();
+		$Page     	= new Page($count,15);
+		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
+		$Page 		-> setConfig("first","首页");
+		$Page 		-> setConfig("last", "尾页");
+		$Page 		-> setConfig("prev","上一页");
+		$Page 		-> setConfig("next","下一页");
+		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
+		$show     	= $Page->show();
+		if($count<16){
+			$show 	= '';
+		}
+		$zone     	= $zo->order('id')->page($nowPage.','.$Page->listRows)->select();
+		$this		->assign('page',$show);
+		$this		->assign('count',$count);
+		$this		->assign("zone",$zone);
+		$this		->display();
 	}
 	public function addCheck(){
 		// 创建数据库对象
