@@ -1,0 +1,97 @@
+<include file="Index:headerWeb" />
+<style>
+.website_manage table{
+	width:980px;
+}
+.website_manage_head {
+    background: #eee;
+    border:1px solid #ccc;
+    height: 24px;
+    padding: 7px 10px 0;
+}
+</style>
+<div class="main clearfix">    
+		<div class="website_manage">
+			<div class="website_manage_head">
+				<span>网站管理</span>
+				<div class="add_newsite fr">
+					<em class="add">+</em>
+					<a href="SITE_URL/?m=SiteWeb&a=site_add">添加新网站</a>
+				</div>
+				<div class="cb"></div>
+			</div>
+			<div class="website_manage_body">
+				<table class="table_list">
+					<tbody>
+						<tr class="color_td">
+							<td>网站名称</td>
+							<td>网站ID</td>
+							<td>网站URL</td>
+							<td>网站类别</td>
+							<td>网站状态</td>
+							<td>操作</td>
+						</tr>
+						<volist name="site" id="vo">
+						<tr>
+							<td>{$vo.sitename}</td>
+							<td>{$vo.id}</td>
+							<td>{$vo.domain}</td>
+							<td>{$vo.type}</td>
+							<td><em <if condition="$vo.status eq 0">style="color:gray"<elseif condition="$vo.status eq 1"/>style="color:red"<elseif condition="$vo.status eq 2"/>style="color:green"<else />style="color:orange"</if>><if condition="$vo.status eq 0">未验证<elseif condition="$vo.status eq 1"/>审核中<elseif condition="$vo.status eq 2"/>正常<elseif condition="$vo.status eq 3"/>锁定<else />拒绝</if></em></td>   <td><a href="SITE_URL/?m=SiteWeb&a=site_edit&site_id={$vo.id}" class="blue">修改</a>&nbsp;|&nbsp;<a href="SITE_URL/?m=SiteWeb&a=site_delete&site_id={$vo.id}" class="red" onclick="return confirm('确认删除网站？');">删除</a>
+							</td>
+						</tr>
+						</volist>
+					</tbody>
+				</table>
+			</div>
+		</div>
+</div>
+<div id="verify_site" style="display:none">
+<p>验证码：<input type="text" name="verify_code" value="" style="width:300px;height:25px"></p>
+<p style="margin:10px 0">第一步：创建名为<span id="verify_code_span"></span>.html 的空文件，内容为空</p>
+<p style="margin:10px 0">第二步：将此HTML文件上传到该网站根目录下</p>
+<p style="margin:10px 0">第三步：点击“确定验证”后等待验证结果</p>
+<p><button onclick="verifyConfirm()">确认验证</button></p>
+<p id="msg" style="color:red"></p>
+</div>
+<script>
+var site_id_global;
+function siteVerify(site_id){  
+	$("#msg").html("");
+	site_id_global = site_id;
+    $.getJSON("http://adu.phpad.cn/center.php?m=site&a=site_verify", {site_id:site_id}, function(data){
+        if(data.status == 1)
+        {
+            $("input[name='verify_code']").val(data.data.code);
+            $("#verify_code_span").html(data.data.code);
+        }
+        else
+        {
+        	$("#msg").html(data.msg);
+        }
+
+        });
+
+    art.dialog({  
+        content: document.getElementById("verify_site"),    
+        title:'网站验证',  
+    }); 
+} 
+
+function verifyConfirm(){
+	$("#msg").html("<div class='aui_loading'></div>");
+    $.getJSON("http://adu.phpad.cn/center.php?m=site&a=site_verify_do", {site_id:site_id_global}, function(data){
+	    if(data.status == 1)
+	    {
+	        $("#msg").html(data.msg);
+	        location.reload();
+	    }
+	    else
+	    {
+	    	$("#msg").html(data.msg);
+	    }
+	   });	
+}
+
+</script>
+<include file="Index:footer" />

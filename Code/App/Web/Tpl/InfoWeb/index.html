@@ -1,0 +1,79 @@
+<include file="Index:headerWeb" />
+<div class="main clearfix">
+	<div class="sidebar fr">
+    	<div class="text_box clearfix">
+        	<h3>小贴士</h3>
+            <ul>
+            	<li class="nobb">
+                	<h4>1.个人与法人的区别？</h4>
+                    <p>用户信息中的个人/法人用来表明您的属性。如果您是个人身份，则请选择个人。如果您是以公司身份来注册，则请选择法人。对于法人身份的用户，支付佣金时需要提供盖有公章的发票。</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="main_left">
+    	<div class="huiyuan_xinxi gray_box">
+        	<div class="gb_t">
+            	<div class="gb_tr">
+					<h3 class="fl">会员信息</h3>
+					<div class="xiugai_xinxi fr">
+						<a href="http://adu.phpad.cn/center.php?m=profile&a=profile_edit">修改会员信息</a>
+					</div>
+					<div class="cb"></div>
+				</div>
+            </div>
+            <div class="gb_m">
+				<table border="0">
+				  <tbody><tr>
+					<td><b>用户名：</b><span>web&nbsp;&nbsp;(用户ID：300020)</span></td>
+					<td><b>电话：</b><span>123456</span></td>
+				  </tr>
+				  <tr>
+					<td><b>密码：</b><span>****** </span><a class="orange" href="http://adu.phpad.cn/center.php?m=profile&a=profile_password">修改密码</a></td>
+					<td><b>手机：</b><span>13838143800</span></td>
+				  </tr>
+				  <tr>
+					<td><b>个人/法人</b>：<span>个人</span></td>
+					<td><b>QQ：</b><span>123456789</span></td>
+				  </tr>
+				  <tr>
+					<td><b>姓名：</b><span>李四</span></td>
+					<td><b>旺旺：</b><span></span></td>
+				  </tr>
+				  <tr>
+					<td><b>身份证号：</b><span></span></td>					
+					<td><b>是否接受邮件：<span>是</span></td>
+				  </tr>
+				</tbody></table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<script>
+function subscribe(){
+    $.ajax({
+        type: "GET",
+        url: "?m=siter&a=subscribe",
+        cache: false,
+        dataType: "json",
+        success: callback
+    });
+}
+
+function callback(data) {
+    var tcbar = $('#subscribe');
+    try {
+        if(data == 1)
+        {
+            tcbar.html('是').removeClass('red').addClass('green');
+        }
+        else
+        {
+            tcbar.html('否').removeClass('green').addClass('red');
+        }
+    } catch (e) {alert(e)}
+}
+</script>
+<include file="Index:footer" />
