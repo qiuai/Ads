@@ -14,7 +14,11 @@
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
 class IndexAction extends CommonAction {
-    public function index(){ 
+	function _initialize(){
+		$this->assign("flag","index");
+	}
+    public function index(){
+		$this->assign("title","网站主-首页");
 		$this->display();
     }
 }
