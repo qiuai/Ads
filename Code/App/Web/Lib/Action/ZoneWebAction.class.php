@@ -83,9 +83,9 @@ class ZoneWebAction extends CommonAction {
 		// 往数据库中添加
 		$flag = $zone->add();
 		if($flag){
-			$this->success('数据添加成功','/?m=ZoneWeb&a=zone_list');
+			$this->success('数据添加成功','SITE_URL/web.php/?m=ZoneWeb&a=zone_list');
 		}else{
-			$this->error("数据添加失败",'/?m=ZoneWeb&a=zone_add');
+			$this->error("数据添加失败",'SITE_URL/web.php/?m=ZoneWeb&a=zone_add');
 		}
 	}
 	public function zone_edit(){
@@ -106,17 +106,20 @@ class ZoneWebAction extends CommonAction {
 		$zone['description']= $_POST["description"];
 		// 更改数据库数据
 		$site->where("id =".$_POST["site_id"])->data($st)->save();
-		$this->success('数据更改成功','SITE_URL/?m=SiteWeb&a=index');
+		$this->success('数据更改成功','SITE_URL/web.php/?m=SiteWeb&a=index');
 	}
 	public function zone_delete(){
 		$status	= $_GET["status"];
-		$id		= $_GET["site_id"];
-		$zo  	= M("zone");
+		$id		= $_GET["zone_id"];
+		$zone  	= M("zone");
 		if($status ==0){
-			$zone 	= $zo->query('update zhts_zone set status =1 where id='.$id);
+			$zone->where("id =".$id)->setField("status","1");
 		}else{
-			$zone 	= $zo->query('update zhts_zone set status =0 where id='.$id);
+			$zone->where("id =".$id)->setField("status","0");
 		}
-		$this	->success('状态修改成功','ZoneWeb/index');
+		$this	->success('状态修改成功','SITE_URL/web.php/?m=ZoneWeb&a=index');
+	}
+	public function get_code(){
+		$this->display();
 	}
 }

@@ -16,7 +16,7 @@
 				<span>代码位管理</span>
 				<div class="add_newsite fr">
 					<em class="add">+</em>
-					<a href="SITE_URL/?m=ZoneWeb&a=zone_add">新增代码位</a>
+					<a href="SITE_URL/web.php/?m=ZoneWeb&a=zone_add">新增代码位</a>
 				</div>
 				<div class="cb"></div>
 			</div>
@@ -36,17 +36,29 @@
 					<volist name="zone" id="vo">
 					<tr>
                         <td>{$vo.name}</td>
-                        <td>{$vo.cp}</td>
-                        <td>{$vo.display}</td>
+                        <td>
+							<if condition="$vo.cp eq 1">CPS
+							<elseif condition="$vo.cp eq 2"/>CPA
+							<elseif condition="$vo.cp eq 3"/>CPC
+							<elseif condition="$vo.cp eq 4"/>CPM</if>
+						</td>
+                        <td>
+							<if condition="$vo.display eq 1">图片
+							<elseif condition="$vo.display eq 2"/>漂浮
+							<elseif condition="$vo.display eq 3"/>对联
+							<elseif condition="$vo.display eq 4"/>文本
+							<elseif condition="$vo.display eq 5"/>右下角悬浮
+							<elseif condition="$vo.display eq 6"/>弹窗</if>
+						</td>
                         <td>{$vo.size}</td>
-                        <td>{$vo.intelligence}</td> 
+                        <td><if condition="$vo.intelligence eq 0">是<else />否</if></td> 
                         <td>{$vo.updatedate}</td>   
-                        <td><span class="green">{$vo.status}</span></td>
+                        <td><span <if condition="$vo.status eq 0">class="red"<else />class="green"</if>><if condition="$vo.status eq 0">停用<else />正常</if></span></td>
                         <td>                          
-                            <a href="SITE_URL/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}" class="blue">修改</a>
-                            <a href="SITE_URL/?m=ZoneWeb&a=get_code&zone_id={$vo.id}" class="blue">获取代码</a>
-                            <a href="SITE_URL/?m=ZoneWeb&a=zone_delete&status={$vo.status}&zone_id={$vo.id}" class="blue" onclick="return confirm(&#39;确认停用该代码位？&#39;);">停用</a>
-                            <a href="SITE_URL/?m=ReportWeb&a=report_all&zone_id={$vo.id}" class="blue">查看报表</a>
+                            <a href="SITE_URL/web.php/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}" class="blue">修改</a>
+                            <a href="SITE_URL/web.php/?m=ZoneWeb&a=get_code&zone_id={$vo.id}" class="blue">获取代码</a>
+                            <a href="SITE_URL/web.php/?m=ZoneWeb&a=zone_delete&status={$vo.status}&zone_id={$vo.id}" class="blue" onclick="return confirm(&#39;确认停用该代码位？&#39;);"><if condition="$vo.status eq 0">启用<else />停用</if></a>
+                            <a href="SITE_URL/web.php/?m=ReportWeb&a=report_all&zone_id={$vo.id}" class="blue">查看报表</a>
                         </td>
 					</tr>
 					</volist>
