@@ -25,7 +25,7 @@ return array(
     'RBAC_USER_TABLE'           =>  'zhts_role_user',
     'RBAC_ACCESS_TABLE'         =>  'zhts_access',
     'RBAC_NODE_TABLE'           =>  'zhts_node',
-    'SHOW_PAGE_TRACE'           =>  1//显示调试信息
+    'SHOW_PAGE_TRACE'           =>  1,//显示调试信息
 	
 	/**
 	 * 上传文件相关的配置
