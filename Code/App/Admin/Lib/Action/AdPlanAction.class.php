@@ -68,7 +68,7 @@ class AdPlanAction extends CommonAction{
 		
 		// 获取id值查询相关的数据
 		$this->AdPlan = D($this->actionName);
-		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where($_GET and 'industry.id = adplan.category_id')->find();
+		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where('industry.id = adplan.category_id and adplan.id = '.$_GET['id'])->find();
 		
 		// 处理数据
 		$AdPlanInfo = $this->dealDataOne($AdPlanInfo);
@@ -116,7 +116,7 @@ class AdPlanAction extends CommonAction{
 		
 		// 获取id值查询相关的数据
 		$this->AdPlan = D($this->actionName);
-		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where($_GET and 'industry.id = adplan.category_id')->find();
+		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where('industry.id = adplan.category_id and adplan.id = '.$_GET['id'])->find();
 		
 		// 处理数据
 		$AdPlanInfo = $this->dealDataOne($AdPlanInfo);
@@ -127,6 +127,62 @@ class AdPlanAction extends CommonAction{
 		// 显示相关的信息
 		$this->display();
 	}
+	
+	/**
+	 * 
+	 * 激活暂停计划对应的方法
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-10 下午5:23:34
+	 */
+	public function plan_active(){
+		
+		
+		$this->AdPlan = M($this->actionName);
+		
+		// 组装并修改数据库中的数据
+		$data = array();
+		// 获取提交过来的id值
+		$data['id'] = $_POST['id'];
+		$data['status'] = $_POST['status'];
+		if($this->AdPlan->save($data)){
+			echo "ok";
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * 广告计划编辑
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-10 下午5:34:29
+	 */
+	public function plan_edit(){
+		
+				
+		$this->AdPlan = M($this->actionName);
+		
+		// 查询相关的数据
+		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where('industry.id = adplan.category_id and adplan.id = '.$_GET['id'])->find();
+		if($AdPlanInfo['status']==1){
+			
+			echo "<script>";
+			echo "alert('计划正在运行中不能进行更该，如果要更改请先暂停计划');";			
+			echo "window.location.href='".C('SITE_URL')."?m=".$this->actionName."&a=index';";
+			echo "</script>";
+			
+		}else{
+			
+			// 获取行业表中的行业相关的信息
+			$industry = M('Industry');
+		
+			$industryInfo = $industry->select();
+			$this->assign("industryInfo",$industryInfo);
+			$this->assign('AdPlanInfo',$AdPlanInfo);
+			$this->display();			
+		}
+
+	}
+	
 	/**
 	 * 
 	 * 处理广告计划相关的数据
