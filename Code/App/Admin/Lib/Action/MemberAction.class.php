@@ -15,7 +15,7 @@
  */
 class MemberAction extends CommonAction {
     public function index(){
-    	$this->display();
+    	$this->memberList();
 	}
 	/**
 	 * 会员注册
@@ -49,5 +49,19 @@ class MemberAction extends CommonAction {
 				$this->error("注册失败！");
 			}
 		}
+	}
+	/**
+	 * 会员列表
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-11 下午2:36:12
+	 */
+	public function memberList(){
+		$model = M("Member");
+		$member = $model->select();
+		
+		$this->assign("location","会员列表");
+		$this->display("list");
+// 		var_dump($member);
 	}
 }
