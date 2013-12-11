@@ -133,13 +133,14 @@ class PublicAction extends Action {
         //生成认证条件
         $map            =   array();
         // 支持使用绑定帐号登录
-        $map['account']	= $_POST['account'];
+        $map['username']	= $_POST['account'];
         $map["status"]	=	array('gt',0);
         if(session('verify') != md5($_POST['verify'])) {
             $this->error('验证码错误！');
         }
         import ( '@.ORG.Util.RBAC' );
         $authInfo = RBAC::authenticate($map);
+        
         //使用用户名、密码和状态的方式进行认证
         if(false === $authInfo) {
             $this->error('帐号不存在或已禁用！');
@@ -149,10 +150,10 @@ class PublicAction extends Action {
             }
             $_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
             $_SESSION['email']	=	$authInfo['email'];
-            $_SESSION['loginUserName']		=	$authInfo['nickname'];
+            $_SESSION['loginUserName']		=	$authInfo['username'];
             $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
-            $_SESSION['login_count']	=	$authInfo['login_count'];
-            if($authInfo['account']=='admin') {
+            $_SESSION['login_count']	=	$authInfo['username'];
+            if($authInfo['username']=='admin') {
                 $_SESSION['administrator']		=	true;
             }
             //保存登录信息

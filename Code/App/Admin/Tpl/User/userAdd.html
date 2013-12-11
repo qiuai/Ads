@@ -10,7 +10,7 @@
 <script>
 $(document).ready(function(){
 	$(".confirm_btn").click(function(){
-		if(!$("input[name='account']").val()){
+		if(!$("input[name='username']").val()){
 			alert("用户名不能为空！");return false;
 		}
 		if(!$("input[name='password']").val()){
@@ -44,7 +44,7 @@ $(document).ready(function(){
 		    </tr>
 		    <tr>
 		        <td>名称：</td>
-		        <td><input type="text" name="account" class="textbox"><div class="onShow">请填写正确的管理员名，管理员名不能为空</div>	</td>
+		        <td><input type="text" name="username" class="textbox"><div class="onShow">请填写正确的管理员名，管理员名不能为空</div>	</td>
 		    </tr>
 		    <tr>
 		        <td>密码：</td>

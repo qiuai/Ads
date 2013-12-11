@@ -119,6 +119,7 @@ class UserAction extends CommonAction {
 	 * @see CommonAction::insert()
 	 */
 	public function insert() {
+		
 		// 创建数据对象
 		$User	 =	 D("User");
 		if(!$User->create()) {
