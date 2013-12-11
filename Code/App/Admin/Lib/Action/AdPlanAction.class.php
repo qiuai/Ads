@@ -39,7 +39,8 @@ class AdPlanAction extends CommonAction{
 		
 		// 查询相关的数据
 		$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->field('adplan.*,industry.name')->where('industry.id = adplan.category_id')->select();
-		
+		dump($AdPlanInfo);
+		exit;
 		//dump( $this->AdPlan->getLastSql());
 // 		echo ACTION_NAME."<br>";
 // 		echo APP_NAME."<br/>";
