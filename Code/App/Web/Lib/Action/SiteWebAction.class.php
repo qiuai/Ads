@@ -42,31 +42,6 @@ class SiteWebAction extends CommonAction {
 		$this		->assign("sitetype",$sitetype);
 		$this		->display();
     }
-	public function site_list(){
-		$this		->assign("title","网站列表");
-		$st 		= M('site');
-		import('ORG.Util.Page');
-		$count		= $st->count();
-		$Page     	= new Page($count,15);
-		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
-		$Page 		-> setConfig("first","首页");
-		$Page 		-> setConfig("last", "尾页");
-		$Page 		-> setConfig("prev","上一页");
-		$Page 		-> setConfig("next","下一页");
-		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
-		$show     	= $Page->show();
-		if($count<16){
-			$show 	= '';
-		}
-		$site     	= $st->order('id')->page($nowPage.','.$Page->listRows)->select();
-		$this		->assign('page',$show);
-		$this		->assign('count',$count);
-		$this		->assign("site",$site);
-		$stp 		= M("sitetype");
-		$sitetype   = $stp->select();
-		$this		->assign("sitetype",$sitetype);
-		$this		->display(index);
-	}
 	public function site_add(){
 		$this->assign("title","新增网站");
 		$this->display();

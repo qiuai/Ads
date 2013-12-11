@@ -39,28 +39,6 @@ class ZoneWebAction extends CommonAction {
 		$this		->assign("zone",$zone);
 		$this		->display();
     }
-	public function zone_list(){
-		$this		->assign("title","代码位管理");
-		$zo 		= M('zone');
-		import('ORG.Util.Page');
-		$count		= $zo->count();
-		$Page     	= new Page($count,15);
-		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
-		$Page 		-> setConfig("first","首页");
-		$Page 		-> setConfig("last", "尾页");
-		$Page 		-> setConfig("prev","上一页");
-		$Page 		-> setConfig("next","下一页");
-		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
-		$show     	= $Page->show();
-		if($count<16){
-			$show 	= '';
-		}
-		$zone     	= $zo->order('id')->page($nowPage.','.$Page->listRows)->select();
-		$this		->assign('page',$show);
-		$this		->assign('count',$count);
-		$this		->assign("zone",$zone);
-		$this		->display(index);
-	}
 	public function zone_add(){
 		$this	->assign("title","新增代码位");
 		$st		= M('site');
