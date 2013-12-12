@@ -70,7 +70,7 @@ a{
 
     <Volist name="list" id="vo">
     <tr class="bgcolor3">        
-    	<td>{$vo.uid}</td>
+    	<td>{$vo.id}</td>
         <td>{$vo.username}</td>
         <td><if condition="$vo.user_type eq 'web'">网站主<else/>广告主</if></td>
         <td>{$vo.truename}</td>
@@ -81,15 +81,15 @@ a{
         <td>{:date('Y-m-d',$vo['last_login_time'])}</td>
         <td>
         	<if condition="$vo.status eq 0">
-        		<span style="color:green">正常</span>
+        		{:C('MEMBER_STATUS.0')}
         	<elseif condition="$vo.status eq 1" />
-        		<span style="color:orange">待审</span>
+        		{:C('MEMBER_STATUS.1')}
         	<elseif condition="$vo.status eq 2" />
-        		<span style="color:red">锁定</span>
+        		{:C('MEMBER_STATUS.2')}
         	<elseif condition="$vo.status eq 3" />
-        		<span style="color:gray">拒绝</span>
+        		{:C('MEMBER_STATUS.3')}
         	<elseif condition="$vo.status eq 4" />
-        		<span style="color:orange">邮件未激活</span>
+        		{:C('MEMBER_STATUS.4')}
         	</if>
         	
         </td>
@@ -97,7 +97,7 @@ a{
         
         <if condition="$vo.user_type eq 'web'">
          <!-- 网站主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$('#quick_{$vo.uid}').show()" onmouseout="$('#quick_{$vo.uid}').hide()">
+         <tr class="td_b_m" onmouseover="$('#quick_{$vo.id}').show()" onmouseout="$('#quick_{$vo.id}').hide()">
 			<td>
 				&nbsp;
 				<if condition="$vo.status eq 0">
@@ -112,34 +112,34 @@ a{
 				    <img height="16" border="0" alt="{$vo.qq}" src="http://wpa.qq.com/pa?p=1:{$vo.qq}:4">
 				</a>
 				</if>
-				<span style="display: none;" id="quick_{$vo.uid}">
-					<a href="SITE_URL?m=Member&a=edit&uid={$vo.uid}" title="编辑这个会员">
+				<span style="display: none;" id="quick_{$vo.id}">
+					<a href="SITE_URL?m=Member&a=edit&id={$vo.id}" title="编辑这个会员">
 						编辑
 					</a>
 					|
-					<a title="激活这个会员" onclick="activate({$vo.uid})">
+					<a title="激活这个会员" onclick="activate({$vo.id})">
 						激活
 					</a>
 					|
-					<a title="锁定这个会员" onclick="locks({$vo.uid})">
+					<a title="锁定这个会员" onclick="locks({$vo.id})">
 						锁定
 					</a>
 					<a>
 						|
 					</a>
-					<a title="删除这个会员" onclick="delete_member({$vo.uid})">
+					<a title="删除这个会员" onclick="delete_member({$vo.id})">
 						删除
 					</a>
 					|
-					<a href="SITE_URL?m=balance&a=balance_add&uid=300020" title="手动充值" class="">
+					<a href="SITE_URL?m=balance&a=balance_add&id=300020" title="手动充值" class="">
 						增/扣款项
 					</a>
 					|
-					<a href="SITE_URL?m=report&a=report_web&uid=300020" title="查看报表">
+					<a href="SITE_URL?m=report&a=report_web&id=300020" title="查看报表">
 						报表
 					</a>
 					|
-					<a href="SITE_URL?m=site&a=site_list&uid=300020" title="查看网站">
+					<a href="SITE_URL?m=site&a=site_list&id=300020" title="查看网站">
 						网站
 					</a>
 					|
@@ -147,7 +147,7 @@ a{
 						广告位
 					</a>
 					|
-					<a href="SITE_URL?m=send_email&a=send_email_list&uid=300020" title="发送邮件">
+					<a href="SITE_URL?m=send_email&a=send_email_list&id=300020" title="发送邮件">
 						发送邮件
 					</a>
 					<!-- 
@@ -169,7 +169,7 @@ a{
 						扣量等设置
 					</a>
 					&nbsp;|&nbsp;
-					<a target="_blank" href="SITE_URL?m=member&a=member_login&uid=300020" title="进入后台">
+					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&id={$vo.id}" title="进入后台">
 						进入后台
 					</a>
 				</span>
@@ -178,7 +178,7 @@ a{
         <!-- 网站主快捷操作结束 -->
         <else />
         <!-- 广告主快捷操作开始 -->
-         <tr class="td_b_m" onmouseover="$('#quick_{$vo.uid}').show()" onmouseout="$('#quick_{$vo.uid}').hide()">
+         <tr class="td_b_m" onmouseover="$('#quick_{$vo.id}').show()" onmouseout="$('#quick_{$vo.id}').hide()">
 			<td>
 				&nbsp;
 				<if condition="$vo.status eq 0">
@@ -193,30 +193,30 @@ a{
 				    <img height="16" border="0" alt="{$vo.qq}" src="http://wpa.qq.com/pa?p=1:{$vo.qq}:4">
 				</a>
 				</if>
-				<span style="display: none;" id="quick_{$vo.uid}">
-					<a href="SITE_URL?m=Member&a=edit&uid={$vo.uid}" title="编辑这个会员">
+				<span style="display: none;" id="quick_{$vo.id}">
+					<a href="SITE_URL?m=Member&a=edit&id={$vo.id}" title="编辑这个会员">
 						编辑
 					</a>
 					|
-					<a title="激活这个会员" onclick="activate({$vo.uid})">
+					<a title="激活这个会员" onclick="activate({$vo.id})">
 						激活
 					</a>
 					|
-					<a title="锁定这个会员" onclick="locks({$vo.uid})">
+					<a title="锁定这个会员" onclick="locks({$vo.id})">
 						锁定
 					</a>
 					<a>
 						|
 					</a>
-					<a title="删除这个会员" onclick="delete_member({$vo.uid})">
+					<a title="删除这个会员" onclick="delete_member({$vo.id})">
 						删除
 					</a>
 					|
-					<a href="SITE_URL?m=balance&a=balance_add&uid=600043" title="手动充值" class="">
+					<a href="SITE_URL?m=balance&a=balance_add&id=600043" title="手动充值" class="">
 						增/扣款项
 					</a>
 					|
-					<a href="SITE_URL?m=plan&a=plan_list&uid=600043" title="广告计划">
+					<a href="SITE_URL?m=plan&a=plan_list&id=600043" title="广告计划">
 						广告计划
 					</a>
 					|
@@ -224,15 +224,15 @@ a{
 						新建计划
 					</a>
 					|
-					<a href="SITE_URL?m=webad&a=ad_list&uid=600043" title="查看广告">
+					<a href="SITE_URL?m=webad&a=ad_list&id=600043" title="查看广告">
 						广告
 					</a>
 					|
-					<a href="SITE_URL?m=send_email&a=send_email_list&uid=600043" title="发送邮件">
+					<a href="SITE_URL?m=send_email&a=send_email_list&id=600043" title="发送邮件">
 						发送邮件
 					</a>
 					&nbsp;|&nbsp;
-					<a target="_blank" href="SITE_URL?m=member&a=member_login&uid=600043" title="进入后台">
+					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&id={$vo.id} title="进入后台">
 						进入后台
 					</a>
 				</span>

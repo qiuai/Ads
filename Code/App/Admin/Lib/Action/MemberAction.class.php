@@ -122,9 +122,73 @@ class MemberAction extends CommonAction {
 	 */
 	public function _before_edit(){
 		$model = M("member_detail");
-		$where['uid'] = $_REQUEST['uid'];
+		$where['uid'] = $_REQUEST['id'];
 		$vo = $model->where($where)->find();
 		$this->assign('bank', $vo);
+	}
+	/**
+	 * 更新会员信息
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-12 下午4:05:22
+	 */
+	public function update(){
+		$model = M("Member");
+		$_POST['password'] = pwdHash($_POST['password']);
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+		// 更新数据
+        $list = $model->save();
+        if (false !== $list) {
+	        $model = M("member_detail");
+	        $condition['uid']		= $_POST['id'];
+	        $data['id_card']	= $_POST['id_card'];
+	        $data['bank_name']	= $_POST['bank_name'];
+	        $data['card_author']= $_POST['card_author'];
+	        $data['card_number']= $_POST['card_number'];
+	        // 更新数据
+	        $list = $model->where($condition)->save($data);
+	        if (false !== $list) {
+	            //成功提示
+	            $this->success('编辑成功!');
+	        } else {
+	            //错误提示
+	            $this->error('编辑失败!');
+	        }
+        } else {
+            //错误提示
+            $this->error('编辑失败!');
+        }
+	}
+	/**
+	 * 进入会员中心
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-12 下午5:32:59
+	 */
+	public function loginMemberHome(){
+		$model = M("Member");
+		$id = $_REQUEST['id'];
+		$member = $model->find($id);
+		
+		//生成认证条件
+		$map            =   array();
+		// 支持使用绑定帐号登录
+		$map['username']	= $member['username'];
+		$map["status"]	=	array('gt',0);
+		import ( '@.ORG.Util.RBAC' );
+		$authInfo = RBAC::authenticate($map);
+		$_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
+		$_SESSION['email']	=	$authInfo['email'];
+		$_SESSION['loginUserName']		=	$authInfo['username'];
+		$_SESSION['login_count']	=	$authInfo['username'];
+		
+		if($member['user_type'] == "web"){
+			redirect(C('WEB_URL'));
+		}else{
+			redirect(C('ADV	_URL'));
+		}
 	}
 	/**
 	 * 获取会员数据

@@ -14,8 +14,8 @@
 <div class="body_title">修改会员信息</div>
 <div class="listmain setting">	
 
-<form method="post" action="http://adu.phpad.cn/admin.php?m=member&a=member_save&">
-<input type="hidden" name="uid" value="600054">
+<form method="post" action="SITE_URL?m=Member&a=update">
+<input type="hidden" name="id" value="{$vo.id}">
 <table class="list" cellspacing="0">
     <tbody><tr class="title1">
 	   <td colspan="4">基本信息</td>
@@ -23,8 +23,8 @@
 	<tr>
 	    <td width="14%">会员姓名:</td>
 	    <td width="36%">{$vo.username}</td>
-        <td width="14%">会员UID:</td>
-        <td width="36%">{$vo.uid}</td>
+        <td width="14%">会员ID:</td>
+        <td width="36%">{$vo.id}</td>
     </tr>
     <tr>
         <td>会员状态:</td><td>
@@ -35,15 +35,15 @@
         	当前状态：
         <span style="color:orange">
         	<if condition="$vo.status eq 0">
-        		<span style="color:green">正常</span>
+        		{:C('MEMBER_STATUS.0')}
         	<elseif condition="$vo.status eq 1" />
-        		<span style="color:orange">待审</span>
+        		{:C('MEMBER_STATUS.1')}
         	<elseif condition="$vo.status eq 2" />
-        		<span style="color:red">锁定</span>
+        		{:C('MEMBER_STATUS.2')}
         	<elseif condition="$vo.status eq 3" />
-        		<span style="color:gray">拒绝</span>
+        		{:C('MEMBER_STATUS.3')}
         	<elseif condition="$vo.status eq 4" />
-        		<span style="color:orange">邮件未激活</span>
+        		{:C('MEMBER_STATUS.4')}
         	</if>
         </span>        
         </td>
@@ -77,8 +77,8 @@
     <tr>
         <td>帐户类型:</td><td>
         <select name="bank_name">
-                <option value="icbc">工商银行</option>
-                <option value="cmb">招商银行</option>
+                <option value="icbc" <if condition="$bank.bank_name eq icbc">selected="selected"</if>>{:C('BANK_TYPE.ICBC')}</option>
+                <option value="cmb" <if condition="$bank.bank_name eq cmb">selected="selected"</if>>{:C('BANK_TYPE.CMB')}</option>
                 </select>
         </td>
         <td>身份证:</td><td colspan="3"><input type="text" name="id_card" id="id_card" value="{$bank.id_card}"><div class="onShow">请填写真实的身份证</div></td>
