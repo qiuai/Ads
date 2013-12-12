@@ -31,7 +31,7 @@ class PublicAction extends CommonAction {
 	 */
 	public function userAdd(){
 		if($this->isPost()){
-			$re = R("Admin://Member/userAdd");
+			$re = R("Admin://Member/memberAdd");
 		}
 	}
 	/**
