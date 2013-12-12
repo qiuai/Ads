@@ -25,11 +25,6 @@ return array(
     'RBAC_USER_TABLE'           =>  'zhts_role_user',
     'RBAC_ACCESS_TABLE'         =>  'zhts_access',
     'RBAC_NODE_TABLE'           =>  'zhts_node',
-    'SHOW_PAGE_TRACE'           =>  1,//显示调试信息
-	
-	/**
-	 * 上传文件相关的配置
-	 */
-	'UPLOAD_MAX_SIZE'			=> 2000000,// 上传文件的最大值
+    'SHOW_PAGE_TRACE'           =>  1,//显示调试信息	
 );
 ?>
