@@ -51,16 +51,16 @@ $(function(){
             	<form id="zone_edit" action="SITE_URL/?m=ZoneWeb&a=editCheck" method="post">
 				<volist name="zone" id="vo">
             	<input type="hidden" name="zone_id" value="{$vo.id}">
-            	<input type="hidden" name="pay_type" value="{$vo.cp}">
+            	<input type="hidden" name="pay_type" value="{$vo.pay_type}">
             	<input type="hidden" name="show_type" value="{$vo.display}">
             	<input type="hidden" name="width" value="{$vo.width}">
             	<input type="hidden" name="height" value="{$vo.height}">
                   <tr>
                     <td colspan="6" class="notb">
-                    	<table border="0" class="noborder" style="margin:15px;">                         
+                    	<table border="0" class="noborder" style="margin:15px;">                    
                           <tr>
                             <td>计费类型：</td>   
-                            <td><if condition="$vo.cp eq 1">CPS<elseif condition="$vo.cp eq 2"/>CPA<elseif condition="$vo.cp eq 3"/>CPC<else />CPM</if></td>                         
+                            <td><if condition="$vo.pay_type eq 1">CPS<elseif condition="$vo.pay_type eq 2"/>CPA<elseif condition="$vo.pay_type eq 3"/>CPC<else />CPM</if></td>                         
                           </tr>
 						  <volist name="adsize" id="list">
                           <tr>

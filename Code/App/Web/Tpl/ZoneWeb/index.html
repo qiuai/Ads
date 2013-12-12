@@ -37,10 +37,10 @@
 					<tr>
                         <td>{$vo.name}</td>
                         <td>
-							<if condition="$vo.cp eq 1">CPS
-							<elseif condition="$vo.cp eq 2"/>CPA
-							<elseif condition="$vo.cp eq 3"/>CPC
-							<elseif condition="$vo.cp eq 4"/>CPM</if>
+							<if condition="$vo.pay_type eq 1">CPS
+							<elseif condition="$vo.pay_type eq 2"/>CPA
+							<elseif condition="$vo.pay_type eq 3"/>CPC
+							<elseif condition="$vo.pay_type eq 4"/>CPM</if>
 						</td>
                         <td>
 							<if condition="$vo.display eq 1">图片
