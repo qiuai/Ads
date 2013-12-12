@@ -25,19 +25,20 @@
     	<div class="main_nav clearfix">
         <div class="mn_l fl"></div>
     	<ul class="fl" id="nav_list">
-			<li <if condition="$flag eq 'index'">class="selected"</if>><a href="/web.php?m=Index&a=index">首页</a></li>
-			<li <if condition="$flag eq 'plan'">class="selected"</if>><a href="/web.php?m=PlanWeb&a=index">广告计划</a></li>
-			<li <if condition="$flag eq 'report'">class="selected"</if>><a href="/web.php?m=ReportWeb&a=index">查看报表</a></li>
-			<li <if condition="$flag eq 'site'">class="selected"</if>><a href="/web.php?m=SiteWeb&a=index">网站管理</a></li>
-			<li <if condition="$flag eq 'zone'">class="selected"</if>><a href="/web.php?m=ZoneWeb&a=index">代码位管理</a></li>
-			<li <if condition="$flag eq 'money'">class="selected"</if>><a href="/web.php?m=MoneyWeb&a=index">财务管理</a></li>
-			<li <if condition="$flag eq 'info'">class="selected"</if>><a href="/web.php?m=InfoWeb&a=index">个人信息</a></li>
+		
+			<li <if condition="$flag eq 'Index'">class="selected"</if>><a href="/web.php?m=Index&a=index">首页</a></li>
+			<li <if condition="$flag eq 'PlanWeb'">class="selected"</if>><a href="/web.php?m=PlanWeb&a=index">广告计划</a></li>
+			<li <if condition="$flag eq 'ReportWeb'">class="selected"</if>><a href="/web.php?m=ReportWeb&a=index">查看报表</a></li>
+			<li <if condition="$flag eq 'SiteWeb'">class="selected"</if>><a href="/web.php?m=SiteWeb&a=index">网站管理</a></li>
+			<li <if condition="$flag eq 'ZoneWeb'">class="selected"</if>><a href="/web.php?m=ZoneWeb&a=index">代码位管理</a></li>
+			<li <if condition="$flag eq 'MoneyWeb'">class="selected"</if>><a href="/web.php?m=MoneyWeb&a=index">财务管理</a></li>
+			<li <if condition="$flag eq 'InfoWeb'">class="selected"</if>><a href="/web.php?m=InfoWeb&a=index">个人信息</a></li>
 			<li ><a href="#"></a></li>
 		</ul>
         <div class="mn_r fr"></div>
         </div>
         <!--二级导航-->
-		<if condition="$flag eq 'plan'">
+		<if condition="$flag eq 'PlanWeb'">
 		<!--计划管理-->
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
@@ -49,7 +50,7 @@
             </ul>
             <div class="sn_r fr"></div>
         </div>
-		<elseif condition="$flag eq 'report'"/>
+		<elseif condition="$flag eq 'ReportWeb'"/>
 		<!--广告管理-->
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
@@ -62,7 +63,7 @@
             </ul>
             <div class="sn_r fr"></div>
         </div>
-		<elseif condition="$flag eq 'site'"/>
+		<elseif condition="$flag eq 'SiteWeb'"/>
 		<!--查看网站-->
 		 <div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
@@ -74,7 +75,7 @@
             </ul>
             <div class="sn_r fr"></div>
         </div>
-		<elseif condition="$flag eq 'zone'"/>
+		<elseif condition="$flag eq 'ZoneWeb'"/>
 		<!--投放申请-->
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
@@ -84,7 +85,7 @@
             </ul>
             <div class="sn_r fr"></div>
         </div>
-		<elseif condition="$flag eq 'money'"/>
+		<elseif condition="$flag eq 'MoneyWeb'"/>
 		<!--财务管理-->
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
@@ -96,7 +97,7 @@
             </ul>
             <div class="sn_r fr"></div>
         </div>
-		<elseif condition="$flag eq 'info'"/>
+		<elseif condition="$flag eq 'InfoWeb'"/>
 		<!--个人信息-->
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>

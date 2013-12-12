@@ -1,6 +1,6 @@
 <?php
 /**
- * 广告联盟系统  首页
+ * 广告联盟系统  网站管理
  * 
  * @copyright (C)2012 ZHTS Inc.
  * @project project_name
@@ -14,9 +14,7 @@
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
 class SiteWebAction extends CommonAction {
-	function _initialize(){
-		$this->assign("flag","site");
-	}
+	//  网站列表
     public function index(){ 
 		$this		->assign("title","网站列表");
 		$st 		= M('site');
@@ -30,6 +28,7 @@ class SiteWebAction extends CommonAction {
 		$Page 		-> setConfig("next","下一页");
 		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
 		$show     	= $Page->show();
+		// 一页时分页不显示
 		if($count<16){
 			$show 	= '';
 		}
@@ -37,11 +36,13 @@ class SiteWebAction extends CommonAction {
 		$this		->assign('page',$show);
 		$this		->assign('count',$count);
 		$this		->assign("site",$site);
+		// 创建网站分类对象
 		$stp 		= M("sitetype");
 		$sitetype   = $stp->select();
 		$this		->assign("sitetype",$sitetype);
 		$this		->display();
     }
+	// 新增网站
 	public function site_add(){
 		$this->assign("title","新增网站");
 		$this->display();
@@ -68,8 +69,9 @@ class SiteWebAction extends CommonAction {
 			$this->error("数据添加失败",'SITE_URL/?m=SiteWeb&a=site_add');
 		}
 	}
+	// 编辑网站
 	public function site_edit(){
-		$id 				= $_GET["site_id"];//dump($id);exit;
+		$id 				= (int)($_GET["site_id"]);//dump($id);exit;
 		// 创建数据库对象
 		$site 				= M('site');
 		$siteOld			= $site->where("id =".$id)->select();
@@ -88,12 +90,14 @@ class SiteWebAction extends CommonAction {
 		$site->where("id =".$_POST["site_id"])->data($st)->save();
 		$this->success('数据更改成功','SITE_URL/?m=SiteWeb&a=index');
 	}
+	// 删除网站
 	public function site_delete(){
-		$id		= $_GET["site_id"];
+		$id		= (int)($_GET["site_id"]);
 		$site 	= M("site");
 		$site	->where("id =".$id)->delete();
 		$this	->success('删除成功','SITE_URL/?m=SiteWeb&a=index');
 	}
+	// 频道列表
 	public function channel_list(){
 		// 创建数据库对象
 		$ch			= M('channel');
@@ -116,6 +120,7 @@ class SiteWebAction extends CommonAction {
 		$this		->assign("channel",$channel);
 		$this		->display();
 	}
+	// 新增频道
 	public function channel_add(){
 		// 创建数据库对象
 		$st 	= M('site');
@@ -139,8 +144,9 @@ class SiteWebAction extends CommonAction {
 			$this->error("数据添加失败",'SITE_URL/?m=SiteWeb&a=channel_add');
 		}
 	}
+	// 编辑频道
 	public function channel_edit(){
-		$id 		= $_GET["channel_id"];
+		$id 		= (int)($_GET["channel_id"]);
 		// 创建数据库对象
 		$ch 		= M('channel');
 		$channel	= $ch->where("id=".$id)->select();
@@ -164,8 +170,9 @@ class SiteWebAction extends CommonAction {
 		$ch		-> where("id=".$_POST["id"])->data($channel)->save();
 		$this	-> success('更改成功','SITE_URL/?m=SiteWeb&a=channel_list');
 	}
+	// 删除频道
 	public function channel_delete(){
-		$id		= $_GET["channel_id"];
+		$id		= (int)($_GET["channel_id"]);
 		$ch 	= M("channel");
 		$ch		->where("id =".$id)->delete();
 		$this	->success('删除成功','SITE_URL/?m=SiteWeb&a=channel_list');
