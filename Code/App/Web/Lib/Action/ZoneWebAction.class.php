@@ -1,6 +1,6 @@
 <?php
 /**
- * 广告联盟系统  首页
+ * 广告联盟系统  代码为管理
  * 
  * @copyright (C)2012 ZHTS Inc.
  * @project project_name
@@ -20,6 +20,7 @@ class ZoneWebAction extends CommonAction {
     public function index(){ 
 		$this		->assign("title","代码位管理");
 		$zo 		= M('zone');
+		// 分页
 		import('ORG.Util.Page');
 		$count		= $zo->count();
 		$Page     	= new Page($count,15);
@@ -30,13 +31,14 @@ class ZoneWebAction extends CommonAction {
 		$Page 		-> setConfig("next","下一页");
 		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
 		$show     	= $Page->show();
+		// 第一页的分页不显示
 		if($count<16){
 			$show 	= '';
 		}
 		$zone     	= $zo->order('id')->page($nowPage.','.$Page->listRows)->select();
 		$as			= M('adsize');
 		foreach($zone as $key=>$val){
-			$zone[$key]["updatedate"]=date("Y-m-d",$val["updatedate"]);
+			$zone[$key]["refresh_time"]=date("Y-m-d",$val["refresh_time"]);
 			// 连表查询代码位尺寸展示类型
 			$adsize	= $as->where("id=".$val['size'])->select();
 			foreach($adsize as $keys=>$value){
@@ -50,6 +52,7 @@ class ZoneWebAction extends CommonAction {
 		$this		->assign("zone",$zone);
 		$this		->display();
     }
+	// 添加代码位
 	public function zone_add(){
 		$this	->assign("title","新增代码位");
 		$st		= M('site');
@@ -91,10 +94,8 @@ class ZoneWebAction extends CommonAction {
 		$zone->sid			= $_POST["site_id"];
 		$zone->cp			= $_POST["pay_type"];
 		$zone->size			= $_POST["show_type"];
-		$zone->intelligence	= 0;
-		$zone->status		= 0;
 		$zone->uid			= 320000;
-		$zone->updatedate	= time();
+		$zone->refresh_time	= time();
 		// 往数据库中添加
 		$flag = $zone->add();
 		if($flag){
@@ -103,6 +104,7 @@ class ZoneWebAction extends CommonAction {
 			$this->error("数据添加失败",'SITE_URL/?m=ZoneWeb&a=zone_add');
 		}
 	}
+	// 编辑代码位
 	public function zone_edit(){
 		$this	->assign("title","编辑代码位");
 		$id 	= $_GET["zone_id"];
@@ -147,6 +149,7 @@ class ZoneWebAction extends CommonAction {
 		$zo		->where("id =".$id)->setField("name",$name);
 		$this	->success('数据更改成功','SITE_URL/?m=ZoneWeb&a=index');
 	}
+	// 删除代码位
 	public function zone_delete(){
 		$status	= $_GET["status"];
 		$id		= $_GET["zone_id"];
@@ -158,6 +161,7 @@ class ZoneWebAction extends CommonAction {
 		}
 		$this	->success('状态修改成功','SITE_URL/?m=ZoneWeb&a=index');
 	}
+	// 获取代码
 	public function get_code(){
 		$this->display();
 	}
