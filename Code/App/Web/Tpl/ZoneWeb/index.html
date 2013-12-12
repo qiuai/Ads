@@ -52,7 +52,7 @@
 						</td>
                         <td>{$vo.width}*{$vo.height}</td>
                         <td><if condition="$vo.intelligence eq 0">是<else />否</if></td> 
-                        <td>{$vo.updatedate}</td>   
+                        <td>{$vo.refresh_time}</td>   
                         <td><span <if condition="$vo.status eq 0">class="red"<else />class="green"</if>><if condition="$vo.status eq 0">停用<else />正常</if></span></td>
                         <td>                          
                             <a href="SITE_URL/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}" class="blue">修改</a>
