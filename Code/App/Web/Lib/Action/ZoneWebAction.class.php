@@ -89,7 +89,7 @@ class ZoneWebAction extends CommonAction {
 		$zone 				= M('zone');
 		$zone->name			= $_POST["zone_name"];
 		$zone->sid			= $_POST["site_id"];
-		$zone->cp			= $_POST["pay_type"];
+		$zone->pay_type		= $_POST["pay_type"];
 		$zone->size			= $_POST["show_type"];
 		$zone->uid			= 320000;
 		$zone->refresh_time	= time();

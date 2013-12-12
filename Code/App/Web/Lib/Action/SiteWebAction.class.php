@@ -37,7 +37,7 @@ class SiteWebAction extends CommonAction {
 		$this		->assign('count',$count);
 		$this		->assign("site",$site);
 		// 创建网站分类对象
-		$stp 		= M("sitetype");
+		$stp 		= M("site_type");
 		$sitetype   = $stp->select();
 		$this		->assign("sitetype",$sitetype);
 		$this		->display();
