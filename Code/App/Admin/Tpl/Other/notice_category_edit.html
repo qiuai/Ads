@@ -10,30 +10,31 @@
 <body>
 	<div class="wrap">
 		<div class="main">
-			<div class='body_title'>新增公告类别</div>
+			<div class='body_title'>修改公告类别</div>
 			<div class="listmain setting">
-				<form id="form" method="post" action="SITE_URL/?m=Other&a=notice_category_save&" onsubmit="return false;">
+				<form id="form" method="post" action="SITE_URL/?m=Other&a=notice_category_edit_save" onsubmit="return false;">
 					<table align="center" cellspacing="0" class="list">
-					    <tr class="title1">
-							<th colspan="2">新增公告类别</th>
+						<volist name="category" id="vo">
+					    <input type="hidden" name="category_id" value="{$vo.id}" />
+						<tr class="title1">
+							<th colspan="2">修改公告类别</th>
 						</tr>
 						<tr>
 							<td>类目名称：</td>
-							<td>
-								<input type="text" name="category_name" id="category_name" size="56px" value="" />
-								<div class="onShow">填写的类目名称不能为空</div>
-							</td>
+							<td><input type="text" name="category_name" id="category_name" size="56px"
+								value="{$vo.category_name}" /><div class="onShow">填写的类目名称不能为空</div></td>
 						</tr>
 						<tr>
 							<td>父级类别：</td>
 							<td>
-								<select name="pid"><option value="0">消息中心</option></select>
+								<select name="pid"><option value="{$vo.pid}">消息中心</option></select>
 							 </td>
 						</tr>
 						<tr>
 							<td colspan="2"><input class="confirm_btn" type="submit" value="" onclick="check();"/>
 							<input class="back_btn" type="button" onclick="javascript:history.back(-1);" /></td>
 						</tr>
+						</volist>
 					</table>
 				</form>
 				<script type="text/javascript">

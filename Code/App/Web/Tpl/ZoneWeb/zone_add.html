@@ -13,7 +13,7 @@
 </script>
 <div class="main clearfix">
 	<div class="huiyuan_change">
-    	<form id="zone_add" action="SITE_URL/web.php/?m=ZoneWeb&a=addCheck" method="post">
+    	<form id="zone_add" action="SITE_URL/?m=ZoneWeb&a=addCheck" method="post">
 		<div class="huiyuan_change_head">
 			<span>新建代码位</span>
 			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
@@ -52,6 +52,7 @@
 			  <tr>
 				<td class="w155"><em class="red">*</em>代码位尺寸：</td>
 				<td class="textbox_td">
+				<!--
 					<select class="newsite_select" name="show_type">
 						<optgroup label="图片广告" style="background-color:#ccc"></optgroup>
 							<option value='1' show_type='image'>960*90&nbsp;图片横幅</option>
@@ -69,6 +70,12 @@
 							<option value='8' show_type='pop'>50*50&nbsp;弹窗</option>
 							<option value='9' show_type='image'>100*100&nbsp;小图块</option>
                     </select>
+					-->
+					<select class="newsite_select" name="show_type">
+						<volist name="adsize" id="vo">
+						<option value='{$vo.id}'>{$vo.width}*{$vo.height}&nbsp;{$vo.size_type}</option>
+						</volist>
+					</select>
 				</td>
 			  </tr>
 			</tbody>

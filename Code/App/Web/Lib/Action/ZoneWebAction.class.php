@@ -34,6 +34,17 @@ class ZoneWebAction extends CommonAction {
 			$show 	= '';
 		}
 		$zone     	= $zo->order('id')->page($nowPage.','.$Page->listRows)->select();
+		$as			= M('adsize');
+		foreach($zone as $key=>$val){
+			$zone[$key]["updatedate"]=date("Y-m-d",$val["updatedate"]);
+			// 连表查询代码位尺寸展示类型
+			$adsize	= $as->where("id=".$val['size'])->select();
+			foreach($adsize as $keys=>$value){
+				$zone[$key]['display']	=$adsize[$keys]['size_type'];
+				$zone[$key]['width']	=$adsize[$keys]['width'];
+				$zone[$key]['height']	=$adsize[$keys]['height'];
+			}
+		}
 		$this		->assign('page',$show);
 		$this		->assign('count',$count);
 		$this		->assign("zone",$zone);
@@ -44,6 +55,33 @@ class ZoneWebAction extends CommonAction {
 		$st		= M('site');
 		$site	= $st->field("id,domain")->select();
 		$this   ->assign("site",$site);
+		$ads	= M('adsize');
+		$adsize = $ads->select();
+		foreach($adsize as $key=>$val){
+			switch($val['size_type']){
+				case 1:
+					$adsize[$key]["size_type"]="图片";
+				break;
+				case 2:
+					$adsize[$key]["size_type"]="漂浮";
+				break;
+				case 3:
+					$adsize[$key]["size_type"]="对联";
+				break;
+				case 4:
+					$adsize[$key]["size_type"]="文本";
+				break;
+				case 5:
+					$adsize[$key]["size_type"]="右下角悬浮";
+				break;
+				case 6:
+					$adsize[$key]["size_type"]="弹窗";
+				break;
+				default:
+				break;
+			}
+		}
+		$this   ->assign("adsize",$adsize);
 		$this	->display();
 	}
 	public function addCheck(){
@@ -53,37 +91,6 @@ class ZoneWebAction extends CommonAction {
 		$zone->sid			= $_POST["site_id"];
 		$zone->cp			= $_POST["pay_type"];
 		$zone->size			= $_POST["show_type"];
-		switch($_POST["show_type"]){
-			case 1:
-				$zone->display	= "1";
-				break;
-			case 2:
-				$zone->display	= "1";
-				break;
-			case 3:
-				$zone->display	= "2";
-				break;
-			case 4:
-				$zone->display	= "3";
-				break;
-			case 5:
-				$zone->display	= "3";
-				break;
-			case 6:
-				$zone->display	= "4";
-				break;
-			case 7:
-				$zone->display	= "5";
-				break;
-			case 8:
-				$zone->display	= "6";
-				break;
-			case 9:
-				$zone->display	= "6";
-				break;
-			default:
-				break;
-		}
 		$zone->intelligence	= 0;
 		$zone->status		= 0;
 		$zone->uid			= 320000;
@@ -91,30 +98,54 @@ class ZoneWebAction extends CommonAction {
 		// 往数据库中添加
 		$flag = $zone->add();
 		if($flag){
-			$this->success('数据添加成功','SITE_URL/web.php/?m=ZoneWeb&a=zone_list');
+			$this->success('数据添加成功','SITE_URL/?m=ZoneWeb&a=index');
 		}else{
-			$this->error("数据添加失败",'SITE_URL/web.php/?m=ZoneWeb&a=zone_add');
+			$this->error("数据添加失败",'SITE_URL/?m=ZoneWeb&a=zone_add');
 		}
 	}
 	public function zone_edit(){
 		$this	->assign("title","编辑代码位");
 		$id 	= $_GET["zone_id"];
 		$zo  	= M("zone");
+		$ads  	= M("adsize");
 		$zone 	= $zo->where("id=".$id)->select();
+		$adsize = $ads->where("id=".$zone[0]["size"])->select();
+		foreach($adsize as $key=>$val){
+			switch($val['size_type']){
+				case 1:
+					$adsize[$key]["size_type"]="图片";
+				break;
+				case 2:
+					$adsize[$key]["size_type"]="漂浮";
+				break;
+				case 3:
+					$adsize[$key]["size_type"]="对联";
+				break;
+				case 4:
+					$adsize[$key]["size_type"]="文本";
+				break;
+				case 5:
+					$adsize[$key]["size_type"]="右下角悬浮";
+				break;
+				case 6:
+					$adsize[$key]["size_type"]="弹窗";
+				break;
+				default:
+				break;
+			}
+		}
 		$this	->assign("zone",$zone);
+		$this	->assign("adsize",$adsize);
 		$this	->display();
 	}
 	public function editCheck(){
 		// 创建数据库对象
-		$zo 	 			= M('zone');
-		$zone['id']			= $_POST["site_id"];
-		$zone['name']		= $_POST["site_name"];
-		$zone['domain']		= $_POST["site_domain"];
-		$zone['type']		= $_POST["site_type"];
-		$zone['description']= $_POST["description"];
+		$zo 	= M('zone');
+		$id		= $_POST["zone_id"];
+		$name	= $_POST["zone_name"];
 		// 更改数据库数据
-		$site->where("id =".$_POST["site_id"])->data($st)->save();
-		$this->success('数据更改成功','SITE_URL/web.php/?m=SiteWeb&a=index');
+		$zo		->where("id =".$id)->setField("name",$name);
+		$this	->success('数据更改成功','SITE_URL/?m=ZoneWeb&a=index');
 	}
 	public function zone_delete(){
 		$status	= $_GET["status"];
@@ -125,7 +156,7 @@ class ZoneWebAction extends CommonAction {
 		}else{
 			$zone->where("id =".$id)->setField("status","0");
 		}
-		$this	->success('状态修改成功','SITE_URL/web.php/?m=ZoneWeb&a=index');
+		$this	->success('状态修改成功','SITE_URL/?m=ZoneWeb&a=index');
 	}
 	public function get_code(){
 		$this->display();
