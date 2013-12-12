@@ -27,25 +27,25 @@
 			  <tbody><tr>
 				<td class="w155"><em class="red">*</em>网站名称：</td>
 				<td class="textbox_td">
-					<input id="site_name" class="newsite_textw160" type="textbox" name="site_name" value="{$vo.sitename}">		
+					<input id="site_name" class="newsite_textw160" type="textbox" name="site_name" value="{$vo.site_name}">		
 				</td>
 			  </tr>
 			  <tr>
 				<td class="w155"><em class="red">*</em>网站地址：</td>
 				<td class="textbox_td">
-					<input id="site_domain" class="textbox" type="textbox" name="site_domain" value="{$vo.domain}">				
+					<input id="site_domain" class="textbox" type="textbox" name="site_domain" value="{$vo.site_domain}">				
 				</td>
 			  </tr>
 			  <tr>
 				<td class="w155"><em class="red">*</em>网站类别：</td>
 				<td class="textbox_td">
 					<select class="newsite_select" name="site_type">
-						<option <if condition="$vo.type eq 1">selected="selected"</if> value="1">电商</option>
-						<option <if condition="$vo.type eq 2">selected="selected"</if> value="2">博客</option>
-						<option <if condition="$vo.type eq 3">selected="selected"</if> value="3">论坛</option>
-						<option <if condition="$vo.type eq 4">selected="selected"</if> value="4">新闻</option>
-						<option <if condition="$vo.type eq 5">selected="selected"</if> value="5">门户网站</option>
-						<option <if condition="$vo.type eq 6">selected="selected"</if> value="6">资讯</option>
+						<option <if condition="$vo.site_type eq 1">selected="selected"</if> value="1">电商</option>
+						<option <if condition="$vo.site_type eq 2">selected="selected"</if> value="2">博客</option>
+						<option <if condition="$vo.site_type eq 3">selected="selected"</if> value="3">论坛</option>
+						<option <if condition="$vo.site_type eq 4">selected="selected"</if> value="4">新闻</option>
+						<option <if condition="$vo.site_type eq 5">selected="selected"</if> value="5">门户网站</option>
+						<option <if condition="$vo.site_type eq 6">selected="selected"</if> value="6">资讯</option>
 					</select>
 				</td>
 			  </tr>

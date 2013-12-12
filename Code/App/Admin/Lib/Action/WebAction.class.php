@@ -33,9 +33,9 @@ class WebAction extends CommonAction {
 		$this		->assign('page',$show);
 		$this		->assign('count',$count);
 		$this		->assign("site",$site);
-		$stp 		= M("sitetype");
-		$sitetype   = $stp->where("id =".$site[0]['type'])->select();
-		$this		->assign("sitetype",$sitetype[0]['name']);	
+		$stp 		= M("site_type");
+		$sitetype   = $stp->where("id =".$site[0]['site_type'])->select();
+		$this		->assign("sitetype",$sitetype[0]['code_name_zh']);	
 		$this		->display();
 	}
 	public function header(){
@@ -58,7 +58,7 @@ class WebAction extends CommonAction {
 				$where = "id =".$content;
 			break;
 			case "site_domain":
-				$where = "domain ='".$content."'";
+				$where = "site_domain ='".$content."'";
 			break;
 			case "uid":
 				$where = "uid =".$content;
@@ -68,9 +68,9 @@ class WebAction extends CommonAction {
 		}
 		$st 		= M("site");
 		$site       = $st->where($where)->select();
-		$stp 		= M("sitetype");
-		$sitetype   = $stp->where("id =".$site[0]['type'])->select();
-		$this		->assign("sitetype",$sitetype[0]['name']);
+		$stp 		= M("site_type");
+		$sitetype   = $stp->where("id =".$site[0]['site_type'])->select();
+		$this		->assign("sitetype",$sitetype[0]['code_name_zh']);
 		$this		->assign("site",$site);
 		$this		->display(index);
 	}
@@ -81,7 +81,7 @@ class WebAction extends CommonAction {
 		$this	->success('删除成功','Web/index');
 	}
 	public function site_type(){
-		$st = M("sitetype");
+		$st = M("site_type");
 		$siteType = $st ->select();
 		$this->assign("sitetype",$siteType);
 		$this->display();
@@ -112,7 +112,7 @@ class WebAction extends CommonAction {
 	}
 	public function site_type_edit(){
 		$id = $_GET["code_id"];
-		$st = M("sitetype");
+		$st = M("site_type");
 		$siteType = $st ->where("id = ".$id)->select();
 		$this->assign("sitetype",$siteType);
 		$this->display();
@@ -141,9 +141,9 @@ class WebAction extends CommonAction {
 	}
 	public function addCheck(){
 		// 创建数据库对象
-		$siteType 			= M('sitetype');
-		$siteType->name		= $_POST["code_name_zh"];
-		$siteType->ename	= $_POST["code_value"];
+		$siteType 			= M('site_type');
+		$siteType->code_name_zh		= $_POST["code_name_zh"];
+		$siteType->code_name_en	= $_POST["code_value"];
 		$siteType->status	= $_POST["status"];
 		$siteType->sort		= $_POST["sort"];
 		// 往数据库中添加
@@ -156,10 +156,10 @@ class WebAction extends CommonAction {
 	}
 	public function editCheck(){
 		// 创建数据库对象
-		$siteType 		= M('sitetype');
+		$siteType 		= M('site_type');
 		$st['id']		= $_POST["code_id"];
-		$st['name']		= $_POST["code_name_zh"];
-		$st['ename']	= $_POST["code_value"];
+		$st['code_name_zh']		= $_POST["code_name_zh"];
+		$st['code_name_en']	= $_POST["code_value"];
 		$st['status']	= $_POST["status"];
 		$st['sort']		= $_POST["sort"];
 		// 更改数据库数据
