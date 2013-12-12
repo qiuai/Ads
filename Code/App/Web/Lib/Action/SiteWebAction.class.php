@@ -14,9 +14,6 @@
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
 class SiteWebAction extends CommonAction {
-	function _initialize(){
-		$this->assign("flag","site");
-	}
     public function index(){ 
 		$this		->assign("title","网站列表");
 		$st 		= M('site');
