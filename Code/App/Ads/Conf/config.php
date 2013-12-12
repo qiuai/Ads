@@ -1,5 +1,6 @@
 <?php
 $dbConfig			=	require ROOT_PATH . '/Conf/db.global.php';
+$systemConfig		=	require ROOT_PATH . '/Conf/config.system.php';
 $commonConfig   	=   require ROOT_PATH . '/Conf/config.global.php';
 $domainCommonConfig =   require ROOT_PATH . '/Conf/domain.php';
 $domainConfig 		=   require 'domain.php';
@@ -9,5 +10,5 @@ $array=array(
 	'TMPL_PARSE_STRING' 		=>  $domain,  // 模板常量
 );
 
-return array_merge($dbConfig, $commonConfig, $array,$domainCommonConfig,$domain);
+return array_merge($dbConfig, $commonConfig, $array, $domainCommonConfig, $domain, $systemConfig);
 ?>

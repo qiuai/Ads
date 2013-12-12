@@ -21,7 +21,11 @@ class PublicAction extends Action {
 	 * @CreateDate: 2013-11-25 上午10:10:51
 	 */
 	public function login(){
-		$this->display();
+		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
+            $this->display();
+        }else{
+            $this->redirect(C('SITE_URL'));
+        }
 	}
 	/**
 	 * 左侧菜单

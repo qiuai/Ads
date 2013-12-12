@@ -31,7 +31,114 @@ class PublicAction extends CommonAction {
 	 */
 	public function userAdd(){
 		if($this->isPost()){
-			$re = R("Admin://Member/userAdd");
+			$re = R("Admin://Member/memberAdd");
+		}
+	}
+	/**
+	 * 用户登录
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-10 下午9:35:46
+	 */
+	public function login(){
+		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
+            $this->redirect(C('SITE_URL'));
+        }else{
+            $this->redirect(C('SITE_URL'));
+        }
+	}
+	/**
+	 * 用户登出
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-10 下午9:37:02
+	 */
+	public function logout(){
+		R("Agent/logout");
+	}
+	/**
+	 * 检查登录
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-10 下午9:35:28
+	 */
+	public function checkLogin(){
+		if(empty($_POST['username'])) {
+            $info['error'] = '帐号错误！';
+            return $info;
+        }elseif (empty($_POST['password'])){
+            $info['error'] = '密码必须！';
+            return $info;
+        }
+        //生成认证条件
+        $map            =   array();
+        // 支持使用绑定帐号登录
+        $map['username']	= $_POST['username'];
+        $map["status"]	=	array('gt',0);
+        import ( '@.ORG.Util.RBAC' );
+        $authInfo = RBAC::authenticate($map);
+        
+        //使用用户名、密码和状态的方式进行认证
+        if(false === $authInfo) {
+        	$info['error'] = '帐号不存在或已禁用！';
+        	return $info;
+        }else {
+            if($authInfo['password'] != md5($_POST['password'])) {
+                $info['error'] = '密码错误！';
+                return $info;
+            }
+            $_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
+            $_SESSION['email']	=	$authInfo['email'];
+            $_SESSION['loginUserName']		=	$authInfo['username'];
+            $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
+            $_SESSION['login_count']	=	$authInfo['username'];
+            if($authInfo['username']=='admin') {
+                $_SESSION['administrator']		=	true;
+            }
+            //保存登录信息
+            $User	=	M('Member');
+            $ip		=	get_client_ip();
+            $time	=	time();
+            $data = array();
+            $data['id']	=	$authInfo['id'];
+            $data['last_login_time']	=	$time;
+            $data['login_count']	=	array('exp','login_count+1');
+            $data['last_login_ip']	=	$ip;
+            $User->save($data);
+
+            // 缓存访问权限
+            RBAC::saveAccessList();
+            
+            $info['success'] = 1;
+            return $info;
+        }
+	}
+	/**
+	 * 网站主 登录检测
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-11 下午1:22:21
+	 */
+	public function checkWeb(){
+		$info = $this->checkLogin();
+		if($info['success']){
+			redirect(C("WEB_URL"));
+		}else{
+			$this->error($info['error']);
+		}
+	}
+	/**
+	 * 广告主 登录检测
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-11 下午1:22:21
+	 */
+	public function checkAdv(){
+		$info = $this->checkLogin();
+		if($info['success']){
+			redirect(C("ADV_URL"));
+		}else{
+			$this->error($info['error']);
 		}
 	}
 	/**

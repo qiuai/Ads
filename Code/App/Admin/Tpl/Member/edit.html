@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+<div class="wrap">
+<div class="main">
+<div class="body_title">修改会员信息</div>
+<div class="listmain setting">	
+
+<form method="post" action="http://adu.phpad.cn/admin.php?m=member&a=member_save&">
+<input type="hidden" name="uid" value="600054">
+<table class="list" cellspacing="0">
+    <tbody><tr class="title1">
+	   <td colspan="4">基本信息</td>
+	</tr>
+	<tr>
+	    <td width="14%">会员姓名:</td>
+	    <td width="36%">{$vo.username}</td>
+        <td width="14%">会员UID:</td>
+        <td width="36%">{$vo.uid}</td>
+    </tr>
+    <tr>
+        <td>会员状态:</td><td>
+        <select name="user_status">
+            <option value="0">激活会员</option>
+            <option value="2">锁定会员</option>
+        </select>　　
+        	当前状态：
+        <span style="color:orange">
+        	<if condition="$vo.status eq 0">
+        		<span style="color:green">正常</span>
+        	<elseif condition="$vo.status eq 1" />
+        		<span style="color:orange">待审</span>
+        	<elseif condition="$vo.status eq 2" />
+        		<span style="color:red">锁定</span>
+        	<elseif condition="$vo.status eq 3" />
+        		<span style="color:gray">拒绝</span>
+        	<elseif condition="$vo.status eq 4" />
+        		<span style="color:orange">邮件未激活</span>
+        	</if>
+        </span>        
+        </td>
+        <td>会员密码:</td><td width="30%"><input type="text" name="password" id="password"><div class="onShow">密码为空，视为不修改密码</div></td>
+    </tr>
+
+	<tr>
+    <td colspan="4" align="center">
+    </td>
+    </tr>
+
+    <tr class="title1">
+	   <td colspan="4">联系方式</td>
+	</tr>
+    <tr>
+        <td>移动电话:</td><td><input type="text" name="mobilephone" id="mobile" value="{$vo.mobilephone}"><div class="onShow">请填写正确的移动电话号码</div></td>
+        <td>固定电话:</td><td><input type="text" name="tel" id="tel" value="{$vo.tel}"><div class="onShow">请填写正确的固定电话号码</div></td>
+    </tr>
+    <tr>
+        <td>QQ:</td><td><input type="text" name="qq" id="qq" value="{$vo.qq}"><div class="onShow">请填写正确的QQ号码</div></td>
+        <td>真实姓名:</td><td><input type="text" name="real_name" id="real_name" value="{$vo.real_name}"><div class="onShow">请填写真实姓名</div></td>
+    </tr>
+    <tr>
+    <td colspan="4" align="center">
+    </td>
+    </tr>
+    
+    <tr>
+    <th colspan="4" class="title1">银行信息</th>
+    </tr>
+    <tr>
+        <td>帐户类型:</td><td>
+        <select name="bank_name">
+                <option value="icbc">工商银行</option>
+                <option value="cmb">招商银行</option>
+                </select>
+        </td>
+        <td>身份证:</td><td colspan="3"><input type="text" name="id_card" id="id_card" value="{$bank.id_card}"><div class="onShow">请填写真实的身份证</div></td>
+    </tr>
+    <tr>
+        <td>开户名:</td><td><input type="text" name="card_author" id="card_author" value="{$bank.card_author}"><div class="onShow">请填写真实的开户名</div></td>
+        <td>帐号:</td><td><input type="text" name="card_number" id="card_number" value="{$bank.card_number}"><div class="onShow">请填写真实的帐号</div></td>
+    </tr>
+        <tr>
+    <td colspan="4">
+        <input class="confirm_btn" type="submit" value="">
+		<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+    </td>
+    </tr>
+    </tbody></table>
+    </form>      
+		
+</div>
+</div>
+</div>		
+
+</body>
+</html>
