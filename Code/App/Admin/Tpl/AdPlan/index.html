@@ -113,7 +113,7 @@ a{
 			</td>
 			<td colspan="13" style="text-align:left;">
 				<span style="display: none;" id="quick_{$vo['id']}" class="quick_operation">
-					<if condition="$vo['auditflag'] eq 0">
+					<if condition="$vo['plan_status'] eq '待审核'">
 				    <a href="SITE_URL?m=AdPlan&a=plan_verify&id={$vo['id']}" title="审核计划" style="color: red">
 						审核计划
 					</a>
@@ -200,13 +200,13 @@ function activate(id){
     if (psub) {
         $.post("SITE_URL?m=AdPlan&a=plan_active&", {
             "id":id,
-            "status":"1",
+            "plan_status":"2",
             "action":"active",
         },function(data) {
             if (data == 'ok') {
                 document.location.reload();
             } else {
-                alert('提交失败');
+                alert('提交失败或已经激活');
             }
         });
     }
@@ -216,13 +216,13 @@ function locks(plan_id){
     if (psub) {
         $.post("SITE_URL?m=AdPlan&a=plan_active&", {
             "id": plan_id,
-            "status":"0",
+            "plan_status":"3",
             "action":"active",
         },function(data) {
             if (data == 'ok') {
                 document.location.reload();
             } else {
-                alert('提交失败');
+                alert('提交失败或已经锁定');
             }
         });
     }

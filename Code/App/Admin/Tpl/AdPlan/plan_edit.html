@@ -18,8 +18,8 @@
    <div class="body_title">修改计划</div>
 		<div class="listmain">
 		
-<form method="post" action="http://adu.phpad.cn/admin.php?m=plan&a=plan_save&"  enctype="multipart/form-data">
-<input type="hidden" name="plan_id" value="138" />
+<form method="post" action="SITE_URL?m=AdPlan&a=plan_save&"  enctype="multipart/form-data">
+<input type="hidden" name="id" value="{$AdPlanInfo['id']}" />
 <table align="center" class="list" width="95%" cellspacing="0">
     <tr>
     	<td style="width:120px"><em class="red">*</em>计划名称：</td>
@@ -53,7 +53,7 @@
 	    <td class="w155"><em class="red">*</em>LOGO：</td>
 		<td class="textbox_td">
 		    <input class="newsite_textw160" type="file" name="plan_logo" />
-		    <img src="{$AdPlanInfo['plan_logo']}" width="120" height="45" title="原LOGO" /> 留空则保留原LOGO
+		    <img src="UPLOAD_URL/{$AdPlanInfo['plan_logo']}" width="120" height="45" title="原LOGO" /> 留空则保留原LOGO
 		</td>
 	</tr>	
     <tr>
@@ -130,17 +130,18 @@
 			  <tr>
 			      <td class="w155"><em class="red">*</em>数据返回机制：</td>
 			      <td class="textbox_td">
-			          <input type="radio" name="cps_data_return" value="0" onclick="returnDate1('cps')" checked="checked" />实时返回
-			          <input type="radio" name="cps_data_return" value="1" onclick="returnDate2('cps')"  />延时返回
-			          <span style="display:none" id="cps_return_date_span">
-			              延时 <input type="text" name="cps_data_return" style="width:20px" value="0" /> 天
+			          <input type="radio" name="cps_data_return" value="0" onclick="returnDate1('cps')" <if condition="$AdPlanInfo['cps_data_return'] eq 0">checked="checked"</if>  />实时返回
+			          <input type="radio" name="cps_data_return" value="{$AdPlanInfo['cps_data_return']}" onclick="returnDate2('cps')" <if condition="$AdPlanInfo['cps_data_return'] neq 0">checked="checked"</if> />延时返回
+			          
+			          <span <if condition="$AdPlanInfo['cps_data_return'] eq 0">style="display:none"</if>id="cps_return_date_span">
+			              延时 <input type="text" name="cps_data_return" style="width:20px" value="{$AdPlanInfo['cps_data_return']}" /> 天
 			          </span>
 			      </td>
 			  </tr>
 			  <tr>
 			      <td class="w155"><em class="red">*</em>效果认定期：</td>
 			      <td class="textbox_td">
-			          <input type="text" name="cps_return_day" style="width:30px" value="32" /> 天
+			          <input type="text" name="cps_return_day" style="width:30px" value="{$AdPlanInfo['cps_return_day']}" /> 天
 			          <div class="onShow">请填写正确的效果认定期，填写内容必须为数字</div>	
 			      </td>
 			  </tr>
@@ -244,7 +245,7 @@
 			  <tr>
 				<td class="newsite_w155">计划介绍：</td>
 				<td class="textbox_td">
-					<textarea rows="5" cols="50" class="site_about" name="description">sdfsdfsdf</textarea>
+					<textarea rows="5" cols="50" class="site_about" name="description">{$AdPlanInfo['description']}</textarea>
 				</td>
 			  </tr>
 			  
