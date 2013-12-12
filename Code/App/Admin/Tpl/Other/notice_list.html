@@ -21,187 +21,20 @@
         <td>是否显示</td>
         <td>操作</td>
     </tr>
+	<volist name="notice" id="vo">
     <tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=3&notice_id=1" target="_blank">联盟简介</a></td>
-        <td>admin</td>
-        <td>2013-07-15</td>
-        <td>显示</td>
+        <td style="text-align:left">
+			<a href="SITE_URL/?m=Other&a=notice_list&category_id={$vo.category_id}&notice_id={$vo.id}" target="_blank">{$vo.title}</a>
+		</td>
+        <td>{$vo.author}</td>
+        <td>{$vo.pubdate}</td>
+        <td>{$vo.is_display}</td>
         <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=1">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=1" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
+            <a href="SITE_URL/?m=Other&a=notice_edit&notice_id={$vo.id}">编辑</a>|
+            <a href="SITE_URL/?m=Other&a=notice_delete&notice_id={$vo.id}" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
         </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=9&notice_id=2" target="_blank">网站主 推广助手</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=2">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=2" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=3" target="_blank">文字广告的要求</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=3">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=3" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=0&notice_id=4" target="_blank">热烈庆祝我盟加盟网站超过10000</a></td>
-        <td>admin</td>
-        <td>2012-08-29</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=4">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=4" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=8&notice_id=5" target="_blank">联盟规则公告</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=5">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=5" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=9&notice_id=7" target="_blank">27号佣金已经发放完毕</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=7">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=7" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=8" target="_blank">服务条款的对象</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=8">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=8" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=9&notice_id=9" target="_blank">”专栏“的制作</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=9">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=9" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=11" target="_blank">【唯品会】719 大家一起来排队~</a></td>
-        <td>TEST</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=11">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=11" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=8&notice_id=31" target="_blank">联盟简介</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=31">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=31" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=23" target="_blank">网站主，广告主，推广助手</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=23">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=23" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=25" target="_blank">大量收购麦冬</a></td>
-        <td>afadf</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=25">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=25" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=26" target="_blank">2013秋季服饰7折上新满249返50</a></td>
-        <td>afadf</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=26">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=26" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=11&notice_id=32" target="_blank">27号佣金已经发放完毕</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=32">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=32" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=9&notice_id=49" target="_blank">关于联盟网站模版错位</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=49">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=49" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=9&notice_id=50" target="_blank">获取广告代码的时候，请选智能代码</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=50">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=50" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=9&notice_id=51" target="_blank">联盟于12月8号满10元日付更新为满50元日付</a></td>
-        <td>admin</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=51">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=51" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=11&notice_id=34" target="_blank">艾文礼肯定我厅“讲文明树新风”公益广告宣传工作</a></td>
-        <td>abc</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=34">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=34" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor3"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=12&notice_id=35" target="_blank">艾文礼肯定我厅“讲文明树新风”公益广告宣传工作</a></td>
-        <td>123</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=35">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=35" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr><tr class="bgcolor4"> 
-        <td style="text-align:left"><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=11&notice_id=36" target="_blank">服务条款</a></td>
-        <td>联盟</td>
-        <td>2013-07-12</td>
-        <td>显示</td>
-        <td>
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_edit&&notice_id=36">编辑</a>|
-            <a href="http://adu.phpad.cn/admin.php?m=site_content&a=notice_delete&&notice_id=36" onclick="javascript:return confirm('确定要删除吗？');">删除</a>
-        </td>
-    </tr>	
+    </tr>
+	</volist>
 </table>
 <div class="admin_do index_page" style="text-align:center;"><div class='page_bar fr'><span>共32 条记录 1/2 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/admin.php?m=site_content&a=notice_list&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/admin.php?m=site_content&a=notice_list&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a href='/admin.php?m=site_content&a=notice_list&page=2'> 2 </a>&nbsp;&nbsp;<a class='page_next' href='/admin.php?m=site_content&a=notice_list&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/admin.php?m=site_content&a=notice_list&page=2'>尾页</a>&nbsp;&nbsp;</div></div>
 </div>

@@ -63,9 +63,9 @@ class SiteWebAction extends CommonAction {
 		// 往数据库中添加
 		$flag = $site->add();
 		if($flag){
-			$this->success('数据添加成功','SITE_URL/web.php/?m=SiteWeb&a=index');
+			$this->success('数据添加成功','SITE_URL/?m=SiteWeb&a=index');
 		}else{
-			$this->error("数据添加失败",'SITE_URL/web.php/?m=SiteWeb&a=site_add');
+			$this->error("数据添加失败",'SITE_URL/?m=SiteWeb&a=site_add');
 		}
 	}
 	public function site_edit(){
@@ -86,13 +86,13 @@ class SiteWebAction extends CommonAction {
 		$st['description']	= $_POST["description"];
 		// 更改数据库数据
 		$site->where("id =".$_POST["site_id"])->data($st)->save();
-		$this->success('数据更改成功','SITE_URL/web.php/?m=SiteWeb&a=index');
+		$this->success('数据更改成功','SITE_URL/?m=SiteWeb&a=index');
 	}
 	public function site_delete(){
 		$id		= $_GET["site_id"];
 		$site 	= M("site");
 		$site	->where("id =".$id)->delete();
-		$this	->success('删除成功','SITE_URL/web.php/?m=SiteWeb&a=index');
+		$this	->success('删除成功','SITE_URL/?m=SiteWeb&a=index');
 	}
 	public function channel_list(){
 		// 创建数据库对象
@@ -134,9 +134,9 @@ class SiteWebAction extends CommonAction {
 		// 往数据库中添加
 		$flag = $channel->add();
 		if($flag){
-			$this->success('数据添加成功','SITE_URL/web.php/?m=SiteWeb&a=channel_list');
+			$this->success('数据添加成功','SITE_URL/?m=SiteWeb&a=channel_list');
 		}else{
-			$this->error("数据添加失败",'SITE_URL/web.php/?m=SiteWeb&a=channel_add');
+			$this->error("数据添加失败",'SITE_URL/?m=SiteWeb&a=channel_add');
 		}
 	}
 	public function channel_edit(){
@@ -162,12 +162,12 @@ class SiteWebAction extends CommonAction {
 		$channel['desc']		= $_POST["desc"];
 		// 往数据库中添加
 		$ch		-> where("id=".$_POST["id"])->data($channel)->save();
-		$this	-> success('更改成功','SITE_URL/web.php/?m=SiteWeb&a=channel_list');
+		$this	-> success('更改成功','SITE_URL/?m=SiteWeb&a=channel_list');
 	}
 	public function channel_delete(){
 		$id		= $_GET["channel_id"];
 		$ch 	= M("channel");
 		$ch		->where("id =".$id)->delete();
-		$this	->success('删除成功','SITE_URL/web.php/?m=SiteWeb&a=channel_list');
+		$this	->success('删除成功','SITE_URL/?m=SiteWeb&a=channel_list');
 	}
 }

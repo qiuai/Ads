@@ -48,7 +48,7 @@ $(function(){
             </div>
             <div class="gb_m">
             	<table class="table_list" width="100%" border="0" cellpadding="0" cellspacing="0">
-            	<form id="zone_edit" action="SITE_URL/web.php/?m=ZoneWeb&a=editCheck" method="post">
+            	<form id="zone_edit" action="SITE_URL/?m=ZoneWeb&a=editCheck" method="post">
 				<volist name="zone" id="vo">
             	<input type="hidden" name="zone_id" value="{$vo.id}">
             	<input type="hidden" name="pay_type" value="{$vo.cp}">
@@ -60,20 +60,23 @@ $(function(){
                     	<table border="0" class="noborder" style="margin:15px;">                         
                           <tr>
                             <td>计费类型：</td>   
-                            <td>{$vo.cp}</td>                         
+                            <td><if condition="$vo.cp eq 1">CPS<elseif condition="$vo.cp eq 2"/>CPA<elseif condition="$vo.cp eq 3"/>CPC<else />CPM</if></td>                         
                           </tr>
+						  <volist name="adsize" id="list">
                           <tr>
                             <td>展示类型：</td>   
-                            <td>{$vo.display}</td>                         
+                            <td>{$list.size_type}</td>                         
                           </tr>
                           <tr>
                             <td>代码位尺寸：</td>   
-                            <td>{$vo.width}*{$vo.height}</td>                         
+                            <td>{$list.width}*{$list.height}</td>                         
                           </tr>
+						  </volist>
                           <tr>
                             <td>代码位名称：</td>   
-                            <td><input id="zone_name" type="text" name="zone_name" style="width:240px" value="{$vo.name}" /></td>                         
-                          </tr>
+                            <td><input id="zone_name" type="text" name="zone_name" style="width:240px" value="{$vo.name}" /></td>
+						  </tr>
+						  <!--
                           <tr>
                             <td>广告选择：</td>   
                             <td>
@@ -81,9 +84,11 @@ $(function(){
                                 <input type="radio" name="auto_ad" value="1" <if condition="$vo.intelligence eq 1">checked="checked"</if>/>手动选择
                             </td>                         
                           </tr>
+						  -->
                         </table>
                     </td>
                   </tr>
+				  <!--
                   <tr><td colspan="6"><h3>已投放广告</h3></td></tr>
                   <tr>
                     <th align="center">选中投放</th>
@@ -104,6 +109,7 @@ $(function(){
                     <th align="center">预览</th>                                       
                   </tr>
 				  <tr><td colspan="6" style="text-align:center">没有数据</td></tr>
+				  -->
                   </tbody>
                 </table>
                 <div class="huiyuan_change_foot">
