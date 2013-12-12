@@ -22,6 +22,7 @@ class CommonAction extends Action {
 	 */
 	function _initialize(){
     	$this->checkUser();
+		$this->assign("flag",MODULE_NAME);
     }
     /**
      * 检测登录
@@ -32,5 +33,5 @@ class CommonAction extends Action {
     public function checkUser(){
     	$Public = A('Agent');
     	$Public->checkUser();
-    }
+	}
 }

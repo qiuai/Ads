@@ -14,9 +14,6 @@
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
 class ZoneWebAction extends CommonAction {
-	function _initialize(){
-		$this->assign("flag","zone");
-	}
     public function index(){ 
 		$this		->assign("title","代码位管理");
 		$zo 		= M('zone');
@@ -31,7 +28,7 @@ class ZoneWebAction extends CommonAction {
 		$Page 		-> setConfig("next","下一页");
 		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
 		$show     	= $Page->show();
-		// 第一页的分页不显示
+		// 一页时的分页不显示
 		if($count<16){
 			$show 	= '';
 		}
@@ -107,8 +104,9 @@ class ZoneWebAction extends CommonAction {
 	// 编辑代码位
 	public function zone_edit(){
 		$this	->assign("title","编辑代码位");
-		$id 	= $_GET["zone_id"];
+		$id 	= (int)($_GET["zone_id"]);
 		$zo  	= M("zone");
+		// 创建代码位尺寸对象
 		$ads  	= M("adsize");
 		$zone 	= $zo->where("id=".$id)->select();
 		$adsize = $ads->where("id=".$zone[0]["size"])->select();
@@ -151,8 +149,8 @@ class ZoneWebAction extends CommonAction {
 	}
 	// 删除代码位
 	public function zone_delete(){
-		$status	= $_GET["status"];
-		$id		= $_GET["zone_id"];
+		$status	= (int)($_GET["status"]);
+		$id		= (int)($_GET["zone_id"]);
 		$zone  	= M("zone");
 		if($status ==0){
 			$zone->where("id =".$id)->setField("status","1");

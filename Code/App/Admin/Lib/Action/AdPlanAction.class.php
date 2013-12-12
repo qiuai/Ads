@@ -38,9 +38,8 @@ class AdPlanAction extends CommonAction{
 		$this->AdPlan = D($this->actionName);
 		
 		// 查询相关的数据
-		$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->field('adplan.*,industry.name')->where('industry.id = adplan.category_id')->select();
-		dump($AdPlanInfo);
-		exit;
+		$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
+		
 		//dump( $this->AdPlan->getLastSql());
 // 		echo ACTION_NAME."<br>";
 // 		echo APP_NAME."<br/>";
@@ -69,10 +68,14 @@ class AdPlanAction extends CommonAction{
 		
 		// 获取id值查询相关的数据
 		$this->AdPlan = D($this->actionName);
-		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where('industry.id = adplan.category_id and adplan.id = '.$_GET['id'])->find();
+		
+		// 处理查询条件数据
+		
+		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->where('ad_plan_category.id = adplan.category_id and adplan.id = '.$_GET['id'])->field('adplan.*,ad_plan_category.name')->find();
 		
 		// 处理数据
 		$AdPlanInfo = $this->dealDataOne($AdPlanInfo);
+		
 		
 		// 数据分配到前端
 		$this->assign('AdPlanInfo',$AdPlanInfo);
@@ -80,6 +83,25 @@ class AdPlanAction extends CommonAction{
 		
 		//dump($AdPlanInfo);
 		$this->display();
+	}
+	
+	/**
+	 * 
+	 * 处理url或表单中提交过来的数据
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-12 上午11:51:27
+	 */
+	private function dealSubmitData(){
+		
+		// 如果有提交过来id值则把id值转化为整型
+		if($_POST['id']){
+			$_POST['id'] = intval($_POST['id']);
+		}
+		
+		if($_GET['id']){
+			$_GET['id'] = intval($_GET['id']);
+		}
+		
 	}
 	
 	/**
@@ -94,7 +116,8 @@ class AdPlanAction extends CommonAction{
 		
 		// 获取id修改数据
 		// 定义更改的数据
-		$_POST['auditflag'] = 1;
+		
+		$_POST['plan_status'] = 1;
 		
 		if($this->AdPlan->save($_POST)){
 			
@@ -117,7 +140,7 @@ class AdPlanAction extends CommonAction{
 		
 		// 获取id值查询相关的数据
 		$this->AdPlan = D($this->actionName);
-		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where('industry.id = adplan.category_id and adplan.id = '.$_GET['id'])->find();
+		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->where('ad_plan_category.id = adplan.category_id and adplan.id = '.$_GET['id'])->field('adplan.*,ad_plan_category.name')->find();
 		
 		// 处理数据
 		$AdPlanInfo = $this->dealDataOne($AdPlanInfo);
@@ -144,10 +167,11 @@ class AdPlanAction extends CommonAction{
 		$data = array();
 		// 获取提交过来的id值
 		$data['id'] = $_POST['id'];
-		$data['status'] = $_POST['status'];
+		$data['plan_status'] = $_POST['plan_status'];
 		if($this->AdPlan->save($data)){
 			echo "ok";
 		}
+
 		
 	}
 	
@@ -163,8 +187,8 @@ class AdPlanAction extends CommonAction{
 		$this->AdPlan = M($this->actionName);
 		
 		// 查询相关的数据
-		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'industry'=>'industry'))->where('industry.id = adplan.category_id and adplan.id = '.$_GET['id'])->find();
-		if($AdPlanInfo['status']==1){
+		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->where('ad_plan_category.id = adplan.category_id and adplan.id = '.$_GET['id'])->field('adplan.*,ad_plan_category.name')->find();
+		if($AdPlanInfo['plan_status']==2){
 			
 			echo "<script>";
 			echo "alert('计划正在运行中不能进行更该，如果要更改请先暂停计划');";			
@@ -174,7 +198,7 @@ class AdPlanAction extends CommonAction{
 		}else{
 			
 			// 获取行业表中的行业相关的信息
-			$industry = M('Industry');
+			$industry = M('adPlanCategory');
 		
 			$industryInfo = $industry->select();
 			$this->assign("industryInfo",$industryInfo);
@@ -186,7 +210,62 @@ class AdPlanAction extends CommonAction{
 	
 	/**
 	 * 
-	 * 处理广告计划相关的数据
+	 * 广告计划编辑后修改
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-12 下午3:40:38
+	 */
+	public function plan_save(){
+		
+		// 创建数据库对象
+		$this->AdPlan = D($this->actionName);
+		$AdPlan = M($this->actionName);
+		
+		if(!$this->AdPlan->create()){
+			
+			//echo $this->AdPlan->getError();
+			// 用jstiao'zhuan
+			$this->error($this->AdPlan->getError(),C('SITE_URL')."?m=".$this->actionName.'&a=plan_edit&id='.$_POST['id']);			
+		}else{
+			
+			// 如果有图片上传删除原来图片
+			if($_FILES['plan_logo']['error'] == 0){
+				
+				// 查询相关的数据
+				$AdPlanInfo =$AdPlan->field('plan_logo')->where("id = ".$_POST['id'])->find();
+				 $this->delUpload($AdPlanInfo['plan_logo']);
+				
+				// 往服务器上传图片
+				$info = $this->upload($this->actionName);
+				
+			// 保存相关的信息
+				if($info['flag']==1){  // 说明文件上传成功保存图片的相关信息
+				
+					$this->AdPlan->plan_logo = $info['message'][0]['completionPath'];
+					
+				}else{
+				
+					// 提示图片上传失败
+					$this->error("图片上传失败".$info['message'],C('SITE_URL')."?m=".$this->actionName.'&a=plan_edit&id='.$_POST['id']);
+				}				
+			}
+			if($this->AdPlan->save()){
+				
+				$this->success('数据修改成功',C('SITE_URL')."?m=".$this->actionName.'&a=index');
+			}else{
+				echo $this->AdPlan->getLastSql()."<br/>";
+				exit;
+				$this->error('数据修改失败',C('SITE_URL')."?m=".$this->actionName.'&a=plan_edit&id='.$_POST['id']);
+			}
+			
+		}
+		
+	}
+	
+	//public function 
+	
+	/**
+	 * 
+	 * 处理广告计划相关的数据（对于二维数组）
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-6 下午1:52:36
 	 */
@@ -202,7 +281,7 @@ class AdPlanAction extends CommonAction{
 
 	/**
 	 * 
-	 * 处理单条相关数据的方法
+	 * 处理单条相关数据的方法（对于一维数组）
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-7 下午2:31:34
 	 * @param unknown_type $AdPlanInfo
@@ -306,7 +385,7 @@ class AdPlanAction extends CommonAction{
 		
 		
 		// 获取行业表中的行业相关的信息
-		$industry = M('Industry');
+		$industry = M('adPlanCategory');
 		//dump($industry);
 		
 		$industryInfo = $industry->select();
@@ -408,5 +487,18 @@ class AdPlanAction extends CommonAction{
 		
 		return $info;
 		
+	}
+	
+	/**
+	 * 删除上传的图片文件
+	 *
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-12 下午4:28:41
+	 */
+	private function delUpload($filePath){
+		
+		if(file_exists(ROOT_PATH."/../Uploadfile/".$filePath)){		
+			unlink(ROOT_PATH."/../Uploadfile/".$filePath);
+		}
 	}
 }
