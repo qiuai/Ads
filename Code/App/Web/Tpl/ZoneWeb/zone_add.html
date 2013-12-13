@@ -33,7 +33,7 @@
 				<td class="textbox_td">
 				    <select name="site_id">
 						<volist name="site" id="list">
-						<option value="{$list.id}">{$list.domain}</option>
+						<option value="{$list.id}">{$list.site_domain}</option>
 						</volist>
 					</select>
 				</td>
@@ -52,25 +52,6 @@
 			  <tr>
 				<td class="w155"><em class="red">*</em>代码位尺寸：</td>
 				<td class="textbox_td">
-				<!--
-					<select class="newsite_select" name="show_type">
-						<optgroup label="图片广告" style="background-color:#ccc"></optgroup>
-							<option value='1' show_type='image'>960*90&nbsp;图片横幅</option>
-							<option value='2' show_type='image'>200*200&nbsp;方形</option>
-						<optgroup label="漂浮广告" style="background-color:#ccc"></optgroup>
-							<option value='3' show_type='pf'>50*50&nbsp;小块漂浮</option>
-						<optgroup label="对联广告" style="background-color:#ccc"></optgroup>
-							<option value='4' show_type='dl'>100*400&nbsp;对联</option>
-							<option value='5' show_type='dl'>50*200&nbsp;小对联</option>
-						<optgroup label="文本广告" style="background-color:#ccc"></optgroup>
-							<option value='6' show_type='txt'>240*60&nbsp;首页文字横幅</option>
-						<optgroup label="右下角悬浮广告" style="background-color:#ccc"></optgroup>
-							<option value='7' show_type='yxj'>300*300&nbsp;右下角视窗</option>
-						<optgroup label="弹窗广告" style="background-color:#ccc"></optgroup>
-							<option value='8' show_type='pop'>50*50&nbsp;弹窗</option>
-							<option value='9' show_type='image'>100*100&nbsp;小图块</option>
-                    </select>
-					-->
 					<select class="newsite_select" name="show_type">
 						<volist name="adsize" id="vo">
 						<option value='{$vo.id}'>{$vo.width}*{$vo.height}&nbsp;{$vo.size_type}</option>
