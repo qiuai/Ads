@@ -33,13 +33,15 @@ class SiteWebAction extends CommonAction {
 			$show 	= '';
 		}
 		$site     	= $st->order('id')->page($nowPage.','.$Page->listRows)->select();
+		// 创建网站分类对象
+		$stp 		= M("site_type");
+		foreach($site as $key =>$val){
+			$sitetype= $stp->where("id=".$val["site_type"])->select();
+			$site[$key]["code_name_zh"]=$sitetype[0]["code_name_zh"];//显示网站类型
+		}
 		$this		->assign('page',$show);
 		$this		->assign('count',$count);
 		$this		->assign("site",$site);
-		// 创建网站分类对象
-		$stp 		= M("site_type");
-		$sitetype   = $stp->select();
-		$this		->assign("sitetype",$sitetype);
 		$this		->display();
     }
 	// 新增网站
@@ -51,9 +53,9 @@ class SiteWebAction extends CommonAction {
 		$this->assign("title","新增网站");
 		// 创建数据库对象
 		$site 				= M('site');
-		$site->sitename		= $_POST["site_name"];
-		$site->domain		= $_POST["site_domain"];
-		$site->type			= $_POST["site_type"];
+		$site->site_name	= $_POST["site_name"];
+		$site->site_domain	= $_POST["site_domain"];
+		$site->site_type	= $_POST["site_type"];
 		$site->description	= $_POST["description"];
 		$site->uid			= 300200;
 		$site->pr			= 0;
@@ -76,15 +78,15 @@ class SiteWebAction extends CommonAction {
 		$site 				= M('site');
 		$siteOld			= $site->where("id =".$id)->select();
 		$this				->assign("siteOld",$siteOld);
-		$this->display();
+		$this				->display();
 	}
 	public function editCheck(){
 		// 创建数据库对象
 		$site 	 			= M('site');
 		$st['id']			= $_POST["site_id"];
-		$st['name']			= $_POST["site_name"];
-		$st['domain']		= $_POST["site_domain"];
-		$st['type']			= $_POST["site_type"];
+		$st['site_name']	= $_POST["site_name"];
+		$st['site_domain']	= $_POST["site_domain"];
+		$st['site_type']	= $_POST["site_type"];
 		$st['description']	= $_POST["description"];
 		// 更改数据库数据
 		$site->where("id =".$_POST["site_id"])->data($st)->save();
@@ -124,7 +126,7 @@ class SiteWebAction extends CommonAction {
 	public function channel_add(){
 		// 创建数据库对象
 		$st 	= M('site');
-		$site	=$st->field("id,sitename")->select();
+		$site	=$st->field("id,site_name")->select();
 		$this	->assign("site",$site);
 		$this	->display();
 	}
@@ -151,10 +153,10 @@ class SiteWebAction extends CommonAction {
 		$ch 		= M('channel');
 		$channel	= $ch->where("id=".$id)->select();
 		$st 		= M('site');
-		$site		= $st->field("id,sitename")->select();
-		$this	->assign("channel",$channel);
-		$this	->assign("site",$site);
-		$this	->display();
+		$site		= $st->field("id,site_name")->select();
+		$this		->assign("channel",$channel);
+		$this		->assign("site",$site);
+		$this		->display();
 	}
 	public function  channel_editCheck(){
 		$this->assign("title","编辑频道");
