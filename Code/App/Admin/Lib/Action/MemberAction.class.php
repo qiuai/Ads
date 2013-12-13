@@ -141,14 +141,20 @@ class MemberAction extends CommonAction {
 		// 更新数据
         $list = $model->save();
         if (false !== $list) {
-	        $model = M("member_detail");
+	        $detail = M("member_detail");
 	        $condition['uid']		= $_POST['id'];
 	        $data['id_card']	= $_POST['id_card'];
 	        $data['bank_name']	= $_POST['bank_name'];
 	        $data['card_author']= $_POST['card_author'];
 	        $data['card_number']= $_POST['card_number'];
+	        $data['uid']= $_POST['id'];
 	        // 更新数据
-	        $list = $model->where($condition)->save($data);
+	        $list = $detail->where($condition)->save($data);
+	        if($detail->where("uid = ". $_POST['id'])->find()){
+	        	$list = $detail->where($condition)->save($data);
+	        }else{
+	        	$list = $detail->where($condition)->add($data);
+	        }
 	        if (false !== $list) {
 	            //成功提示
 	            $this->success('编辑成功!');
