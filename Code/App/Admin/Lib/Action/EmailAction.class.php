@@ -19,6 +19,25 @@ class EmailAction extends CommonAction {
 	 * @see CommonAction::index()
 	 */
     public function index(){
+    	$htmlData = '';	// 编辑器默认文本
+    	
+    	$model = M("Member");
+    	$member = $model->find($_GET['id']);
+    	
+    	$this->assign("member",$member);
+    	
+    	if (!empty($_POST['content'])) {
+    		if (get_magic_quotes_gpc()) {
+    			$htmlData = stripslashes($_POST['content']);
+    		} else {
+    			$htmlData = $_POST['content'];
+    		}
+    	}else{
+    		$model = M("Member");
+    		$member = $model->find($_GET['id']);
+    		
+    		$this->assign("member",$member);
+    	}
     	$this->display();
 	}
 	/**
@@ -28,19 +47,30 @@ class EmailAction extends CommonAction {
 	 * @CreateDate: 2013-12-13 上午10:03:19
 	 */
 	public function sendEmail(){
-		import('ORG.Util.Email');//导入本类
-		$data['mailto'] 	= 	'i@pengyong.info'; //收件人
-		$data['subject'] =	'邮件正文标题';    //邮件标题
-		$data['body'] 	=	'邮件正文内容';    //邮件正文内容
-		$mail = new Email();
-		if($mail->send($data))
-		{
-			//邮件发送成功...
+		if($this->isPost()){
+			if (get_magic_quotes_gpc()) {
+				$htmlData = stripslashes($_POST['content']);
+			} else {
+				$htmlData = $_POST['content'];
+			}
+			var_dump($_POST);exit;
+			
+			import('ORG.Util.Email');//导入本类
+			$data['mailto'] 	= 	$_POST['username']; //收件人
+			$data['subject'] 	=	$_POST['title'];    //邮件标题
+			$data['body'] 		=	$htmlData;    		//邮件正文内容
+			$mail = new Email();
+			if($mail->send($data))
+			{
+				//邮件发送成功...
+				$this->success("邮件发送成功！");
+			}
+			else
+			{
+				//邮件发送失败...
+				$this->error("邮件发送失败！");
+			}
+			// 		$mail->debug(true)->send($data);   //开启调试功能
 		}
-		else
-		{
-			//邮件发送失败...
-		}
-// 		$mail->debug(true)->send($data);   //开启调试功能
 	}
 }
