@@ -24,6 +24,7 @@ class AdAction extends CommonAction {
 		$this->display();
 	}
 	public function left(){
+		
 		$this->display();
 	}
 	public function right(){

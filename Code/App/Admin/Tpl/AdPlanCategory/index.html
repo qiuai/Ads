@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+ <div class="main">
+   <div class='body_title'>计划分类列表</div>
+		<div class="listmain">
+<table align="center" cellspacing="0" class="list">
+    <tr class="tb_title">
+        <td>分类ID</td>
+        <td>分类名称</td>
+        <td>排序</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    	<volist name="AdPlanCategoryInfo" id="vo" key="k">
+            <tr <if condition="$k%2 neq 0">class="bgcolor3"<else />class="bgcolor4"</if> >
+            <td>{$vo['id']}</td>
+        <td>{$vo['name']}</td>
+        <td>{$vo['sort']}</td>
+        <td><span class="green">{$vo['display']}</span></td>
+        <td>
+            <a href="SITE_URL?m=AdPlanCategory&a=edit&id={$vo['id']}">修改</a>  
+        </td>
+        </tr>
+        </volist>
+    </table>
+</div>
+</div>
+</body>
+</html>
