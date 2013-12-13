@@ -78,6 +78,8 @@ class Email
 			$data['body']  = empty($data['body']) ? 'no title':$data['body'];
 			$from = $data['mailfrom'];
 			$subject = $data['subject'];
+			$subject = "=?UTF-8?B?".base64_encode($subject)."?=";
+			$subject = "=?UTF-8?B?".base64_encode($subject)."?=";
 			$body = $data['body'];
 			$mailtype = $data['mailtype'];
 			$to = $data['mailto'];
@@ -91,7 +93,8 @@ class Email
 		$header .= "MIME-Version:1.0\r\n";
 		if($mailtype=="HTML")
 		{
-			$header .= "Content-Type:text/html\r\n";
+			//$header .= "Content-Type:text/html\r\n";
+			$header .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
 		}
 		 $header .= "To: ".$to."\r\n";
 		if ($cc != "")

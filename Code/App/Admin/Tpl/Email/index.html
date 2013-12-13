@@ -42,17 +42,7 @@
 			<div class="body_title">发送邮件</div>
 			<div class="listmain">
 				<form name="myform" method="post" action="SITE_URL?m=Email&a=sendEmail">
-					<table align="center" cellspacing="0" class="list">
-					<!-- 
 						<tr>
-							<td><span style="color:red">*</span>选项：</td>
-							<td>
-								<input type="radio" name="send" value="1" checked/>单发
-								<input type="radio" name="send" value="2"/>群发
-							</td>
-						</tr>
-					 -->
-						<tbody><tr>
 							<td><span style="color:red">*</span>收件人地址:</td>
 							<td>
 							   <input size="56px" type="text" name="username" class="textbox" value="{$member.username}">
@@ -74,7 +64,7 @@
 								<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
 							</td>
 						</tr>
-					</tbody></table>
+					</table>
 				</form>
 			</div>
 		</div>
