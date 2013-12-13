@@ -36,12 +36,7 @@
 							<td>{$vo.site_name}</td>
 							<td>{$vo.id}</td>
 							<td>{$vo.site_domain}</td>
-							<td>
-								<if condition="$vo.site_type eq 1">CPS
-								<elseif condition="$vo.site_type eq 2"/>CPA
-								<elseif condition="$vo.site_type eq 3"/>CPC
-								<elseif condition="$vo.site_type eq 4"/>CPM</if>
-							</td>
+							<td>{$vo.code_name_zh}</td>
 							<td><em <if condition="$vo.status eq 0">style="color:gray"<elseif condition="$vo.status eq 1"/>style="color:red"<elseif condition="$vo.status eq 2"/>style="color:green"<else />style="color:orange"</if>><if condition="$vo.status eq 0">未验证<elseif condition="$vo.status eq 1"/>审核中<elseif condition="$vo.status eq 2"/>正常<elseif condition="$vo.status eq 3"/>锁定<else />拒绝</if></em></td>   <td><a href="SITE_URL/?m=SiteWeb&a=site_edit&site_id={$vo.id}" class="blue">修改</a>&nbsp;|&nbsp;<a href="SITE_URL/?m=SiteWeb&a=site_delete&site_id={$vo.id}" class="red" onclick="return confirm('确认删除网站？');">删除</a>
 							</td>
 						</tr>

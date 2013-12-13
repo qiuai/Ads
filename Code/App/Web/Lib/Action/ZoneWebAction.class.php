@@ -33,15 +33,15 @@ class ZoneWebAction extends CommonAction {
 			$show 	= '';
 		}
 		$zone     	= $zo->order('id')->page($nowPage.','.$Page->listRows)->select();
-		$as			= M('adsize');
+		$as			= M('ad_size');
 		foreach($zone as $key=>$val){
 			$zone[$key]["refresh_time"]=date("Y-m-d",$val["refresh_time"]);
 			// 连表查询代码位尺寸展示类型
 			$adsize	= $as->where("id=".$val['size'])->select();
 			foreach($adsize as $keys=>$value){
-				$zone[$key]['display']	=$adsize[$keys]['size_type'];
-				$zone[$key]['width']	=$adsize[$keys]['width'];
-				$zone[$key]['height']	=$adsize[$keys]['height'];
+				$zone[$key]['display']	=$value['size_type'];
+				$zone[$key]['width']	=$value['width'];
+				$zone[$key]['height']	=$value['height'];
 			}
 		}
 		$this		->assign('page',$show);
@@ -53,9 +53,9 @@ class ZoneWebAction extends CommonAction {
 	public function zone_add(){
 		$this	->assign("title","新增代码位");
 		$st		= M('site');
-		$site	= $st->field("id,domain")->select();
+		$site	= $st->field("id,site_domain")->select();
 		$this   ->assign("site",$site);
-		$ads	= M('adsize');
+		$ads	= M('ad_size');
 		$adsize = $ads->select();
 		foreach($adsize as $key=>$val){
 			switch($val['size_type']){
@@ -107,7 +107,7 @@ class ZoneWebAction extends CommonAction {
 		$id 	= (int)($_GET["zone_id"]);
 		$zo  	= M("zone");
 		// 创建代码位尺寸对象
-		$ads  	= M("adsize");
+		$ads  	= M("ad_size");
 		$zone 	= $zo->where("id=".$id)->select();
 		$adsize = $ads->where("id=".$zone[0]["size"])->select();
 		foreach($adsize as $key=>$val){
