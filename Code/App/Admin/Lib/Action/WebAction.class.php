@@ -134,6 +134,37 @@ class WebAction extends CommonAction {
 			$show 	= '';
 		}
 		$zone     	= $zo->order('id')->page($nowPage.','.$Page->listRows)->select();
+		//创建广告尺寸对象
+		$ads		= M("adsize");
+		foreach($zone as $key =>$val){
+			$adsize	= $ads->where("id=".$zone[$key]["size"])->select();
+			foreach($adsize as $keys => $value){
+				$zone[$key]["width"]=$value["width"];
+				$zone[$key]["height"]=$value["height"];
+				switch($value["size_type"]){
+					case 1:
+						$zone[$key]["display"]="图片";
+					break;
+					case 2:
+						$zone[$key]["display"]="文字";
+					break;
+					case 3:
+						$zone[$key]["display"]="漂浮";
+					break;
+					case 4:
+						$zone[$key]["display"]="对联";
+					break;
+					case 5:
+						$zone[$key]["display"]="弹窗";
+					break;
+					case 6:
+						$zone[$key]["display"]="视窗";
+					break;
+					default:
+					break;
+				}
+			}
+		}
 		$this		->assign('page',$show);
 		$this		->assign('count',$count);
 		$this		->assign("zone",$zone);
@@ -142,7 +173,7 @@ class WebAction extends CommonAction {
 	public function addCheck(){
 		// 创建数据库对象
 		$siteType 			= M('site_type');
-		$siteType->code_name_zh		= $_POST["code_name_zh"];
+		$siteType->code_name_zh	= $_POST["code_name_zh"];
 		$siteType->code_name_en	= $_POST["code_value"];
 		$siteType->status	= $_POST["status"];
 		$siteType->sort		= $_POST["sort"];
@@ -158,7 +189,7 @@ class WebAction extends CommonAction {
 		// 创建数据库对象
 		$siteType 		= M('site_type');
 		$st['id']		= $_POST["code_id"];
-		$st['code_name_zh']		= $_POST["code_name_zh"];
+		$st['code_name_zh']	= $_POST["code_name_zh"];
 		$st['code_name_en']	= $_POST["code_value"];
 		$st['status']	= $_POST["status"];
 		$st['sort']		= $_POST["sort"];
