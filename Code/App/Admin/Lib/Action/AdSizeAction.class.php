@@ -42,8 +42,90 @@ class AdSizeAction extends CommonAction{
 		
 		// 处理相关的数据
 		
-	dump($AdSizeInfo);
+	//dump($AdSizeInfo);
 		$this->display();
+	}
+	
+	/**
+	 * 广告尺寸修改相关的方法
+	 * (non-PHPdoc)
+	 * @see CommonAction::edit()
+	 */
+	public function edit(){
+		
+		// 创建数据库对象
+		$AdSize = M('AdSize');
+		$this->dealSubmitData();
+		// 查询相关的数据
+		$AdSizeInfo = $AdSize->where("id = ".$_GET['id'])->find();
+		
+		// 处理数据
+		//$AdSizeInfo = $this->dealDataOne($AdSizeInfo);
+		
+		// 数据分配到前端模版
+		$this->assign('AdSizeInfo',$AdSizeInfo);
+		
+		// 获取广告位置分类信息 （先存储在配置文件中读取配置文件)
+		$sizeType = C('AD_SIZE_TYPE');
+			
+		//dump($sizeType);
+		$sizeType = $this->dealAdSizeType($sizeType);
+		//dump($sizeType);
+		// 数据分配到前端模版
+		$this->assign('sizeType',$sizeType);
+		
+		$this->display();
+	}
+	
+	/**
+	 * 
+	 * 修改数据入库
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-14 上午10:51:46
+	 */
+	public function doEdit(){
+		
+		// 创建数据库资源对象
+		$AdSize = D('AdSize');
+		if(!$AdSize->create()){
+			// 说明验证未通过，提示未通过的原因 跳转到添加页面
+			$this->error($AdSize->getError(),C('SITE_URL')."?m=".$this->actionName.'&a=edit&id'.$_POST['id']);
+			
+		}else{
+			
+			// 数据入库操作
+			if($AdSize->save()){
+				
+				// 数据修改成功
+				$this->success("数据修改成功!",C('SITE_URL')."?m=".$this->actionName.'&a=index');
+			}else{
+				
+				// 数据修改失败
+				$this->error("数据修改失败!",C('SITE_URL')."?m=".$this->actionName.'&a=edit&id'.$_POST['id']);
+			}
+		}
+		
+	}
+	
+
+	
+	/**
+	 * 
+	 * 处理表单提交过来的数据
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-13 下午5:30:10
+	 */
+	private function dealSubmitData(){
+	
+		// 如果有提交过来id值则把id值转化为整型
+		if($_POST['id']){
+			$_POST['id'] = intval($_POST['id']);
+		}
+	
+		if($_GET['id']){
+			$_GET['id'] = intval($_GET['id']);
+		}
+	
 	}
 	
 	/**
@@ -71,6 +153,7 @@ class AdSizeAction extends CommonAction{
 	private function dealDataOne($AdSizeInfo){
 		
 		$AdSizeInfo = $this->dealData($AdSizeInfo);
+		return  $AdSizeInfo;
 	}
 	
 	/**
