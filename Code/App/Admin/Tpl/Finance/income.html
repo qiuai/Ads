@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/calendar-blue.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/calendar.js"></script>
+</head>
+<body>
+ <div class="main">
+    <div class='body_title'>结算明细列表</div>
+		<div class="listmain">
+		<form method="post" action="SITE_URL/?m=Finance&a=income">
+       <table align="center" class="list" cellspacing="0">
+            <tr>
+                <td style="border-right:none;">
+                    选择时间段：
+                    <input type="text" name="start_date" id="start_date"  value="{$start_date}" />
+						<script language="javascript" type="text/javascript">
+                            Calendar.setup({
+                                inputField     :    "start_date",
+                                ifFormat       :    "%Y-%m-%d",
+                            });
+                        </script>
+						- <input type="text" name="end_date" id="end_date" value="{$end_date}" />
+						<script language="javascript" type="text/javascript">
+                            Calendar.setup({
+                                inputField     :    "end_date",
+                                ifFormat       :    "%Y-%m-%d",
+                            });
+                        </script>
+                    　广告计划ID：<input type="text" name="plan_id" />
+                   　 网站主UID：<input type="text" name="uid" />
+                    　<input type="submit" value="查询" class="button" />
+                </td>
+                <td align="right">
+                	                	<a style="font-size:11px;color:#000;" href="http://adu.phpad.cn/admin.php?m=report_income&a=report_income_list_rule&">定制报表</a>
+                    <input type="button" value="导出报表" class="button1" onclick="location.href='http://adu.phpad.cn/admin.php?m=report_income&a=income_export&plan_id=&uid=&status=&start_date=2013-12-11&end_date=2013-12-14'" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="css1" style="font-size:13px;">业绩状态：
+                    <a href="SITE_URL/?m=Finance&a=income&" class="link-checked">全部</a>
+                    <a href="SITE_URL/?m=Finance&a=income&status=1"  class="link_before_checked">未确认</a>
+                    <a href="SITE_URL/?m=Finance&a=income&status=2"  class="link_before_checked">已确认</a>
+                    <a href="SITE_URL/?m=Finance&a=income&status=3"  class="link_before_checked">无效</a>
+                </td>
+            </tr>
+        </table>
+        </form>
+
+<table cellspacing="0" class="list" style="text-align:center">
+	<tr class="tb_title">
+        <td>计划ID</td>
+        <td>网站主ID</td>
+        <td>结算日期</td>
+        <td>真实收入</td>
+        <td>结算收入</td>
+        <td>IP</td>
+        <td>PV</td>
+        <td>CLICK</td>
+        <td>CPS</td>
+        <td>CPA</td>
+        <td>业绩状态</td>
+        <td>结算状态</td>
+        <td>操作</td>
+    </tr>
+	<volist name="income" id="vo">
+	<tr class="tb_title">
+        <td>{$vo.pid}</td>
+        <td>{$vo.uid}</td>
+        <td>{$vo.settlement_time}</td>
+        <td>{$vo.real_income}</td>
+        <td>{$vo.balance_income}</td>
+        <td>{$vo.ip}</td>
+        <td>{$vo.pv}</td>
+        <td>{$vo.click}</td>
+        <td>{$vo.cps}</td>
+        <td>{$vo.cpa}</td>
+        <td>{$vo.performance_status}</td>
+        <td>{$vo.settlement_status}</td>
+        <td><a href="SITE_URL/?m=Finance&a=incomeDo">冻结</a></td>
+    </tr>
+	</volist>
+</table>
+</div>
+<div class="admin_do index_page" style="text-align:center;"></div>
+</div>
+</body>
+</html>
