@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class="body_title">新增广告尺寸</div>
+			<div class="listmain setting">
+				<form method="post" action="SITE_URL?m=AdSize&a=doAdd&">
+					<table align="center" cellspacing="0" class="list">
+						<tr>
+							<td style="width:100px">描述：</td>
+							<td><input class="textbox" type="text" name="description"  />
+							<div class="onShow">请填写相关描述信息</div></td>
+						</tr>
+						<tr>
+							<td>类型：</td>
+							<td>
+							    <select name="size_type">
+							    	<volist name="sizeType" id="vo">
+							    		<option selected="selected" value="{$vo['key']}">{$vo['val']}</option>
+							    	</volist>							    								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>宽度：</td>
+							<td><input class="textbox" type="text" name="width" />
+							<div class="onShow">填写的宽度必须为数字</div></td>
+						</tr>
+						<tr>
+							<td>高度：</td>
+							<td><input class="textbox" type="text" name="height" />
+							<div class="onShow">填写的高度必须为数字</div></td>
+						</tr>
+					    <tr>
+							<td>排序：</td>
+							<td><input type="text" name="sort" value="" class="textbox"/><div class="onShow">填写的排序必须为数字</div></td>
+					    </tr>
+					    <tr>
+							<td>是否启用：</td>
+							<td>
+							    <input type="radio" name="enable" value="启用" checked="checked" />启用
+							    <input type="radio" name="enable" value="不启用" />不启用
+							</td>
+						</tr>
+					</table>
+					<input class="confirm_btn" type="submit" value="" />
+					<input class="back_btn" type="button" onclick="javascript:history.back(-1);" />
+				</form>
+			</div>
+		</div>
+		</div>
+</body>
+</html>

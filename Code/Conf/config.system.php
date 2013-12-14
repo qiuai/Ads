@@ -25,9 +25,14 @@ return array(
 			'4'		=>	"<span style=\"color:gray\">邮件未激活</span>",
 			),
 	
+	
+	
 	/**
-	 * phpmailer 邮箱配置
+	 * 广告尺寸类型
 	 */
+	'AD_SIZE_TYPE' => array('1'=>'图片','2'=>'文字','3'=>'漂浮','4'=>'对联','5'=>'弹窗','6'=>'视窗'),				// 尺寸类型相关的配置
+		
+
 	'THINK_EMAIL' => array(
 		'SMTP_HOST'   => 'smtp.163.com', //SMTP服务器
 		'SMTP_PORT'   => '25', //SMTP服务器端口
@@ -38,5 +43,6 @@ return array(
 		'REPLY_EMAIL' => '', //回复EMAIL（留空则为发件人EMAIL）
 		'REPLY_NAME'  => '', //回复名称（留空则为发件人名称）
 	),
+
 );
 ?>
