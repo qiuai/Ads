@@ -1,0 +1,108 @@
+<include file="Index:headerWeb" />
+</div><script type="text/javascript" src="http://adu.phpad.cn/static/js/default/PCASClass.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"profile_user",autotip:true});
+		$("#real_name").formValidator({onshow:"请务必填写真实的姓名",onfocus:"请输入真实姓名（必须为 中文、字母或数字）"}).inputValidator({min:1,onerror:"输入的真实姓名不能为空"}).regexValidator({regexp:"ps_username",datatype:"enum",onerror:"输入的真实姓名格式错误"});
+		$("#id_number").formValidator({onshow:"请务必填写真实的身份证号",onfocus:"请输入正确的身份证号"}).inputValidator({min:1,onerror:"输入的身份证号不能为空"}).regexValidator({regexp:"idcard",datatype:"enum",onerror:"输入的身份证号格式错误"});
+		$("#mobile").formValidator({onshow:"请务必填写真实的手机号",onfocus:"请输入正确的手机号"}).inputValidator({min:1,onerror:"输入的手机号不能为空"}).regexValidator({regexp:"mobile",datatype:"enum",onerror:"输入的手机号格式错误"});
+	});
+</script>
+<div class="main clearfix">
+	<div class="huiyuan_change">
+		<div class="huiyuan_change_head">
+			<span>修改会员信息</span>
+			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
+			<div class="cb"></div>
+		</div>
+        <form id="profile_user" action="SITE_URL?m=Profile&a=profileEdit" method="post">
+		<div class="huiyuan_change_body">
+			<table class="table_list">
+			 <tr>
+				<td class="w155"><em class="red">*</em> 用户名：</td>
+				<td class="textbox_td">{$info.username}</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em> 个人/法人：</td>
+				<td class="textbox_td">
+					<select class="personal_select" name="legal_status">
+						<option value="个人" <if condition="$info['legal_status'] eq '个人'">selected="selected"</if>>个人</option>
+                        <option value="法人" <if condition="$info['legal_status'] eq '法人'">selected="selected"</if>>法人</option>
+					</select>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em> 姓名：</td>
+				<td class="textbox_td">
+					<input id="real_name" class="textbox" name="real_name" type="textbox" value="{$info.real_name}">
+				<div id="real_nameTip" class="onShow">请务必填写真实的姓名</div></td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em> 身份证号：</td>
+				<td class="textbox_td">
+					<input id="id_number" class="textbox" type="textbox" name="id_card" value="{$info_detail.id_card}">
+				<div id="id_numberTip" class="onShow">请务必填写真实的身份证号</div></td>
+			  </tr>			  
+			  <tr>
+				<td class="w155"> 电话：</td>
+				<td class="textbox_td">
+					<input id="tel" class="textbox call_c" type="textbox" name="tel" value="{$info.tel}">
+				</td>
+			  </tr>
+			   <tr>
+				<td class="w155"><em class="red">*</em> 手机：</td>
+				<td class="textbox_td">
+					<input id="mobile" class="textbox mobile" type="textbox" name="mobilephone" value="{$info.mobilephone}">
+				<div id="mobileTip" class="onShow">请务必填写真实的手机号</div></td>
+			  </tr>
+			   <tr>
+				<td class="w155">QQ：</td>
+				<td class="textbox_td">
+					<input id="qq" class="textbox" type="textbox" name="qq" value="{$info.qq}">
+				</td>
+			  </tr>
+              <tr>
+				<td class="w155">邮件订阅</td>
+				<td class="textbox_td">
+				    <input type="radio" name="is_feed" value="1" <if condition="$info['is_feed'] eq 1">checked="checked"</if>>是
+				    <input type="radio" name="is_feed" value="0" <if condition="$info['is_feed'] eq 0">checked="checked"</if>>否
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<div class="huiyuan_change_foot">
+			<input type="hidden" name="id" value="{$info.id}">
+			<input class="confirm_btn" type="submit" name="dosubmit" value="">
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);">
+		</div>
+		</form>
+    </div>
+</div>
+<script>
+function subscribe(){
+    $.ajax({
+        type: "GET",
+        url: "?m=siter&a=subscribe",
+        cache: false,
+        dataType: "json",
+        success: callback
+    });
+}
+
+function callback(data) {
+    var tcbar = $('#subscribe');
+    try {
+        if(data == 1)
+        {
+            tcbar.html('是').removeClass('red').addClass('green');
+        }
+        else
+        {
+            tcbar.html('否').removeClass('green').addClass('red');
+        }
+    } catch (e) {alert(e)}
+}
+</script>
+<include file="Index:footer" />

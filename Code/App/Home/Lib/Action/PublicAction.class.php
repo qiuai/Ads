@@ -83,7 +83,7 @@ class PublicAction extends CommonAction {
         	$info['error'] = '帐号不存在或已禁用！';
         	return $info;
         }else {
-            if($authInfo['password'] != md5($_POST['password'])) {
+            if($authInfo['password'] != $this->pwdHash($_POST['password'])) {
                 $info['error'] = '密码错误！';
                 return $info;
             }

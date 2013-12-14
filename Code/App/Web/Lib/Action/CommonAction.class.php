@@ -34,4 +34,16 @@ class CommonAction extends Action {
     	$Public = A('Agent');
     	$Public->checkUser();
 	}
+	/**
+	 * 加密
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-14 上午11:43:08
+	 * @param string $password
+	 * @param string $type
+	 * @return string
+	 */
+	function pwdHash($password, $type = 'md5') {
+		return hash ( $type, $password );
+	}
 }

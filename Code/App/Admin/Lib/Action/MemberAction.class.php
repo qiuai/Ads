@@ -134,7 +134,9 @@ class MemberAction extends CommonAction {
 	 */
 	public function update(){
 		$model = M("Member");
-		$_POST['password'] = pwdHash($_POST['password']);
+		if($_POST['password']){
+			$_POST['password'] = pwdHash($_POST['password']);
+		}
         if (false === $model->create()) {
             $this->error($model->getError());
         }
@@ -143,10 +145,11 @@ class MemberAction extends CommonAction {
         if (false !== $list) {
 	        $detail = M("member_detail");
 	        $condition['uid']		= $_POST['id'];
-	        $data['id_card']	= $_POST['id_card'];
-	        $data['bank_name']	= $_POST['bank_name'];
-	        $data['card_author']= $_POST['card_author'];
-	        $data['card_number']= $_POST['card_number'];
+	        $_POST['uid']= $_POST['id'];
+	        $data['id_card']	= $_POST['id_card'] ? $_POST['id_card'] : '';
+	        $data['bank_name']	= $_POST['bank_name'] ? $_POST['bank_name'] : '';
+	        $data['card_author']= $_POST['card_author'] ? $_POST['card_author'] : '';
+	        $data['card_number']= $_POST['card_number'] ? $_POST['card_number'] : '';
 	        $data['uid']= $_POST['id'];
 	        // 更新数据
 	        $list = $detail->where($condition)->save($data);
@@ -217,5 +220,48 @@ class MemberAction extends CommonAction {
 		}
 		
 		$this->memberPage($model, $where, 20);
+	}
+	/**
+	 * 获取会员信息
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-14 上午11:08:23
+	 */
+	public function getMemberInfo($id){
+		$id = $id ? $id : $_SESSION[C('USER_AUTH_KEY')];
+		$User	=	M('Member');
+		$info	=	$User->find($id);
+		$detail	=	M("member_detail");	
+		$info_detail	=	$detail->where('uid = '. $info['id'])->find();
+		$this->assign("info",$info);
+		$this->assign("info_detail",$info_detail);
+		return $info;
+	}
+	/**
+	 * 修改密码
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-14 下午1:31:45
+	 */
+	public function changePassword($id, $newpsw){
+		$id = $id ? $id : $_SESSION[C('USER_AUTH_KEY')];
+		$Member = M('Member');
+		$data['password'] = $this->pwdHash($newpsw);
+		$data['id'] = $id;
+		if($Member->save($data)){
+			$this->success('修改成功！');
+		}
+	}
+	/**
+	 * 得到密码
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-14 下午1:47:18
+	 */
+	public function getPassword($id){
+		$id = $id ? $id : $_SESSION[C('USER_AUTH_KEY')];
+		$Member	=	M('Member');
+		$info	=	$Member->find($id);
+		return $info['password'];
 	}
 }
