@@ -21,27 +21,27 @@
 <table align="center" class="list" cellspacing="0">
     <tbody><tr>
         <td style="border-right:none;">
-            <form method="get">
-                <input type="hidden" name="m" value="report_finance">
+            <form method="post" action="SITE_URL/?m=Finance&a=index">
                 UID: <input type="text" name="uid">
                 <input type="submit" value="查询" class="button">
             </form>
         </td>
                 <td align="right">
-            <input type="button" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=report_finance&amp;a=withdraw_export&amp;uid=&amp;status=&#39;" class="button1" value="导出数据">
+            <input type="button" onclick="location.href=&#39;SITE_URL/?m=Finance&amp;a=withdraw_export&amp;uid=&amp;status=&#39;" class="button1" value="导出数据">
         </td>
     </tr>
     <tr>
         <td colspan="2" id="css1" style="font-size:13px;">支付状态：
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=" class="link-checked">全部</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=%E5%BE%85%E6%94%AF%E4%BB%98" class="link_before_checked">未支付</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=%E5%B7%B2%E6%94%AF%E4%BB%98" class="link_before_checked">已支付</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=%E5%BC%82%E5%B8%B8" class="link_before_checked">异常</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=" class="link-checked">全部</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=1" class="link_before_checked">未支付</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=2" class="link_before_checked">已支付</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=3" class="link_before_checked">异常</a>
         </td>
     </tr>
 </tbody></table>		
 <table align="center" cellspacing="0" class="list" style="text-align:center">
-	<tbody><tr class="tb_title">
+	<tbody>
+	<tr class="tb_title">
         <td>会员ID</td>
         <td>申请时间</td>
         <td>税前总收入(￥)</td>
@@ -52,18 +52,22 @@
         <td>状态</td>     
         <td>操作</td>
     </tr>
-    <tr class="bgcolor3">        <td>300020</td>
-        <td>2013-08-14 08:00</td>
-        <td>900.00</td>
-        <td>880.00</td>
-        <td>2.00</td>
-        <td>878.00</td> 
-        <td></td>
-        <td>待支付</td>        
+	<volist name="apply" id="vo">
+    <tr class="bgcolor3">        
+		<td>{$vo.id}</td>
+        <td>{$vo.apply_date}</td>
+        <td>{$vo.pre_tax}</td>
+        <td>{$vo.after_tax}</td>
+        <td>{$vo.fee}</td>
+        <td>{$vo.amount_payable}</td> 
+        <td>{$vo.process_time}</td>
+        <td><if condition="$vo.status eq 1">未支付<elseif condition="$vo.status eq 2"/>已支付<else />异常</if></td>     
         <td><a href="javascript:void(0);" onclick="doWithdraw(1)">处理提现</a></td>
-        </tr>
-        </tbody></table>
-<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共1 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=report_finance&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=report_finance&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=report_finance&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=report_finance&page=1">尾页</a>&nbsp;&nbsp;</div></div>
+    </tr>
+	</volist>
+</tbody>
+</table>
+<div class="admin_do index_page" style="text-align:center;"></div>
 </div>
 </div>
 <div id="withdraw_do" style="display:none;width:390px;">
@@ -87,7 +91,7 @@ function doWithdraw(id)
 {
     $("input[name='id']").val(id);
 
-    $.getJSON("http://adu.phpad.cn/admin.php?m=report_finance&a=withdraw_detail&", {id:id}, function(data){
+    $.getJSON("SITE_URL/m=Finance&a=withdraw_detail&", {id:id}, function(data){
         if (data.status == 1)
         {
             $("#account").html(data.data.account);
@@ -111,5 +115,5 @@ function doWithdraw(id)
     }); 	
 }
 </script>
-
-</body></html>
+</body>
+</html>
