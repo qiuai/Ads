@@ -1,0 +1,62 @@
+<include file="Index:headerWeb" />
+<link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/calendar-blue.css">
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/calendar.js"></script>
+<div class="main clearfix">
+	<div class="tixian_detail  gray_box ie6_floatbug">
+		<div class="gb_t">
+			<div class="gb_tr"><h3>提现明细</h3></div>
+		</div>
+		<div class="tixian_border">
+			<div class="tixian_detail_body">
+				<table class="table_list">
+				  <tbody>
+				  <tr>
+				  <form action="SITE_URL/?m=FinanceWeb&a=index" method="post">
+					<td colspan="8" style="padding:10px;" class="notb">
+					<span class="fl" style="margin-left:10px;">支付状态：</span>
+					<select name="status" class="fl">
+						<option value="">选择状态</opstion>
+						<option value="1">未支付</option>
+						<option value="2">已支付</option>
+						<option value="3">异常</option>
+					</select>
+					<input type="submit" class="report_searchbtn fr" value="">
+					</td>
+				  </form>                     
+				  </tr>
+				<tr class="tixian_bcolor">
+					<td height="28" class="notb">提现时间</td>
+					<td class="notb">提现金额</td>
+					<td class="notb">扣税金额</td>
+					<td class="notb">汇款手续费</td>
+					<td class="notb">实付金额</td>
+					<td class="notb">支付状态</td>
+					<td class="notb">支付时间</td>
+					<td class="notb">备注</td>
+				  </tr>
+				  <volist name="finance" id="vo">
+				  <tr>
+					  <td>{$vo.withdrawal_date}</td>
+					  <td>{$vo.withdrawal_amount}</td>
+					  <td>{$vo.deductible_amount}</td>
+					  <td>{$vo.transfer_fee}</td>
+					  <td>{$vo.amount_payable}</td>
+					  <td>{$vo.payment_status}</td>
+					  <td>{$vo.paid_time}</td>
+					  <td>{$vo.remark}</td>
+				  </tr>
+				  </volist>
+				  <tr>
+					<td colspan="8">
+						<div class='page_bar fr'>
+						<!--分页-->
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			</div>				
+		</div>
+	</div>		    
+</div>
+<include file="Index:footer" />
