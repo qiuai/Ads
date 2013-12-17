@@ -11,13 +11,16 @@
 		<div class="main">
 			<div class='body_title'>新增广告</div>
 			<div class="listmain setting">
-			<form action="http://adu.phpad.cn/admin.php?m=webad&a=ad_save&" method="post" enctype="multipart/form-data">
+			<form action="SITE_URL?m=AdManage&a=doAdd" method="post" enctype="multipart/form-data">
 				<table align="center" cellspacing="0" class="list">
 					<tr>
 						<td style="width: 120px"><em class="red">*</em>所属计划：</td>
 						<td class="textbox_td">
-						    <select class="newsite_select" name="plan_id" >
-                                <option value="96">test</option><option value="97">test1</option><option value="98">test11</option><option value="99">test11</option><option value="100">test11</option><option value="101">test11</option><option value="102">admin plan test1</option><option value="108">step_plan2</option><option value="120">step_plan4</option><option value="121">step_plan5</option><option value="128">directional_test</option>                            </select>
+						    <select class="newsite_select" name="pid" >
+						    	<volist name="adPlanInfo" id="vo">
+						    		<option value="{$vo['id']}">{$vo['plan_name']}</option>
+						    	</volist>
+                             </select>
                         </td>
 					</tr>
 					<tr>
@@ -29,15 +32,12 @@
 						<td><em class="red">*</em>展示形式：</td>
 						<td class="textbox_td">
 						    <select class="newsite_select" name="show_type">
-						        <optgroup label="图片广告" style="background-color:#ccc"></optgroup><option value='6' show_type='image'>960*90&nbsp;图片横幅</option>
-<option value='7' show_type='image'>200*200&nbsp;方形</option>
-<optgroup label="漂浮广告" style="background-color:#ccc"></optgroup><option value='10' show_type='pf'>50*50&nbsp;小块漂浮</option>
-<optgroup label="对联广告" style="background-color:#ccc"></optgroup><option value='11' show_type='dl'>100*400&nbsp;对联</option>
-<option value='19' show_type='dl'>50*200&nbsp;小对联</option>
-<optgroup label="文本广告" style="background-color:#ccc"></optgroup><option value='20' show_type='txt'>240*60&nbsp;首页文字横幅</option>
-<optgroup label="右下角悬浮广告" style="background-color:#ccc"></optgroup><option value='21' show_type='yxj'>300*300&nbsp;右下角视窗</option>
-<optgroup label="弹窗广告" style="background-color:#ccc"></optgroup><option value='22' show_type='pop'>50*50&nbsp;弹窗</option>
-<option value='39' show_type='image'>100*100&nbsp;小图块</option>
+						    <volist name="sizeTypeInfo" id="vo">
+						    	 <optgroup label="{$vo[0]['size_type_name']}" style="background-color:#ccc"></optgroup>
+						    	 <volist name='vo' id='item'>
+						    	 	<option value='{$item["id"]}'  <if condition=" $item['size_type'] eq 2">show_type='txt'<else />show_type='image'</if>>{$item['description']}</option>
+						    	 </volist>
+						    </volist>
                             </select>
                         </td>
 					</tr>
