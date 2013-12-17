@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0043)http://adu.phpad.cn/admin.php?m=web_balance -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><style type="text/css">
+.list td{
+	border:0px;
+}
+.td_b_m td {
+    border-bottom: 2px solid #DDDDDD;
+}
+a{
+	cursor: pointer;
+}
+</style>
+<link rel="stylesheet" href="STATIC_URL/admin/css/black.css?">
+<script language="javascript" src="STATIC_URL/admin/js/artDialog.js"></script>
+</head>
+<body><div class=" aui_state_focus" style="position: absolute; left: -9999em; top: 257px; display: block; width: auto; z-index: 1987;"><div class="aui_outer"><table class="aui_border"><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move; display: block;">消息</div><a class="aui_close" href="javascript:/*artDialog*/;" style="display: block;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background-image: none; background-position: initial initial; background-repeat: initial initial;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px;"><div class="aui_loading"><span>loading..</span></div></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></table></div></div>
+<div class="wrap">
+ <div class="main">
+  <div class="body_title">网站主余额列表</div>
+  <div class="listmain">	
+      <table align="center" class="list" cellspacing="0">
+        <tr>
+        <td width="40%" style="border-right:none;border-top:1px solid #ccc">
+            <form method="get">
+                <input type="hidden" name="m" value="{$module_name}">
+                <input type="hidden" name="a" value="{$action_name}">
+                <input type="text" name="content" value="">
+                <select name="condition">
+                    <option value="id">用户UID</option>
+                    <option value="username">用户名</option>
+                </select>
+                <input type="submit" value="查询" class="button">
+            </form>
+        </td>
+                <td align="right" style="border-top:1px solid #ccc">
+            <input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=web_balance&amp;a=web_balance_export&amp;content=&amp;condition=&amp;user_status=&#39;">
+        </td>
+        </tr>
+        <tr>
+            <td style="font-size:13px;height:40px;border-top: 1px solid #CECECE;" colspan="2">用户状态：
+                <a href="SITE_URL?m={$module_name}&a={$action_name}" class="link-checked">全部状态</a>
+                <a href="SITE_URL?m={$module_name}&a={$action_name}&status=0" class="link_before_checked">正常</a>
+                <a href="SITE_URL?m={$module_name}&a={$action_name}&status=1" class="link_before_checked">待审核</a>
+                <a href="SITE_URL?m={$module_name}&a={$action_name}&status=2" class="link_before_checked">锁定</a>
+                <a href="SITE_URL?m={$module_name}&a={$action_name}&status=3" class="link_before_checked">拒绝</a>
+                <a href="SITE_URL?m={$module_name}&a={$action_name}&status=4" class="link_before_checked">未激活邮件</a>
+            </td>
+        </tr>
+    </table>
+		
+		
+<form method="post" id="sitelist_form">
+<table cellspacing="0" cellpadding="0" border="0" class="list" style="text-align:center;">
+    <tr class="tb_title">
+        <td>UID</td>
+        <td>会员名</td>
+        <td>已结算余额</td>
+        <td>总余额</td>
+        <td>日余额</td>
+        <td>周余额</td>
+        <td>月余额</td>
+        <td>可用积分</td>
+        <td>会员状态</td>
+        <td>属于客服</td>
+        <td>上次登录时间</td>       
+    </tr>
+    
+    <Volist name="list" id="vo">
+    <tr class="bgcolor3">        
+    	<td>{$vo.id}</td>
+        <td>{$vo.username}</td>
+        <td>{$vo.settlement_balance}</td>
+        <td>{$vo.total_balance}</td>
+        <td>{$vo.day_balance}</td>
+        <td>{$vo.week_balance}</td>
+        <td>{$vo.month_balance}</td>
+        <td>{$vo.integral}</td>
+        <td>
+        	<if condition="$vo.status eq 0">
+        		{:C('MEMBER_STATUS.0')}
+        	<elseif condition="$vo.status eq 1" />
+        		{:C('MEMBER_STATUS.1')}
+        	<elseif condition="$vo.status eq 2" />
+        		{:C('MEMBER_STATUS.2')}
+        	<elseif condition="$vo.status eq 3" />
+        		{:C('MEMBER_STATUS.3')}
+        	<elseif condition="$vo.status eq 4" />
+        		{:C('MEMBER_STATUS.4')}
+        	</if>
+        </td>
+        <td>{$vo.manager}</td>
+        <td>{:date('Y-m-d',$vo['last_login_time'])}</td>
+        </tr>
+        
+        <!-- 网站主快捷操作开始 -->
+         <tr class="td_b_m" onmouseover="$('#quick_{$vo.id}').show()" onmouseout="$('#quick_{$vo.id}').hide()">
+			<td>
+				&nbsp;
+				<if condition="$vo.status eq 0">
+				<img src="STATIC_URL/admin/images/active.png" alt="活跃/不活跃" align="middle">
+				<else />
+				<img src="STATIC_URL/admin/images/inactive.png" alt="活跃/不活跃" align="middle">
+				</if>
+			</td>
+			<td colspan="10" style="text-align:left;width:900px">
+				<span style="display: none;" id="quick_{$vo.id}">
+					<a href="SITE_URL?m=Member&a=edit&id={$vo.id}" title="编辑这个会员">
+						编辑
+					</a>
+					|
+					<a title="激活这个会员" onclick="activate({$vo.id})">
+						激活
+					</a>
+					|
+					<a title="锁定这个会员" onclick="locks({$vo.id})">
+						锁定
+					</a>
+					|
+					<a href="SITE_URL?m=Member&a=modifyAmount&uid={$vo.id}" title="手动充值" class="">
+						增/扣款项
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=300020" title="查看报表">
+						报表
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=300020" title="查看网站">
+						网站
+					</a>
+					|
+					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=300020" title="查看广告位">
+						广告位
+					</a>
+					|
+					<a href="SITE_URL?m=Email&id={$vo.id}" title="发送邮件">
+						发送邮件
+					</a>
+					&nbsp;|&nbsp;
+					<a title="相关设置" class="" onclick="doDeduction(300020,10,1.00,0.00,0.00,0.00)">
+						扣量等设置
+					</a>
+					&nbsp;|&nbsp;
+					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&id={$vo.id}" title="进入后台">
+						进入后台
+					</a>
+				</span>
+			</td>		
+		</tr>
+        <!-- 网站主快捷操作结束 -->
+    </Volist>
+    
+    </table>
+</form>
+<div id="show_act" style="display:none;position:absolute"></div>
+</div>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div></div>
+</div>
+</div>
+<div id="deduction" style="display:none">
+	<form action="http://adu.phpad.cn/admin.php?m=web_balance&a=member_set_deduction&" method="post">
+	<input type="hidden" name="uid" id="uid" value="">
+		<p style="margin:10px 0">CPS扣量：<input type="text" name="cps" id="cps" value="" class="textbox">%</p>
+		<p style="margin:10px 0">CPA扣量：<input type="text" name="cpa" id="cpa" value="" class="textbox">效果</p>
+		<p style="margin:10px 0">CPC扣量：<input type="text" name="cpc" id="cpc" value="" class="textbox">点击</p>
+		<p style="margin:10px 0">CPM扣量：<input type="text" name="cpm" id="cpm" value="" class="textbox">%</p>
+		<p style="margin:10px 0">
+		属于客服：<select name="mid">
+					<option value="0">--请选择客服--</option>
+									</select>
+		<input style="margin-left:80px" type="submit" value="修改" class="button">
+		</p>
+	</form>
+</div>
+<script type="text/javascript">
+function activate(uid){
+	var psub = confirm("是否确认激活？");
+    if (psub) {
+        $.post("SITE_URL?m=Member&a=updateStatus", {
+            "uid": uid,
+            "status":"0",
+            "action":"active",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('提交失败');
+            }
+        });
+    }
+}
+function locks(uid){
+	var psub = confirm("是否确认锁定？");
+    if (psub) {
+        $.post("SITE_URL?m=Member&a=updateStatus", {
+            "uid": uid,
+            "status":"2",
+            "action":"active",
+        },function(data) {
+            if (data == 'ok') {
+                document.location.reload();
+            } else {
+                alert('提交失败');
+            }
+        });
+    }
+}
+//扣量设置
+function doDeduction(uid,mid,cps,cpa,cpc,cpm)
+{
+	$('#uid').val(uid);
+	$('#cps').val(cps);
+	$('#cpa').val(cpa);
+	$('#cpc').val(cpc);
+	$('#cpm').val(cpm);
+	$('.mid').each(function(){
+			if($(this).val()==mid){
+				$(this).attr('selected','selected');
+			}
+		});
+    art.dialog({  
+        content: document.getElementById("deduction"),    
+        title:uid+'的扣量等设置',  
+        id:'withdras',
+        width:'350px',
+        height:'230px',
+        padding:'5px'
+    }); 	
+}
+</script>
+
+</body></html>

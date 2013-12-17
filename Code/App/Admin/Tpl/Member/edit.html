@@ -76,9 +76,9 @@
     </tr>
     <tr>
         <td>帐户类型:</td><td>
-        <select name="bank_name">
-                <option value="icbc" <if condition="$bank.bank_name eq icbc">selected="selected"</if>>{:C('BANK_TYPE.ICBC')}</option>
-                <option value="cmb" <if condition="$bank.bank_name eq cmb">selected="selected"</if>>{:C('BANK_TYPE.CMB')}</option>
+        <select name="bank_short">
+                <option value="ICBC" <if condition="$bank.bank_short eq ICBC">selected="selected"</if>>{:C('BANK_SHORT.ICBC')}</option>
+                <option value="CMB" <if condition="$bank.bank_short eq CMB">selected="selected"</if>>{:C('BANK_SHORT.CMB')}</option>
                 </select>
         </td>
         <td>身份证:</td><td colspan="3"><input type="text" name="id_card" id="id_card" value="{$bank.id_card}"><div class="onShow">请填写真实的身份证</div></td>

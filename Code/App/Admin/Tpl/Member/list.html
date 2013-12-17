@@ -131,7 +131,7 @@ a{
 						删除
 					</a>
 					|
-					<a href="SITE_URL?m=balance&a=balance_add&id=300020" title="手动充值" class="">
+					<a href="SITE_URL?m=Member&a=modifyAmount&uid={$vo.id}" title="手动充值" class="">
 						增/扣款项
 					</a>
 					|
@@ -228,7 +228,7 @@ a{
 						广告
 					</a>
 					|
-					<a href="SITE_URL?m=send_email&a=send_email_list&id=600043" title="发送邮件">
+					<a href="SITE_URL?m=Email&id={$vo.id}" title="发送邮件">
 						发送邮件
 					</a>
 					&nbsp;|&nbsp;
