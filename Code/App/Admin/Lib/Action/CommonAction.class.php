@@ -49,7 +49,7 @@ class CommonAction extends Action {
     	$this->assign("groupList",$list);
     }
     /**
-     * 分页方法
+     * 分页方法 ThinkPHP
      *
      * @author Vonwey <VonweyWang@gmail.com>
      * @CreateDate: 2013-12-12 上午11:09:19
@@ -74,6 +74,30 @@ class CommonAction extends Action {
     
     	$show       = $Page->show();// 分页显示输出
     
+    	$this->assign('page',$show);// 赋值分页输出
+    }
+    /**
+     * SQL 分页
+     *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-12-16 下午3:43:45
+     */
+    public function pageList($sql, $countSql, $pageNum){
+    	$model = M('');
+    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    	$list = $model->query($sql);
+    	$this->assign('list',$list);// 赋值数据集
+    	import("ORG.Util.Page");// 导入分页类
+    	$count      = $model->query($countSql);;// 查询满足要求的总记录数
+    	$Page       = new Page($count[0]['num'],$pageNum);// 实例化分页类 传入总记录数和每页显示的记录数
+    	
+    	$Page->setConfig('first','首页');
+    	$Page->setConfig('last','尾页');
+    	
+    	$Page->setConfig('theme','共%totalRow% %header% %nowPage%/%totalPage% 页  %first% %upPage% %prePage% %linkPage% %downPage% %end%');
+    	
+    	$show       = $Page->show();// 分页显示输出
+    	
     	$this->assign('page',$show);// 赋值分页输出
     }
 	public function index() {

@@ -10,15 +10,15 @@
 <body>
 
  <div class="main">
-   <div class="body_title">新增余额修改</div>
+   <div class="body_title">{$location}</div>
 		<div class="listmain setting">
 		
-<form method="post" action="http://adu.phpad.cn/admin.php?m=balance&a=balance_insert&">
+<form method="post" action="SITE_URL?m=Member&a=modifyAmount">
 <table align="center" class="list" width="95%" cellspacing="0">
     <tbody><tr>
     	<td style="width:120px"><em class="red">*</em>用&nbsp;&nbsp;户&nbsp;&nbsp;ID：</td>
     	<td class="textbox_td">
-    		<input class="textbox" type="text" name="uid" value="">
+    		<input class="textbox" type="text" name="uid" value="{$uid}">
     		<div class="onShow">请填写正确的用户ID</div>				
     	</td>
     </tr>

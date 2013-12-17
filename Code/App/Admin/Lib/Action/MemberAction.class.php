@@ -108,7 +108,7 @@ class MemberAction extends CommonAction {
 	 */
 	public function updateStatus(){
 		$model = M("Member");
-		$where['uid'] = (int)$_REQUEST['uid'];
+		$where['id'] = (int)$_REQUEST['uid'];
 		$data['status'] = (int)$_REQUEST['status'];
 		if($model->where($where)->save($data)){
 			echo 'ok';
@@ -147,7 +147,7 @@ class MemberAction extends CommonAction {
 	        $condition['uid']		= $_POST['id'];
 	        $_POST['uid']= $_POST['id'];
 	        $data['id_card']	= $_POST['id_card'] ? $_POST['id_card'] : '';
-	        $data['bank_name']	= $_POST['bank_name'] ? $_POST['bank_name'] : '';
+	        $data['bank_short']	= $_POST['bank_short'] ? $_POST['bank_short'] : '';
 	        $data['card_author']= $_POST['card_author'] ? $_POST['card_author'] : '';
 	        $data['card_number']= $_POST['card_number'] ? $_POST['card_number'] : '';
 	        $data['uid']= $_POST['id'];
@@ -238,6 +238,60 @@ class MemberAction extends CommonAction {
 		return $info;
 	}
 	/**
+	 * 增扣款项列表
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-16 下午5:15:07
+	 */
+	public function modifyAmount(){
+		if($this->isPost()){
+			// 查询总余额
+			$module = M('web_balance');
+			$where['uid'] = $_POST['uid'];
+			$balance = $module->where($where)->find();
+			// 余额数据是否存在
+			if(empty($balance)){
+				$module->add($where);
+			}
+			if($total = (floatval(trim($balance['total_balance'])) + floatval(trim($_POST['money'])))){
+				// 增减总余额
+				if($module->where('id = '.$balance['id'])->setField(array('total_balance'=>$total))){
+					// 记录修改金额
+					// 记录修改金额
+					$_POST['aid'] = $_SESSION[C('USER_AUTH_KEY')]; // 操作员ID
+					$_POST['create_time'] = time(); // 添加时间
+					$module = M('balance_money');
+					if($module->create()){
+						if($module->add()){
+							$this->success("添加成功！");
+						}else{
+							$this->error("添加失败！");
+						}
+					}else{
+						echo "修改金额成功，记录数据失败！";
+					}
+				}else{
+					$this->error("修改余额失败！");
+				}
+			}else{
+				$this->error("会员余额不足！");
+			}
+		}else{
+			$this->assign("uid",$_REQUEST['uid']);
+			$this->assign("location","增扣款项列表");
+			$this->display();
+		}
+	}
+	/**
+	 * 网站余额列表
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-16 下午6:38:20
+	 */
+	public function modifyList(){
+		
+	}
+	/**
 	 * 修改密码
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
@@ -263,5 +317,35 @@ class MemberAction extends CommonAction {
 		$Member	=	M('Member');
 		$info	=	$Member->find($id);
 		return $info['password'];
+	}
+	/**
+	 * 网站主余额列表
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-16 上午10:30:49
+	 */
+	public function webBalance(){
+		// 搜索
+		if($_REQUEST['content']){
+			$where = "where m." . $_REQUEST['condition'] ." = " .$_REQUEST['content'];
+			$isSearch = 1;
+		}
+		
+		// 状态
+		if($_REQUEST['status'] != '' && $_REQUEST['status'] != NULL){
+			if($isSearch){
+				$where .= " m.status = " . $_REQUEST['status'];
+			}else{
+				$where = "where m.status = " . $_REQUEST['status'];
+			}
+		}
+		$p = $_GET['p'] ? $_GET['p'] : 0;
+		$num = 10;
+		$limit = " limit ". $p*$num .",".$num;
+		$sql = "select b.*, m.* from " . C('DB_PREFIX') . "member m left join " . C('DB_PREFIX') . "web_balance b on m.id = b.uid $where $limit";
+		$count = "select count(m.id) as num from " . C('DB_PREFIX') . "member m left join " . C('DB_PREFIX') . "web_balance b on m.id = b.uid $where limit 1";
+		
+		$this->pageList($sql, $count, $num);
+		$this->display();
 	}
 }
