@@ -450,4 +450,68 @@ class CommonAction extends Action {
     function pwdHash($password, $type = 'md5') {
     	return hash ( $type, $password );
     }
+    
+    
+    /**
+     *
+     * 图片上传对应的方法
+     * @author Yumao <815227173@qq.com>
+     * @CreateDate: 2013-12-14 下午5:17:53
+     * @param unknown_type $uploadPathDir
+     * @return Ambigous <string, multitype:number NULL string >
+     */
+   protected  function upload($uploadPathDir){
+    
+    	// 定义变量保存上传图片的相关信息
+    	$info = array();
+    	import('ORG.Net.UploadFile');
+    	$upload = new UploadFile();// 实例化上传类
+    	$upload->maxSize  = C('UPLOAD_MAX_SIZE');// 设置附件上传大小
+    
+    	// 获取当前的年月
+    	$yearMonth = date("Ym",time());
+    
+    	// 获取当前的日期
+    	$day = date("d",time());
+    
+    	// 创建上传文件夹路径
+    	$uploadPathCompletion = ROOT_PATH."/../Uploadfile/".$uploadPathDir."/".$yearMonth."/".$day;
+    
+    	// 创建文件夹
+    	mkdir($uploadPathCompletion,0777,true);
+    
+    	$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+    
+    	// 设置上传文件的保存目录
+    	$upload -> savePath =  $uploadPathCompletion.'/';
+    
+    	if(!$upload->upload()){
+    
+    		// 发生错误跳转
+    		$info['message'] = $upload->getErrorMsg();
+    		$info['flag'] = 0;
+    	}else{
+    
+    		// 上传文件成功返回文件的相关信息
+    		$info['message'] = $upload->getUploadFileInfo();
+    		$info['message']['0']['completionPath'] = $uploadPathDir."/".$yearMonth."/".$day."/".$info['message'][0]['savename'];
+    		$info['flag'] = 1;  // 代表上传成功
+    	}
+    
+    	return $info;
+    
+    }
+    
+    /**
+     * 删除上传的图片文件
+     *
+     * @author Yumao <815227173@qq.com>
+     * @CreateDate: 2013-12-12 下午4:28:41
+     */
+    protected  function delUpload($filePath){
+    
+    	if(file_exists(ROOT_PATH."/../Uploadfile/".$filePath)){
+    		unlink(ROOT_PATH."/../Uploadfile/".$filePath);
+    	}
+    }
 }

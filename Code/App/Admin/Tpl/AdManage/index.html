@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+<style type="text/css">
+/*.link-checked{background:#ccc;}*/
+</style>
+</head>
+<body>
+		<div class="main">
+			<div class='body_title'>广告列表</div>
+			<table align="center" class="list" cellspacing="0">
+				<tr>
+					<td style="border-right: 0px;">
+						<form method="get">
+							<input type="hidden" name="m" value="webad" />
+							计划ID：<input type="text" name="plan_id" value="" />
+							<input type="submit" value="查询"class="button" />
+						</form>
+					</td>
+										 <td align="right">
+			            <input type="button" value="导出报表" class="button1" onclick="location.href='http://adu.phpad.cn/admin.php?m=webad&a=webad_export&plan_id=&status=&uid='" />
+			        </td>
+				</tr>
+				<tr>
+					<td colspan="2" style="font-size: 13px;">广告状态：
+					    <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&" class="link-checked">全部状态</a>                        
+                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=3"  class="link_before_checked">新增待审</a>
+                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=4"  class="link_before_checked">修改待审</a>
+                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=1"  class="link_before_checked">投放中</a> 
+                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=2"  class="link_before_checked">审核拒绝</a>                                              
+                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=0"  class="link_before_checked">计划停止</a>
+					</td>
+				</tr>
+			</table>
+
+			<table cellspacing="0" class="list" style="text-align:center">
+				<tr class="tb_title">
+					<td>广告ID</td>
+					<td>计划ID</td>
+					<td>广告主ID</td>
+					<td>展示类型</td>
+					<td>标题</td>
+					<td>尺寸</td>
+					<td>添加时间</td>
+					<td>状态</td>
+					<td>操作</td>
+				</tr>
+				<volist name="AdManageInfo" id="vo" key="key">
+					
+					<tr <if condition="$key%2 eq 0">class="bgcolor3"<else />class="bgcolor4"</if>>
+					<td>
+                        {$vo['aid']}
+                    </td>
+					<td>
+                        {$vo['pid']}
+                     </td>
+                    <td>
+                        {$vo['sid']}
+                    </td>
+					<td>
+                        {$vo['size_type']}
+                    </td>
+					<td>
+                        {$vo['title']}
+                     </td>
+					<td>
+                        {$vo['size']}&nbsp;
+                     </td>
+					<td>
+                       	{$vo['time']}                   </td>
+					<td>
+                        <span 
+                        <if condition="$vo['status'] eq 2" >
+                        style="color:green"
+                        <elseif condition="($vo['status'] eq 0) or ($vo['status'] eq 1)"/>
+                        style="color:orange"
+                        <else />
+                        style="color:red"
+                        </if> 
+                        >{$vo['status_name']}</span>                    </td>
+					<td>
+						<if condition="$vo['status'] eq 2"> 
+						<a href="SITE_URL?m=AdManage&a=show&aid={$vo['aid']}"  >查看广告</a>&nbsp;<a href="SITE_URL?m=AdManage&a=edit&aid={$vo['aid']}"  >修改</a><else/><a href="SITE_URL?m=AdManage&a=check&aid={$vo['aid']}"  >审核广告</a>&nbsp;<a href="SITE_URL?m=AdManage&a=edit&aid={$vo['aid']}"  >修改</a></if>
+					    					   
+					    					</td>
+				</tr>
+				</volist>
+                </table>
+
+<div class="admin_do index_page" style="text-align: center;"><div class='page_bar fr'><span>共29 条记录 1/2 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/admin.php?m=webad&a=ad_list&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/admin.php?m=webad&a=ad_list&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a href='/admin.php?m=webad&a=ad_list&page=2'> 2 </a>&nbsp;&nbsp;<a class='page_next' href='/admin.php?m=webad&a=ad_list&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/admin.php?m=webad&a=ad_list&page=2'>尾页</a>&nbsp;&nbsp;</div></div>
+</div>
+</body>
+</html>

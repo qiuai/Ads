@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>审核广告</div>
+			<div class="listmain">
+				<table align="center" cellspacing="0" class="list">
+					<tr>
+						<td style="width: 100px">广告ID：</td>
+						<td>{$AdManageInfo['aid']}</td>
+					</tr>
+					<tr>
+						<td>广告标题：</td>
+						<td>{$AdManageInfo['title']}</td>
+					</tr>
+					<tr>
+						<td>所属计划：</td>
+						<td>{$AdManageInfo['plan_name']}</td>
+					</tr>
+					<tr>
+						<td>广告尺寸：</td>
+						<td>{$AdManageInfo['size']}</td>
+					</tr>
+					<tr>
+						<td>跳转链接：</td>
+						<td><a href="{$AdManageInfo['jump_url']}">{$AdManageInfo['jump_url']}</a></td>
+					</tr>
+					<tr>
+					    <td>广告内容：</td>
+					    <td>
+                                               {$AdManageInfo['content']}
+                                            </td>                  
+                    </tr>
+					<tr>
+						<td>广告状态：</td>
+						<td><span style="color:orange">{$AdManageInfo['status_name']}</span></td>
+					</tr>
+				</table>
+
+				<form method="post" action="SITE_URL?m=AdManage&a=doCheck">
+				<input type="hidden" name="aid" value="{$AdManageInfo['aid']}" />
+				<table align="center">
+					<tr>
+						<td colspan="2" align="center">
+						  <input type="submit" name="submitPass" value="通过" class="button" />
+						  <input type="submit" name="submitRefuse" value="拒绝" class="button" style="margin-left: 20px" />
+						</td>					
+					</tr>
+				</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
