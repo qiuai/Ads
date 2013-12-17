@@ -86,6 +86,7 @@ class CommonAction extends Action {
     	$model = M('');
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$list = $model->query($sql);
+//     	echo $model->getLastSql();
     	$this->assign('list',$list);// 赋值数据集
     	import("ORG.Util.Page");// 导入分页类
     	$count      = $model->query($countSql);;// 查询满足要求的总记录数

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0039)http://adu.phpad.cn/admin.php?m=balance -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+<div class="wrap">
+ <div class="main">
+  <div class="body_title">增扣款项列表</div>
+  <div class="listmain">	
+      <table align="center" class="list" cellspacing="0">
+        <tr>
+        <td width="40%" style="border-right:none;">
+            <form method="get">
+                <input type="hidden" name="m" value="{$module_name}">
+                <input type="hidden" name="a" value="{$action_name}">
+                <input type="text" name="content" value="">
+                <select name="condition">
+                    <option value="uid">用户UID</option>
+                    <option value="aid">操作者ID</option>                    
+                </select>
+                <input type="submit" value="查询" class="button">
+            </form>
+        </td> 
+                <td align="right">
+            <input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=balance&amp;a=balance_export&amp;content=&amp;condition=&#39;">
+        </td>
+        </tr>
+    </table>
+		
+<form method="post" id="sitelist_form">
+<table cellspacing="0" class="list" style="text-align:center">
+    <tr class="tb_title">
+        <td>ID</td>
+        <td>UID</td>
+        <td>操作者ID</td>
+        <td>户头</td>
+        <td>帐户</td>
+        <td>开户行</td>
+        <td>更改金额（$）</td>
+        <td>用户余额（$）</td>
+        <td>用户手机号</td>
+        <td>添加时间</td>
+        <td>备注</td>        
+    </tr>
+    
+    <Volist name="list" id="vo" key="key">
+    <tr <if condition="$key%2 gt 0">class="bgcolor3"<else />class="bgcolor4"</if>>    	
+    	<td>{$vo.id}</td>
+        <td>{$vo.uid}</td>
+        <td>{$vo.aid}</td>
+        <td>{$vo.card_author}</td>
+        <td>{$vo.card_number}</td>
+        <td>{$vo.bank_short}</td>
+     	<td>{$vo.money}</td>
+     	<td>{$vo.total_balance}</td>
+        <td>{$vo.mobilephone}</td>
+        <td>{:date('Y-m-d',$vo['create_time'])}</td>
+      	<td>{$vo.remark}</td>        
+    </tr>
+    </Volist>
+    
+    </table>
+</form>
+<div id="show_act" style="display:none;position:absolute"></div>
+</div>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div></div>
+</div>
+</div>
+
+</body></html>

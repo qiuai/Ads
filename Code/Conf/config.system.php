@@ -8,7 +8,7 @@ return array(
 	/**
 	 * 账号类型
 	 */
-	'BANK_TYPE'				=>array(
+	'BANK_SHORT'			=>array(
 			'ABC'	=>	"中国银行",
 			'ICBC'	=>	"工商银行",
 			'CMB'	=>	"招商银行",
