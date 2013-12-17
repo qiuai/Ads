@@ -35,6 +35,7 @@ class CommonAction extends Action {
     public function checkUser(){
     	$Public = A('Agent');
 		$Public->checkUser();
+		$this->logRecord();
     }
     /**
      * 获取应用信息
@@ -63,6 +64,7 @@ class CommonAction extends Action {
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$list = $model->where($where)->order($order)->page($_GET['p'].','.$pageNum)->select();
     	$this->assign('list',$list);// 赋值数据集
+//     	echo $model->getLastSql();
     	import("ORG.Util.Page");// 导入分页类
     	$count      = $model->where($where)->count();// 查询满足要求的总记录数
     	$Page       = new Page($count,$pageNum);// 实例化分页类 传入总记录数和每页显示的记录数
@@ -474,5 +476,24 @@ class CommonAction extends Action {
      */
     function pwdHash($password, $type = 'md5') {
     	return hash ( $type, $password );
+    }
+    /**
+     * 记录操作
+     *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-12-17 上午11:39:26
+     */
+    public function logRecord(){
+    	// 是否记录操作
+		$module = M("Node");
+		$where['module'] = MODULE_NAME;
+		$where['action'] = ACTION_NAME;
+		$data = $module->where($where)->find();
+		if(!empty($data) && $data['record']){
+			$log = D("Log");
+			if($log->create($where)){
+				$log->add();
+			}
+		}
     }
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0056)http://adu.phpad.cn/admin.php?m=user_log&a=user_log_list -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+    <div class="main">
+   <div class="body_title">操作记录列表</div>
+		<div class="listmain">
+<table align="center" class="list" cellspacing="0">
+    <tr>
+        <td style="border-right:none;">
+            <form method="get">
+                <input type="hidden" name="m" value="User">
+                <input type="hidden" name="a" value="logList">
+                UID: <input type="text" name="aid" value="">
+                <input type="submit" value="查询" class="button">
+            </form>
+        </td>
+        <td width="50" align="right">
+            <input type="button" onclick="location.href='SITE_URL?m=User&a=logClean';" class="button4" value="清除30日前的记录">
+        </td>
+    </tr>
+</table>		
+<table align="center" cellspacing="0" class="list" style="text-align:center">
+	<tr class="tb_title">
+        <td>ID</td>
+        <td>UID</td>
+        <td>Model</td>
+        <td>Action</td>
+        <td>参数</td>
+        <td>时间</td>      
+    </tr>
+    
+    <Volist name="list" id="vo" key="key">
+    <tr class="bgcolor3">            
+    	<td>{$vo.id}</td>
+        <td>{$vo.aid}</td>
+        <td>{$vo.module}</td>
+        <td>{$vo.action}</td>
+        <td>{$vo.argument}</td>
+        <td>{:date('Y-m-d H:i:s',$vo['create_time'])}</td>
+    </tr>
+    </Volist>
+    
+</table>
+
+<div id="show_act" style="display:none;position:absolute"></div>
+</div>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div></div>
+</div>
+
+
+</body></html>
