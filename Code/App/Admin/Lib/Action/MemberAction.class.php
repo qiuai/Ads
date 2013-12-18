@@ -329,9 +329,9 @@ class MemberAction extends CommonAction {
 				$where = "where m.status = " . $_REQUEST['status'];
 			}
 		}
-		$p = $_GET['p'] ? $_GET['p'] : 0;
+		$p = $_GET['p'] ? $_GET['p'] : 1;
 		$num = 10;
-		$limit = " limit ". $p*$num .",".$num;
+		$limit = " limit ". ($p-1)*$num .",".$num;
 		$sql = "select b.*, m.* from " . C('DB_PREFIX') . "member m left join " . C('DB_PREFIX') . "web_balance b on m.id = b.uid $where $limit";
 		$count = "select count(m.id) as num from " . C('DB_PREFIX') . "member m left join " . C('DB_PREFIX') . "web_balance b on m.id = b.uid $where limit 1";
 		
@@ -350,9 +350,9 @@ class MemberAction extends CommonAction {
 			$where = "where b." . $_REQUEST['condition'] ." = " .$_REQUEST['content'];
 		}
 		
-		$p = $_GET['p'] ? $_GET['p'] : 0;
+		$p = $_GET['p'] ? $_GET['p'] : 1;
 		$num = 10;
-		$limit = " limit ". $p*$num .",".$num;
+		$limit = " limit ". ($p-1)*$num .",".$num;
 		$sql = "select w.*, m.*, d.*, b.* from " . C('DB_PREFIX') . "member m right join " . C('DB_PREFIX') . "balance_money b on m.id = b.uid left join ". C('DB_PREFIX') ."member_detail d on m.id = d.uid left join ". C('DB_PREFIX') ."web_balance w on b.uid = w.uid ". $where." order by b.id desc". $limit;
 		$count = "select count(m.id) as num from " . C('DB_PREFIX') . "member m right join " . C('DB_PREFIX') . "balance_money b on m.id = b.uid $where limit 1";
 		

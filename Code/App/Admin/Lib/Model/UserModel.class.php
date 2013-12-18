@@ -2,7 +2,7 @@
 // 用户模型
 class UserModel extends CommonModel {
     public $_validate	=	array(
-        array('username','/^[a-z]\w{3,}$/i','帐号格式错误'),
+        array('username','/([a-z0-9]*[-_.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[.][a-z]{2,3}([.][a-z]{2})?/i','帐号格式错误'),
         array('password','require','密码必须'),
         array('repassword','require','确认密码必须'),
         array('repassword','password','确认密码不一致',self::EXISTS_VALIDATE,'confirm'),

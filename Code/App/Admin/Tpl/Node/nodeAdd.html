@@ -16,6 +16,7 @@ $(document).ready(function(){
 			async: false,
 			success:function(data){
 				$("#menu").empty();
+				$("#menu").append("<option value=\"0\">顶级栏目</option>");   //为Select追
 				level = $("#group").val();
 				item = data[level];
 				for(i=0; i<item.length; i++){
@@ -32,7 +33,6 @@ $(document).ready(function(){
 			<div class="body_title">{$location}</div>
 			<div class="listmain setting">
 				<form method="post" action="{:U(MODULE_NAME.'/nodeAdd')}">
-				<input id="input_pid" type="hidden" name="pid" value="">
 					<table align="center" cellspacing="0" class="list">
 						<tr>
 							<td style="width:150px"><em class="red">*</em>权限模块名称：</td>

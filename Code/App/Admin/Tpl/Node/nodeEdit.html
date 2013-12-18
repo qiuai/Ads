@@ -12,8 +12,8 @@
 		<div class="main">
 			<div class="body_title">{$location}</div>
 			<div class="listmain setting">
-				<form method="post" action="{:U(MODULE_NAME.'/update')}">
-				<input id="input_pid" type="hidden" name="pid" value="">
+				<form method="post" action="{:U(MODULE_NAME.'/nodeEdit')}">
+				<input id="input_pid" type="hidden" name="id" value="{$list.id}">
 					<table align="center" cellspacing="0" class="list">
 						<tbody><tr>
 							<td style="width:150px"><em class="red">*</em>权限模块名称：</td>
@@ -30,8 +30,8 @@
 					    <tr>
 							<td>是否记录操作：</td>
 							<td>
-							    <input type="radio" name="record" value="1" checked="checked"> 是
-							    <input type="radio" name="record" value="0" style="margin-left:10px"> 否
+							    <input type="radio" name="record" value="1" <if condition="$list.record eq 1">checked="checked"</if>> 是
+							    <input type="radio" name="record" value="0" <if condition="$list.record eq 0">checked="checked"</if> style="margin-left:10px"> 否
 							    </td>
 					    </tr>
 					</tbody></table>

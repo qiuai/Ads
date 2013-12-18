@@ -10,11 +10,12 @@
 function checkAction(pid)
 {
 	$('.cid_' + pid).attr("checked", "checked");
+	$('.tid_' + pid).attr("checked", "checked");
 }
 
-function checkModel(pid)
+function checkModule(pid)
 {
-	$('.pid_' + pid).attr("checked", "checked");
+	$('.tid_' + pid).attr("checked", "checked");
 }
 </script>
 </head>
@@ -39,7 +40,10 @@ function checkModel(pid)
 		            	<input type="checkbox" <if condition="$vo.checked eq 1">checked="checked"</if> name="node_id[]" value="{$vo.id}" onclick="checkAction({$vo.id});" class="pid_{$vo.id}">【{$vo.module_name}】
 		        	</h4>
 		        	<Volist name='vo[item]' id='item'>
-		        	 	{$item.module_name}<input type="checkbox" name="node_id[]" value="{$item.id}" class="cid_{$item.pid}" onclick="checkModel({$item.pid})" <if condition="$item.checked eq 1">checked="checked"</if>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		        	 	【{$item.module_name}】<input type="checkbox" name="node_id[]" value="{$item.id}" class="cid_{$item.pid}" onclick="checkModule({$item.id})" <if condition="$item.checked eq 1">checked="checked"</if>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		        	 	<foreach name="item[item]" item="child">
+		        	 	{$child.module_name}<input type="checkbox" name="node_id[]" value="{$child.id}" class="cid_{$item.pid} tid_{$item.id}" <if condition="$child.checked eq 1">checked="checked"</if>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		        	 	</foreach><br/>
 		        	</Volist><hr>
 		      	  </Volist>
 		      	  

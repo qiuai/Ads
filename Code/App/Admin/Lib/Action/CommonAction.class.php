@@ -24,8 +24,35 @@ class CommonAction extends Action {
     	$this->checkUser();
     	$this->assign("module_name",MODULE_NAME);
     	$this->assign("action_name",ACTION_NAME);
+    	
+    	/**
+    	 * 权限检测
+    	 */
+    	import('@.ORG.Util.Cookie');
+    	// 用户权限检查
+    	if (C('USER_AUTH_ON') && !in_array(MODULE_NAME, explode(',', C('NOT_AUTH_MODULE')))) {
+    		import('@.ORG.Util.RBAC');
+//     		dump(RBAC::getAccessList($_SESSION[C('USER_AUTH_KEY')]));die();
+    		if (!RBAC::AccessDecision()) {
+    			//检查认证识别号
+    			if (!$_SESSION [C('USER_AUTH_KEY')]) {
+    				//跳转到认证网关
+    				redirect(PHP_FILE . C('USER_AUTH_GATEWAY'));
+    			}
+    			// 没有权限 抛出错误
+    			if (C('RBAC_ERROR_PAGE')) {
+    				// 定义权限错误页面
+    				redirect(C('RBAC_ERROR_PAGE'));
+    			} else {
+    				if (C('GUEST_AUTH_ON')) {
+    					$this->assign('jumpUrl', PHP_FILE . C('USER_AUTH_GATEWAY'));
+    				}
+    				// 提示错误信息
+    				$this->error(L('_VALID_ACCESS_'));
+    			}
+    		}
+    	}
     }
-    
     /**
      * 检测用户是否登录
      *
@@ -77,6 +104,8 @@ class CommonAction extends Action {
     	$show       = $Page->show();// 分页显示输出
     
     	$this->assign('page',$show);// 赋值分页输出
+    	
+    	return $list;
     }
     /**
      * SQL 分页
@@ -100,8 +129,9 @@ class CommonAction extends Action {
     	$Page->setConfig('theme','共%totalRow% %header% %nowPage%/%totalPage% 页  %first% %upPage% %prePage% %linkPage% %downPage% %end%');
     	
     	$show       = $Page->show();// 分页显示输出
-    	
     	$this->assign('page',$show);// 赋值分页输出
+    	
+    	return $list;
     }
 	public function index() {
         //列表过滤器，生成查询Map对象
@@ -235,7 +265,7 @@ class CommonAction extends Action {
         return;
     }
 
-    function insert($data=array()) {
+    function insert($data=array(), $url='') {
         $name = $this->getActionName();
         $model = D($name);
         if (false === $model->create()) {
@@ -244,7 +274,8 @@ class CommonAction extends Action {
         //保存当前数据对象
         $list = $model->add();
         if ($list !== false) { //保存成功
-            $this->success('新增成功!',cookie('_currentUrl_'));
+        	$url = $url ? $url : cookie('_currentUrl_');
+            $this->success('新增成功!',$url);
         } else {
             //失败提示
             $this->error('新增失败!');
@@ -490,6 +521,11 @@ class CommonAction extends Action {
 		$where['action'] = ACTION_NAME;
 		$data = $module->where($where)->find();
 		if(!empty($data) && $data['record']){
+			$log = D("Log");
+			if($log->create($where)){
+				$log->add();
+			}
+		}else{
 			$log = D("Log");
 			if($log->create($where)){
 				$log->add();

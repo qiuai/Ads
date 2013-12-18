@@ -13,9 +13,6 @@ $(document).ready(function(){
 		if(!$("input[name='account']").val()){
 			alert("用户名不能为空！");return false;
 		}
-		if(!$("input[name='password']").val()){
-			alert("密码不能为空！");return false;
-		}
 		if($("input[name='password']").val() != $("input[name='repassword']").val()){
 			alert("两次密码输入不一致！");return false;
 		}else{
@@ -36,7 +33,7 @@ $(document).ready(function(){
 		        <td>
 		            <select name="role_id">
 			            <Volist name="roleList" id="vo">
-			            	<option value="{$vo.id}">{$vo.name}</option>
+			            	<option <if condition="$vo['id'] eq $userList['group_id']">selected="selected"</if> value="{$vo.id}">{$vo.name}</option>
 						</Volist>
 		            </select>
 		        </td>
@@ -56,8 +53,8 @@ $(document).ready(function(){
 		    <tr>
 		        <td>是否启用：</td>
 		        <td>
-		            <input type="radio" name="status" value="1" checked="checked"> 启用
-		            <input type="radio" name="status" value="0" style="margin-left:10px"> 不启用
+		            <input type="radio" name="status" value="1" <if condition="$userList.status eq 1">checked="checked"</if>> 启用
+		            <input type="radio" name="status" value="0" <if condition="$userList.status eq 0">checked="checked"</if> style="margin-left:10px"> 不启用
 		        </td>
 			</tr>
 		</table>
