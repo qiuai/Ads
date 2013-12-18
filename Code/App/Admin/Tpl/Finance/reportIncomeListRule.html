@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>定制结算明细报表</div>
+			<div class="listmain setting">
+			<form action="SITE_URL/?m=Finance&a=reportIncomeListRuleDo" method="post">
+				<table align="center" cellspacing="0" class="list">
+					<volist name="report" id="vo">
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>计划ID：</td>
+						<td><input type="radio" name="plan_id" value="0" <if condition="$vo.pid eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="plan_id" value="1" <if condition="$vo.pid eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>网站主ID：</td>
+						<td><input type="radio" name="uid" value="0" <if condition="$vo.uid eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="uid" value="1" <if condition="$vo.uid eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>日期：</td>
+						<td><input type="radio" name="times" value="0" <if condition="$vo.settlement_time eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="times" value="1" <if condition="$vo.settlement_time eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>真实收入：</td>
+						<td><input type="radio" name="income_real" value="0" <if condition="$vo.real_income eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="income_real" value="1" <if condition="$vo.real_income eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>结算收入：</td>
+						<td><input type="radio" name="income" value="0" <if condition="$vo.balance_income eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="income" value="1" <if condition="$vo.balance_income eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>IP：</td>
+						<td><input type="radio" name="count_ip" value="0" <if condition="$vo.ip eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="count_ip" value="1" <if condition="$vo.ip eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>PV：</td>
+						<td><input type="radio" name="count_pv" value="0" <if condition="$vo.pv eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="count_pv" value="1" <if condition="$vo.pv eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>CLICK：</td>
+						<td><input type="radio" name="count_click" value="0" <if condition="$vo.click eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="count_click" value="1" <if condition="$vo.click eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>CPS：</td>
+						<td><input type="radio" name="count_cps" value="0" <if condition="$vo.cps eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="count_cps" value="1" <if condition="$vo.cps eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>CPA：</td>
+						<td><input type="radio" name="count_cpa" value="0" <if condition="$vo.cpa eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="count_cpa" value="1" <if condition="$vo.cpa eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>业绩状态：</td>
+						<td><input type="radio" name="status" value="0" <if condition="$vo.performance_status eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="status" value="1" <if condition="$vo.performance_status eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>结算状态：</td>
+						<td><input type="radio" name="pay_status" value="0" <if condition="$vo.settlement_status eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="pay_status" value="1" <if condition="$vo.settlement_status eq 1">checked</if>/>隐藏</td>
+					</tr>
+					</volist>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td colspan="2" align="center">
+								<input class="confirm_btn" type="submit" value="" />
+								<input class="back_btn" type="button" onclick="javascript:history.back(-1);" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>	
+			</div>
+		</div>
+	</div>
+</body>
+</html>

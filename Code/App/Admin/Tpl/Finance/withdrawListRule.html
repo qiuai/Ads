@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="http://adu.phpad.cn/static/css/default/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script></head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>定制提现申请报表</div>
+			<div class="listmain setting">
+			<form action="SITE_URL/?m=Finance&a=withdrawListRuleDo" method="post">
+				<table align="center" cellspacing="0" class="list">
+					<volist name="withdraw" id="vo">
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>会员ID：</td>
+						<td><input type="radio" name="uid" value="0" <if condition="$vo.uid eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="uid" value="1" <if condition="$vo.uid eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>申请时间：</td>
+						<td><input type="radio" name="timestmp" value="0" <if condition="$vo.apply_date eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="timestmp" value="1" <if condition="$vo.apply_date eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>税前总收入(￥)：</td>
+						<td><input type="radio" name="income_zong" value="0" <if condition="$vo.pre_tax eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="income_zong" value="1" <if condition="$vo.pre_tax eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>税后(￥)：</td>
+						<td><input type="radio" name="income_shuihou" value="0" <if condition="$vo.after_tax eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="income_shuihou" value="1" <if condition="$vo.after_tax eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>手续费(￥)：</td>
+						<td><input type="radio" name="income_shouxufei" value="0" <if condition="$vo.fee eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="income_shouxufei" value="1" <if condition="$vo.fee eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>应付金额(￥)：</td>
+						<td><input type="radio" name="income_yingfu" value="0" <if condition="$vo.amount_payable eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="income_yingfu" value="1" <if condition="$vo.amount_payable eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>处理时间：</td>
+						<td><input type="radio" name="pay_time" value="0" <if condition="$vo.process_time eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="pay_time" value="1" <if condition="$vo.process_time eq 1">checked</if>/>隐藏</td>
+					</tr>
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>支付状态：</td>
+						<td><input type="radio" name="status" value="0" <if condition="$vo.status eq 0">checked</if>/>显示&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="status" value="1" <if condition="$vo.status eq 1">checked</if>/>隐藏</td>
+					</tr>
+					</volist>
+				</table>
+
+				<table align="center">
+					<tbody>
+						<tr>
+							<td colspan="2" align="center">
+								<input class="confirm_btn" type="submit" value="" />
+								<input class="back_btn" type="button" onclick="javascript:history.back(-1);" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>	
+			</div>
+		</div>
+	</div>
+</body>
+</html>
