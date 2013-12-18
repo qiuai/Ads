@@ -38,13 +38,13 @@
                     　<input type="submit" value="查询" class="button" />
                 </td>
                 <td align="right">
-                	                	<a style="font-size:11px;color:#000;" href="http://adu.phpad.cn/admin.php?m=report_income&a=report_income_list_rule&">定制报表</a>
-                    <input type="button" value="导出报表" class="button1" onclick="location.href='http://adu.phpad.cn/admin.php?m=report_income&a=income_export&plan_id=&uid=&status=&start_date=2013-12-11&end_date=2013-12-14'" />
+					<a style="font-size:11px;color:#000;" href="SITE_URL/?m=Finance&a=reportIncomeListRule">定制报表</a>
+                    <input type="button" value="导出报表" class="button1" onclick="location.href='SITE_URL/?m=Finance&a=incomeExport'" />
                 </td>
             </tr>
             <tr>
                 <td colspan="2" id="css1" style="font-size:13px;">业绩状态：
-                    <a href="SITE_URL/?m=Finance&a=income&" class="link-checked">全部</a>
+                    <a href="SITE_URL/?m=Finance&a=income&status=all" class="link_before_checked">全部</a>
                     <a href="SITE_URL/?m=Finance&a=income&status=1"  class="link_before_checked">未确认</a>
                     <a href="SITE_URL/?m=Finance&a=income&status=2"  class="link_before_checked">已确认</a>
                     <a href="SITE_URL/?m=Finance&a=income&status=3"  class="link_before_checked">无效</a>
@@ -83,7 +83,7 @@
         <td>{$vo.cpa}</td>
         <td>{$vo.performance_status}</td>
         <td>{$vo.settlement_status}</td>
-        <td><a href="SITE_URL/?m=Finance&a=incomeDo">冻结</a></td>
+        <td><a href="SITE_URL/?m=Finance&a=incomeDo&id={$vo.id}"><if condition="$vo.frozen_status eq 1">冻结</if></a></td>
     </tr>
 	</volist>
 </table>

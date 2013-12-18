@@ -1,55 +1,95 @@
 <include file="Index:headerWeb" />
 <div class="main clearfix">
+	<div class="sidebar fr">
+    	<div class="text_box clearfix">
+        	<h3>小贴士</h3>
+            <ul>
+            	<li class="nobb">
+                	<h4>1.佣金满多少元可以提现？</h4>
+                    <p>佣金只需满20元（含20元）即可申请提现。如果您当月佣金未达到20元，则自动累计到下周。</p>
+                </li>
+                <li class="nobb">
+                	<h4>2.佣金每月允许提现次数？</h4>
+                    <p>佣金每月允许提现次数:4次</p>
+                </li>
+                <li class="nobb">
+                	<h4>3.佣金允许提现周天？</h4>
+                    <p>佣金允许提现周天:星期一,星期二,星期三,星期四,星期五</p>
+                </li>
+                 <li class="nobb">
+                	<h4>3.佣金允许提现时间？</h4>
+                    <p>佣金允许提现时间:从9点到18点</p>
+                </li>
+            </ul>
+        </div>
+    </div>
 	<div class="huiyuan_change">
 		<div class="huiyuan_change_head">
 			<span>申请提现</span>
 			<div class="cb"></div>
 		</div>
-        <form method="post" action="http://adu.phpad.cn/center.php?m=finance&a=finance_pay_do"> 
+		<form method="post" action="SITE_URL/?m=FinanceWeb&a=financePayDo"> 
         <div class="huiyuan_change_body">
-			<table border="1" bordercolor="#CCCCCC">
+			<table border="1" bordercolor="#CCCCCC" style="width:746px;">
 			  <tbody><tr>
 				<td colspan="2" border="0">
-                        <div class="payee_name">
+					<volist name="member" id="vo">
+                    <div class="payee_name">
 						<span><b class="payee_name_font"> 开户银行：　　</b></span>
-						<div class="payee_name_right fl">招商银行</div>
+						<div class="payee_name_right fl">{$vo.bank_name}</div>
 						<div class="cb"></div>
 					</div>
                     <div class="payee_name">
 						<span><b class="payee_name_font"> 开户人：　　　</b></span>
-						<div class="payee_name_right fl">1234</div>
+						<div class="payee_name_right fl">{$vo.card_author}</div>
 						<div class="cb"></div>
 					</div>
                     <div class="payee_name">
 						<span><b class="payee_name_font"> 银行卡号：　　</b></span>
-						<div class="payee_name_right fl">12345</div>
+						<div class="payee_name_right fl">{$vo.card_number}</div>
 						<div class="cb"></div>
 					</div>
-                    <div class="payee_name">
-                        <span><b class="payee_name_font"> 可提现金额：　</b></span>
-						<div class="payee_name_right fl">￥0.00</div>
-						<span style="color:red">未达到最低提现额度￥20</span>
+					</volist>
+					<volist name="balance" id="list">
+					<div class="payee_name">
+                        <span><b class="payee_name_font"> 账户总余额：　</b></span>
+						<div class="payee_name_right fl">{$list.total_balance}（￥）</div>
+						<span style="color:green"></span>
                         <div class="cb"></div>
 					</div>
-					  <div class="payee_name">
+                    <div class="payee_name">
+                        <span><b class="payee_name_font"> 申请提现金额：</b></span>
+						<div class="payee_name_right fl"><input type="text" name="balance" value="0.00" />（￥）</div>
+						<span style="color:red">未达到最低提现金额20</span>
+                        <div class="cb"></div>
+					</div>
+					<div class="payee_name">
+                        <span><b class="payee_name_font"> 是否托管提现：</b></span>
+						<div class="payee_name_right fl">
+							<input type="radio" name="withdraw_auto" value="0" checked>	是
+							<input type="radio" name="withdraw_auto" value="1" >	否 						
+						</div>
+                        <div class="cb"></div>
+					</div>
+					<div class="payee_name">
                         <span><b class="payee_name_font"> 本月提现次数：</b></span>
-						<div class="payee_name_right fl">0次</div>
+						<div class="payee_name_right fl">{$list.withdraw_num}次</div>
 						<span style="color:red"></span>
 						<div class="cb"></div>
 					</div>
+					</volist>
 					<div class="payee_name">
                         <span><b class="payee_name_font"> 提现时间：　　</b></span>
-						<div class="payee_name_right fl">2013-11-28 15:40:29</div>
+						<div class="payee_name_right fl">{$apply_date}</div>
 						<span style="color:red"></span>
 						<div class="cb"></div>
-					</div>				
+					</div>
                  </td>
 			  </tr>
 			</tbody></table>
 		</div>
 		<div class="huiyuan_change_foot">
-			<input type="hidden" name="balance" value="0.00"/>
-			<input class="confirm_btn" type="submit" value="" disabled="disabled" />
+			<input class="confirm_btn" type="submit" value="" />
 			<input class="back_btn" type="button" onclick="javascript:history.back(-1);"/>
 		</div>
        </form>

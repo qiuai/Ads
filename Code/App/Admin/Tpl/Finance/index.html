@@ -26,12 +26,18 @@
                 <input type="submit" value="查询" class="button">
             </form>
         </td>
-                <td align="right">
-            <input type="button" onclick="location.href=&#39;SITE_URL/?m=Finance&amp;a=withdraw_export&amp;uid=&amp;status=&#39;" class="button1" value="导出数据">
+			<td align="right">
+			<a style="font-size:11px;color:#000;" href="SITE_URL/?m=Finance&a=withdrawListRule">定制报表</a>
+			<input type="button" onclick="location.href=&#39;SITE_URL/?m=Finance&a=withdrawExport&#39;" class="button1" value="导出数据">
         </td>
     </tr>
     <tr>
-        
+        <td colspan="2" id="css1" style="font-size:13px;">支付状态：
+            <a href="SITE_URL/?m=Finance&a=index&status=" class="link_before_checked">全部</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=1" class="link_before_checked">未支付</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=2" class="link_before_checked">已支付</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=3" class="link_before_checked">异常</a>
+        </td>
     </tr>
 </tbody></table>		
 <table align="center" cellspacing="0" class="list" style="text-align:center">
@@ -49,7 +55,7 @@
     </tr>
 	<volist name="apply" id="vo">
     <tr class="bgcolor3">        
-		<td>{$vo.id}</td>
+		<td>{$vo.uid}</td>
         <td>{$vo.apply_date}</td>
         <td>{$vo.pre_tax}</td>
         <td>{$vo.after_tax}</td>
@@ -57,7 +63,7 @@
         <td>{$vo.amount_payable}</td> 
         <td>{$vo.process_time}</td>
         <td><if condition="$vo.status eq 1">未支付<elseif condition="$vo.status eq 2"/>已支付<else />异常</if></td>     
-        <td><a href="javascript:void(0);" onclick="doWithdraw(1)">处理提现</a></td>
+        <td><a href="javascript:void(0);" onclick="doWithdraw({$vo.id})">处理提现</a></td>
     </tr>
 	</volist>
 </tbody>
@@ -65,17 +71,23 @@
 <div class="admin_do index_page" style="text-align:center;"></div>
 </div>
 </div>
-<div id="withdraw_do" style="display:none;width:390px;">
+
+<div id="withdraw_do" style="display:block;width:390px;">
 <div style="border:1px solid black;margin:15px 50px;padding:20px;width:240px;height:90px">
     <p style="margin:5px 0px 10px 0px;">账户信息：</p>
     <p style="margin:5px 0px;">　　银行：<span id="bank"></span></p>
     <p style="margin:5px 0px;">　　户头：<span id="account"></span></p>
     <p style="margin:5px 0px;">　　帐号：<span id="accounts"></span></p>
 </div>
-<form id="widthdraw_do" action="http://adu.phpad.cn/admin.php?m=report_finance&a=withdraw_do&" method="post">
-    <input type="hidden" name="id">   
+<form id="widthdraw_do" action="SITE_URL/?m=Finance&a=withdrawDo" method="post">
+    <input type="hidden" name="id">
     <p style="margin:10px 0">支付结果：<input type="radio" name="status" value="1" checked="checked">成功　<input type="radio" name="status" value="0">失败</p>
-    <p style="margin:10px 0">支付渠道：<select name="pay_channel"><option value="5">工商银行</option><option value="6">招商银行</option></select></p>
+    <p style="margin:10px 0">支付渠道：
+		<select name="pay_channel">
+			<option value="ICBC">工商银行</option>
+			<option value="CMB">招商银行</option>
+		</select>
+	</p>
     <p style="margin:10px 0">交易单号：<input type="text" name="pay_record" style="width:150px" id="pay_record"><div id="pay_recordTip" class="onShow">请输入正确的交易单号</div></p>
     <p style="margin:10px 0">备注信息：<input type="text" name="pay_remark" style="width:150px" id="pay_remark"></p>
     <p style="margin:10px 60px"><input type="submit" class="button" value="确定">　　<input type="reset" class="button" value="重置"></p>
@@ -85,8 +97,7 @@
 function doWithdraw(id)
 {
     $("input[name='id']").val(id);
-
-    $.getJSON("SITE_URL/m=Finance&a=withdraw_detail&", {id:id}, function(data){
+    $.getJSON("SITE_URL/?m=Finance&a=withdrawDo", {id:id}, function(data){alert(data);
         if (data.status == 1)
         {
             $("#account").html(data.data.account);

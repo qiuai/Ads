@@ -1,0 +1,93 @@
+<include file="Index:headerWeb" />
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/PCASClass.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
+<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"finance_bank",autotip:true});
+		$("#bank_account").formValidator({onshow:"需与银行卡（存折）开户人姓名完全一致",onfocus:"请输入银行卡（存折）开户人姓名"}).inputValidator({min:1,onerror:"输入的收款人姓名不能为空"}).regexValidator({regexp:"ps_username",datatype:"enum",onerror:"收款人姓名必须为中文、字母或数字"});
+		$("#subname").formValidator({onshow:"请务必填写完整的开户行名称，以确保佣金能及时汇入您的账户（格式为*省*市*银行*分行）",onfocus:"请输入完整的开户行名称，以确保佣金能及时汇入您的账户（格式为*省*市*银行*分行）"}).inputValidator({min:1,onerror:"输入的开户银行全称不能为空"}).regexValidator({regexp:"ps_username",datatype:"enum",onerror:"开户银行全称必须为中文、字母或数字"});
+		$("#accounts").formValidator({onshow:"请准确填写收款人银行卡卡号或存折账号 ",onfocus:"请输入正确收款人银行卡卡号或存折账号",oncorrect:"输入正确"}).regexValidator({regexp:"^[0-9]{10,19}$",onerror:"您输入的银行卡卡号或存折账号不正确"});
+		$("#confirm_accounts").formValidator({onshow:"请重复输入以上银行卡卡号或存折账号 ",onfocus:"请重复输入以上银行卡卡号或存折账号 ",oncorrect:"重复输入银行卡卡号或存折账号正确"}).compareValidator({desid:"accounts",operateor:"=",onerror:"两次银行卡卡号或存折账号 输入不一致"});
+		function allEmpty(val,elem)
+		{
+			return ($("#qq").val()=="" && $("#wangwang").val()=="")?false:true;
+		} 
+	})
+</script>
+<div class="main clearfix">
+	<div class="huiyuan_change">
+		<div class="huiyuan_change_head">
+			<span>修改银行信息</span>
+			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
+			<div class="cb"></div>
+		</div>
+        <form id="finance_bank" method="post" action="SITE_URL/?m=FinanceWeb&a=financeBankEditDo">
+		<div class="huiyuan_change_body">
+			<table border="1" bordercolor="#CCCCCC">
+			  <tr>
+				<td colspan="2" border="0">	
+					<volist name="member" id="vo">
+					<div class="payee_name">
+						<span><em class="red">*</em><b class="payee_name_font"> 收款人姓名：</b></span>
+						<div class="payee_name_right fl">
+							<input id="bank_account" class="textbox payee_name_textbox" type="textbox" name="account" value="{$vo.real_name}" />
+			            </div>
+						<div class="cb"></div>
+					</div>
+					<div class="payee_xingzhi">
+						<span><em class="red">*</em><b class="payee_xingzhi_font"> 收款人性质:</b></span>
+						<div class="payee_xingzhi_right fl">
+							<label>
+								<input type="radio" name="legal_status" value="0" <if condition="$vo.legal_status eq 0">checked="checked"</if>>
+								<span>个人</span>
+							</label>
+							<label>
+								<input type="radio" name="legal_status" value="1" <if condition="$vo.legal_status eq 1">checked="checked"</if>>
+								<span>公司</span>
+							</label>
+						</div>
+						<div class="cb"></div>
+					</div>
+					</volist>
+				</td>
+			  </tr>
+			  <volist name="memberDetail" id="list">
+			  <tr>
+				<td class="w155"><em class="red">*</em> 开户行：</td>
+				<td class="textbox_td">
+				    <select name="bank" id="bank_id" class="textbox bank_province">
+						<option value="icbc" <if condition="$list.bank_short eq 'icbc'">selected="selected"</if>>工商银行</option>
+						<option value="bcbc" <if condition="$list.bank_short eq 'bcbc'">selected="selected"</if>>招商银行</option>
+					</select>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155 td_65height"><em class="red">*</em> 开户银行全称：</td>
+				<td class="textbox_td">
+					<input class="textbox bank_allname" type="textbox" name="bank_name" id="subname" value="{$list.bank_name}" />
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155 td_65height"><em class="red">*</em> 收款人银行账号：</td>
+				<td class="textbox_td">
+					<input id="accounts" class="textbox" type="textbox" name="accounts" value="{$list.card_number}" />
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em> 请再输入一遍：</td>
+				<td class="textbox_td">
+					<input id="confirm_accounts" class="textbox" type="textbox" name="accounts_again"/>
+				</td>
+			  </tr>
+			  </volist>
+			</table>
+		</div>
+		<div class="huiyuan_change_foot">
+			<input class="confirm_btn" type="submit" value=" "/>
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);"/>
+		</div>
+       </form>
+	</div>
+</div>
+<include file="Index:footer" />
