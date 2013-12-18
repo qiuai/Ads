@@ -32,7 +32,7 @@
 	        <td>{$vo.module}</td>
 	        <td>{$vo.action}</td>
 	        <td>{$vo.title}</td>
-	        <td><if condition="$vo.status eq 1">是<else />否</if></td>
+	        <td><if condition="$vo.record eq 1">是<else />否</if></td>
 	        <td>
 	            <a href="SITE_URL?m=Node&a=nodeEdit&id={$vo.id}">编辑</a>
 	            <a href="SITE_URL?m=Node&a=delete&id={$vo.id}">删除</a>

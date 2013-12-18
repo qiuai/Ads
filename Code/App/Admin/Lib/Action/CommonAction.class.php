@@ -35,6 +35,7 @@ class CommonAction extends Action {
     public function checkUser(){
     	$Public = A('Agent');
 		$Public->checkUser();
+		$this->logRecord();
     }
     /**
      * 获取应用信息
@@ -63,6 +64,7 @@ class CommonAction extends Action {
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$list = $model->where($where)->order($order)->page($_GET['p'].','.$pageNum)->select();
     	$this->assign('list',$list);// 赋值数据集
+//     	echo $model->getLastSql();
     	import("ORG.Util.Page");// 导入分页类
     	$count      = $model->where($where)->count();// 查询满足要求的总记录数
     	$Page       = new Page($count,$pageNum);// 实例化分页类 传入总记录数和每页显示的记录数
@@ -86,6 +88,7 @@ class CommonAction extends Action {
     	$model = M('');
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$list = $model->query($sql);
+//     	echo $model->getLastSql();
     	$this->assign('list',$list);// 赋值数据集
     	import("ORG.Util.Page");// 导入分页类
     	$count      = $model->query($countSql);;// 查询满足要求的总记录数
@@ -473,5 +476,86 @@ class CommonAction extends Action {
      */
     function pwdHash($password, $type = 'md5') {
     	return hash ( $type, $password );
+    }
+    /**
+     * 记录操作
+     *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-12-17 上午11:39:26
+     */
+    public function logRecord(){
+    	// 是否记录操作
+		$module = M("Node");
+		$where['module'] = MODULE_NAME;
+		$where['action'] = ACTION_NAME;
+		$data = $module->where($where)->find();
+		if(!empty($data) && $data['record']){
+			$log = D("Log");
+			if($log->create($where)){
+				$log->add();
+			}
+		}
+	}
+    /**
+     *
+     * 图片上传对应的方法
+     * @author Yumao <815227173@qq.com>
+     * @CreateDate: 2013-12-14 下午5:17:53
+     * @param unknown_type $uploadPathDir
+     * @return Ambigous <string, multitype:number NULL string >
+     */
+   protected  function upload($uploadPathDir){
+    
+    	// 定义变量保存上传图片的相关信息
+    	$info = array();
+    	import('ORG.Net.UploadFile');
+    	$upload = new UploadFile();// 实例化上传类
+    	$upload->maxSize  = C('UPLOAD_MAX_SIZE');// 设置附件上传大小
+    
+    	// 获取当前的年月
+    	$yearMonth = date("Ym",time());
+    
+    	// 获取当前的日期
+    	$day = date("d",time());
+    
+    	// 创建上传文件夹路径
+    	$uploadPathCompletion = ROOT_PATH."/../Uploadfile/".$uploadPathDir."/".$yearMonth."/".$day;
+    
+    	// 创建文件夹
+    	mkdir($uploadPathCompletion,0777,true);
+    
+    	$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+    
+    	// 设置上传文件的保存目录
+    	$upload -> savePath =  $uploadPathCompletion.'/';
+    
+    	if(!$upload->upload()){
+    
+    		// 发生错误跳转
+    		$info['message'] = $upload->getErrorMsg();
+    		$info['flag'] = 0;
+    	}else{
+    
+    		// 上传文件成功返回文件的相关信息
+    		$info['message'] = $upload->getUploadFileInfo();
+    		$info['message']['0']['completionPath'] = $uploadPathDir."/".$yearMonth."/".$day."/".$info['message'][0]['savename'];
+    		$info['flag'] = 1;  // 代表上传成功
+    	}
+    
+    	return $info;
+    
+    }
+    
+    /**
+     * 删除上传的图片文件
+     *
+     * @author Yumao <815227173@qq.com>
+     * @CreateDate: 2013-12-12 下午4:28:41
+     */
+    protected  function delUpload($filePath){
+    
+    	if(file_exists(ROOT_PATH."/../Uploadfile/".$filePath)){
+    		unlink(ROOT_PATH."/../Uploadfile/".$filePath);
+    	}
     }
 }

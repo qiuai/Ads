@@ -27,16 +27,12 @@ class UserAction extends CommonAction {
 		$Role = M("Role");
 		$roleList = $Role->select();
 		
-		//var_dump($groupList);
-		
 		$User = M("User");
 		$userList = $User->select();
 		
 		foreach ($userList as $key=>$value){
 			$userList[$key]['group_name'] = $this->getGroup($value['id']);
 		}
-		
-		//var_dump($userList);
 		
 		$this->assign("roleList",$roleList);
 		$this->assign("userList",$userList);
@@ -176,7 +172,6 @@ class UserAction extends CommonAction {
 		$RoleUser->role_id	=	$_REQUEST['role_id'];
 		$RoleUser->add();
 	}
-	
 	/**
 	 * 重置密码
 	 *
@@ -193,5 +188,34 @@ class UserAction extends CommonAction {
 		$User->password	=	md5($password);
 		$User->id			=	$id;
 		$result	=	$User->save();
+	}
+	/**
+	 * 操作记录列表
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-17 下午3:07:57
+	 */
+	public function logList(){
+		// 搜索
+		if($_REQUEST['aid']){
+			$where['aid'] = intval($_REQUEST['aid']);
+		}
+		// 列表
+		$model = M("Log");
+		$this->memberPage($model, $where, $pageNum=15, $order='id desc');
+		$this->display();
+	}
+	/**
+	 * 清除前30天的记录
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-17 下午3:22:37
+	 */
+	public function logClean(){
+		$log = M("Log");
+		$month = mktime(0,0,0,date("m")-1,date("d"),date("Y"));
+		$where['create_time'] = array('lt',$month);
+		$log->delete($where);
+		echo $log->getLastSql();
 	}
 }

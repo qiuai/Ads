@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+<style type="text/css">
+.newsite_select option{
+	width:100px;
+	height:20px;
+}
+</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>修改广告</div>
+			<div class="listmain setting">
+			<form action="SITE_URL?m=AdManage&a=doEdit" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="aid" value="{$AdManageInfo['aid']}" />
+				<table align="center" cellspacing="0" class="list">
+					<tr>
+						<td style="width: 120px"><em class="red">*</em>所属计划：</td>
+						<td>{$AdManageInfo['plan_name']}</td>
+					</tr>
+					<tr>
+						<td><em class="red">*</em>广告标题：</td>
+						<td><input type="text" name="title" value="{$AdManageInfo['title']}" class="textbox"/>
+						<div class="onShow">请填写正确的广告标题</div></td>
+					</tr>
+					<tr>
+						<td><em class="red">*</em>展示形式：</td>
+						<td>
+						           {$AdManageInfo['size']}{$AdManageInfo['size_type']}              </td>
+					</tr>
+					<tr>
+						<td class="newsite_w155"><em class="red">*</em>目标网址：</td>
+						<td><input type="text" name="jump_url" value="{$AdManageInfo['jump_url']}" class="textbox"/>
+						<div class="onShow">请填写正确的目标网址</div></td>
+					</tr>
+					<if condition="$AdManageInfo['picFlag'] eq 1">
+						<tr>
+							<td class="w155"><em class="red">*</em>图片/FLASH：</td>
+							<td class="textbox_td">
+								<input class="newsite_textw160" type="file" name="content"> 留空则保留原文件				
+							</td>
+			  			</tr>
+			  			 <tr>
+								<td class="w155">原图片/FLASH：</td>
+								<td class="textbox_td">
+				    				 {$AdManageInfo['content']}   				    
+				    			</td>
+			  			</tr>
+			  		<else />
+			  			<tr>
+							<td class="w155"><em class="red">*</em>文字内容：</td>
+							<td class="textbox_td">
+								<textarea rows="5" cols="80" name="content" style="margin:5px">{$AdManageInfo['content']}</textarea>
+							</td>
+			  			</tr>			  			
+					</if>
+			  	</table>
+
+				<table align="center">
+					<tbody>
+						<tr>
+							<td colspan="2" align="center"><input class="confirm_btn" type="submit" value="" />
+								<input class="back_btn" type="button" onclick="javascript:history.back(-1);" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>	
+			</div>
+		</div>
+	</div>
+</body>
+</html>
