@@ -213,64 +213,69 @@ class RBAC {
         // Db方式权限数据
         $db     =   Db::getInstance(C('RBAC_DB_DSN'));
         $table = array('role'=>C('RBAC_ROLE_TABLE'),'user'=>C('RBAC_USER_TABLE'),'access'=>C('RBAC_ACCESS_TABLE'),'node'=>C('RBAC_NODE_TABLE'));
-        $sql    =   "select node.id,node.name from ".
-                    $table['role']." as role,".
-                    $table['user']." as user,".
-                    $table['access']." as access ,".
-                    $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=1 and node.status=1";
+        // 读取项目的导航权限
+        $sql    =   "select * from ".
+        		$table['role']." as role,".
+        		$table['user']." as user,".
+        		$table['access']." as access ,".
+        		$table['node']." as node ".
+        		"where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and access.node_id=node.id and node.level=2 and node.group_id = 1 and node.status=1";
         $apps =   $db->query($sql);
+        
+//         var_dump($apps);
         $access =  array();
         foreach($apps as $key=>$app) {
-            $appId	=	$app['id'];
-            $appName	 =	 $app['name'];
-            // 读取项目的模块权限
-            $access[strtoupper($appName)]   =  array();
-            $sql    =   "select node.id,node.name from ".
-                    $table['role']." as role,".
-                    $table['user']." as user,".
-                    $table['access']." as access ,".
-                    $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=2 and node.pid={$appId} and node.status=1";
-            $modules =   $db->query($sql);
-            // 判断是否存在公共模块的权限
-            $publicAction  = array();
-            foreach($modules as $key=>$module) {
-                $moduleId	 =	 $module['id'];
-                $moduleName = $module['name'];
-                if('PUBLIC'== strtoupper($moduleName)) {
-                $sql    =   "select node.id,node.name from ".
-                    $table['role']." as role,".
-                    $table['user']." as user,".
-                    $table['access']." as access ,".
-                    $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=3 and node.pid={$moduleId} and node.status=1";
-                    $rs =   $db->query($sql);
-                    foreach ($rs as $a){
-                        $publicAction[$a['name']]	 =	 $a['id'];
-                    }
-                    unset($modules[$key]);
-                    break;
-                }
-            }
+        	$appId		=	$app['id'];
+        	$appName	=	APP_NAME;
+        	$access[strtoupper($appName)][strtoupper($app['module'])]['INDEX']	 =	 $app['id'];
+        	
+        	// 读取项目的模块权限
+        	$sql    =   "select * from ".
+        			$table['role']." as role,".
+        			$table['user']." as user,".
+        			$table['access']." as access ,".
+        			$table['node']." as node ".
+        			"where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and access.node_id=node.id and node.level=3 and node.pid={$appId} and node.status=1";
+        	$modules =   $db->query($sql);
+        	// 判断是否存在公共模块的权限
+        	$publicAction  = array();
+        	foreach($modules as $key=>$module) {
+        		$moduleId	 =	 $module['id'];
+        		$moduleName = $module['module_name'];
+        		if('PUBLIC'== strtoupper($moduleName)) {
+        			$sql    =   "select node.id,node.action from ".
+        					$table['role']." as role,".
+        					$table['user']." as user,".
+        					$table['access']." as access ,".
+        					$table['node']." as node ".
+        					"where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id access.node_id=node.id and node.level=3 and node.pid={$moduleId} and node.status=1";
+        			$rs =   $db->query($sql);
+        			foreach ($rs as $a){
+        				$publicAction[$a['action']]	 =	 $a['id'];
+        			}
+        			unset($modules[$key]);
+        			break;
+        		}
+        	}
+        	 
             // 依次读取模块的操作权限
             foreach($modules as $key=>$module) {
                 $moduleId	 =	 $module['id'];
-                $moduleName = $module['name'];
-                $sql    =   "select node.id,node.name from ".
+                $moduleName = $module['module'];
+                $sql    =   "select node.id,node.action from ".
                     $table['role']." as role,".
                     $table['user']." as user,".
                     $table['access']." as access ,".
                     $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=3 and node.pid={$moduleId} and node.status=1";
+                    "where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and access.node_id=node.id and node.level=4 and node.pid={$moduleId} and node.status=1";
                 $rs =   $db->query($sql);
-                $action = array();
+//                 $action = array();
                 foreach ($rs as $a){
-                    $action[$a['name']]	 =	 $a['id'];
+                    $action[$a['action']]	 =	 $a['id'];
                 }
                 // 和公共模块的操作权限合并
                 $action += $publicAction;
-                $access[strtoupper($appName)][strtoupper($moduleName)]   =  array_change_key_case($action,CASE_UPPER);
+                $access[strtoupper($appName)][strtoupper($moduleName)]  +=  array_change_key_case($action,CASE_UPPER);
             }
         }
         return $access;
@@ -285,7 +290,7 @@ class RBAC {
                     $table['role']." as role,".
                     $table['user']." as user,".
                     $table['access']." as access ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and  access.module='{$module}' ";
+                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.id ) ) and role.status=1 and  access.module='{$module}' ";
         $rs =   $db->query($sql);
         $access	=	array();
         foreach ($rs as $node){

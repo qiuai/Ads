@@ -21,7 +21,8 @@ class CommonAction extends Action {
 	 * @CreateDate: 2013-11-25 上午10:07:29
 	 */
 	function _initialize(){
-    	//$this->checkUser();
+    	$this->checkUser();
+    	
 		$this->assign("flag",MODULE_NAME);
     }
     /**
