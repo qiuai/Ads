@@ -39,14 +39,7 @@ class CountAction extends Action{
 		
 		
 		header("Content-type: text/html; charset=utf-8");
-		
-		
-		
-		
-		//dump($_SERVER['HTTP_REFERER']);
-		
-		// 获取当前客户端访问useragent
-		
+					
 		// 获取提交过来的代码位信息
 		$_GET['id'] = $_GET['zone'];
 		$this->dealSubmitData();
@@ -67,7 +60,6 @@ class CountAction extends Action{
 			
 			// 代码执行到这里说明本次访问的来源网站是正确的 并且当前代码为已经启用 
 			// 组装广告代码展示	
-
 			$code = $this->createAdCode($zoneInfo['size']);
 			echo $code;
 			
@@ -81,24 +73,6 @@ class CountAction extends Action{
 			}
 		
 		}
-		//echo "document.write('<a href=\" \" target=>".$adManageInfo['content']."</a>');";
-		
-		
-		// 获取当前广告的id值
-		
-		// 获取当前广告位网站主的id值
-		
-		
-		// 往计数表中添加数据
-			
-		
-		
-		/*if(!$_SESSION['uid']){
-			$_SESSION['uid'] = rand(1,1000000);
-		}
-		dump($_SESSION);
-		dump($_COOKIE);
-		file_put_contents("d:/jjjjj.txt", $_COOKIE['PHPSESSID']);*/
 	}
 	
 	/**
@@ -146,11 +120,6 @@ class CountAction extends Action{
 		
 		// 定义变量保存第二天0时0分0秒的时间戳
 		$tomorrowStartTime = $dayStartTime+3600*24;
-		
-		
-		//$data['view_ip_num'] = $this->getIp();
-		
-		
 		
 		/**
 		 * 
@@ -246,10 +215,7 @@ class CountAction extends Action{
 			}
 								
 		}
-		// 查询zone_visit表看看是否数据库中存在符合zid为当前代码位id 并且时间在当天0时0分0秒到第二天0时0分0秒之间 并且view_or_click为1（即浏览）并且ip为当前客户端ip的数据 如果存在则
 		
-		
-		// 根据上面组装的条件如果数据库中已经有记录  说明当前的ip当天浏览
 		
 	}
 	/**
@@ -384,7 +350,6 @@ class CountAction extends Action{
 			
 	}
 	
-	//public function createAdCode
 	/**
 	 * 
 	 * 处理提交过来的数据
