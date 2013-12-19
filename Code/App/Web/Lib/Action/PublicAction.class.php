@@ -21,7 +21,7 @@ class PublicAction extends Action {
 	 * @CreateDate: 2013-12-19 上午9:50:57
 	 */
 	public function checkUser() {
-		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
+		if(!isset($_SESSION[C('WEB_AUTH_KEY')])) {
 			$this->redirect('/?m=Public&a=login');
 		}
 	}
@@ -32,7 +32,7 @@ class PublicAction extends Action {
 	 * @CreateDate: 2013-11-25 上午10:10:51
 	 */
 	public function login() {
-        if(isset($_SESSION[C('USER_AUTH_KEY')])) {
+        if(isset($_SESSION[C('WEB_AUTH_KEY')])) {
             redirect(C('WEB_URL'));
         }else{
             redirect(C('HOME_URL'));
@@ -45,11 +45,9 @@ class PublicAction extends Action {
 	 * @CreateDate: 2013-11-25 上午10:11:13
 	 */
 	public function logout(){
-		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
-            unset($_SESSION[C('USER_AUTH_KEY')]);
-            unset($_SESSION);
-            session_destroy();
-            $this->redirect(__URL__.'&a=login');
+		if(isset($_SESSION[C('WEB_AUTH_KEY')])) {
+            unset($_SESSION[C('WEB_AUTH_KEY')]);
+            $this->redirect('/?m=Public&a=login');
         }else {
             $this->error('已经登出！');
         }

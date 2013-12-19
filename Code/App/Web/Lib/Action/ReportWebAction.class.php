@@ -14,9 +14,6 @@
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
 class ReportWebAction extends CommonAction {
-	function _initialize(){
-		$this->assign("flag","report");
-	}
     public function index(){ 
 		$this->assign("title","综合报表");
 		$this->display();

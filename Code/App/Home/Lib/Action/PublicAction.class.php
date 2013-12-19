@@ -122,6 +122,8 @@ class PublicAction extends CommonAction {
 	public function checkWeb(){
 		$info = $this->checkLogin();
 		if($info['success']){
+			// 注册网站主SESSIONID
+			$_SESSION[C('WEB_AUTH_KEY')] = $_SESSION[C('USER_AUTH_KEY')];
 			redirect(C("WEB_URL"));
 		}else{
 			$this->error($info['error']);
@@ -136,6 +138,8 @@ class PublicAction extends CommonAction {
 	public function checkAdv(){
 		$info = $this->checkLogin();
 		if($info['success']){
+			// 注册广告主SESSIONID
+			$_SESSION[C('ADV_AUTH_KEY')] = $_SESSION[C('USER_AUTH_KEY')];
 			redirect(C("ADV_URL"));
 		}else{
 			$this->error($info['error']);

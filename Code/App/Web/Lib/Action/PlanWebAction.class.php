@@ -14,9 +14,6 @@
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
 class PlanWebAction extends CommonAction {	
-	function _initialize(){
-		$this->assign("flag","plan");
-	}
     public function index(){ 
 		$this->assign("title","广告活动列表");
 		$this->display();

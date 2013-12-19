@@ -13,7 +13,7 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class PublicAction extends CommonAction {
+class PublicAction extends Action {
 	/**
 	 * 检测用户是否登录
 	 *
@@ -21,7 +21,9 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-11-25 上午10:10:26
 	 */
 	public function checkUser(){
-	
+		if(!isset($_SESSION[C('ADV_AUTH_KEY')])) {
+			$this->redirect('/?m=Public&a=login');
+		}
 	}
 	/**
 	 * 用户登录
@@ -30,7 +32,7 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-11-25 上午10:10:51
 	 */
 	public function login() {
-        if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
+        if(isset($_SESSION[C('ADV_AUTH_KEY')])) {
             redirect(C('WEB_URL'));
         }else{
             redirect(C('HOME_URL'));
@@ -43,10 +45,8 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-11-25 上午10:11:13
 	 */
 	public function logout(){
-		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
-			unset($_SESSION[C('USER_AUTH_KEY')]);
-			unset($_SESSION);
-			session_destroy();
+		if(isset($_SESSION[C('ADV_AUTH_KEY')])) {
+			unset($_SESSION[C('ADV_AUTH_KEY')]);
 			$this->redirect(__URL__.'&a=login');
 		}else {
 			$this->error('已经登出！');

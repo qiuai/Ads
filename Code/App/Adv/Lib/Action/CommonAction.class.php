@@ -30,7 +30,7 @@ class CommonAction extends Action {
      * @CreateDate: 2013-12-12 下午6:04:13
      */
     public function checkUser(){
-    	$Public = A('Agent');
+    	$Public = A('Public');
     	$Public->checkUser();
     }
     /**
