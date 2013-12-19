@@ -399,7 +399,7 @@ class AdManageAction  extends CommonAction{
 		}else{
 			
 			// 处理提交过来的数据
-			$adManage->sid = $_SESSION[C('USER_AUTH_KEY')];
+			$adManage->sid = $_SESSION[C('ADMIN_AUTH_KEY')];
 			
 			// 调用方法通过查询广告尺寸数据库得到广告的尺寸数据
 			// $adManage->size = $this->getSize($_REQUEST['show_type']);

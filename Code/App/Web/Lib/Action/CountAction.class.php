@@ -11,6 +11,24 @@
  */
 class CountAction extends Action{
 	
+	// 定义控制器名称
+	private $actionName;
+	
+	/**
+	 * 
+	 * 初始化方法必须调用
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-19 上午11:37:14
+	 */
+	function _initialize(){
+		
+		// 先调用父类的初始化方法
+		//parent::_initialize();
+			
+		// 初始化数据库句柄
+		//$this->AdPlan =
+		$this->actionName = $this->getActionName();
+	}
 	/**
 	 * 
 	 * 广告展示计数对应的方法
@@ -55,8 +73,11 @@ class CountAction extends Action{
 			
 			if($code){		// 服务器端开始计录本次访问
 												
-				// 往数据zhts_zone_visit中添加数据
-				$this->addZoneVisit();				
+				// 往数据表zhts_zone_visit中添加数据
+				$this->addZoneVisit(1);	 // 参数值为1代表的是展示
+
+				// 往数据表zhts_zone_visit_count中添加数据
+				$this->addZoneVisitCount(1);
 			}
 		
 		}
@@ -81,12 +102,12 @@ class CountAction extends Action{
 	}
 	
 	/**
-	 * 
+	 * $view_or_click 代表是展示还是点击 1 为代码位的展示 2 为点击
 	 * 往代码位记录表中添加数据
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-18 下午8:00:36
 	 */
-	private function addZoneVisit(){
+	private function addZoneVisit($view_or_click){
 		
 		// 创建zone_visit句柄
 		$zoneVisit = M('ZoneVisit');
@@ -96,22 +117,26 @@ class CountAction extends Action{
 		
 		// 往数据表中添加一条浏览的数据
 		$data['visit_ip']  = $cip; // 记录客户端ip
-		$data['view_or_click'] = 1; // 表示浏览
+		$data['view_or_click'] = $view_or_click; // 1表示浏览 2表示点击
 		$data['visit_time'] = time(); // 本次访问的时间戳
-		$data['zid'] = $_GET['id']; // 当前广告为的id
-		
+		if($view_or_click==1){
+			$data['zid'] = $_GET['id']; // 当前广告为的id
+		}elseif ($view_or_click==2){
+			$data['zid'] = intval($_GET['zoneId']);
+		}
+
 		// 往zone_visit表添加记录
 		$zoneVisit->add($data);
 				
 	}
 	
 	/**
-	 * 
+	 * $view_or_click 代表是展示还是点击 1 为代码的位的展示 2 为点击
 	 * 往代码位访问计数表中添加数据 
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-18 下午8:24:32
 	 */
-	private function addZoneVisitCount(){
+	private function addZoneVisitCount($view_or_click){
 		
 		// 创建zone_visit_count句柄
 		$zoneVisitCount = M('ZoneVisitCount');
@@ -136,7 +161,12 @@ class CountAction extends Action{
 		 */
 		// 组装查询条件的数据
 		$data['day_start_time'] = $dayStartTime;
-		$data['zid'] = $_GET['id'];
+		if($view_or_click==1){
+			$data['zid'] = $_GET['id']; // 当前广告为的id
+		}elseif ($view_or_click==2){
+			$data['zid'] = intval($_GET['zoneId']);
+		}
+		
 		$zoneVisitCountInfo = $zoneVisitCount->where($data)->find();
 		if(!$zoneVisitCountInfo){
 			
@@ -144,10 +174,18 @@ class CountAction extends Action{
 			$insertData = array();
 			$insertData['day_start_time'] = $dayStartTime;
 			$insertData['zid'] = $_GET['id'];
-			$insertData['view_pv_num'] = 1;
-			$insertData['view_ip_num'] = 1;
-			$insertData['click_pv_num'] = 0;
-			$insertData['click_ip_num'] = 0;
+			
+			if($view_or_click==1){
+				$insertData['view_pv_num'] = 1;
+				$insertData['view_ip_num'] = 1;
+				$insertData['click_pv_num'] = 0;
+				$insertData['click_ip_num'] = 0;
+			}elseif($view_or_click==2){
+				$insertData['view_pv_num'] = 0;
+				$insertData['view_ip_num'] = 0;
+				$insertData['click_pv_num'] = 1;
+				$insertData['click_ip_num'] = 1;
+			}
 			
 			// 往数据库中添加数据
 			$zoneVisitCount->add($insertData);
@@ -163,8 +201,12 @@ class CountAction extends Action{
 			// 组装查询条件
 			$data = array();
 			//$data['day_start_time'] = $dayStartTime;
-			$data['zid'] = $_GET['id'];
-			$data['view_or_click'] = 1;
+			if($view_or_click==1){
+				$data['zid'] = $_GET['id']; // 当前广告为的id
+			}elseif ($view_or_click==2){
+				$data['zid'] = intval($_GET['zoneId']);
+			}
+			$data['view_or_click'] = $view_or_click;
 			$data['visit_time'] = array(array("egt",$dayStartTime),array("lt",$tomorrowStartTime),'and');
 			$data['visit_ip'] = $this->getIp(); 
 			
@@ -172,14 +214,35 @@ class CountAction extends Action{
 			$zoneVisit = M('ZoneVisit');
 			
 			// 查询数据
-			$zoneVisitInfo = $zoneVisit->where($data)->find();
+			$zoneVisitInfo = $zoneVisit->where($data)->select();
 			
-			if($zoneVisitInfo){
+			if(count($zoneVisitInfo) >= 2){
 				
 				// 组装数据库中更新的数据
 				$updateData = array();
-				$updateData['id'] = $zoneVisitInfo['id'];
-			//	$updateData['view_pv_num'] = 
+				$updateData['id'] = $zoneVisitCountInfo['id'];
+				if($view_or_click==1){
+					$updateData['view_pv_num'] = $zoneVisitCountInfo['view_pv_num']+1;
+				}elseif($view_or_click==2){
+					$updateData['click_pv_num'] = $zoneVisitCountInfo['click_pv_num']+1;
+				}
+				
+				// 更改数据
+				$zoneVisitCount->save($updateData);
+			}else{
+				
+				// 组装数据更新数据库
+				$updateData = array();
+				$updateData['id'] = $zoneVisitCountInfo['id'];
+				if($view_or_click==1){
+					$updateData['view_pv_num'] = $zoneVisitCountInfo['view_pv_num']+1;
+					$updateData['view_ip_num'] = $zoneVisitCountInfo['view_ip_num']+1;
+				}elseif ($view_or_click==2){
+					$updateData['click_pv_num'] = $zoneVisitCountInfo['click_pv_num']+1;
+					$updateData['click_ip_num'] = $zoneVisitCountInfo['click_ip_num']+1;
+				}
+				// 更改数据
+				$zoneVisitCount->save($updateData);
 			}
 								
 		}
@@ -212,6 +275,7 @@ class CountAction extends Action{
 	/**
 	 * 
 	 * 判断当前的访问是否来源于广告主在代码位申请的时候填写的网站，如果来源不正确则直接退出正确才进行下面的展示广告和计数的问题
+	 * 其中参数$zoneInfo 为 代码位的信息
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-18 下午5:23:52
 	 */
@@ -260,18 +324,64 @@ class CountAction extends Action{
 		
 		if($adManageInfo){
 			
-			// 组装div框中的图片或文字的广告
+// 			/**
+// 			 * 产生随机数保存到服务器端SESSION中用来连接到广告的链接地址后
+// 			 * 这样每次用户刷新一下页面所产生的广告连接地址都不相同
+// 			 * 从而可以避免用户是直接输入广告地址的跳转广告的页面因为随机数一直在发生变化
+// 			 */
+			//$codeRandNum = md5(rand(100,10000).md5(time()).rand(100,10000));
 			
+			// 把随机数保存到当前广告
+			// 组装url连接地址
+			$jumpUrl = C('SITE_URL')."?m=".$this->actionName.'&a=clickAdJump&zoneId='.$_GET['id'].'&aid='.$adManageInfo['aid'];
+			// 组装div框中的图片或文字的广告
+		
 		
 			$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
 			/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
-			$code.="<div width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$adManageInfo['jump_url']."\' target=\"_blank\" >".$adManageInfo['content']."</a></div>";
+			$code.="<div width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$jumpUrl."\' target=\"_blank\" >".$adManageInfo['content']."</a></div>";
 			$code=$code."');";
 			return $code;
 		}else{
 			
 			return "没有适合当前代码位中所定义的尺寸大小的广告";
 		}
+	}
+	
+	/**
+	 * 
+	 * 用户点击广告之后所执行的方法
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-19 上午11:04:04
+	 */
+	public function clickAdJump(){
+		
+		// 查询相关的信息随机生成广告信息
+		$zone = M("Zone");
+		
+		// 查询代码位相关的信息必须是启用状态的代码位
+		$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
+		
+		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
+		$this->verifyVisitSource($zoneInfo);
+		//dump($_SERVER['HTTP_REFERER']);
+		
+		// 获取当前的广告的信息
+		$adManage = M("adManage");
+		$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
+		if($adManageInfo){
+			
+			// 接下来做点击计数
+			$this->addZoneVisit(2);  // 往zone_visit数据表中添加点击的记录的信息
+			
+			// 往zone_visit_count 表中添加数据
+			$this->addZoneVisitCount(2);
+			
+			// 跳转
+			header("location:".$adManageInfo['jump_url']);
+		
+		}
+			
 	}
 	
 	//public function createAdCode
