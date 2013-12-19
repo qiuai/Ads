@@ -19,7 +19,7 @@ div.calendar { position: relative; }
 .headrow{border-top:1px solid #b3cbe4}
 
 .calendar table thead td.button div div{
-	background-image: url(../../image/default/question-balloon.png);
+	background-image: url(../images/question-balloon.png);
 	background-repeat: no-repeat; text-indent:-100px; overflow:hidden
 }
 .headrow .button { /* "<<", "<", ">", ">>" buttons have this class */

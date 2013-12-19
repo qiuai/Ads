@@ -17,20 +17,21 @@ class OtherAction extends CommonAction {
     public function index(){
     	$this->display();
 	}
-	// 添加公告分类
+	// 新增公告分类
 	public function notice_category_add(){		
  		$this			->display();
 	}
+	// 处理新增公告分类
 	public function notice_category_save(){
-		$type['pid'] 	= $_POST["pid"];
+		$type['pid'] 	= (int)($_POST["pid"]);
 		$type['category_name'] 	= $_POST["category_name"];
-		$category 		= M("noticetype");
+		$category 		= M("notice_type");
 		$category		->data($type)->add();
 		$this			->success("添加成功","SITE_URL/?m=Other&a=notice_category_list");
 	}
 	// 公告分类列表
 	public function notice_category_list(){
-		$noticetype 	= M("noticetype");
+		$noticetype 	= M("notice_type");
 		$category		= $noticetype->select();
 		$this			->assign("category",$category);
  		$this			->display();
@@ -38,23 +39,24 @@ class OtherAction extends CommonAction {
 	// 编辑公告分类
 	public function notice_category_edit(){
 		$id				= (int)($_GET["category_id"]);
-		$noticetype 	= M("noticetype");
+		$noticetype 	= M("notice_type");
 		$category		= $noticetype->where("id=".$id)->select();
 		$this			->assign("category",$category);
 		$this			->display();
 	}
+	// 处理编辑公告分类
 	public function notice_category_edit_save(){
-		$type['id']		= $_POST['category_id'];
-		$type['pid'] 	= $_POST["pid"];
+		$type['id']		= (int)($_POST['category_id']);
+		$type['pid'] 	= (int)($_POST["pid"]);
 		$type['category_name'] 	= $_POST["category_name"];
-		$category 		= M("noticetype");
+		$category 		= M("notice_type");
 		$category		->setField($type);
 		$this			->success("添加成功","SITE_URL/?m=Other&a=notice_category_list");
 	}
 	// 删除公告分类
 	public function notice_category_delete(){
 		$id				= (int)($_GET["category_id"]);
-		$category 		= M("noticetype");
+		$category 		= M("notice_type");
 		$category		->where("id=".$id)->delete();
 		$this			->success("添加成功","SITE_URL/?m=Other&a=notice_category_list");
 	}
@@ -69,24 +71,24 @@ class OtherAction extends CommonAction {
 			}else{
 				$notice[$key]["is_display"]="隐藏";
 			}
-			
 		}
 		$this			->assign("notice",$notice);
  		$this			->display();
 	}
 	// 添加公告
 	public function notice_add(){
-		$no				= M("noticetype");
+		$no				= M("notice_type");
 		$category		= $no->select();
 		$this			->assign("category",$category);
  		$this			->display();
 	}
+	// 处理添加公告
 	public function notice_save(){
  		$type['title'] 		= $_POST["title"];
  		$type['author'] 	= $_POST["author"];
- 		$type['category_id']= $_POST["category_id"];
- 		$type['sort'] 		= $_POST["sort"];
- 		$type['is_display'] = $_POST["is_display"];
+ 		$type['category_id']= (int)($_POST["category_id"]);
+ 		$type['sort'] 		= (int)($_POST["sort"]);
+ 		$type['is_display'] = (int)($_POST["is_display"]);
  		$type['content'] 	= $_POST["content"];
 		$type['pubdate'] 	= time();
 		$category 			= M("notice");
@@ -95,31 +97,31 @@ class OtherAction extends CommonAction {
 	}
 	// 编辑公告
 	public function notice_edit(){
-		$not			= M("noticetype");
+		$not			= M("notice_type");
 		$category		= $not->select();
 		$this			->assign("category",$category);
-		
  		$id				= (int)($_GET["notice_id"]);
 		$no			 	= M("notice");
 		$notice			= $no->where("id=".$id)->select();
 		$this			->assign("notice",$notice);
 		$this			->display();
 	}
+	// 处理编辑公告
 	public function notice_edit_save(){
- 		$type['id']		= $_POST['notice_id'];
-		$type['title'] 	= $_POST["title"];
-		$type['author'] = $_POST["author"];
-		$type['category_id']= $_POST["category_id"];
-		$type['sort'] 	= $_POST["sort"];
-		$type['is_display']= $_POST["is_display"];
-		$type['content']= $_POST["content"];
+ 		$type['id']		= (int)($_POST['notice_id']); //编号
+		$type['title'] 	= $_POST["title"]; //标题
+		$type['author'] = $_POST["author"]; //作者
+		$type['category_id']= (int)($_POST["category_id"]); //分类编号
+		$type['sort'] 	= (int)($_POST["sort"]); //排序
+		$type['is_display']= (int)($_POST["is_display"]); //是否显示
+		$type['content']= $_POST["content"]; //内容
 		$notice 		= M("notice");
-		$notice			->where("id=".$type['id'])->setField($type);
+		$notice			->where("id=".$type['id'])->setField($type); //更改公告
 		$this			->success("更改数据成功","SITE_URL/?m=Other&a=notice_list");
 	}
 	// 删除公告
 	public function notice_delete(){
- 		$id				= (int)($_GET["notice_id"]);
+ 		$id				= (int)($_GET["notice_id"]); //得到公告ID
 		$no			 	= M("notice");
 		$no				->where("id=".$id)->delete();
 		$this			->success("删除成功","SITE_URL/?m=Other&a=notice_list");

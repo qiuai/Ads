@@ -1,0 +1,1 @@
+var $CONFIG={};$CONFIG['url'] = "http://a.ads.me";

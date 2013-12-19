@@ -558,3 +558,25 @@ ul{
 .onCorrect{background-position:3px -247px;border-color:#40B3FF;}
 .onLamp{background-position:3px -200px}
 .onTime{background-position:3px -1356px}
+
+
+.make_report{
+	cursor:pointer;
+	width:23px;
+	height:23px;
+	background-color:#ffffff;
+	background-image:url(../images/report.png);
+	background-attachment:scroll;
+	background-position:center;
+	border:0 none;
+	text-align:center;
+	margin:0 auto;
+}
+
+.none_border{
+	border:none;
+}
+
+table .none_border tr td{
+	border:none;
+}
