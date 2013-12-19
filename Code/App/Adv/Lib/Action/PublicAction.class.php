@@ -43,6 +43,13 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-11-25 上午10:11:13
 	 */
 	public function logout(){
-	
+		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
+			unset($_SESSION[C('USER_AUTH_KEY')]);
+			unset($_SESSION);
+			session_destroy();
+			$this->redirect(__URL__.'&a=login');
+		}else {
+			$this->error('已经登出！');
+		}
 	}
 }
