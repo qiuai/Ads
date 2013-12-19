@@ -46,8 +46,8 @@ class FinanceAction extends CommonAction {
 	}
 	// 申请提现
 	public function withdraw(){
-		$uid			= (int)($_GET["uid"]);	
-		$id				= (int)($_GET["id"]);	
+		$uid			= (int)($_GET["uid"]); //会员编号
+		$id				= (int)($_GET["id"]); //提现编号
 		$member_detail	=	M("member_detail");
 		$member			=	$member_detail->where("uid=".$uid)->select();
 		$this			->assign("member",$member);
@@ -56,11 +56,11 @@ class FinanceAction extends CommonAction {
 	}
 	// 处理申请提现
 	public function withdrawDo(){
-		$id					= (int)($_POST["id"]);
-		$data["status"]		= $_POST["status"];
-		$data["pay_record"]	= $_POST["pay_record"];
-		$data["pay_remark"]	= $_POST["pay_remark"];
-		$data["process_time"]= time();
+		$id					= (int)($_POST["id"]); //提现编号
+		$data["status"]		= $_POST["status"]; //支付状态
+		$data["pay_record"]	= $_POST["pay_record"]; //交易单号
+		$data["pay_remark"]	= $_POST["pay_remark"]; //交易备注 
+		$data["process_time"]= time(); //操作时间
 		$finance_apply 		= M("finance_apply");
 		$finance			= $finance_apply->where("id=".$id)->data($data)->save();
 		$this				->success("提现处理成功！","SITE_URL/?m=Finance&a=index");
