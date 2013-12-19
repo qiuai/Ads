@@ -46,7 +46,7 @@ class PublicAction extends Action {
 	 */
 	public function logout(){
 		if(isset($_SESSION[C('WEB_AUTH_KEY')])) {
-            unset($_SESSION[C('WEB_AUTH_KEY')]);
+			session_destroy();
             $this->redirect('/?m=Public&a=login');
         }else {
             $this->error('已经登出！');

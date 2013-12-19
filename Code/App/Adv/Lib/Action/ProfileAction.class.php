@@ -20,7 +20,7 @@ class ProfileAction extends CommonAction {
 	 */
     public function index(){
     	$User	=	M('Member');
-    	$info	=	$User->find($authInfo['id']);
+    	$info	=	$User->find($_SESSION[C('ADV_AUTH_KEY')]);
     	$detail	=	M("member_detail");
     	$info_detail	=	$detail->where('uid = '. $info['id'])->find();
     	$this->assign("info",$info);
@@ -35,9 +35,9 @@ class ProfileAction extends CommonAction {
      */
     public function profileEdit(){
     	if($this->isPost()){
-    		R('Admin://Member/update');
+    		R('Admin://Member/update', array($_SESSION[C('ADV_AUTH_KEY')]));
     	}else{
-    		R('Admin://Member/getMemberInfo');
+    		R('Admin://Member/getMemberInfo', array($_SESSION[C('ADV_AUTH_KEY')]));
     		$this->display();
     	}
     }
@@ -52,7 +52,7 @@ class ProfileAction extends CommonAction {
     		if($_REQUEST['oldpass'] && (R('Admin://Member/getPassword') == $this->pwdHash($_REQUEST['oldpass']))) {
 				$Member = M('Member');
 				$data['password'] = $this->pwdHash($_REQUEST['newpass']);
-				$data['id'] = $_SESSION[C('USER_AUTH_KEY')];
+				$data['id'] = $_SESSION[C('ADV_AUTH_KEY')];
 				if($Member->save($data)){
 					$this->success('修改成功！');
 				}

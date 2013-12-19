@@ -50,8 +50,8 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-12-10 下午9:37:02
 	 */
 	public function logout(){
-		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
-            unset($_SESSION[C('USER_AUTH_KEY')]);
+		if(isset($_SESSION[C('MEMBER_AUTH_KEY')])) {
+			session_destroy();
             $this->redirect(__URL__.'/login/');
         }else {
             $this->error('已经登出！');
@@ -88,15 +88,17 @@ class PublicAction extends CommonAction {
                 $info['error'] = '密码错误！';
                 return $info;
             }
-            $_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
+            $_SESSION[C('MEMBER_AUTH_KEY')]	=	$authInfo['id'];
             $_SESSION['email']	=	$authInfo['email'];
             $_SESSION['loginUserName']		=	$authInfo['username'];
             $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
             $_SESSION['login_count']	=	$authInfo['username'];
             if($authInfo['user_type']=='web') {
                 $_SESSION[C('WEB_AUTH_KEY')]	=	$authInfo['id'];
+                unset($_SESSION[C('ADV_AUTH_KEY')]);
             }else{
             	$_SESSION[C('ADV_AUTH_KEY')]	=	$authInfo['id'];
+            	unset($_SESSION[C('WEB_AUTH_KEY')]);
             }
             //保存登录信息
             $User	=	M('Member');
