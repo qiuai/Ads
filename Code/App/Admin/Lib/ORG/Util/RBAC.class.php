@@ -219,8 +219,10 @@ class RBAC {
         		$table['user']." as user,".
         		$table['access']." as access ,".
         		$table['node']." as node ".
-        		"where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and access.node_id=node.id and node.is_menu=1 and node.level=2 and node.group_id = 1 and node.status=1";
+        		"where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and access.node_id=node.id and node.level=2 and node.group_id = 1 and node.status=1";
         $apps =   $db->query($sql);
+        
+//         var_dump($apps);
         $access =  array();
         foreach($apps as $key=>$app) {
         	$appId		=	$app['id'];

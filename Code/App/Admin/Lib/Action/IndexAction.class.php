@@ -18,6 +18,10 @@ class IndexAction extends CommonAction {
     	$this->display();
 	}
 	public function header(){
+		$model = M('User');
+		$header = $model->find($_SESSION[C('USER_AUTH_KEY')]);
+		
+		$this->assign('header',$header);
 		$this->display();
 	}
 	public function footer(){
