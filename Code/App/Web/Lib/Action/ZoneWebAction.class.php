@@ -161,6 +161,8 @@ class ZoneWebAction extends CommonAction {
 	}
 	// 获取代码
 	public function get_code(){
+		
+		
 		$this->display();
 	}
 }
