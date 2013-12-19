@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0036)http://adu.phpad.cn/admin.php?m=zone -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <title></title>
 <link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
 <script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
@@ -28,12 +27,11 @@
 				</form>
 							</td>
 				<td align="right">
-				<input type="button" value="导出报表" class="button1" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=zone&amp;a=zone_export&amp;content=&amp;condition=&#39;">
+				<input type="button" value="导出报表" class="button1" onclick="location.href=&#39;SITE_URL?m=Web&a=zoneExport&#39;">
 				</td>
 			</tr>
 		</tbody>
-   </table>
-		
+   </table>	
 <form method="post">
 <table align="center" cellspacing="0" class="list">
     <tbody>
@@ -58,7 +56,7 @@
 			<td>{$vo.display}</td>
 			<td>{$vo.width}*{$vo.height}</td>
 			<td><if condition="$vo.status eq 0">是<else />否</if></td>
-			<td><a target="_blank" href="http://www.ads.me/web.php/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}">编辑</a></td>
+			<td><a target="_blank" href="SITE_WEB_URL/web.php/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}">编辑</a></td>
 		</tr>
 		</volist>
 	</tbody>
