@@ -34,13 +34,27 @@ class MemberAction extends CommonAction {
 			}elseif($_POST['password'] != $_POST['confirm_password']){
 				$this->error("密码不一致！");
 			}
-			$Member = M("Member");
+			$Member = D("Member");
+			
+// 			if(!$Member->create()) {
+// 				$this->error($User->getError());
+// 			}else{
+// 				if($Member->add()){
+// 					echo $Member->getLastSql();
+// // 					$this->success("注册成功！");
+// 				}else{
+// 					echo $Member->getLastSql();
+// 					//$this->error("注册失败！");
+// 				}
+// 			}
+
 			$_POST['status'] = 1; // 状态
 			$_POST['legal_status'] = '个人'; // 法律身份
 			$_POST['is_feed'] = 1; // 是否接受邮件订阅
 			$_POST['password'] = MD5($_POST['password']); // 密码加密
 			$_POST['create_time'] = time(); // 创建时间
 			$_POST['ip'] = $_SERVER['SERVER_ADDR']; // 创建时间
+			
 			if($Member->create()){
 				if($Member->add()){
 					$this->success("注册成功！");

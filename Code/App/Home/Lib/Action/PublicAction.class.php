@@ -41,11 +41,7 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-12-10 下午9:35:46
 	 */
 	public function login(){
-		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
-            $this->redirect(C('SITE_URL'));
-        }else{
-            $this->redirect(C('SITE_URL'));
-        }
+		$this->redirect(C('SITE_URL'));
 	}
 	/**
 	 * 用户登出
@@ -54,7 +50,12 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-12-10 下午9:37:02
 	 */
 	public function logout(){
-		R("Agent/logout");
+		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
+            unset($_SESSION[C('USER_AUTH_KEY')]);
+            $this->redirect(__URL__.'/login/');
+        }else {
+            $this->error('已经登出！');
+        }
 	}
 	/**
 	 * 检查登录
@@ -75,8 +76,8 @@ class PublicAction extends CommonAction {
         // 支持使用绑定帐号登录
         $map['username']	= $_POST['username'];
         $map["status"]	=	array('gt',0);
-        import ( '@.ORG.Util.RBAC' );
-        $authInfo = RBAC::authenticate($map);
+        $model = M('Member');
+        $authInfo = $model->where($map)->find();
         
         //使用用户名、密码和状态的方式进行认证
         if(false === $authInfo) {
@@ -92,8 +93,10 @@ class PublicAction extends CommonAction {
             $_SESSION['loginUserName']		=	$authInfo['username'];
             $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
             $_SESSION['login_count']	=	$authInfo['username'];
-            if($authInfo['username']=='admin') {
-                $_SESSION['administrator']		=	true;
+            if($authInfo['user_type']=='web') {
+                $_SESSION[C('WEB_AUTH_KEY')]	=	$authInfo['id'];
+            }else{
+            	$_SESSION[C('ADV_AUTH_KEY')]	=	$authInfo['id'];
             }
             //保存登录信息
             $User	=	M('Member');
@@ -105,9 +108,6 @@ class PublicAction extends CommonAction {
             $data['login_count']	=	array('exp','login_count+1');
             $data['last_login_ip']	=	$ip;
             $User->save($data);
-
-            // 缓存访问权限
-            RBAC::saveAccessList();
             
             $info['success'] = 1;
             return $info;
@@ -122,8 +122,6 @@ class PublicAction extends CommonAction {
 	public function checkWeb(){
 		$info = $this->checkLogin();
 		if($info['success']){
-			// 注册网站主SESSIONID
-			$_SESSION[C('WEB_AUTH_KEY')] = $_SESSION[C('USER_AUTH_KEY')];
 			redirect(C("WEB_URL"));
 		}else{
 			$this->error($info['error']);
@@ -138,8 +136,6 @@ class PublicAction extends CommonAction {
 	public function checkAdv(){
 		$info = $this->checkLogin();
 		if($info['success']){
-			// 注册广告主SESSIONID
-			$_SESSION[C('ADV_AUTH_KEY')] = $_SESSION[C('USER_AUTH_KEY')];
 			redirect(C("ADV_URL"));
 		}else{
 			$this->error($info['error']);
