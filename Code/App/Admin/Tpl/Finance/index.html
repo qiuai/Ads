@@ -63,7 +63,8 @@
         <td>{$vo.amount_payable}</td> 
         <td>{$vo.process_time}</td>
         <td><if condition="$vo.status eq 1">未支付<elseif condition="$vo.status eq 2"/>已支付<else />异常</if></td>     
-        <td><a href="javascript:void(0);" onclick="doWithdraw({$vo.id})">处理提现</a></td>
+        <!--<td><a href="javascript:void(0);" onclick="doWithdraw({$vo.id})">处理提现</a></td>-->
+        <td><a href="SITE_URL/?m=Finance&a=withdraw&uid={$vo.uid}&id={$vo.id}"><if condition="$vo.process_time eq null">处理提现</if></a></td>
     </tr>
 	</volist>
 </tbody>
@@ -71,7 +72,7 @@
 <div class="admin_do index_page" style="text-align:center;"></div>
 </div>
 </div>
-
+<!--
 <div id="withdraw_do" style="display:block;width:390px;">
 <div style="border:1px solid black;margin:15px 50px;padding:20px;width:240px;height:90px">
     <p style="margin:5px 0px 10px 0px;">账户信息：</p>
@@ -93,6 +94,7 @@
     <p style="margin:10px 60px"><input type="submit" class="button" value="确定">　　<input type="reset" class="button" value="重置"></p>
 </form>
 </div>
+-->
 <script>
 function doWithdraw(id)
 {
