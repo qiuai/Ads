@@ -31,7 +31,11 @@ class FinanceAction extends CommonAction {
 		$apply		= $fa->where($where)->select();
 		foreach($apply as $key =>$value){
 			$apply[$key]["apply_date"] = date("Y-m-d H:i:s",$value["apply_date"]);
-			$apply[$key]["process_time"] = date("Y-m-d H:i:s",$value["process_time"])?0:0;
+			if($value["process_time"]==0){
+				$apply[$key]["process_time"] = 0;
+			}else{
+				$apply[$key]["process_time"] = date("Y-m-d H:i:s",$value["process_time"]);
+			}			
 			$apply[$key]["pre_tax"] = $value["pre_tax"]?0:0;
 			$apply[$key]["after_tax"] = $value["after_tax"]?0:0;
 			$apply[$key]["fee"] = $value["fee"]?0:0;
@@ -40,9 +44,26 @@ class FinanceAction extends CommonAction {
 		$this		->assign("apply",$apply);
     	$this		->display();
 	}
+	// 申请提现
+	public function withdraw(){
+		$uid			= (int)($_GET["uid"]);	
+		$id				= (int)($_GET["id"]);	
+		$member_detail	=	M("member_detail");
+		$member			=	$member_detail->where("uid=".$uid)->select();
+		$this			->assign("member",$member);
+		$this			->assign("id",$id);
+		$this			->display();
+	}
+	// 处理申请提现
 	public function withdrawDo(){
-		$id=(int)($_GET["id"]);
-		
+		$id					= (int)($_POST["id"]);
+		$data["status"]		= $_POST["status"];
+		$data["pay_record"]	= $_POST["pay_record"];
+		$data["pay_remark"]	= $_POST["pay_remark"];
+		$data["process_time"]= time();
+		$finance_apply 		= M("finance_apply");
+		$finance			= $finance_apply->where("id=".$id)->data($data)->save();
+		$this				->success("提现处理成功！","SITE_URL/?m=Finance&a=index");
 	}
 	// 结算明细
 	public function income(){
