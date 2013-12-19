@@ -4,29 +4,31 @@
 		<div class="huiyuan_change_head">
 			<span>银行信息</span>
 			<div class="bitian fr">
-					<a href="http://adu.phpad.cn/center.php?m=finance&a=finance_bank_edit">修改银行信息</a>
+				<a href="SITE_URL/?m=FinanceWeb&a=financeBankEdit">修改银行信息</a>
 			</div>
 			<div class="cb"></div>
 		</div>
         <div class="huiyuan_change_body">
 			<table border="1" bordercolor="#CCCCCC">
 			  <tbody><tr>
-				<td colspan="2" border="0">
-                        <div class="payee_name">
+				<td colspan="2" border="0">	
+					<volist name="member" id="vo">
+                    <div class="payee_name">
 						<span><b class="payee_name_font"> 开户银行：</b></span>
-						<div class="payee_name_right fl">招商银行</div>
+						<div class="payee_name_right fl">{$vo.bank_name}</div>
 						<div class="cb"></div>
 					</div>
                     <div class="payee_name">
-						<span><b class="payee_name_font"> 开户人：</b></span>
-						<div class="payee_name_right fl">1234</div>
+						<span><b class="payee_name_font"> 开&nbsp;&nbsp;户&nbsp;&nbsp;人：</b></span>
+						<div class="payee_name_right fl">{$vo.card_author}</div>
 						<div class="cb"></div>
 					</div>
                     <div class="payee_name">
 						<span><b class="payee_name_font"> 银行卡号：</b></span>
-						<div class="payee_name_right fl">12345</div>
+						<div class="payee_name_right fl">{$vo.card_number}</div>
 						<div class="cb"></div>
-					</div>					
+					</div>
+					</volist>
                  </td>
 			  </tr>
 			  

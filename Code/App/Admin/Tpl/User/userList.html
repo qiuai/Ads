@@ -34,10 +34,10 @@
 			        <td>操作</td>
 			    </tr>
 			    
-			    <Volist name="userList" id="vo">
+			    <Volist name="list" id="vo">
 			    <tr class="bgcolor3">        
 			    	<td>{$vo.id}</td>
-			        <td>{$vo.group_name}</td>
+			        <td>{$vo.name}</td>
 			        <td>{$vo.username}</td>
 			        <td>
 			        	<if condition="$vo.status eq 1">
@@ -56,7 +56,7 @@
 			</table>
 		</div>
 
-<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共3 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=0">上一页</a>&nbsp;&nbsp;<span class="current"> 1 </span>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=user&a=user_list&page=1">尾页</a>&nbsp;&nbsp;</div></div>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div></div>
 </div>
 
 </body></html>

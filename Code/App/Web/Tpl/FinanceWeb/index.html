@@ -15,7 +15,7 @@
 					<td colspan="8" style="padding:10px;" class="notb">
 					<span class="fl" style="margin-left:10px;">支付状态：</span>
 					<select name="status" class="fl">
-						<option value="">选择状态</opstion>
+						<option value="">选择状态</option>
 						<option value="1">未支付</option>
 						<option value="2">已支付</option>
 						<option value="3">异常</option>
@@ -36,8 +36,8 @@
 				  </tr>
 				  <volist name="finance" id="vo">
 				  <tr>
-					  <td>{$vo.withdrawal_date}</td>
-					  <td>{$vo.withdrawal_amount}</td>
+					  <td>{$vo.withdraw_date}</td>
+					  <td>{$vo.withdraw_amount}</td>
 					  <td>{$vo.deductible_amount}</td>
 					  <td>{$vo.transfer_fee}</td>
 					  <td>{$vo.amount_payable}</td>

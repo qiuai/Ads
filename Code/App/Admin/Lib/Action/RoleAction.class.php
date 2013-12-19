@@ -88,13 +88,24 @@ class RoleAction extends CommonAction {
 					{
 						$av['checked'] = 0;
 					}
+					// 操作
+					foreach($av['item'] as $ck=>$cv)
+					{
+						if(in_array($av['id'],$node_ids))
+						{
+							$av['item'][$ck]['checked'] = 1;
+						}
+						else
+						{
+							$av['item'][$ck]['checked'] = 0;
+						}
+					}
 					$mv['item'][$ak] = $av;
 				}
 				$gv['item'][$mk] = $mv;
 			}
 			$group[$gk] = $gv;
 		}
-		
 		$this->assign('roleList',$group);
 		$this->assign("location","修改管理员组");
 		$this->display();
@@ -206,7 +217,7 @@ class RoleAction extends CommonAction {
 	 */
 	public function getRole(){
 		$Role = M("Role");
-		$roleList = $Role->select();
+		$roleList = $Role->order("id asc")->select();
 	
 		$this->assign("roleList",$roleList);
 	}

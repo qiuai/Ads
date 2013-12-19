@@ -24,18 +24,20 @@ class UserAction extends CommonAction {
 	 * @CreateDate: 2013-11-29 下午3:27:42
 	 */
 	public function userList(){
-		$Role = M("Role");
-		$roleList = $Role->select();
-		
-		$User = M("User");
-		$userList = $User->select();
-		
-		foreach ($userList as $key=>$value){
-			$userList[$key]['group_name'] = $this->getGroup($value['id']);
+		$this->getRole();
+		// 搜索
+		if($_REQUEST['roleId']){
+			$where = "where ru.role_id = " .$_REQUEST['roleId'];
 		}
 		
-		$this->assign("roleList",$roleList);
-		$this->assign("userList",$userList);
+		$p = $_GET['p'] ? $_GET['p'] : 1;
+		$num = 10;
+		$limit = " limit ". ($p-1)*$num .",".$num;
+		$sql = "select r.*, u.* from " . C('DB_PREFIX') . "user u left join " . C('DB_PREFIX') . "role_user ru on u.id = ru.user_id left join ". C('DB_PREFIX') ."role r on r.id = ru.role_id ". $where." order by u.id desc". $limit;
+		$count = "select count(*) as num from " . C('DB_PREFIX') . "user u join " . C('DB_PREFIX') . "role_user ru on u.id = ru.user_id join ". C('DB_PREFIX') ."role r on r.id = ru.role_id ". $where." limit 1";
+		
+		$list = $this->pageList($sql, $count, $num);
+		
 		$this->assign("location","管理员列表");
 		$this->display('userList');
 	}
@@ -58,11 +60,12 @@ class UserAction extends CommonAction {
 	 * @CreateDate: 2013-12-3 上午11:55:56
 	 */
 	public function userEdit(){
-		
 		$this->getRole();
 		
 		$User = M("User");
 		$userList = $User->find($_GET['id']);
+		$group = $this->getGroup($_GET['id']);
+		$userList['group_id'] = $group['role_id'];
 		
 		$this->assign("userList",$userList);
 		$this->assign("location","修改信息");
@@ -76,16 +79,8 @@ class UserAction extends CommonAction {
 	public function update(){
 		$id = intval($_REQUEST['id']);
 		$name=$this->getActionName();
-		$model = M ( $name );
+		$model = D ( $name );
 		
-		//var_dump($_REQUEST);exit;
-	
-		if($_REQUEST['password'] == ''){
-			unset($_REQUEST['password']);
-		}else{
-			$model->password = md5($_REQUEST['password']);
-		}
-		 
 		$RoleUser = M("role_user");
 		$data['user_id']	=	$_REQUEST['id'];
 		$data['role_id']	=	$_REQUEST['role_id'];
@@ -97,17 +92,22 @@ class UserAction extends CommonAction {
 		 
 		$model->update_time = time();
 		$model->id = $_REQUEST['id'];
+		$model->status = $_REQUEST['status'];
+		$model->username = $_REQUEST['account'];
+		if($_REQUEST['password']){
+			$model->password = pwdHash($_POST['password']);
+		}
 		// 更新数据
 		$list=$model->save();
 		 
 		if (false != $list || $role != false)
 		{
-			$this->success ("更新成功！");
+			$this->success ("更新成功！", C('SITE_URL')."?m=User");
 		}
 		else
 		{
 			//错误提示
-			$this->error ("修改失败！");
+			$this->error ("修改失败！", C('SITE_URL')."?m=User");
 		}
 	}
 	/**
@@ -124,9 +124,9 @@ class UserAction extends CommonAction {
 			// 写入帐号数据
 			if($result	 =	 $User->add()) {
 				$this->addRole($result);
-				$this->success('用户添加成功！');
+				$this->success('用户添加成功！', C('SITE_URL')."?m=User");
 			}else{
-				$this->error('用户添加失败！');
+				$this->error('用户添加失败！', C('SITE_URL')."?m=User");
 			}
 		}
 	}
@@ -143,7 +143,7 @@ class UserAction extends CommonAction {
 		->join(C("DB_PREFIX")."role_user ru on r.id = ru.role_id")
 		->join(C("DB_PREFIX")."user u on u.id = ru.user_id ")->where("u.id = $id")
 		->find();
-		return $result[name];
+		return $result;
 	}
 	/**
 	 * 返回角色
@@ -153,9 +153,16 @@ class UserAction extends CommonAction {
 	 */
 	public function getRole(){
 		$Role = M("Role");
-		$roleList = $Role->select();
+		$array= array(
+// 				array('neq',1),	// 隐藏管理员
+				array('neq',2),	// 隐藏广告主
+				array('neq',3)	// 隐藏网站主
+				);
+		$where['id'] = $array;
+		$roleList = $Role->where($where)->select();
 		
 		$this->assign("roleList",$roleList);
+		
 	}
 	/**
 	 * 写入角色数据
@@ -215,7 +222,7 @@ class UserAction extends CommonAction {
 		$log = M("Log");
 		$month = mktime(0,0,0,date("m")-1,date("d"),date("Y"));
 		$where['create_time'] = array('lt',$month);
-		$log->delete($where);
-		echo $log->getLastSql();
+		$log->where($where)->delete();
+		$this->redirect(C(SITE_URL)."?m=User&a=logList");
 	}
 }

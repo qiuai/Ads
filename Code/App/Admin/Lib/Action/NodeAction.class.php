@@ -24,8 +24,8 @@ class NodeAction extends CommonAction {
 		if($this->isPost()){
 			$model = M("Node");
 			$level = $this->getLevel($_POST['pid']);
-			$_POST['level'] = ($level+1) ? ($level+1) : 1;
-			$this->insert();
+			$_POST['level'] = $level + 2;
+			$this->insert($_REQUEST, C('SITE_URL')."?m=Node&a=nodeList");
 		}else{
 			$this->getGroup();
 			$this->assign('location',"新增权限");
@@ -39,16 +39,19 @@ class NodeAction extends CommonAction {
 	 * @CreateDate: 2013-11-29 下午4:22:34
 	 */
 	public function nodeList(){
-		$model	=	M("");
-		
-		$where = " where g.id = n.group_id and level = 2 order by id ";
+		$where = " where g.id = n.group_id and level = 2 order by n.group_id asc, n.sort desc, n.id asc ";
 		$select =" n.*,g.title";
 		$table = " ".C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g ';
 		
-		$sql = "select $select from $table $where";
+		$p = $_GET['p'] ? $_GET['p'] : 1;
+		$num = 5;
+		$limit = " limit ". ($p-1)*$num .",".$num;
+		
+		$sql = "select $select from $table $where $limit";
+		$count = "select count(n.id) as num from $table $where limit 1";
 		
 		// 菜单栏
-		$list = $model->query($sql);
+		$list = $this->pageList($sql, $count, $num);
 		
 		// 菜单下栏目
 		foreach($list as $key=>$value){
@@ -72,13 +75,29 @@ class NodeAction extends CommonAction {
 	 * @CreateDate: 2013-12-3 上午10:23:04
 	 */
 	public function nodeEdit(){
-		$model	=	M("");
-		$sql = "select * from ".C('DB_PREFIX')."node where id = ".$_GET['id'];
-		$list = $model->query($sql);
-		
-		$this->assign('list',$list[0]);
-		$this->assign('location',"修改权限");
-		$this->display();
+		if($this->isPost()){
+			$model = M('Node');
+			if (false === $model->create()) {
+				$this->error($model->getError());
+			}
+			// 更新数据
+			$list = $model->save();
+			if (false !== $list) {
+				//成功提示
+				$this->success('编辑成功!',cookie('_currentUrl_'));
+			} else {
+				//错误提示
+				$this->error('编辑失败!');
+			}
+		}else{
+			$model	=	M();
+			$sql = "select * from ".C('DB_PREFIX')."node where id = ".$_GET['id'];
+			$list = $model->query($sql);
+				
+			$this->assign('list',$list[0]);
+			$this->assign('location',"修改权限");
+			$this->display();
+		}
 	}
 	/**
 	 * 返回节点
