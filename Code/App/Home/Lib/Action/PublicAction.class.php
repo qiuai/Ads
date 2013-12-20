@@ -75,12 +75,12 @@ class PublicAction extends CommonAction {
         $map            =   array();
         // 支持使用绑定帐号登录
         $map['username']	= $_POST['username'];
-        $map["status"]	=	array('gt',0);
+        $map["status"]	=	array('eq',0);
         $model = M('Member');
         $authInfo = $model->where($map)->find();
         
         //使用用户名、密码和状态的方式进行认证
-        if(false === $authInfo) {
+        if(false == $authInfo) {
         	$info['error'] = '帐号不存在或已禁用！';
         	return $info;
         }else {

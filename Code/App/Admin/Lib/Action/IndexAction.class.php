@@ -24,12 +24,6 @@ class IndexAction extends CommonAction {
 		$this->assign('header',$header);
 		$this->display();
 	}
-	public function footer(){
-		$this->display();
-	}
-	public function left(){
-		$this->display();
-	}
 	public function right(){
 		// 日历输出
 		$this->getCalendar();

@@ -1,9 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0053)http://adu.phpad.cn/admin.php?m=start&a=start_system& -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 	<title>版本信息</title>
-   	<link href="./版本信息_files/admin_first_style.css" rel="stylesheet" type="text/css">
+   	<link href="STATIC_URL/admin/css/admin_first_style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -20,23 +19,23 @@
 											</div>
 											<div class="tabs">
 												<ul class="links">
-																										<li class="link">
-														<a href="http://adu.phpad.cn/admin.php?m=start&a=start_index&">
+													<li class="link">
+														<a href="SITE_URL?m=Index&a=right">
 															<span>控制面版</span>
 														</a>
 													</li>
 													<li class="active">
-														<a href="./版本信息_files/版本信息.htm">
+														<a href="SITE_URL?m=Index&a=system">
 															<span>版本信息</span>
 														</a>
 													</li>
 													<li class="link">
-														<a href="http://adu.phpad.cn/admin.php?m=start&a=start_copyright&">
+														<a href="SITE_URL?m=Index&a=copyright">
 															<span>版权所有</span>
 														</a>
 													</li>
 													<li class="link">
-														<a href="http://adu.phpad.cn/admin.php?m=start&a=start_server&">
+														<a href="SITE_URL?m=Index&a=server">
 															<span>服务器负载</span>
 														</a>
 													</li>
@@ -82,42 +81,41 @@
 													WEB服务器:
 												</td>
 												<td>
-													nginx/1.2.7												</td>
+													<?PHP echo $_SERVER['SERVER_SOFTWARE']; ?>											</td>
 											</tr>
 											<tr class="t1">
 												<td class="locked" width="500">
 													MYSQL版本:
 												</td>
-												<td>
-																									</td>
+												<td><?php echo mysql_get_server_info();?></td>
 											</tr>
 											<tr class="t1">
 												<td class="locked">
 													服务器时间:
 												</td>
 												<td>
-													2013-12-20 09:28:08												</td>
+													<?php echo date('Y-m-d H:i:s'); ?>											</td>
 											</tr>
 											<tr class="t1">
 												<td class="locked">
 													操作系统:
 												</td>
 												<td>
-													Linux												</td>
+													<?PHP echo PHP_OS; ?>												</td>
 											</tr>
 											<tr class="t1">
 												<td class="locked">
 													文件上传:
 												</td>
 												<td>
-													允许 50M												</td>
+													<?PHP echo get_cfg_var("upload_max_filesize")?get_cfg_var("upload_max_filesize"):"不允许上传附件"; ?>											</td>
 											</tr>
 											<tr class="t1">
 												<td class="locked">
 													GD Library:
 												</td>
 												<td>
-													bundled (2.0.34 compatible)												</td>
+													<?php $gd = gd_info(); echo $gd['GD Version']; ?>										</td>
 											</tr>
 										</tbody>
 									</table>
