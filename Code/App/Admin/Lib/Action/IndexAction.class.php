@@ -69,7 +69,12 @@ class IndexAction extends CommonAction {
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-12-20 下午1:45:06
 	 */
-	public function tenDaysBefore(){
+	public function tenDaysBefore($uid=''){
+		// 会员报表 
+		if($uid){
+			$where = " and uid = ". intval($uid);
+		}
+		
 		// 查询中心 当日时间或者选择时间
 		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : date('d');
 		
@@ -78,7 +83,7 @@ class IndexAction extends CommonAction {
 		for($i=9; $i>=0; $i--){
 			$day = mktime(0,0,0,date("m") ,$today-($i+1),date("Y"));
 			$yestoday = mktime(0,0,0,date("m") ,$today-$i,date("Y"));
-			$data = $model->query("select sum(click) as click, sum(pv) as pv, sum(cpm) as cpm, sum(cpc) as cpc, sum(real_income) as income, count(ip) as ip from " . C('DB_PREFIX') . "income where settlement_time < $yestoday and settlement_time >= $day");
+			$data = $model->query("select sum(click) as click, sum(pv) as pv, sum(cpm) as cpm, sum(cpc) as cpc, sum(real_income) as income, count(ip) as ip from " . C('DB_PREFIX') . "income where settlement_time < $yestoday and settlement_time >= $day $where");
 			foreach($data[0] as $key=>$value){
 				$data[0][$key] = $value ? $value : 0;
 			}
