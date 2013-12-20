@@ -6,7 +6,7 @@
 	<script src="STATIC_URL/admin/js/amcharts.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	// 统计图数据 
-	var chartData = [{day:"1117",income:10,count_ip:10,count_pv:20,count_click:40,count_cps:0,count_cpa:0},{day:"1118",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1119",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1120",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1121",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1122",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1123",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1124",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1125",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0},{day:"1126",income:0,count_ip:0,count_pv:0,count_click:0,count_cps:0,count_cpa:0}];
+	var chartData = {$chartData};
 	AmCharts.ready(function() {
 		// SERIAL CHART  
 		chart = new AmCharts.AmSerialChart();
@@ -34,7 +34,7 @@
 		var graph2 = new AmCharts.AmGraph();
 		graph2.type = "line";
 		graph2.title = "ip";
-		graph2.valueField = "count_ip";
+		graph2.valueField = "ip";
 		graph2.lineThickness = 2;
 		graph2.bullet = "round";
 		chart.addGraph(graph2);
@@ -43,7 +43,7 @@
 		var graph2 = new AmCharts.AmGraph();
 		graph2.type = "line";
 		graph2.title = "pv";
-		graph2.valueField = "count_pv";
+		graph2.valueField = "pv";
 		graph2.lineThickness = 2;
 		graph2.bullet = "round";
 		chart.addGraph(graph2);
@@ -52,7 +52,7 @@
 		var graph2 = new AmCharts.AmGraph();
 		graph2.type = "line";
 		graph2.title = "click";
-		graph2.valueField = "count_click";
+		graph2.valueField = "click";
 		graph2.lineThickness = 2;
 		graph2.bullet = "round";
 		chart.addGraph(graph2);
@@ -60,8 +60,8 @@
 		// line
 		var graph2 = new AmCharts.AmGraph();
 		graph2.type = "line";
-		graph2.title = "cps";
-		graph2.valueField = "count_cps";
+		graph2.title = "cpc";
+		graph2.valueField = "cpc";
 		graph2.lineThickness = 2;
 		graph2.bullet = "round";
 		chart.addGraph(graph2);
@@ -69,8 +69,8 @@
 		// line
 		var graph2 = new AmCharts.AmGraph();
 		graph2.type = "line";
-		graph2.title = "cpa";
-		graph2.valueField = "count_cpa";
+		graph2.title = "cpm";
+		graph2.valueField = "cpm";
 		graph2.lineThickness = 2;
 		graph2.bullet = "round";
 		chart.addGraph(graph2);
