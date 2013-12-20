@@ -71,18 +71,11 @@ class IndexAction extends CommonAction {
 	 */
 	public function tenDaysBefore(){
 		// 查询中心 当日时间或者选择时间
-		$today = $_REQUEST['day'] ? $_REQUEST['day'] : date('d');
-		
-		// json 输出 格式：	day:"1117",income:10,count_ip:10,count_pv:20,count_click:40,count_cps:0,count_cpa:0};
-// 		$tendaysbefore = mktime(0,0,0,date("m") ,intval($today)-10,date("Y"));
-// 		$yestoday = mktime(0,0,0,date("m") ,-1,date("Y"));
-// 		$yestoday = strtotime(date('Y-m-d'), $yestoday);
-		
-// 		var_dump(date('Y-m-d H:i:s',$yestoday));exit;
+		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : date('d');
 		
 		// 获取数据
 		$model = M('Income');
-		for($i=10; $i>0; $i--){
+		for($i=9; $i>=0; $i--){
 			$day = mktime(0,0,0,date("m") ,$today-($i+1),date("Y"));
 			$yestoday = mktime(0,0,0,date("m") ,$today-$i,date("Y"));
 			$data = $model->query("select sum(click) as click, sum(pv) as pv, sum(cpm) as cpm, sum(cpc) as cpc, sum(real_income) as income, count(ip) as ip from " . C('DB_PREFIX') . "income where settlement_time < $yestoday and settlement_time >= $day");
@@ -169,7 +162,7 @@ class IndexAction extends CommonAction {
 				if($dayecho=="&nbsp"){
 					$todaybg = 'bgcolor="#ffffff"';
 				}
-				$tabstr.="<td $todaybg>$dayecho</td>";
+				$tabstr.="<td $todaybg><a href=\"".C('SITE_URL')."?m=Index&a=right&day=$dayecho\">$dayecho</a></td>";
 			}
 			$tabstr.="</tr>";
 		}
