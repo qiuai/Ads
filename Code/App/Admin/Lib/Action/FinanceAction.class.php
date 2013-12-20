@@ -72,23 +72,18 @@ class FinanceAction extends CommonAction {
 		$plan_id = $_POST["plan_id"]; // 计划ID
 		$uid = $_POST["uid"]; // 网站主ID
 		// 转化成时间戳
-		if(empty($start_date)){
-			$start  = time()-86400*4;
-		}else{
-			$start	= strtotime($start_date);
-		}
-		if(empty($end_date)){
-			$end  	= time()+86400;
-		}else{
-			$end	= strtotime($end_date);
-		}
+		$start	= strtotime($start_date);
+		$end	= strtotime($end_date);
 		// 查询条件
 		if(empty($_GET["status"])){ // 按时间，id查询
-			if($start<=$end){
-				$end +=86400; // 计算到一天结束为止
-				$where = "start_date >=".$start." and end_date<=".$end;
+			if(empty($start)&&empty($end)){
+				$where=1; // 默认
+			}else if(empty($start)&&!empty($end)){
+				$where="settlement_time <= ".$end; // 早于结束时间
+			}else if(!empty($start)&&empty($end)){
+				$where="settlement_time >= ".$start; // 晚于开始时间
 			}else{
-				$this->error("请正确选择日期！","SITE_URL/?m=Finance&a=income");
+				$where="settlement_time >= ".$start." and settlement_time <= ".$end; // 介于开始结束时间之间
 			}
 			if(!empty($plan_id)){
 				$where = $where." and pid =".$plan_id; 

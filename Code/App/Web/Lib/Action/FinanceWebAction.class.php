@@ -49,7 +49,7 @@ class FinanceWebAction extends CommonAction {
 	// 申请提现
 	public function financePay(){
 		$this	->assign("title","申请提现");
-		$uid 	= $_SESSION[C('USER_AUTH_KEY')];
+		$uid 	= $_SESSION[C('WEB_AUTH_KEY')];
 		// 创建web_balance表对象
 		$web  	= M("web_balance");
 		$balance= $web->where("uid=".$uid)->select();
@@ -64,7 +64,7 @@ class FinanceWebAction extends CommonAction {
     }
 	// 处理提现申请数据
 	public function financePayDo(){
-		$uid						= $_SESSION[C('USER_AUTH_KEY')];
+		$uid						= $_SESSION[C('WEB_AUTH_KEY')];
 		$data["uid"] 				= $uid;
 		$data["apply_date"] 		= time();
 		$data["withdraw_balance"] 	= $_POST["balance"];
@@ -79,7 +79,7 @@ class FinanceWebAction extends CommonAction {
 	// 收款人银行卡信息
 	public function financeBank(){
 		$this	->assign("title","银行信息");
-		$uid 	= $_SESSION[C('USER_AUTH_KEY')];
+		$uid 	= $_SESSION[C('WEB_AUTH_KEY')];
 		$me  	= M("member_detail");
 		$member	= $me->where("uid=".$uid)->select();
 		$this	->assign("member",$member);
@@ -88,7 +88,9 @@ class FinanceWebAction extends CommonAction {
 	// 编辑银行信息
 	public function financeBankEdit(){
 		$this->assign("title","修改银行信息");
-		$uid=$_SESSION[C('USER_AUTH_KEY')];
+		$uid=$_SESSION[C('WEB_AUTH_KEY')]; //获取用户信息
+		$bank_type=C('BANK_TYPE'); //获取银行信息
+		$this->assign("bank_type",$bank_type);
 		$me=M("member");
 		$member=$me->where("id =".$uid)->select();
 		$this->assign("member",$member);
@@ -118,7 +120,7 @@ class FinanceWebAction extends CommonAction {
 		if($card_number!=$accounts_again){
 			$this->error("两次银行卡卡号或存折账号 输入不一致!","SITE_URL/?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
 		}else{
-			$uid=$_SESSION[C('USER_AUTH_KEY')]; // 获取会员id
+			$uid=$_SESSION[C('WEB_AUTH_KEY')]; // 获取会员id
 			$me=M("member");
 			$member=$me->where("id =".$uid)->data($data_member)->save(); // 更改真实姓名、法人信息
 			$med=M("member_detail");
@@ -130,11 +132,11 @@ class FinanceWebAction extends CommonAction {
 	// 结算明细
 	public function financeDetail(){
 		// 按结算时间所处时间段查询
-		$start	=	$_POST["time_start"];
-		$end	=	$_POST["time_end"];
-		$start	=	strtotime($start);
-		$end	=	strtotime($end);
-		$in	= M("income");
+		$start_date	= $_POST["time_start"];
+		$end_date	= $_POST["time_end"];
+		$start		= strtotime($start_date);
+		$end		= strtotime($end_date);
+		$in			= M("income");
 		if(empty($start)&&empty($end)){
 			$income=$in->select(); // 默认
 		}else if(empty($start)&&!empty($end)){
@@ -148,6 +150,18 @@ class FinanceWebAction extends CommonAction {
 			$income[$key]["start_date"] = date("Y-m-d",$val["start_date"]); // 周期开始时间
 			$income[$key]["end_date"] = date("Y-m-d",$val["end_date"]); // 周期结束时间
 			$income[$key]["settlement_time"] = date("Y-m-d",$val["settlement_time"]); // 结算时间
+		}
+		//标注开始日期
+		if(empty($start_date)){
+			$this->assign("start_date",date("Y-m-d",time()-86400*3));
+		}else{
+			$this->assign("start_date",$start_date);
+		}
+		//标注结束日期	
+		if(empty($end_date)){
+			$this->assign("end_date",date("Y-m-d",time()));
+		}else{
+			$this->assign("end_date",$end_date);
 		}
 		$this->assign("income",$income);
 		$this->display();
