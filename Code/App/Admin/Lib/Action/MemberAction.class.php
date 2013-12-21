@@ -192,25 +192,11 @@ class MemberAction extends CommonAction {
 	 */
 	public function loginMemberHome(){
 		$model = M("Member");
-		$id = $_REQUEST['id'];
+		$id = $_REQUEST['uid'];
 		$member = $model->find($id);
 		
-		//生成认证条件
-		$map            =   array();
-		// 支持使用绑定帐号登录
-		$map['username']	= $member['username'];
-		$map["status"]	=	array('gt',0);
-		import ( '@.ORG.Util.RBAC' );
-		$authInfo = RBAC::authenticate($map);
-		$_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
-		$_SESSION['email']	=	$authInfo['email'];
-		$_SESSION['loginUserName']		=	$authInfo['username'];
-		$_SESSION['login_count']	=	$authInfo['username'];
-		
-		if($member['user_type'] == "web"){
-			redirect(C('WEB_URL'));
-		}else{
-			redirect(C('ADV	_URL'));
+		if(!empty($member)){
+			redirect(C('HOME_URL').'?m=Public&a=adminLogin&username=' . $member['username'] . '&password=' . $member['password']);
 		}
 	}
 	/**
@@ -250,6 +236,15 @@ class MemberAction extends CommonAction {
 		$this->assign("info",$info);
 		$this->assign("info_detail",$info_detail);
 		return $info;
+	}
+	/**
+	 * 扣量设置
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午3:06:01
+	 */
+	public function memberSetDeduction(){
+		
 	}
 	/**
 	 * 增扣款项列表

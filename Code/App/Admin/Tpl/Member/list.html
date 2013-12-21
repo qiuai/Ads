@@ -135,7 +135,7 @@ a{
 						增/扣款项
 					</a>
 					|
-					<a href="SITE_URL?m=report&a=report_web&id=300020" title="查看报表">
+					<a href="SITE_URL?m=Report&a=webReport&uid={$vo.id}" title="查看报表">
 						报表
 					</a>
 					|
@@ -143,7 +143,7 @@ a{
 						网站
 					</a>
 					|
-					<a href="SITE_URL?m=zone&a=zone_list&condition=uid&content=300020" title="查看广告位">
+					<a href="SITE_URL?m=Web&a=zoneSearch&condition=uid&content={$vo.id}" title="查看广告位">
 						广告位
 					</a>
 					|
@@ -169,7 +169,7 @@ a{
 						扣量等设置
 					</a>
 					&nbsp;|&nbsp;
-					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&id={$vo.id}" title="进入后台">
+					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&uid={$vo.id}" title="进入后台">
 						进入后台
 					</a>
 				</span>
@@ -232,7 +232,7 @@ a{
 						发送邮件
 					</a>
 					&nbsp;|&nbsp;
-					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&id={$vo.id} title="进入后台">
+					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&uid={$vo.id} title="进入后台">
 						进入后台
 					</a>
 				</span>
@@ -249,8 +249,8 @@ a{
 </div>
 </div>
 <div id="deduction" style="display:none">
-	<form action="SITE_URL?m=member&a=member_set_deduction&" method="post">
-	<input type="hidden" name="uid" id="uid" value="">
+	<form action="SITE_URL?m=member&a=memberSetDeduction" method="post">
+	<input type="hidden" name="uid" id="uid" value="{$uid}">
 		<p style="margin:10px 0">CPS扣量：<input type="text" name="cps" id="cps" value="" class="textbox">%</p>
 		<p style="margin:10px 0">CPA扣量：<input type="text" name="cpa" id="cpa" value="" class="textbox">效果</p>
 		<p style="margin:10px 0">CPC扣量：<input type="text" name="cpc" id="cpc" value="" class="textbox">点击</p>

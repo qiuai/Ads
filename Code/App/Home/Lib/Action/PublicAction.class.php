@@ -116,6 +116,45 @@ class PublicAction extends CommonAction {
         }
 	}
 	/**
+	 * 管理员 进入 网站主广告主后台 验证
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午2:15:56
+	 * @return unknown
+	 */
+	public function adminLogin(){
+		if( !$_REQUEST['username'] || !$_REQUEST['password']) {
+			redirect(C('HOME_URL'));
+		}
+		//生成认证条件
+		$map            =   array();
+		// 支持使用绑定帐号登录
+		$map['username']	= $_REQUEST['username'];
+		$map['password']	= $_REQUEST['password'];
+		$model = M('Member');
+		$authInfo = $model->where($map)->find();
+	
+		//使用用户名、密码和状态的方式进行认证
+		if(!empty($authInfo)) {
+			
+			$_SESSION[C('MEMBER_AUTH_KEY')]	=	$authInfo['id'];
+			$_SESSION['email']	=	$authInfo['email'];
+			$_SESSION['loginUserName']		=	$authInfo['username'];
+			$_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
+			$_SESSION['login_count']	=	$authInfo['username'];
+			if($authInfo['user_type']=='web') {
+				$_SESSION[C('WEB_AUTH_KEY')]	=	$authInfo['id'];
+				unset($_SESSION[C('ADV_AUTH_KEY')]);
+				redirect(C("WEB_URL"));
+			}else{
+				$_SESSION[C('ADV_AUTH_KEY')]	=	$authInfo['id'];
+				unset($_SESSION[C('WEB_AUTH_KEY')]);
+				redirect(C("ADV_URL"));
+			}
+			
+		}
+	}
+	/**
 	 * 网站主 登录检测
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
