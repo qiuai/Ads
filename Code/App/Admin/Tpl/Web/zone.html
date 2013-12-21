@@ -54,7 +54,7 @@
 			<td>{$vo.sid}</td>
 			<td>{$vo.uid}</td>
 			<td><if condition="$vo.pay_type eq 1">CPS<elseif condition="$vo.pay_type eq 2"/>CPA<elseif condition="$vo.pay_type eq 3"/>CPC<else />CPM</if></td>
-			<td>{$vo.displa}</td>
+			<td>{$vo.display}</td>
 			<td>{$vo.width}*{$vo.height}</td>
 			<td><if condition="$vo.status eq 0">是<else />否</if></td>
 			<td><a target="_blank" href="SITE_WEB_URL/web.php/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}">编辑</a></td>
