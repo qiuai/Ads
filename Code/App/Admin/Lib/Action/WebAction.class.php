@@ -42,7 +42,7 @@ class WebAction extends CommonAction {
 		$this		->assign("sitetype",$sitetype[0]['code_name_zh']);	
 		$this		->display();
 	}
-	//按条件查询
+	//按条件查询网站
 	public function site_search(){
 		$content	= $_GET["content"]; //查询条件
 		$condition	= $_GET["condition"]; //查询条件类型
@@ -244,6 +244,57 @@ class WebAction extends CommonAction {
 		$st['sort']		= (int)($_POST["sort"]);
 		$siteType->where("id =".$_POST["code_id"])->data($st)->save();
 		$this->success('数据更改成功','SITE_URL/?m=Web&a=site_type');
+	}
+	//按条件查询代码位
+	public function zoneSearch(){
+		$content	= (int)($_GET["content"]); //查询条件
+		$condition	= $_GET["condition"]; //查询条件类型
+		switch($condition){
+			case "zone_id": //按网站ID查询
+				$where = "id =".$content;
+			break;
+			case "site_id": //按网站域名查询
+				$where = "sid =".$content;
+			break;
+			case "uid": //按用户ID查询
+				$where = "uid =".$content;
+			break;
+			default:
+			break;
+		}
+		$zo 		= M("zone");
+		$zone       = $zo->where($where)->select();
+		$ads 		= M("ad_size");
+		$ad_size    = $ads->where("id =".$zone[0]['size'])->select();
+		foreach($ad_size as $key =>$val){
+			$zone[0]["width"]	=	$val["width"];
+			$zone[0]["height"]	=	$val["height"];
+			switch($val["size_type"]){
+				case 1:
+					$size_type="图片";
+				break;
+				case 2:
+					$size_type="文字";
+				break;
+				case 3:
+					$size_type="漂浮";
+				break;
+				case 4:
+					$size_type="对联";
+				break;
+				case 5:
+					$size_type="弹窗";
+				break;
+				case 6:
+					$size_type="视窗";
+				break;
+				default:
+				break;
+			}
+		}
+		$zone[0]['display']	= $size_type;
+		$this		->assign("zone",$zone);
+		$this		->display(zone);
 	}
 	//导出代码位报表
 	public function zoneExport(){

@@ -15,8 +15,9 @@
         <tbody>
 			<tr>
 				<td style="border-right:none;">
-				<form method="get" action="SITE_URL?m=Web&a=zoneSearch">
-				
+				<form method="get">
+				<input type="hidden" name="m" value="Web">
+				<input type="hidden" name="a" value="zoneSearch">
 				<input type="text" name="content" value="">
 				<select name="condition">
 					<option value="zone_id">广告位ID</option>
@@ -27,7 +28,7 @@
 				</form>
 							</td>
 				<td align="right">
-				<input type="button" value="导出报表" class="button1" onclick="location.href=&#39;SITE_URL?m=Web&a=zoneExport&#39;">
+				<input type="button" value="导出报表" class="button1" onclick="location.href=&#39;SITE_URL/?m=Web&a=zoneExport&#39;">
 				</td>
 			</tr>
 		</tbody>
@@ -53,7 +54,7 @@
 			<td>{$vo.sid}</td>
 			<td>{$vo.uid}</td>
 			<td><if condition="$vo.pay_type eq 1">CPS<elseif condition="$vo.pay_type eq 2"/>CPA<elseif condition="$vo.pay_type eq 3"/>CPC<else />CPM</if></td>
-			<td>{$vo.display}</td>
+			<td>{$vo.displa}</td>
 			<td>{$vo.width}*{$vo.height}</td>
 			<td><if condition="$vo.status eq 0">是<else />否</if></td>
 			<td><a target="_blank" href="SITE_WEB_URL/web.php/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}">编辑</a></td>
