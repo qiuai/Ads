@@ -165,7 +165,7 @@ a{
 					</a> 
 					-->
 					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(300020,11,0.00,0.00,0.00,0.00)">
+					<a title="相关设置" class="" onclick="doDeduction({$vo.id},11,0.00,0.00,0.00,0.00)">
 						扣量等设置
 					</a>
 					&nbsp;|&nbsp;
@@ -249,8 +249,8 @@ a{
 </div>
 </div>
 <div id="deduction" style="display:none">
-	<form action="SITE_URL?m=member&a=memberSetDeduction" method="post">
-	<input type="hidden" name="uid" id="uid" value="{$uid}">
+	<form action="SITE_URL?m=Member&a=memberSetDeduction" method="post">
+	<input type="hidden" name="uid" id="uid" value="">
 		<p style="margin:10px 0">CPS扣量：<input type="text" name="cps" id="cps" value="" class="textbox">%</p>
 		<p style="margin:10px 0">CPA扣量：<input type="text" name="cpa" id="cpa" value="" class="textbox">效果</p>
 		<p style="margin:10px 0">CPC扣量：<input type="text" name="cpc" id="cpc" value="" class="textbox">点击</p>
@@ -258,8 +258,8 @@ a{
 		<p style="margin:10px 0">
 		属于客服：<select name="mid">
 					<option value="0">--请选择客服--</option>
-										<option value="10" class="mid">admintest</option>
-									</select>
+				<option value="10" class="mid">admintest</option>
+			</select>
 		<input style="margin-left:80px" type="submit" value="修改" class="button">
 		</p>
 	</form>

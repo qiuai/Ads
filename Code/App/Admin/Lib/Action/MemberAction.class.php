@@ -244,7 +244,16 @@ class MemberAction extends CommonAction {
 	 * @CreateDate: 2013-12-21 下午3:06:01
 	 */
 	public function memberSetDeduction(){
-		
+		$model = M('balance_amount');
+		if($model->create()){
+			if($model->save()){
+				$this->success('修改成功！');
+			}else{
+				$this->error('修改失败！');
+			}
+		}else{
+			$this->error('修改失败！');
+		}
 	}
 	/**
 	 * 增扣款项列表
