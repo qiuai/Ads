@@ -88,8 +88,8 @@ class FinanceWebAction extends CommonAction {
 	// 编辑银行信息
 	public function financeBankEdit(){
 		$this->assign("title","修改银行信息");
-		$uid=$_SESSION[C('WEB_AUTH_KEY')]; //获取用户信息
-		$bank_type=C('BANK_TYPE'); //获取银行信息
+		$uid=$_SESSION[C('WEB_AUTH_KEY')]; // 获取用户信息
+		$bank_type=C('BANK_TYPE'); // 获取银行信息
 		$this->assign("bank_type",$bank_type);
 		$me=M("member");
 		$member=$me->where("id =".$uid)->select();
@@ -151,13 +151,13 @@ class FinanceWebAction extends CommonAction {
 			$income[$key]["end_date"] = date("Y-m-d",$val["end_date"]); // 周期结束时间
 			$income[$key]["settlement_time"] = date("Y-m-d",$val["settlement_time"]); // 结算时间
 		}
-		//标注开始日期
+		// 标注开始日期
 		if(empty($start_date)){
 			$this->assign("start_date",date("Y-m-d",time()-86400*3));
 		}else{
 			$this->assign("start_date",$start_date);
 		}
-		//标注结束日期	
+		// 标注结束日期	
 		if(empty($end_date)){
 			$this->assign("end_date",date("Y-m-d",time()));
 		}else{

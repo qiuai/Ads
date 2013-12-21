@@ -18,11 +18,11 @@
 				<form method="get">
 				<input type="hidden" name="m" value="Web">
 				<input type="hidden" name="a" value="zoneSearch">
-				<input type="text" name="content" value="">
+				<input type="text" name="content" value="{$content}">
 				<select name="condition">
-					<option value="zone_id">广告位ID</option>
-					<option value="site_id">所属网站ID</option>
-					<option value="uid">用户UID</option>
+					<option value="zone_id" <if condition="$condition eq 'zone_id'">selected</if>>广告位ID</option>
+					<option value="site_id" <if condition="$condition eq 'site_id'">selected</if>>所属网站ID</option>
+					<option value="uid" <if condition="$condition eq 'uid'">selected</if>>用户UID</option>
 				</select>
 				<input type="submit" value="查询" class="button">
 				</form>
@@ -53,10 +53,10 @@
 			<td>{$vo.name}</td>
 			<td>{$vo.sid}</td>
 			<td>{$vo.uid}</td>
-			<td><if condition="$vo.pay_type eq 1">CPS<elseif condition="$vo.pay_type eq 2"/>CPA<elseif condition="$vo.pay_type eq 3"/>CPC<else />CPM</if></td>
+			<td><if condition="$vo.pay_type eq 1">CPS<elseif condition="$vo.pay_type eq 2"/>CPA<elseif condition="$vo.pay_type eq 3"/>CPC<elseif condition="$vo.pay_type eq 4"/>CPM</if></td>
 			<td>{$vo.display}</td>
 			<td>{$vo.width}*{$vo.height}</td>
-			<td><if condition="$vo.status eq 0">是<else />否</if></td>
+			<td><if condition="$vo.status eq 0">是<elseif condition="$vo.status eq 1"/>否</if></td>
 			<td><a target="_blank" href="SITE_WEB_URL/web.php/?m=ZoneWeb&a=zone_edit&zone_id={$vo.id}">编辑</a></td>
 		</tr>
 		</volist>
