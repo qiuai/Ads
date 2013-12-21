@@ -67,6 +67,71 @@ class WebAction extends CommonAction {
 		$this		->assign("site",$site);
 		$this		->display(index);
 	}
+	//导出网站列表报表
+	public function siteExport(){
+		//输出的文件类型为excel
+		header("Content-type:application/vnd.ms-excel");
+		//提示下载
+		header("Content-Disposition:attachement;filename=网站列表_".date("Y-m-d").".xls");
+		//查询提现申请表
+		$st				= M("site");
+		$sp				= M("site_type");
+		$site	 	  	= $st->select();
+		$ReportArr	  	= array();
+		//将关系数组转换成索引数组
+		foreach($site as $key =>$val){
+			$ReportArr[$key][]=$val["id"]; //网站ID
+			$ReportArr[$key][]=$val["site_name"]; //网站名称
+			$ReportArr[$key][]=$val["site_domain"]; //网站域名
+			$type=$sp->where("id=".$val["site_type"])->field("code_name_zh")->select();//查询网站类型
+			$ReportArr[$key][]=$type[0]["code_name_zh"]; //网站类型
+			$ReportArr[$key][]=$val["uid"]; //网站主ID
+			switch($val["status"]){//处理网站状态
+				case 0:
+					$status ="未验证";
+				break;
+				case 1:
+					$status ="审核中";
+				break;
+				case 2:
+					$status ="正常";
+				break;
+				case 3:
+					$status ="锁定";
+				break;
+				case 4:
+					$status ="拒绝";
+				break;
+				default:
+				break;
+			}
+			$ReportArr[$key][]=$status; //网站状态		
+		}
+		//报表数据
+		$ReportContent = '';
+		$num1 = count($ReportArr);
+		for($i=0;$i<$num1;$i++){
+			$num2 = count($ReportArr[$i]);
+			for($j=0;$j<$num2;$j++){
+				//ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+				$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
+			}
+			//最后连接\n 表示换行
+			$ReportContent .= "\n";
+		}
+		$t[]="网站ID";//判断是否要导出网站ID信息 
+		$t[]="网站名称";//判断是否要导出网站名称信息
+		$t[]="网站域名";//判断是否要导出网站域名信息
+		$t[]="网站类型";//判断是否要导出网站类型信息
+		$t[]="网站主ID";//判断是否要导出网站主ID信息
+		$t[]="网站状态";//判断是否要导出网站状态信息
+		for($k=0;$k<count($t);$k++){
+			//ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+			$ReportTitle .= '"'.$t[$k].'"'."\t";
+		}
+		//输出即提示下载
+		echo $ReportTitle."\n".$ReportContent;
+	}
 	//删除网站
 	public function site_delete(){
 		$id		= (int)($_GET["site_id"]);
@@ -177,8 +242,95 @@ class WebAction extends CommonAction {
 		$st['code_name_en']	= $_POST["code_value"];
 		$st['status']	= (int)($_POST["status"]);
 		$st['sort']		= (int)($_POST["sort"]);
-		// 更改数据库数据
 		$siteType->where("id =".$_POST["code_id"])->data($st)->save();
 		$this->success('数据更改成功','SITE_URL/?m=Web&a=site_type');
+	}
+	//导出代码位报表
+	public function zoneExport(){
+		//输出的文件类型为excel
+		header("Content-type:application/vnd.ms-excel");
+		//提示下载
+		header("Content-Disposition:attachement;filename=代码位列表_".date("Y-m-d").".xls");
+		//查询代码位表
+		$zo				= M("zone");
+		$ad_size		= M("ad_size");
+		$zone	 	  	= $zo->select();
+		$ReportArr	  	= array();
+		//将关系数组转换成索引数组
+		foreach($zone as $key =>$val){
+			$ReportArr[$key][]=$val["id"]; //代码位ID
+			$ReportArr[$key][]=$val["name"]; //代码位名称
+			$ReportArr[$key][]=$val["sid"]; //所属网站ID
+			$ReportArr[$key][]=$val["uid"]; //所属用户ID
+			switch($val["pay_type"]){
+				case 1:
+					$pay_type="CPS";
+				break;
+				case 2:
+					$pay_type="CPA";
+				break;
+				case 3:
+					$pay_type="CPC";
+				break;
+				case 4:
+					$pay_type="CPM";
+				break;
+				default:
+				break;
+			}
+			$ReportArr[$key][]=$pay_type; //计费类型
+			$ad=$ad_size->where("id=".$val["size"])->select();//查询广告尺寸信息
+			switch($ad[0]["size_type"]){
+				case 1:
+					$size_type="图片";
+				break;
+				case 2:
+					$size_type="文字";
+				break;
+				case 3:
+					$size_type="漂浮";
+				break;
+				case 4:
+					$size_type="对联";
+				break;
+				case 5:
+					$size_type="弹窗";
+				break;
+				case 6:
+					$size_type="视窗";
+				break;
+				default:
+				break;
+			}
+			$ReportArr[$key][]=$size_type; //展示方式
+			$ReportArr[$key][]=$ad[0]["width"]."X".$ad[0]["height"]; //尺寸
+			$ReportArr[$key][]=$val["auto_ad"]; //智能广告
+		}
+		//报表数据
+		$ReportContent = '';
+		$num1 = count($ReportArr);
+		for($i=0;$i<$num1;$i++){
+			$num2 = count($ReportArr[$i]);
+			for($j=0;$j<$num2;$j++){
+				//ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+				$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
+			}
+			//最后连接\n 表示换行
+			$ReportContent .= "\n";
+		}
+		$t[]="代码位ID";//判断是否要导出代码位ID信息 
+		$t[]="代码位名称";//判断是否要导出代码位名称信息
+		$t[]="所属网站ID";//判断是否要导出所属网站ID信息
+		$t[]="所属用户ID";//判断是否要导出所属用户ID信息
+		$t[]="计费类型";//判断是否要导出计费类型信息
+		$t[]="展示方式";//判断是否要导出展示方式信息
+		$t[]="尺寸";//判断是否要导出尺寸信息
+		$t[]="智能广告";//判断是否要导出智能广告信息
+		for($k=0;$k<count($t);$k++){
+			//ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+			$ReportTitle .= '"'.$t[$k].'"'."\t";
+		}
+		//输出即提示下载
+		echo $ReportTitle."\n".$ReportContent;
 	}
 }

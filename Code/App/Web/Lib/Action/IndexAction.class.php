@@ -16,6 +16,40 @@
 class IndexAction extends CommonAction {
     public function index(){
 		$this->assign("title","网站主-首页");
+		
+		//  报表查询
+		$this->tenDaysBefores();
+		
 		$this->display();
+    }
+    /**
+     * 最近十天数据
+     *
+     * cpm cpc
+     *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-12-20 下午1:45:06
+     */
+    public function tenDaysBefores(){
+    	$uid = $_SESSION[C('WEB_AUTH_KEY')];
+    	// 查询中心 当日时间或者选择时间
+    	$today = date('d');
+    	
+    	// 获取数据
+    	$model = M('Income');
+    	for($i=9; $i>=0; $i--){
+    		$day = mktime(0,0,0,date("m") ,$today-($i+1),date("Y"));
+    		$yestoday = mktime(0,0,0,date("m") ,$today-$i,date("Y"));
+    		$data = $model->query("select sum(click) as click, sum(pv) as pv, sum(cpm) as cpm, sum(cpc) as cpc, sum(real_income) as income, count(ip) as ip from " . C('DB_PREFIX') . "income where settlement_time < $yestoday and settlement_time >= $day and uid = $uid");
+    		foreach($data[0] as $key=>$value){
+    			$data[0][$key] = $value ? $value : 0;
+    		}
+    		$data[0]['day'] = date('md', $yestoday);
+    		$list[] = $data[0];
+    	}
+    	
+    	$json = json_encode($list);
+    	
+    	$this->assign("chartData", $json);
     }
 }

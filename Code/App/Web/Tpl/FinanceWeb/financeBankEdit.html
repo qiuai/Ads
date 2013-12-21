@@ -1,7 +1,7 @@
 <include file="Index:headerWeb" />
-<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/PCASClass.js"></script>
-<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidator.js"></script>
-<script type="text/javascript" src="http://adu.phpad.cn/static/js/default/formvalidatorregex.js"></script>
+<script type="text/javascript" src="STATIC_URL/web/js/PCASClass.js"></script>
+<script type="text/javascript" src="STATIC_URL/web/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/web/js/formvalidatorregex.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$.formValidator.initConfig({formid:"finance_bank",autotip:true});
@@ -57,8 +57,9 @@
 				<td class="w155"><em class="red">*</em> 开户行：</td>
 				<td class="textbox_td">
 				    <select name="bank" id="bank_id" class="textbox bank_province">
-						<option value="icbc" <if condition="$list.bank_short eq 'icbc'">selected="selected"</if>>工商银行</option>
-						<option value="bcbc" <if condition="$list.bank_short eq 'bcbc'">selected="selected"</if>>招商银行</option>
+						<volist name="bank_type" id="tp">
+						<option value="{$tp[1]}" <if condition="$list['bank_short'] eq $tp[1]">selected="selected"</if>>{$tp[2]}</option>
+						</volist>
 					</select>
 				</td>
 			  </tr>

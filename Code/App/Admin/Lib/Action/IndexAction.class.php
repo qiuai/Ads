@@ -14,9 +14,12 @@
  * Vonwey   2013-11-25 上午9:58:45      todo
  */
 class IndexAction extends CommonAction {
-    public function index(){
-    	$this->display();
-	}
+	/**
+	 * 头部
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-20 上午11:21:30
+	 */
 	public function header(){
 		$model = M('User');
 		$header = $model->find($_SESSION[C('USER_AUTH_KEY')]);
@@ -24,40 +27,81 @@ class IndexAction extends CommonAction {
 		$this->assign('header',$header);
 		$this->display();
 	}
+	/**
+	 * 报表展现
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-20 上午11:21:20
+	 */
 	public function right(){
+		
+		// 最近十天数据显示
+		$this->tenDaysBefore();
+		
 		// 日历输出
 		$this->getCalendar();
 		
-// 		$mdays=date("t");    //当月总天数
-// 		$datenow=date("j");  //当日日期
-// 		$monthnow=date("n"); //当月月份
-// 		$yearnow=date("Y");  //当年年份
-// 		//计算当月第一天是星期几
-// 		$wk1st=date("w",mktime(0,0,0,$monthnow,1,$yearnow));
-// 		$trnum=ceil(($mdays+$wk1st)/7); //计算表格行数
-// 		//以下是表格字串
-// 		$tabstr="<table id=tc_calendar><tr id=tc_week><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></tr>";
-// 		for($i=0;$i<$trnum;$i++) {
-// 		   $tabstr.="<tr class=even>";
-// 		   for($k=0;$k<7;$k++) { //每行七个单元格
-// 		      $tabidx=$i*7+$k; //取得单元格自身序号
-// 		      //若单元格序号小于当月第一天的星期数($wk1st)或大于(月总数+$wk1st)
-// 		      //只填写空格，反之，写入日期
-// 		      ($tabidx<$wk1st or $tabidx>$mdays+$wk1st-1) ? $dayecho="&nbsp" : $dayecho=$tabidx-$wk1st+1;
-// 		      //突出标明今日日期
-// 		      // $dayecho="<span style=\"background-color:red;color:#fff;\">$dayecho</span>";
-// 		      if($dayecho==$datenow){$todaybg = " class=current";}
-// 		      else{$todaybg = "";}
-// 		      $tabstr.="<td".$todaybg.">$dayecho</td>";
-// 		   }
-// 		   $tabstr.="</tr>";
-// 		}
-// 		$tabstr.="</table>";
-		
-// 		echo $tabstr;
+		// 当日新增情况
+		$this->todayAdd();
 		
 		$this->display();
 	}
+	/**
+	 * 当日新增情况
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-20 下午1:46:57
+	 */
+	public function todayAdd(){
+		// 新增会员
+		
+		// 新增广告
+		
+		// 待处理提现数
+		
+		// 积分商城订单
+	}
+	/**
+	 * 最近十天数据
+	 * 
+	 * cpm cpc
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-20 下午1:45:06
+	 */
+	public function tenDaysBefore($uid=''){
+		// 会员报表 
+		if($uid){
+			$where = " and uid = ". intval($uid);
+		}
+		
+		// 查询中心 当日时间或者选择时间
+		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : date('d');
+		
+		// 获取数据
+		$model = M('Income');
+		for($i=9; $i>=0; $i--){
+			$day = mktime(0,0,0,date("m") ,$today-($i+1),date("Y"));
+			$yestoday = mktime(0,0,0,date("m") ,$today-$i,date("Y"));
+			$data = $model->query("select sum(click) as click, sum(pv) as pv, sum(cpm) as cpm, sum(cpc) as cpc, sum(real_income) as income, count(ip) as ip from " . C('DB_PREFIX') . "income where settlement_time < $yestoday and settlement_time >= $day $where");
+			foreach($data[0] as $key=>$value){
+				$data[0][$key] = $value ? $value : 0;
+			}
+			$data[0]['day'] = date('md', $yestoday);
+			$list[] = $data[0];
+		}
+		
+		$json = json_encode($list);
+		
+		$this->assign("chartData", $json);
+		
+	}
+	/**
+	 * 日历输出
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-20 上午11:20:51
+	 */
 	public function getCalendar(){
 		$mdays=date("t");    //当月总天数
 		$datenow=date("j");  //当日日期
@@ -123,7 +167,7 @@ class IndexAction extends CommonAction {
 				if($dayecho=="&nbsp"){
 					$todaybg = 'bgcolor="#ffffff"';
 				}
-				$tabstr.="<td $todaybg>$dayecho</td>";
+				$tabstr.="<td $todaybg><a href=\"".C('SITE_URL')."?m=Index&a=right&day=$dayecho\">$dayecho</a></td>";
 			}
 			$tabstr.="</tr>";
 		}
