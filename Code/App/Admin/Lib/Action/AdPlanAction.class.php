@@ -389,11 +389,57 @@ class AdPlanAction extends CommonAction{
 		
 		$industryInfo = $industry->select();
 		$this->assign("industryInfo",$industryInfo);
-		$this->display();
 		
+		// 读取配置文件获取获取广告计费形式的相关信息
+		$adPayType = C('AD_PAY_TYPE');
+		
+		//dump($adPayType);
+		// 把数据组装成二维数组
+		$adPayTypeInfo = $this->oneDimensionalArrayToTwoDimensionalArray($adPayType);
+		$this->assign("adPayTypeInfo",$adPayTypeInfo);
+		
+		// 读取广告计划的审核方式
+		$adPlanCheck = C('AD_PLAN_CHECK');
+		
+		// 把数据转换为二维数组
+		$adPlanCheckInfo = $this->oneDimensionalArrayToTwoDimensionalArray($adPlanCheck);
+		
+		// 分配到前端模版
+		$this->assign('adPlanCheckInfo',$adPlanCheckInfo);
+		
+		// 读取广告的结算方式
+		$adClearingForm = C('CLEARING_FORM');
+		$adClearingFormInfo = $this->oneDimensionalArrayToTwoDimensionalArray($adClearingForm);
+		$this->assign("adClearingFormInfo",$adClearingFormInfo);
+		
+		
+		//dump($adPayTypeInfo);
+		$this->display();		
 		
 	}
 	
+	/**
+	 * 
+	 * 把一维数组转换根据键和值转换为二维数组
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-20 下午2:14:15
+	 */
+	private function oneDimensionalArrayToTwoDimensionalArray($oneDimensionalArray){
+		
+		// 定义数组保存转换后的数组
+		$changeEndArr = array();
+		
+		// 定义变量保存转换后的数组的下标值
+		$i = 0;
+		while (list($key,$val)=each($oneDimensionalArray)){
+			$changeEndArr[$i]['key'] = $key;
+			$changeEndArr[$i]['val'] = $val;
+			$i++;
+		}
+		
+		return $changeEndArr;
+		
+	}	
 	/**
 	 * 
 	 * 广告添加检查

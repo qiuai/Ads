@@ -21,12 +21,6 @@ class CountAction extends Action{
 	 * @CreateDate: 2013-12-19 上午11:37:14
 	 */
 	function _initialize(){
-		
-		// 先调用父类的初始化方法
-		//parent::_initialize();
-			
-		// 初始化数据库句柄
-		//$this->AdPlan =
 		$this->actionName = $this->getActionName();
 	}
 	/**
@@ -69,7 +63,7 @@ class CountAction extends Action{
 				$this->addZoneVisit(1);	 // 参数值为1代表的是展示
 
 				// 往数据表zhts_zone_visit_count中添加数据
-				$this->addZoneVisitCount(1);
+				$this->addZoneVisitCount(1); // 参数值为1代表的是展示
 			}
 		
 		}
@@ -212,11 +206,8 @@ class CountAction extends Action{
 				}
 				// 更改数据
 				$zoneVisitCount->save($updateData);
-			}
-								
-		}
-		
-		
+			}								
+		}				
 	}
 	/**
 	 * 
@@ -233,8 +224,7 @@ class CountAction extends Action{
 		$month = date("m",time());
 		
 		// 获取当前的天
-		$day = date("d",time());
-		
+		$day = date("d",time());		
 		return mktime(0,0,0,$month,$day,$year);
 	}
 	
@@ -328,7 +318,7 @@ class CountAction extends Action{
 		// 查询代码位相关的信息必须是启用状态的代码位
 		$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
 		
-		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
+		// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
 		$this->verifyVisitSource($zoneInfo);
 		//dump($_SERVER['HTTP_REFERER']);
 		
