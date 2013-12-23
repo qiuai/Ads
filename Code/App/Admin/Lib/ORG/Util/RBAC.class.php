@@ -222,7 +222,6 @@ class RBAC {
         		"where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and access.node_id=node.id and node.level=2 and node.group_id = 1 and node.status=1";
         $apps =   $db->query($sql);
         
-//         var_dump($apps);
         $access =  array();
         foreach($apps as $key=>$app) {
         	$appId		=	$app['id'];
@@ -275,7 +274,7 @@ class RBAC {
                 }
                 // 和公共模块的操作权限合并
                 $action += $publicAction;
-                $access[strtoupper($appName)][strtoupper($moduleName)]  +=  array_change_key_case($action,CASE_UPPER);
+                $access[strtoupper($appName)][strtoupper($moduleName)]  =  array_merge(array_change_key_case($action,CASE_UPPER),$access[strtoupper($appName)][strtoupper($moduleName)]);
             }
         }
         return $access;

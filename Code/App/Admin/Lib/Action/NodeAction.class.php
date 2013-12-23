@@ -24,7 +24,7 @@ class NodeAction extends CommonAction {
 		if($this->isPost()){
 			$model = M("Node");
 			$level = $this->getLevel($_POST['pid']);
-			$_POST['level'] = $level + 2;
+			$_POST['level'] = $level + 1;
 			$this->insert($_REQUEST, C('SITE_URL')."?m=Node&a=nodeList");
 		}else{
 			$this->getGroup();
