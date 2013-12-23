@@ -1,27 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0051)http://adu.phpad.cn/admin.php?m=report&a=report_web -->
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
 <script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
-<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript" src="STATIC_URL/admin/js/calendar.js"></script><link href="./admin.php_files/calendar-blue.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/calendar.js"></script>
+<link href="STATIC_URL/admin/css/calendar-blue.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="main">
    <div class="body_title">网站主报表</div>
 		<div class="listmain">
 <table align="center" class="list" cellspacing="0">
-    <tbody><tr>
+    <tr>
         <td style="border-right:none;">
             <form method="get">
-                <input type="hidden" name="m" value="report">
-                <input type="hidden" name="a" value="report_web">
+                <input type="hidden" name="m" value="Report">
+                <input type="hidden" name="a" value="webReport">
                 UID：
-                <input type="text" name="uid">
+                <input type="text" name="uid" value={$uid}>
                 选择时间段：
-                <input type="text" name="start_date" id="start_date" class="input_text" size="12" value="20131128">
+                <input type="text" name="start_date" id="start_date" class="input_text" size="12" value="{:date('Ymd')}">
                 <script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "start_date",
@@ -29,7 +31,7 @@
                             });
                 </script>
                 -
-                <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="20131128">
+                <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="{:date('Ymd')}">
                 <script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "end_date",
@@ -53,22 +55,41 @@
         </td>
     </tr>
     -->
-</tbody></table>		
+</table>		
 <table align="center" cellspacing="0" class="list" style="text-align:center">
-	<tbody><tr class="tb_title">
+	<tr class="tb_title">
         <td>网站主</td>
         <td>IP</td>
         <td>PV</td>
         <td>点击量</td>
         <td>CTR</td>
-        <td>CPS效果数</td>      
-        <td>CPA效果数</td> 
+        <td>CPM效果数</td>      
+        <td>CPC效果数</td> 
         <td>广告费</td>     
         <td>盈利</td>
     </tr>
-            <tr><td colspan="10">没有数据</td></tr>
-        </tbody></table>
-<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共0 条记录 1/0 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=report&a=report_web&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=report&a=report_web&page=0">上一页</a>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=report&a=report_web&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=report&a=report_web&page=0">尾页</a>&nbsp;&nbsp;</div></div>
+    
+    <if condition="$list">
+    <Volist name='list' id='vo'>
+   	<tr>
+        <td>{$vo.uid}</td>
+        <td>{$vo.ip}</td>
+        <td>{$vo.pv}</td>
+        <td>{$vo.click}</td>
+        <td><?php echo 'CTR'; ?></td>
+        <td>{$vo.cpm}</td>      
+        <td>{$vo.cpc}</td> 
+        <td>{$vo.real_income}</td>     
+        <td>{$vo.balance_income}</td>
+    </tr>
+   	</Volist>
+   	<else />
+   	<tr>
+   		<td colspan="10">没有数据</td>
+   	</tr>
+   	</if>
+</table>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div></div>
 </div>
 </div>
 

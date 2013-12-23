@@ -24,7 +24,95 @@ class IndexAction extends CommonAction {
 		$model = M('User');
 		$header = $model->find($_SESSION[C('USER_AUTH_KEY')]);
 		
+		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
+			//显示菜单项
+			$menu  = array();
+			if(isset($_SESSION['nav'.$_SESSION[C('USER_AUTH_KEY')]])) {
+				//如果已经缓存，直接读取缓存
+				$menu   =   $_SESSION['nav'.$_SESSION[C('USER_AUTH_KEY')]];
+			}else {
+				if(isset($_SESSION['_ACCESS_LIST'])) {
+					$accessList = $_SESSION['_ACCESS_LIST'];
+				}else{
+					import('@.ORG.Util.RBAC');
+					$accessList =   RBAC::getAccessList($_SESSION[C('USER_AUTH_KEY')]);
+				}
+				$list = M('Node')->where('is_menu=1 and status=1 and group_id=1 and level = 2')->field('id,module,module_name')->order("sort, id")->select();
+				foreach($list as $key=>$nav) {
+					if(isset($accessList[strtoupper(APP_NAME)][strtoupper($nav['module'])]) || $_SESSION[C('ADMIN_AUTH_KEY')]) {
+						//设置模块访问权限
+						$nav['access'] =   1;
+						$menu[$key]  = $nav;
+					}else{
+						unset($menu[$key]);
+					}
+				}
+				//$_SESSION['nav'.$_SESSION[C('USER_AUTH_KEY')]]	=	$menu;
+			}
+		}
+		$this->assign('role_navs',$menu);
+		
 		$this->assign('header',$header);
+		$this->display();
+	}
+	/**
+	 * 左侧菜单
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-23 上午11:09:49
+	 */
+	public function left(){
+		$id	= intval($_REQUEST['id']) ? intval($_REQUEST['id']) : 1;
+		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
+			//显示菜单项
+			$menu  = array();
+			if(isset($_SESSION['menu'.$_SESSION[C('USER_AUTH_KEY')]])) {
+				//如果已经缓存，直接读取缓存
+				$menu   =   $_SESSION['menu'.$_SESSION[C('USER_AUTH_KEY')]];
+			}else {
+				//读取数据库模块列表生成菜单项
+				$node    =   M("Node");
+				$where['is_menu']	= 1;
+				$where['status']	= 1;
+				$where['pid']	= $id;
+				$list	=	$node->where($where)->field('id,action,module,module_name')->order('sort asc')->select();
+				if(isset($_SESSION['_ACCESS_LIST']) && !$_SESSION[C('ADMIN_AUTH_KEY')]) {
+					$accessList = $_SESSION['_ACCESS_LIST'];
+				}else if(!$_SESSION[C('ADMIN_AUTH_KEY')]){
+					import('@.ORG.Util.RBAC');
+					$accessList =   RBAC::getAccessList($_SESSION[C('USER_AUTH_KEY')]);
+				}
+				foreach($list as $key=>$module) {
+					$data['pid'] = $module['id'];
+					$data['is_menu'] = 1;
+					$second = $node->where($data)->field('id,action,module,module_name')->order('sort asc')->select();
+					if(isset($accessList[strtoupper(APP_NAME)][strtoupper($module['module'])]) || $_SESSION[C('ADMIN_AUTH_KEY')]) {
+						//设置模块访问权限
+						$module['access'] =   1;
+						$menu[$key]  = $module;
+					}
+					foreach($second as $i=>$value){
+						if(isset($accessList[strtoupper(APP_NAME)][strtoupper($value['module'])]) || $_SESSION[C('ADMIN_AUTH_KEY')]) {
+							//设置操作访问权限
+							$value['access'] = 1;
+							$item[$i]  = $value;
+						}
+						if(!isset($item[$i]['access'])){
+							unset($item[$i]);
+						}
+					}
+					if(!isset($menu[$key]['access'])){
+						unset($menu[$key]);
+					}else{
+						$menu[$key]['nodes'] = $item;
+					}
+					unset($item);
+				}
+				//缓存菜单访问
+				//$_SESSION['menu'.$_SESSION[C('USER_AUTH_KEY')]]	=	$menu;
+			}
+			$this->assign('menus',$menu);
+		}
 		$this->display();
 	}
 	/**
@@ -54,12 +142,50 @@ class IndexAction extends CommonAction {
 	 */
 	public function todayAdd(){
 		// 新增会员
+		$this->getMemberAdd();
 		
 		// 新增广告
+		$this->getAdAdd();
 		
 		// 待处理提现数
+		$this->getWithdraw();
 		
 		// 积分商城订单
+	}
+	/**
+	 * 新增会员
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午5:34:57
+	 */
+	public function getMemberAdd(){
+		$model = M('Member');
+		$where['create_time'] = array('gt',mktime(0,0,0,date("m") ,date('d')-1,date("Y")));
+		$count = $model->where($where)->count();
+		
+		$this->assign('memberAddCount', $count);
+	}
+	/**
+	 * 新增广告
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午5:34:48
+	 */
+	public function getAdAdd(){
+		// 新增广告
+		$count = 0;
+		$this->assign('adAddCount', $count);
+	}
+	/**
+	 * 待处理提现数
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午5:34:41
+	 */
+	public function getWithdraw(){
+		// 待处理提现数
+		$count = 0;
+		$this->assign('withdrawCount', $count);
 	}
 	/**
 	 * 最近十天数据

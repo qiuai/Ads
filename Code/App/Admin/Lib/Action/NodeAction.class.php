@@ -24,7 +24,7 @@ class NodeAction extends CommonAction {
 		if($this->isPost()){
 			$model = M("Node");
 			$level = $this->getLevel($_POST['pid']);
-			$_POST['level'] = $level + 2;
+			$_POST['level'] = $level + 1;
 			$this->insert($_REQUEST, C('SITE_URL')."?m=Node&a=nodeList");
 		}else{
 			$this->getGroup();
@@ -44,7 +44,7 @@ class NodeAction extends CommonAction {
 		$table = " ".C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g ';
 		
 		$p = $_GET['p'] ? $_GET['p'] : 1;
-		$num = 5;
+		$num = 2;
 		$limit = " limit ". ($p-1)*$num .",".$num;
 		
 		$sql = "select $select from $table $where $limit";
@@ -76,6 +76,10 @@ class NodeAction extends CommonAction {
 	 */
 	public function nodeEdit(){
 		if($this->isPost()){
+			if(!$_POST['group_id'] || !$_POST['pid']){
+				unset($_POST['group_id']);
+				unset($_POST['pid']);
+			}
 			$model = M('Node');
 			if (false === $model->create()) {
 				$this->error($model->getError());
@@ -84,12 +88,14 @@ class NodeAction extends CommonAction {
 			$list = $model->save();
 			if (false !== $list) {
 				//成功提示
-				$this->success('编辑成功!',cookie('_currentUrl_'));
+				$this->success('编辑成功!',C('SITE_URL').'?m=Node&a=nodeList');
 			} else {
 				//错误提示
 				$this->error('编辑失败!');
 			}
 		}else{
+			$this->getGroup();
+			
 			$model	=	M();
 			$sql = "select * from ".C('DB_PREFIX')."node where id = ".$_GET['id'];
 			$list = $model->query($sql);

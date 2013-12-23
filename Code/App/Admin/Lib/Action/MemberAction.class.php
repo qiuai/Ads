@@ -23,7 +23,7 @@ class MemberAction extends CommonAction {
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-12-9 下午4:37:38
 	 */
-	public function memberAdd(){
+	public function memberAdd($jumpurl=''){
 		if($this->isPost()){
 			if(empty($_POST['username'])) {
 				$this->error('帐号错误！');
@@ -49,7 +49,7 @@ class MemberAction extends CommonAction {
 // 			}
 
 			$_POST['status'] = 1; // 状态
-			$_POST['legal_status'] = '个人'; // 法律身份
+			$_POST['legal_status'] = 0; // 法律身份
 			$_POST['is_feed'] = 1; // 是否接受邮件订阅
 			$_POST['password'] = MD5($_POST['password']); // 密码加密
 			$_POST['create_time'] = time(); // 创建时间
@@ -57,7 +57,7 @@ class MemberAction extends CommonAction {
 			
 			if($Member->create()){
 				if($Member->add()){
-					$this->success("注册成功！");
+					$this->success("注册成功！",$jumpurl);
 				}else{
 					$this->error("注册失败！");
 				}
@@ -192,25 +192,11 @@ class MemberAction extends CommonAction {
 	 */
 	public function loginMemberHome(){
 		$model = M("Member");
-		$id = $_REQUEST['id'];
+		$id = $_REQUEST['uid'];
 		$member = $model->find($id);
 		
-		//生成认证条件
-		$map            =   array();
-		// 支持使用绑定帐号登录
-		$map['username']	= $member['username'];
-		$map["status"]	=	array('gt',0);
-		import ( '@.ORG.Util.RBAC' );
-		$authInfo = RBAC::authenticate($map);
-		$_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
-		$_SESSION['email']	=	$authInfo['email'];
-		$_SESSION['loginUserName']		=	$authInfo['username'];
-		$_SESSION['login_count']	=	$authInfo['username'];
-		
-		if($member['user_type'] == "web"){
-			redirect(C('WEB_URL'));
-		}else{
-			redirect(C('ADV	_URL'));
+		if(!empty($member)){
+			redirect(C('HOME_URL').'?m=Public&a=adminLogin&username=' . $member['username'] . '&password=' . $member['password']);
 		}
 	}
 	/**
@@ -250,6 +236,22 @@ class MemberAction extends CommonAction {
 		$this->assign("info",$info);
 		$this->assign("info_detail",$info_detail);
 		return $info;
+	}
+	/**
+	 * 扣量设置
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午3:06:01
+	 */
+	public function memberSetDeduction(){
+		$model = M('Member');
+
+		$_POST['id'] = $_POST['uid'];
+		if(false !== $model->save($_POST)){
+			$this->success('修改成功！');
+		}else{
+			$this->error('修改失败！');
+		}
 	}
 	/**
 	 * 增扣款项列表

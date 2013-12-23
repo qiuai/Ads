@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0036)http://adu.phpad.cn/admin.php?m=site -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title></title>
@@ -19,11 +18,11 @@
 					<form method="get">
 						<input type="hidden" value="Web" name="m">
 						<input type="hidden" value="site_search" name="a">
-						<input type="text" name="content">
+						<input type="text" name="content" value="{$content}">
 						<select name="condition">
-							<option value="site_id">网站ID</option>
-							<option value="site_domain">网站域名</option>
-							<option value="uid">用户UID</option>                    
+							<option value="site_id" <if condition="$condition eq 'site_id'">selected</if>>网站ID</option>
+							<option value="site_domain" <if condition="$condition eq 'site_domain'">selected</if>>网站域名</option>
+							<option value="uid" <if condition="$condition eq 'uid'">selected</if>>用户UID</option>                    
 						</select>
 						<input type="submit" value="查询" class="button">
 					</form>
@@ -34,18 +33,16 @@
 			</tr>
 			<tr>
 				<td style="font-size:13px;height:40px;" colspan="2">网站状态：
-					<a href="SITE_URL/?m=Web&a=site_list&" class="link-checked">全部状态</a>
-					<a href="SITE_URL/?m=Web&a=site_list&status=0" class="link_before_checked">未验证</a>
-					<a href="SITE_URL/?m=Web&a=site_list&status=1" class="link_before_checked">审核中</a>
-					<a href="SITE_URL/?m=Web&a=site_list&status=2" class="link_before_checked">正常</a>
-					<a href="SITE_URL/?m=Web&a=site_list&status=3" class="link_before_checked">锁定</a>
-					<a href="SITE_URL/?m=Web&a=site_list&status=4" class="link_before_checked">拒绝</a>
+					<a href="SITE_URL/?m=Web&a=index&" class="link_before_checked">全部状态</a>
+					<a href="SITE_URL/?m=Web&a=index&status=1" class="link_before_checked">未验证</a>
+					<a href="SITE_URL/?m=Web&a=index&status=2" class="link_before_checked">审核中</a>
+					<a href="SITE_URL/?m=Web&a=index&status=3" class="link_before_checked">正常</a>
+					<a href="SITE_URL/?m=Web&a=index&status=4" class="link_before_checked">锁定</a>
+					<a href="SITE_URL/?m=Web&a=index&status=5" class="link_before_checked">拒绝</a>
 				</td>
 			</tr>
 		</tbody>
-	</table>
-		
-		
+	</table>	
 <form method="post" id="sitelist_form">
 <input type="hidden" value="Web" name="m">
 <input type="hidden" value="site_multi" name="a">
@@ -78,15 +75,15 @@
         <td>{$vo.uid}</td>
         <td>{$vo.site_name}</td>
         <td><a href="http://{$vo.site_domain}" target="_blank">{$vo.site_domain}</a></td>
-        <td>{$sitetype}</td>
+		<td>{$vo.code_name_zh}</td>
         <td>{$vo.register}</td>
         <td>{$vo.pr}</td>
         <td>{$vo.rank}</td>
         <td>{$vo.weight}</td>
         <td>{$vo.addtime}</td>
-        <td><span <if condition="$vo.status eq 0">style="color:gray"<elseif condition="$vo.status eq 1"/>style="color:red"<elseif condition="$vo.status eq 2"/>style="color:green"<else />style="color:orange"</if>><if condition="$vo.status eq 0">未验证<elseif condition="$vo.status eq 1"/>审核中<elseif condition="$vo.status eq 2"/>正常<elseif condition="$vo.status eq 3"/>锁定<else />拒绝</if></span></td>
+        <td><span <if condition="$vo.status eq 1">style="color:gray"<elseif condition="$vo.status eq 2"/>style="color:red"<elseif condition="$vo.status eq 3"/>style="color:green"<else />style="color:orange"</if>><if condition="$vo.status eq 1">未验证<elseif condition="$vo.status eq 2"/>审核中<elseif condition="$vo.status eq 3"/>正常<elseif condition="$vo.status eq 4"/>锁定<elseif condition="$vo.status eq 5"/>拒绝</if></span></td>
         <td>
-            <a href="SITE_URL/?m=Web&a=site_delete&site_id={$vo.id}" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;
+            <a href="SITE_URL/?m=Web&a=siteDelete&site_id={$vo.id}" onclick="return confirm(&#39;确认删除网站？&#39;)">删除</a>&nbsp;&nbsp;
             <a href="SITE_URL/?m=Web&a=zone&site_id={$vo.id}">查看广告位</a>&nbsp;&nbsp;
             <a href="javascript:void(0);" onclick="quick_open(&#39;{$vo.site_domain}&#39;)">快捷查询网站</a>
         </td>
@@ -94,11 +91,11 @@
 	</volist>
 	<tr>
 		<td style="font-size:13px;height:40px;" colspan="13">批量操作：
-			<a href="javascript:muti_apply('0')" class="link_before_checked">未验证</a>
-			<a href="javascript:muti_apply('1')" class="link_before_checked">审核中</a>
-			<a href="javascript:muti_apply('2')" class="link_before_checked">正常</a>
-			<a href="javascript:muti_apply('3')" class="link_before_checked">锁定</a>
-			<a href="javascript:muti_apply('4')" class="link_before_checked">拒绝</a>
+			<a href="javascript:muti_apply('1')" class="link_before_checked">未验证</a>
+			<a href="javascript:muti_apply('2')" class="link_before_checked">审核中</a>
+			<a href="javascript:muti_apply('3')" class="link_before_checked">正常</a>
+			<a href="javascript:muti_apply('4')" class="link_before_checked">锁定</a>
+			<a href="javascript:muti_apply('5')" class="link_before_checked">拒绝</a>
 		</td>
 	</tr>
 </tbody>

@@ -77,9 +77,11 @@
     <tr>
         <td>帐户类型:</td><td>
         <select name="bank_short">
-                <option value="ICBC" <if condition="$bank.bank_short eq ICBC">selected="selected"</if>>{:C('BANK_SHORT.ICBC')}</option>
-                <option value="CMB" <if condition="$bank.bank_short eq CMB">selected="selected"</if>>{:C('BANK_SHORT.CMB')}</option>
-                </select>
+        <?php $BANK_SHORT = C('BANK_SHORT'); ?>
+        	<foreach name='BANK_SHORT' item='bv' key='bk'>
+                <option value="{$bk}" <if condition="$bk eq $bank['bank_short']">selected="selected"</if>>{$bv}</option>
+        	</foreach>
+        </select>
         </td>
         <td>身份证:</td><td colspan="3"><input type="text" name="id_card" id="id_card" value="{$bank.id_card}"><div class="onShow">请填写真实的身份证</div></td>
     </tr>

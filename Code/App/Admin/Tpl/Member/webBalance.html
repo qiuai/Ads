@@ -128,15 +128,15 @@ a{
 						增/扣款项
 					</a>
 					|
-					<a href="http://adu.phpad.cn/admin.php?m=report&a=report_web&uid=300020" title="查看报表">
+					<a href="SITE_URL?m=Report&a=webReport&uid={$vo.id}" title="查看报表">
 						报表
 					</a>
 					|
-					<a href="http://adu.phpad.cn/admin.php?m=site&a=site_list&uid=300020" title="查看网站">
+					<a href="SITE_URL?m=site&a=site_list&id=300020" title="查看网站">
 						网站
 					</a>
 					|
-					<a href="http://adu.phpad.cn/admin.php?m=zone&a=zone_list&condition=uid&content=300020" title="查看广告位">
+					<a href="SITE_URL?m=Web&a=zoneSearch&condition=uid&content={$vo.id}" title="查看广告位">
 						广告位
 					</a>
 					|
@@ -144,7 +144,7 @@ a{
 						发送邮件
 					</a>
 					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(300020,10,1.00,0.00,0.00,0.00)">
+					<a title="相关设置" onclick="doDeduction({$vo.id},{$vo.mid},{$vo.cps},{$vo.cpa},{$vo.cpc},{$vo.cpm})">
 						扣量等设置
 					</a>
 					&nbsp;|&nbsp;

@@ -76,7 +76,7 @@ a{
         <td>{$vo.truename}</td>
         <td>{$vo.qq}</td>
         <td>{$vo.mobilephone}</td>
-        <td>{$vo.legal_status}</td>
+        <td><if condition="$vo.legal_status eq 0">个人<else/>法人</if></td>
         <td>{:date('Y-m-d',$vo['create_time'])}</td>
         <td>{:date('Y-m-d',$vo['last_login_time'])}</td>
         <td>
@@ -135,7 +135,7 @@ a{
 						增/扣款项
 					</a>
 					|
-					<a href="SITE_URL?m=report&a=report_web&id=300020" title="查看报表">
+					<a href="SITE_URL?m=Report&a=webReport&uid={$vo.id}" title="查看报表">
 						报表
 					</a>
 					|
@@ -143,7 +143,7 @@ a{
 						网站
 					</a>
 					|
-					<a href="SITE_URL?m=zone&a=zone_list&condition=uid&content=300020" title="查看广告位">
+					<a href="SITE_URL?m=Web&a=zoneSearch&condition=uid&content={$vo.id}" title="查看广告位">
 						广告位
 					</a>
 					|
@@ -165,11 +165,11 @@ a{
 					</a> 
 					-->
 					&nbsp;|&nbsp;
-					<a title="相关设置" class="" onclick="doDeduction(300020,11,0.00,0.00,0.00,0.00)">
+					<a title="相关设置" onclick="doDeduction({$vo.id},{$vo.mid},{$vo.cps},{$vo.cpa},{$vo.cpc},{$vo.cpm})">
 						扣量等设置
 					</a>
 					&nbsp;|&nbsp;
-					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&id={$vo.id}" title="进入后台">
+					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&uid={$vo.id}" title="进入后台">
 						进入后台
 					</a>
 				</span>
@@ -232,7 +232,7 @@ a{
 						发送邮件
 					</a>
 					&nbsp;|&nbsp;
-					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&id={$vo.id} title="进入后台">
+					<a target="_blank" href="SITE_URL?m=Member&a=loginMemberHome&uid={$vo.id} title="进入后台">
 						进入后台
 					</a>
 				</span>
@@ -249,7 +249,7 @@ a{
 </div>
 </div>
 <div id="deduction" style="display:none">
-	<form action="SITE_URL?m=member&a=member_set_deduction&" method="post">
+	<form action="SITE_URL?m=Member&a=memberSetDeduction" method="post">
 	<input type="hidden" name="uid" id="uid" value="">
 		<p style="margin:10px 0">CPS扣量：<input type="text" name="cps" id="cps" value="" class="textbox">%</p>
 		<p style="margin:10px 0">CPA扣量：<input type="text" name="cpa" id="cpa" value="" class="textbox">效果</p>
@@ -258,8 +258,8 @@ a{
 		<p style="margin:10px 0">
 		属于客服：<select name="mid">
 					<option value="0">--请选择客服--</option>
-										<option value="10" class="mid">admintest</option>
-									</select>
+				<option value="10" class="mid">admintest</option>
+			</select>
 		<input style="margin-left:80px" type="submit" value="修改" class="button">
 		</p>
 	</form>
@@ -301,7 +301,7 @@ function delete_member(uid){
 	var psub = confirm("是否确认删除？");
     if (psub) {
         $.post("SITE_URL?m=Member&a=delete", {
-            "uid": uid,
+            "id": uid,
             "action":"delete",
         },function(data) {
         	document.location.reload();
