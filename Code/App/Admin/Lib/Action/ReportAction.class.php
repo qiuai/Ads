@@ -23,7 +23,11 @@ class ReportAction extends CommonAction {
 	public function webReport(){
 		// 网站主UID
 		$uid = $_REQUEST['uid'] ? $_REQUEST['uid'] : 0;
-		if(!$uid)return;
+		
+		// 搜索UID
+		if($uid){
+			$where['uid'] = intval($uid);
+		}
 		
 		// 搜索日期
 		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
@@ -33,7 +37,6 @@ class ReportAction extends CommonAction {
 		
 		// 列表数据
 		$model = M('Income');
-		$where['uid'] = intval($uid);
 		
 		// 结算时间降序
 		$income = $this->memberPage($model, $where, 10, 'settlement_time desc');
