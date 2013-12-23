@@ -89,7 +89,7 @@ class FinanceWebAction extends CommonAction {
 	public function financeBankEdit(){
 		$this->assign("title","修改银行信息");
 		$uid=$_SESSION[C('WEB_AUTH_KEY')]; // 获取用户信息
-		$bank_type=C('BANK_TYPE'); // 获取银行信息
+		$bank_type=C('BANK_SHORT'); // 获取银行信息
 		$this->assign("bank_type",$bank_type);
 		$me=M("member");
 		$member=$me->where("id =".$uid)->select();
