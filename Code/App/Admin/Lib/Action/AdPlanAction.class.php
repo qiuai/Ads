@@ -37,24 +37,96 @@ class AdPlanAction extends CommonAction{
 		// 查询获取所有的计划
 		$this->AdPlan = D($this->actionName);
 		
-		// 查询相关的数据
-		$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
+		// 获取广告计划的计费形式
+		$this->getAdPayTypeInfo();
 		
-		//dump( $this->AdPlan->getLastSql());
-// 		echo ACTION_NAME."<br>";
-// 		echo APP_NAME."<br/>";
-// 		echo APP_PATH."<br/>";
-// 		echo __APP__."<br/>";
-// 		echo __ACTION__."<br/>";
-// 		echo __CLASS__."<br/>";
-// 		echo $this->getActionName()."<br/>";
-// 		echo __METHOD__."<br/>";
+		// 查询相关的数据
+		//$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
+		$AdPlanInfo  = $this->memberPage($this->AdPlan,array(),5,'id desc');
+		
+		
 		// 处理数据
 		$AdPlanInfo=$this->dealDataArr($AdPlanInfo);
 		
+		// 广告计划的状态信息列表
+		$this->getAdPlanStatusInfo();
+		
 		$this->assign('AdPlanInfo',$AdPlanInfo);
+	
 		// 对数据进行处理
 		$this->display();
+	}
+	
+	/**
+	 * 
+	 * 搜索对应的方法
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:19:09
+	 */
+	public function search(){
+		
+		$this->AdPlan = D($this->actionName);
+		if($_GET['search_type'] == 'plan_id'){
+			
+			$_GET['id'] = intval($_GET['keyword']);
+			unset($_GET['keyword']);
+			unset($_GET['search_type']);
+			
+		}elseif($_GET['search_type'] == 'plan_name'){
+			$_GET['plan_name'] =  strip_tags($_GET['keyword']);
+			$_GET['plan_name'] = array("like","%".$_GET['plan_name']."%");
+			unset($_GET['keyword']);
+			unset($_GET['search_type']);
+		}elseif($_GET['plan_status']===0){
+		
+			//$_GET['pay_type'] = intval($_GET['pay_type']);
+			// 获取相关的数值如计划的状态值
+			$_GET['plan_status'] = intval($_GET['plan_status']);
+		}elseif($_GET['plan_status']){
+			$_GET['plan_status'] = intval($_GET['plan_status']);
+		}elseif($_GET['pay_type']){
+			
+			$_GET['pay_type']=intval($_GET['pay_type']);
+		}
+		
+		$AdPlanInfo  = $this->memberPage($this->AdPlan,$_GET,5,'id desc');
+		
+		// 处理数据
+		$AdPlanInfo=$this->dealDataArr($AdPlanInfo);
+	//	dump($AdPlanInfo);
+		// 广告计划的状态信息列表
+		$this->getAdPlanStatusInfo();
+		
+		$this->getAdPayTypeInfo();
+		//$this->connectUrlArguments();
+		
+	
+		$this->assign('AdPlanInfo',$AdPlanInfo);
+		$this->display();
+	} 
+	
+	/**
+	 * 
+	 * 组装url中参数
+	 * 组装url参数是要把当前的这个搜索类型的参数去除
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 下午2:01:52
+	 */
+	private function connectUrlArguments(){
+		
+		// 定义变量保存url地址参数
+		$urlArguments = "";
+		// 遍历get提交过来的参数
+		foreach($_GET as $key=>$val){
+
+			$urlArguments = $urlArguments."&".$key."=".$val; 
+			
+		}
+		
+		// 去除两边的&值
+		$urlArguments = trim($urlArguments,"&");
+		dump($urlArguments);
+		
 	}
 	
 	/**
@@ -299,24 +371,25 @@ class AdPlanAction extends CommonAction{
 	 * @CreateDate: 2013-12-7 下午2:21:45
 	 */
 	private function dealData($AdPlanInfoOne){
+		
 		// 处理计费方式
-		switch($AdPlanInfoOne['pay_type']){
+		$adPayType = C('AD_PAY_TYPE');		
+		$AdPlanInfoOne['pay_type'] = $adPayType[$AdPlanInfoOne['pay_type']];
+		// 处理计费方式
+		/*switch($AdPlanInfoOne['pay_type']){
 			case 1:
-				$AdPlanInfoOne['pay_type'] = 'cps';
-				break;
-			case 2:
-				$AdPlanInfoOne['pay_type'] = 'cpa';
-				break;
-			case 3:
-				$AdPlanInfoOne['pay_type'] = 'cpc';
-				break;
-			case 4:
 				$AdPlanInfoOne['pay_type'] = 'cpm';
 				break;
-		}
+			case 2:
+				$AdPlanInfoOne['pay_type'] = 'cpc';
+				break;
+			
+		}*/
 			
 		// 处理结算方式
-		switch($AdPlanInfoOne['clearing_form']){
+		$clearingForm = C('CLEARING_FORM');
+		$AdPlanInfoOne['clearing_form'] = $clearingForm[$AdPlanInfoOne['clearing_form']];
+		/*switch($AdPlanInfoOne['clearing_form']){
 			case 1:
 				$AdPlanInfoOne['clearing_form'] = '日结';
 				break;
@@ -326,10 +399,12 @@ class AdPlanAction extends CommonAction{
 			case 3:
 				$AdPlanInfoOne['clearing_form'] = '月结';
 				break;
-		}
+		}*/
 			
 		// 处理审核方式
-		switch ($AdPlanInfoOne['plan_check']){
+		$planCheck = C('AD_PLAN_CHECK');
+		$AdPlanInfoOne['plan_check'] = $planCheck[$AdPlanInfoOne['plan_check']];
+		/*switch ($AdPlanInfoOne['plan_check']){
 			case 0:
 				$AdPlanInfoOne['plan_check'] = '自动审核';
 				break;
@@ -337,10 +412,13 @@ class AdPlanAction extends CommonAction{
 				$AdPlanInfoOne['plan_check'] = '手动审核';
 				break;
 		
-		}
+		}*/
 			
 		// 处理审核的状态
-		switch ($AdPlanInfoOne['plan_status']){
+		$adStatus = C('AD_STATUS');
+		$AdPlanInfoOne['plan_status'] = $adStatus[$AdPlanInfoOne['plan_status']];
+		
+		/*switch ($AdPlanInfoOne['plan_status']){
 			case 0:
 				$AdPlanInfoOne['plan_status'] = '待审核';
 				break;
@@ -357,18 +435,23 @@ class AdPlanAction extends CommonAction{
 				$AdPlanInfoOne['plan_status'] = '已过期';
 				break;
 		
-		}
+		}*/
 		
 		// 处理数据返回机制
-		switch ($AdPlanInfoOne['cps_data_return']){			
+		/*switch ($AdPlanInfoOne['cps_data_return']){			
 			case 1:
 				$AdPlanInfoOne['cps_data_return'] = '实时返回';
 				break;
 			case 2:
 				$AdPlanInfoOne['cps_data_return'] = '延时返回';
 				break;			
-		}
-			
+		}*/
+		
+		// 查询出计划分类所对应的分类名称
+		$adPlanCategory = M('AdPlanCategory');
+		$adPlanCategoryInfo = $adPlanCategory->where("id = ".$AdPlanInfoOne['category_id'])->find();
+		
+		$AdPlanInfoOne['category_name'] = $adPlanCategoryInfo['name'];
 		// 处理开始日期和结束日期的显示方式
 		$AdPlanInfoOne['start_date'] = date('Y-m-d',$AdPlanInfoOne['start_date']);
 		$AdPlanInfoOne['end_date'] = date('Y-m-d',$AdPlanInfoOne['end_date']);
@@ -382,7 +465,9 @@ class AdPlanAction extends CommonAction{
 	 */
 	public function add(){
 		
-		
+		// 当前时间
+		$startDateDefault = date("Y-m-d",time());
+		$this->assign("startDateDefault",$startDateDefault);
 		// 获取行业表中的行业相关的信息
 		$industry = M('adPlanCategory');
 		//dump($industry);
@@ -390,6 +475,48 @@ class AdPlanAction extends CommonAction{
 		$industryInfo = $industry->select();
 		$this->assign("industryInfo",$industryInfo);
 		
+		// 获取广告计划的计费形式
+		$this->getAdPayTypeInfo();
+		
+		// 或取审核方式的相关信息
+		$this->getAdPlanCheckInfo();
+		
+		// 获取广告的结算方式的信息
+		$this->getAdClearingFormInfo();
+		
+		// 获取网站类型的定向相关的数据
+		$this->getDirectionalSiteTypeArrInfo();
+		
+		// 获取时间定向的相关数据
+		$this->getDirectionalTimeArrInfo();
+		
+		// 获取网站星期定向的相关信息
+		$this->getDirectionalWeekArrInfo();
+
+		$this->display();		
+		
+	}
+	
+	/**
+	 * 
+	 * 获取广告的广告计划的状态列表
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:50:41
+	 */
+	private function getAdPlanStatusInfo(){
+		$adPlanStatusInfo = C('AD_STATUS');
+		$this->assign("adPlanStatusInfo",$adPlanStatusInfo);
+		//dump($adPlanStatusInfo);
+	}
+	
+	/**
+	 * 
+	 * 获取广告计划的计费形式
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:25:55
+	 */
+	private function getAdPayTypeInfo(){
+
 		// 读取配置文件获取获取广告计费形式的相关信息
 		$adPayType = C('AD_PAY_TYPE');
 		
@@ -397,7 +524,15 @@ class AdPlanAction extends CommonAction{
 		// 把数据组装成二维数组
 		$adPayTypeInfo = $this->oneDimensionalArrayToTwoDimensionalArray($adPayType);
 		$this->assign("adPayTypeInfo",$adPayTypeInfo);
-		
+	}
+	
+	/**
+	 * 
+	 * 或取审核方式的相关信息
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:28:15
+	 */
+	private function getAdPlanCheckInfo(){
 		// 读取广告计划的审核方式
 		$adPlanCheck = C('AD_PLAN_CHECK');
 		
@@ -406,16 +541,62 @@ class AdPlanAction extends CommonAction{
 		
 		// 分配到前端模版
 		$this->assign('adPlanCheckInfo',$adPlanCheckInfo);
+	}
+	
+	/**
+	 * 
+	 * 获取广告的结算方式的信息
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:32:47
+	 */
+	private function getAdClearingFormInfo(){
 		
 		// 读取广告的结算方式
 		$adClearingForm = C('CLEARING_FORM');
 		$adClearingFormInfo = $this->oneDimensionalArrayToTwoDimensionalArray($adClearingForm);
 		$this->assign("adClearingFormInfo",$adClearingFormInfo);
+	}
+	
+	/**
+	 * 
+	 * 获取网站类型的定向相关的数据
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:35:38
+	 */
+	private function getDirectionalSiteTypeArrInfo(){
 		
+		// 读取网站类型的定向相关的数据
+		$directionalSiteTypeArr = C('DIRECTIONAL_SITE_TYPE_ARR');
+		$directionalSiteTypeArrInfo = $this->oneDimensionalArrayToTwoDimensionalArray($directionalSiteTypeArr);
+		$this->assign("directionalSiteTypeArrInfo",$directionalSiteTypeArrInfo);
+	}
+	
+	/**
+	 * 
+	 * 获取网站星期定向的相关信息
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:36:53
+	 */
+	private function getDirectionalWeekArrInfo(){
 		
-		//dump($adPayTypeInfo);
-		$this->display();		
+		// 读取星期定向相关的数据
+		$directionalWeekArr = C('DIRECTIONAL_WEEK_ARR');
+		$directionalWeekArrInfo = $this->oneDimensionalArrayToTwoDimensionalArray($directionalWeekArr);
+		$this->assign("directionalWeekArrInfo",$directionalWeekArrInfo);
+	}
+	
+	/**
+	 * 
+	 * 获取时间定向的相关数据
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-23 上午11:39:01
+	 */
+	private function getDirectionalTimeArrInfo(){
 		
+		// 读取时间相关的定向
+		$directionalTimeArr = C('DIRECTIONAL_TIME_ARR');
+		$directionalTimeArrInfo = $this->oneDimensionalArrayToTwoDimensionalArray($directionalTimeArr);
+		$this->assign("directionalTimeArrInfo",$directionalTimeArrInfo);		
 	}
 	
 	/**
@@ -447,7 +628,9 @@ class AdPlanAction extends CommonAction{
 	 * @CreateDate: 2013-12-4 上午10:27:24
 	 */
 	public function addCheck(){
-		
+			
+		// 调用函数处理传递过来的数据
+		$this->dealAddSubmitData();
 		
 		// 创建数据库对象
 		$this->AdPlan = D($this->actionName);
@@ -486,7 +669,113 @@ class AdPlanAction extends CommonAction{
 		}
 	}
 	
+	/**
+	 * 
+	 * 处理广告计划添加时用户提交过来的数据
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-21 下午3:00:54
+	 */
+	private function dealAddSubmitData(){
+		
+		$_POST['uid'] = intval($_POST['uid']);
+		
+		// 查询添加的广告主id是否存在
+		$member = M('Member');
+		if(!$member->where("user_type = 'adv'  and id = ".$_POST['uid'])->find()){
+			
+			// 广告主不存在跳转到添加页面
+			$this->error("您填写的广告主不存在",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+		}
+		
+		
+		// 必须传递plan_logo图片
+		if(!$_FILES['plan_logo']){
+			
+			// 说明没有传递计划logo
+			$this->error("您没有上传计划logo图",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+		}
+		
+		// 判断行业类别是否为已有的行业类别
+		$adPlanCategory = M('AdPlanCategory');
+		$_POST['category_id'] = intval($_POST['category_id']);		
+		if(!$adPlanCategory->where("id = ".$_POST['category_id'])->find()){			
+			$this->error("您选择的广告行业类别不存在",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+		}
+		
+		// 判断所选得费形式是否存在于数组中
+		$adPayType = C('AD_PAY_TYPE');
+		$_POST['pay_type'] = intval($_POST['pay_type']);
+		if(!$adPayType[$_POST['pay_type']]){
+			$this->error("您所选择的计费形式暂时不提供",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+		}
 
+		// 处理结算周期
+		$clearingForm = C('CLEARING_FORM');
+		$_POST['clearing_form'] = intval($_POST['clearing_form']);
+		if(!$clearingForm[$_POST['clearing_form']]){
+			$this->error("您所选择的结算周期不存在",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+		}	
+
+		// 处理计费周期
+		// 把时间转化为时间戳格式
+		$_POST['start_date'] = strtotime($_POST['start_date']);
+		$_POST['end_date'] = strtotime($_POST['end_date']);
+		if($_POST['end_date'] <= $_POST['start_date']){
+			$this->error("计费周期结束时间必须大于开始时间",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+		}
+		if($_POST['start_date']< $this->createDayStartTime()){
+			$this->error("计费周期开始时间必须大于等于当前时间",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+		}
+		
+		// 处理价格
+		//$_POST['price'] = intval($_POST['price']);
+		if(!is_numeric($_POST['price'])){
+			$this->error("每千次的价格必须为数值",C('SITE_URL')."?m=".$this->actionName.'&a=add');			
+		}
+		
+		// 处理每日pv限额或每日点击限额 必须为整型数值
+		$_POST['max_per_day'] = intval($_POST['max_per_day']);
+		
+		// 处理某个网站的pv或者点击限额
+		$_POST['max_per_site'] = intval($_POST['max_per_site']);
+		
+		// 处理描述的内容过滤特殊的字符
+		$_POST['description'] = strip_tags($_POST['description']);
+		
+		// 处理网站类型定向
+		$_POST['directional_site_type'] = intval($_POST['directional_site_type']);
+		if($_POST['directional_site_type']){
+			$_POST['directional_site_type_arr'] = json_encode($_POST['directional_site_type_arr']);			
+		}
+		
+		// 处理星期定向
+		$_POST['directional_week'] = intval($_POST['directional_week']);
+		if ($_POST['directional_week']){
+			$_POST['directional_week_arr'] = json_encode($_POST['directional_week_arr']);
+		}
+		
+		// 处理时间定向
+		$_POST['directional_time'] = intval($_POST['directional_time']);
+		if($_POST['directional_time']){
+			$_POST['directional_time_arr'] = json_encode($_POST['directional_time_arr']);
+		}
+		
+		
+		
+	}
+	
+	private  function createDayStartTime(){
+	
+		// 获取当前的年
+		$year = date("Y",time());
+	
+		// 获取当前的月
+		$month = date("m",time());
+	
+		// 获取当前的天
+		$day = date("d",time());
+		return mktime(0,0,0,$month,$day,$year);
+	}
 	
 
 }

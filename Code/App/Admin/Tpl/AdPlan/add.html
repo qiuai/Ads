@@ -32,22 +32,22 @@
     		<div class="onShow">请填写正确的广告主ID，广告主ID不能为空</div>				
     	</td>
     </tr>
-	<!--
+	
     <tr>
     	<td><em class="red">&nbsp;</em>接入网址：</td>
     	<td class="textbox_td">
     	    <input class="newsite_textw160" type="text" name="track_url"  />
     	    <div class="onShow">跳转的入口地址，方便记录访问信息</div>	
     	</td>
-    </tr>-->
-	<!--
+    </tr>
+	
     <tr>
         <td class="w155"><em class="red">*</em>目标网址：</td>
 		<td class="textbox_td">
 		    <input class="" type="text" name="jump_url" value="http://" />
 		    <div class="onShow">请填写正确的目标网址 ，目标网址不能为空</div>				
 	    </td>
-	</tr>-->
+	</tr>
 	<tr>
     	<td class="w155"><em class="red">*</em>LOGO：</td>
     	<td class="textbox_td">
@@ -73,7 +73,7 @@
 				
             </select>
 		</td>
-	</tr>
+	 </tr>
 	<tr>
 		<td><em class="red">*</em>审核方式：</td>
 		<td>
@@ -107,7 +107,7 @@
     <tr>
     	<td><em class="red">*</em>计划周期：</td>
     	<td class="textbox_td">
-    		开始时间：<input type="text" name="start_date" id="start_date" class="input_text" size="12" value="2013-12-20" />
+    		开始时间：<input type="text" name="start_date" id="start_date" class="input_text" size="12" value="{$startDateDefault}" />
     		<script>
                     Calendar.setup({
                         inputField     :    "start_date",
@@ -197,22 +197,13 @@
 		                  <input type="checkbox" name="directional_site_type_check_all" /> 全选
 		              </td>
 		          </tr>
-		          <tr>             
-		          		              <td>
-		                  <input type="checkbox" name="directional_site_type_arr[]" value="13" /> 电商		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_site_type_arr[]" value="14" /> 博客		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_site_type_arr[]" value="15" /> 论坛		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_site_type_arr[]" value="16" /> 新闻		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_site_type_arr[]" value="17" /> 门户网站		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_site_type_arr[]" value="63" /> 资讯		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_site_type_arr[]" value="64" /> wjika		              </td>
-		          		          </tr>
+		          <tr>          
+		          		<volist name="directionalSiteTypeArrInfo" id="vo">
+		          			 <td>
+		                  		<input type="checkbox" name="directional_site_type_arr[]" value="{$vo['key']}" />{$vo['val']}
+		          		     <td>
+		          		</volist>
+		         </tr>
 			 </table>
 		  </td>
 		</tr>
@@ -241,22 +232,14 @@
 		                  <input type="checkbox" name="directional_week_check_all" /> 全选
 		              </td>
 		          </tr>
-		          <tr>             
-		          		              <td>
-		                  <input type="checkbox" name="directional_week_arr[]" value="1" /> 星期一		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_week_arr[]" value="2" /> 星期二		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_week_arr[]" value="3" /> 星期三		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_week_arr[]" value="4" /> 星期四		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_week_arr[]" value="5" /> 星期五		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_week_arr[]" value="6" /> 星期六		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_week_arr[]" value="0" /> 星期日		              </td>
-		          		          </tr>
+		          <tr>     
+		          	<volist name="directionalWeekArrInfo" id="vo">
+		          		 <td>
+		                  	<input type="checkbox" name="directional_week_arr[]" value="{$vo['key']}" /> {$vo['val']}		
+		                  </td>
+		          	</volist>        
+		          		             
+		          </tr>
 			 </table>
 		  </td>	  
 		</tr>
@@ -278,83 +261,18 @@
 		                  <input type="checkbox" name="directional_time_check_all" /> 全选
 		              </td>
 		          </tr>
-		          <tr>             
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="0" /> 0:00 - 0:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="1" /> 1:00 - 1:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="2" /> 2:00 - 2:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="3" /> 3:00 - 3:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="4" /> 4:00 - 4:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="5" /> 5:00 - 5:59
-		              </td>
-		          		              	</tr><tr>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="6" /> 6:00 - 6:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="7" /> 7:00 - 7:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="8" /> 8:00 - 8:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="9" /> 9:00 - 9:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="10" /> 10:00 - 10:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="11" /> 11:00 - 11:59
-		              </td>
-		          		              	</tr><tr>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="12" /> 12:00 - 12:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="13" /> 13:00 - 13:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="14" /> 14:00 - 14:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="15" /> 15:00 - 15:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="16" /> 16:00 - 16:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="17" /> 17:00 - 17:59
-		              </td>
-		          		              	</tr><tr>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="18" /> 18:00 - 18:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="19" /> 19:00 - 19:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="20" /> 20:00 - 20:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="21" /> 21:00 - 21:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="22" /> 22:00 - 22:59
-		              </td>
-		          		              <td>
-		                  <input type="checkbox" name="directional_time_arr[]" value="23" /> 23:00 - 23:59
-		              </td>
-		          		          </tr>
+		              
+		          	<volist name="directionalTimeArrInfo" id="vo" key="k">
+		          		<if condition="$k%6 eq 1">
+		          			<tr>
+		          		</if>
+		          		 <td>
+		                 	 <input type="checkbox" name="directional_time_arr[]" value="{$vo['key']}" /> {$k}{$vo['val']}
+		              	</td>
+		              	<if condition="$k%6 eq 0">
+		          			</tr>
+		          		</if>
+		          	</volist> 
 			     </table>
 		      </td>
 		  </tr>
