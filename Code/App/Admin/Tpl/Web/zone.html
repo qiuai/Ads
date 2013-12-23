@@ -53,7 +53,7 @@
 			<td>{$vo.name}</td>
 			<td>{$vo.sid}</td>
 			<td>{$vo.uid}</td>
-			<td><if condition="$vo.pay_type eq 1">CPS<elseif condition="$vo.pay_type eq 2"/>CPA<elseif condition="$vo.pay_type eq 3"/>CPC<elseif condition="$vo.pay_type eq 4"/>CPM</if></td>
+			<td><if condition="$vo.pay_type eq 1">CPM<elseif condition="$vo.pay_type eq 2"/>CPC</if></td>
 			<td>{$vo.display}</td>
 			<td>{$vo.width}*{$vo.height}</td>
 			<td><if condition="$vo.status eq 0">是<elseif condition="$vo.status eq 1"/>否</if></td>
