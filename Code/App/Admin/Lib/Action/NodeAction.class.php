@@ -76,6 +76,10 @@ class NodeAction extends CommonAction {
 	 */
 	public function nodeEdit(){
 		if($this->isPost()){
+			if(!$_POST['group_id'] || !$_POST['pid']){
+				unset($_POST['group_id']);
+				unset($_POST['pid']);
+			}
 			$model = M('Node');
 			if (false === $model->create()) {
 				$this->error($model->getError());
@@ -84,7 +88,7 @@ class NodeAction extends CommonAction {
 			$list = $model->save();
 			if (false !== $list) {
 				//成功提示
-				$this->success('编辑成功!',cookie('_currentUrl_'));
+				$this->success('编辑成功!',C('SITE_URL').'?m=Node&a=nodeList');
 			} else {
 				//错误提示
 				$this->error('编辑失败!');

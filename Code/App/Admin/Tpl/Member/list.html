@@ -76,7 +76,7 @@ a{
         <td>{$vo.truename}</td>
         <td>{$vo.qq}</td>
         <td>{$vo.mobilephone}</td>
-        <td>{$vo.legal_status}</td>
+        <td><if condition="$vo.legal_status eq 0">个人<else/>法人</if></td>
         <td>{:date('Y-m-d',$vo['create_time'])}</td>
         <td>{:date('Y-m-d',$vo['last_login_time'])}</td>
         <td>
@@ -301,7 +301,7 @@ function delete_member(uid){
 	var psub = confirm("是否确认删除？");
     if (psub) {
         $.post("SITE_URL?m=Member&a=delete", {
-            "uid": uid,
+            "id": uid,
             "action":"delete",
         },function(data) {
         	document.location.reload();
