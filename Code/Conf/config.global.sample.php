@@ -29,5 +29,6 @@ return array(
     'RBAC_ACCESS_TABLE'         =>  'zhts_access',
     'RBAC_NODE_TABLE'           =>  'zhts_node',
     'SHOW_PAGE_TRACE'           =>  0,//显示调试信息
+	'SESSION_ID'		    =>  'PHPSESSID', // 定义sessionid的下标
 );
 ?>

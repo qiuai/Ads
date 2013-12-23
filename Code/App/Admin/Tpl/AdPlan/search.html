@@ -50,17 +50,26 @@ a{
     </tr>
     <tr>
         <td style="font-size:13px;height:40px;border-top:1px solid #ccc" colspan="2">计划状态：
-                    <a href="SITE_URL?m=AdPlan&a=index" class="link-checked">全部</a>
-                   <foreach name="adPlanStatusInfo" item="vo" key="key" >                  		
-                   	<a href="SITE_URL?m=AdPlan&a=search&plan_status={$key}" class="link_before_checked">{$vo}</a>
+                    <a href="SITE_URL?m=AdPlan&a=index"   class="link_before_checked">全部</a>
+                   <foreach name="adPlanStatusInfo" item="vo" key="key" >
+                   	<if condition="($Think.get.plan_status eq $key) and ($Think.get.pay_type eq '') and ($Think.get.plan_name eq '') and ($Think.get.id eq '') ">
+                   		<a href="SITE_URL?m=AdPlan&a=search&plan_status={$key}" class="link-checked">{$vo}</a>
+                   	<else />
+                   		<a href="SITE_URL?m=AdPlan&a=search&plan_status={$key}" class="link_before_checked">{$vo}</a>
+                   	</if>
+                   	
                    </foreach>
         </td>
     </tr>
     <tr>
         <td style="font-size:13px;height:40px;border-top:1px solid #ccc" colspan="2">计费方式：
-                    <a href="SITE_URL?m=AdPlan&a=index" class="link-checked">全部</a>
+            <a href="SITE_URL?m=AdPlan&a=index" class="link_before_checked">全部</a>
             <volist name="adPayTypeInfo" id="vo">
-            	<a href="SITE_URL?m=AdPlan&a=search&pay_type={$vo['key']}" class="link_before_checked">{$vo['val']}</a>
+            	<if condition="$Think.get.pay_type eq $vo['key']">
+            		<a href="SITE_URL?m=AdPlan&a=search&pay_type={$vo['key']}" class="link-checked">{$vo['val']}</a>
+            	<else />
+            		<a href="SITE_URL?m=AdPlan&a=search&pay_type={$vo['key']}" class="link_before_checked">{$vo['val']}</a>
+            	</if>           	
             </volist>
         </td>
     </tr>
@@ -77,7 +86,7 @@ a{
         <td>计划分类</td>
         <td>计费方式</td>
         <td>千次点击或展示价格</td>
-       
+        
         <td>审核方式</td>
         <td>结算方式</td>
         <td>开始日期</td>
@@ -93,7 +102,6 @@ a{
         <td>{$vo['category_name']}</td>
         <td>{$vo['pay_type']}</td>
         <td>{$vo['price']}</td>
-      
         <td>{$vo['plan_check']}</td>
         <td>{$vo['clearing_form']}</td>
         <td>{$vo['start_date']}</td>
