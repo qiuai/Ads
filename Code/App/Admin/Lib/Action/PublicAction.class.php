@@ -132,6 +132,7 @@ class PublicAction extends Action {
 		foreach($dirs as $value) {
 		  $this->rmdirr($value);
 		}
+		$this->assign('jumpUrl',C('SITE_URL'));
 		$this->success('系统缓存清除成功！');
 	}
 	/**
