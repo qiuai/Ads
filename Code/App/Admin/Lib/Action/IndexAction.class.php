@@ -54,12 +54,50 @@ class IndexAction extends CommonAction {
 	 */
 	public function todayAdd(){
 		// 新增会员
+		$this->getMemberAdd();
 		
 		// 新增广告
+		$this->getAdAdd();
 		
 		// 待处理提现数
+		$this->getWithdraw();
 		
 		// 积分商城订单
+	}
+	/**
+	 * 新增会员
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午5:34:57
+	 */
+	public function getMemberAdd(){
+		$model = M('Member');
+		$where['create_time'] = array('gt',mktime(0,0,0,date("m") ,date('d')-1,date("Y")));
+		$count = $model->where($where)->count();
+		
+		$this->assign('memberAddCount', $count);
+	}
+	/**
+	 * 新增广告
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午5:34:48
+	 */
+	public function getAdAdd(){
+		// 新增广告
+		$count = 0;
+		$this->assign('adAddCount', $count);
+	}
+	/**
+	 * 待处理提现数
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-21 下午5:34:41
+	 */
+	public function getWithdraw(){
+		// 待处理提现数
+		$count = 0;
+		$this->assign('withdrawCount', $count);
 	}
 	/**
 	 * 最近十天数据

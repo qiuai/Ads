@@ -5,6 +5,12 @@ return array(
 	  */
 	'UPLOAD_MAX_SIZE'		=> 2000000,// 上传文件的最大值
 	
+	'BANK_SHORT'			=>array(
+			'BC'	=>"中国银行",
+			'ICBC'	=>"中国工商银行",
+			'CMB'	=>"中国招商银行",
+			),
+	
 	/**
 	 * 账号类型
 	 */

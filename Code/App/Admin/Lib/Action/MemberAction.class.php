@@ -23,7 +23,7 @@ class MemberAction extends CommonAction {
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-12-9 下午4:37:38
 	 */
-	public function memberAdd(){
+	public function memberAdd($jumpurl=''){
 		if($this->isPost()){
 			if(empty($_POST['username'])) {
 				$this->error('帐号错误！');
@@ -55,9 +55,11 @@ class MemberAction extends CommonAction {
 			$_POST['create_time'] = time(); // 创建时间
 			$_POST['ip'] = $_SERVER['SERVER_ADDR']; // 创建时间
 			
+			var_dump($_POST);exit;
+			
 			if($Member->create()){
 				if($Member->add()){
-					$this->success("注册成功！");
+					$this->success("注册成功！",$jumpurl);
 				}else{
 					$this->error("注册失败！");
 				}
@@ -244,13 +246,11 @@ class MemberAction extends CommonAction {
 	 * @CreateDate: 2013-12-21 下午3:06:01
 	 */
 	public function memberSetDeduction(){
-		$model = M('balance_amount');
-		if($model->create()){
-			if($model->save()){
-				$this->success('修改成功！');
-			}else{
-				$this->error('修改失败！');
-			}
+		$model = M('Member');
+
+		$_POST['id'] = $_POST['uid'];
+		if(false !== $model->save($_POST)){
+			$this->success('修改成功！');
 		}else{
 			$this->error('修改失败！');
 		}

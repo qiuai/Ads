@@ -21,6 +21,10 @@ class PublicAction extends CommonAction {
 	 * @CreateDate: 2013-12-9 下午3:22:28
 	 */
 	public function register(){
+		$model = M();
+		$sql = "select u.* from " . C('DB_PREFIX') . "user u join " . C('DB_PREFIX') . "role_user r on u.id = r.user_id where r.role_id = 5";
+		$list = $model->query($sql);
+		$this->assign('list',$list);
 		$this->display();
 	}
 	/**
@@ -31,7 +35,7 @@ class PublicAction extends CommonAction {
 	 */
 	public function userAdd(){
 		if($this->isPost()){
-			$re = R("Admin://Member/memberAdd");
+			$re = R("Admin://Member/memberAdd",array(C('HOME_URL')));
 		}
 	}
 	/**

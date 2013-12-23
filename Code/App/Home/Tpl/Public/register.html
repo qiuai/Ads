@@ -40,8 +40,11 @@
            <tr>
               <th><span class="red">*</span>联盟客服：</th>
               <td>
-              	<select name="manager">
+              	<select name="mid">
               		<option value="0">--请选择--</option>
+              		<Volist name='list' id='vo'>
+              		<option value="{$vo.id}">{$vo.username}</option>
+              		</Volist>
               	</select>
               </td>
            </tr>
