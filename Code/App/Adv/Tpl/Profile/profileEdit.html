@@ -28,8 +28,8 @@
 				<td class="w155"><em class="red">*</em> 个人/法人：</td>
 				<td class="textbox_td">
 					<select class="personal_select" name="legal_status">
-						<option value="个人" <if condition="$info['legal_status'] eq '个人'">selected="selected"</if>>个人</option>
-                        <option value="法人" <if condition="$info['legal_status'] eq '法人'">selected="selected"</if>>法人</option>
+						<option value="0" <if condition="$info['legal_status'] eq 0">selected="selected"</if>>个人</option>
+                        <option value="1" <if condition="$info['legal_status'] eq 1">selected="selected"</if>>法人</option>
 					</select>
 				</td>
 			  </tr>
