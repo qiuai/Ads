@@ -44,7 +44,7 @@ class NodeAction extends CommonAction {
 		$table = " ".C('DB_PREFIX').'node n, '.C('DB_PREFIX').'group g ';
 		
 		$p = $_GET['p'] ? $_GET['p'] : 1;
-		$num = 5;
+		$num = 2;
 		$limit = " limit ". ($p-1)*$num .",".$num;
 		
 		$sql = "select $select from $table $where $limit";
@@ -90,6 +90,8 @@ class NodeAction extends CommonAction {
 				$this->error('编辑失败!');
 			}
 		}else{
+			$this->getGroup();
+			
 			$model	=	M();
 			$sql = "select * from ".C('DB_PREFIX')."node where id = ".$_GET['id'];
 			$list = $model->query($sql);
