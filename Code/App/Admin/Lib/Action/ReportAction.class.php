@@ -1,6 +1,6 @@
 <?php
 /**
- * 广告联盟系统  会员管理
+ * 广告联盟系统 报表管理
  * 
  * @copyright (C)2012 ZHTS Inc.
  * @project project_name
@@ -40,8 +40,6 @@ class ReportAction extends CommonAction {
 		
 		// 结算时间降序
 		$income = $this->memberPage($model, $where, 10, 'settlement_time desc');
-// 		$income = $model->where($where)->find();
-// 		var_dump($income);
 		$this->assign('uid', $uid);
 		$this->assign('start_date', $_REQUEST['start_date']);
 		$this->assign('end_date', $_REQUEST['end_date']);
@@ -73,8 +71,6 @@ class ReportAction extends CommonAction {
 	
 		// 结算时间降序
 		$income = $this->memberPage($model, $where, 10, 'settlement_time desc');
-// 		echo $model->getLastSql();
-// 				var_dump($income);
 		$this->assign('pid', $pid);
 		$this->assign('start_date', $_REQUEST['start_date']);
 		$this->assign('end_date', $_REQUEST['end_date']);

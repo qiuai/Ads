@@ -525,11 +525,6 @@ class CommonAction extends Action {
 			if($log->create($where)){
 				$log->add();
 			}
-		}else{
-			$log = D("Log");
-			if($log->create($where)){
-				$log->add();
-			}
 		}
 	}
     /**
