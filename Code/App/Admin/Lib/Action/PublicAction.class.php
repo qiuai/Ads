@@ -28,6 +28,20 @@ class PublicAction extends Action {
         }
 	}
 	/**
+	 * 用户登出
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-24 上午10:16:18
+	 */
+	public function logout(){
+		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
+			session_destroy();
+			$this->redirect('/?m=Public&a=login');
+		}else {
+			$this->error('已经登出！');
+		}
+	}
+	/**
 	 * 检测用户是否登录
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
