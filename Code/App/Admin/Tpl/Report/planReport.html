@@ -17,9 +17,9 @@
         <td style="border-right:none;">
             <form method="get">
                 <input type="hidden" name="m" value="Report">
-                <input type="hidden" name="a" value="report_plan">
+                <input type="hidden" name="a" value="planReport">
                 计划ID：
-                <input type="text" name="plan_id">
+                <input type="text" name="pid" value="{$pid}">
                 选择时间段：
                 <input type="text" name="start_date" id="start_date" class="input_text" size="12" value="20131128">
                 <script language="javascript" type="text/javascript">
@@ -67,8 +67,28 @@
         <td>广告费</td>     
         <td>盈利</td>
     </tr>
-            <tr><td colspan="10">没有数据</td></tr>
-        </tbody></table>
+    
+    <if condition="$list">
+    <Volist name='list' id='vo'>
+   	<tr>
+        <td>{$vo.uid}</td>
+        <td>{$vo.ip}</td>
+        <td>{$vo.pv}</td>
+        <td>{$vo.click}</td>
+        <td><?php echo 'CTR'; ?></td>
+        <td>{$vo.cpm}</td>      
+        <td>{$vo.cpc}</td> 
+        <td>{$vo.real_income}</td>     
+        <td>{$vo.balance_income}</td>
+    </tr>
+   	</Volist>
+   	<else />
+   	<tr>
+   		<td colspan="10">没有数据</td>
+   	</tr>
+   	</if>
+   	
+</table>
 <div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共0 条记录 1/0 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=0">上一页</a>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=0">尾页</a>&nbsp;&nbsp;</div></div>
 </div>
 </div>

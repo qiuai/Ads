@@ -45,4 +45,35 @@ class ReportAction extends CommonAction {
 		$this->assign('uid', $uid);
 		$this->display();
 	}
+	/**
+	 * 计划报表
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-23 下午9:31:09
+	 */
+	public function planReport(){
+		// 网站主UID
+		$pid = $_REQUEST['pid'] ? $_REQUEST['pid'] : 0;
+	
+		// 搜索UID
+		if($pid){
+			$where['pid'] = intval($pid);
+		}
+	
+		// 搜索日期
+		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
+			$where['start_date'] = array('gt', intval($_REQUEST['start_date']));
+			$where['end_date'] = array('lt', intval($_REQUEST['end_date']));
+		}
+	
+		// 列表数据
+		$model = M('Income');
+	
+		// 结算时间降序
+		$income = $this->memberPage($model, $where, 10, 'settlement_time desc');
+// 				$income = $model->where($where)->find();
+// 				var_dump($income);
+		$this->assign('pid', $pid);
+		$this->display();
+	}
 }
