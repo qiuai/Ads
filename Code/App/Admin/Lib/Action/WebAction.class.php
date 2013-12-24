@@ -36,7 +36,7 @@ class WebAction extends CommonAction {
 		$this		->display();
 	}
 	// 按条件查询网站
-	public function site_search(){
+	public function siteSearch(){
 		$content	= $_GET["content"]; // 查询条件
 		$condition	= $_GET["condition"]; // 查询条件类型
 		switch($condition){

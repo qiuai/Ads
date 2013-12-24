@@ -98,21 +98,18 @@ class SiteWebAction extends CommonAction {
 	}
 	// 新增频道
 	public function channelAdd(){
-		// 创建数据库对象
 		$st 	= M('site');
-		$site	=$st->field("id,site_name")->select();
+		$site	= $st->field("id,site_name")->select(); // 获取id，网站名称
 		$this	->assign("site",$site);
 		$this	->display();
 	}
-	public function  channel_addCheck(){
-		// 创建数据库对象
-		$channel 				= M('channel');
-		$channel->sort			= $_POST["sort"];
-		$channel->sid			= $_POST["site_type"];
-		$channel->name			= $_POST["name"];
-		$channel->status		= $_POST["status"];
-		$channel->desc			= $_POST["desc"];
-		// 往数据库中添加
+	public function  channelAddCheck(){
+		$ch				= M('channel');
+		$data["sort"]			= $_POST["sort"];
+		$data["sid"]			= $_POST["site_type"];
+		$data["name"]			= $_POST["name"];
+		$data["status"]			= $_POST["status"];
+		$data["desc"]			= $_POST["desc"];
 		$flag = $channel->add();
 		if($flag){
 			$this->success('数据添加成功','WEB_URL/?m=SiteWeb&a=channel_list');
