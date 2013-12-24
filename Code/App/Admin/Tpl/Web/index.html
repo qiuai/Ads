@@ -17,7 +17,7 @@
 				<td width="40%" style="border-right:none;">
 					<form method="get">
 						<input type="hidden" value="Web" name="m">
-						<input type="hidden" value="site_search" name="a">
+						<input type="hidden" value="siteSearch" name="a">
 						<input type="text" name="content" value="{$content}">
 						<select name="condition">
 							<option value="site_id" <if condition="$condition eq 'site_id'">selected</if>>网站ID</option>
@@ -45,7 +45,7 @@
 	</table>	
 <form method="post" id="sitelist_form">
 <input type="hidden" value="Web" name="m">
-<input type="hidden" value="site_multi" name="a">
+<input type="hidden" value="siteMulti" name="a">
 <table align="center" cellspacing="0" class="list">
     <tbody>
 	<tr class="tb_title">
@@ -128,7 +128,7 @@ function muti_apply(status)
 	if(ids=='') {
 		alert('请选择要操作的网站！');
 	}else{	
-		$.post($CONFIG['url']+"/?m=Web&a=site_multi", {'ids':ids,'status':status}, function(data){
+		$.post($CONFIG['url']+"/?m=Web&a=siteMulti", {'ids':ids,'status':status}, function(data){
 			if(data==0){
 				alert('批量操作成功');
 				window.location.reload();
