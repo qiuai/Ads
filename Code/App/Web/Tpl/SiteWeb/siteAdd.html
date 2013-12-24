@@ -3,7 +3,7 @@
 <script type="text/javascript" src="STATIC_URL/web/js/formvalidatorregex.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$.formValidator.initConfig({formid:"site_edit",autotip:true});
+		$.formValidator.initConfig({formid:"site_add",autotip:true});
 		$("#site_domain").formValidator({onshow:"您将使用此网站地址，请正确填写 ",onfocus:"请输入正确的网站地址",oncorrect:"输入正确"}).regexValidator({regexp:"^([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$",onerror:"您输入的网站格式不正确"});
 		$("#site_name").formValidator({onshow:"您将使用此网站名，请正确填写",onfocus:"请输入正确的网站名"}).inputValidator({min:1,onerror:"网站名不能为空"});		
 		function allEmpty(val,elem)
@@ -14,11 +14,9 @@
 </script>
 <div class="main clearfix">
 	<div class="huiyuan_change">
-    	<form id="site_edit" action="SITE_URL/?m=SiteWeb&a=editCheck" method="post">
-		<volist name="siteOld" id="vo">
-    	<input type="hidden" name="site_id" value="{$vo.id}">
+    	<form id="site_add" action="WEB_URL/?m=SiteWeb&a=addCheck" method="post" onsubmit="return verify()">
 		<div class="huiyuan_change_head">
-			<span>修改网站</span>
+			<span>添加新网站</span>
 			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
 			<div class="cb"></div>
 		</div>
@@ -27,32 +25,29 @@
 			  <tbody><tr>
 				<td class="w155"><em class="red">*</em>网站名称：</td>
 				<td class="textbox_td">
-					<input id="site_name" class="newsite_textw160" type="textbox" name="site_name" value="{$vo.site_name}">		
+					<input class="newsite_textw160" type="textbox" name="site_name" id="site_name">				
 				</td>
 			  </tr>
 			  <tr>
 				<td class="w155"><em class="red">*</em>网站地址：</td>
 				<td class="textbox_td">
-					<input id="site_domain" class="textbox" type="textbox" name="site_domain" value="{$vo.site_domain}">				
+					<input class="textbox" type="textbox" name="site_domain" id="site_domain"> 不带http://			
 				</td>
 			  </tr>
 			  <tr>
 				<td class="w155"><em class="red">*</em>网站类别：</td>
 				<td class="textbox_td">
 					<select class="newsite_select" name="site_type">
-						<option <if condition="$vo.site_type eq 1">selected="selected"</if> value="1">电商</option>
-						<option <if condition="$vo.site_type eq 2">selected="selected"</if> value="2">博客</option>
-						<option <if condition="$vo.site_type eq 3">selected="selected"</if> value="3">论坛</option>
-						<option <if condition="$vo.site_type eq 4">selected="selected"</if> value="4">新闻</option>
-						<option <if condition="$vo.site_type eq 5">selected="selected"</if> value="5">门户网站</option>
-						<option <if condition="$vo.site_type eq 6">selected="selected"</if> value="6">资讯</option>
+						<volist name="site" id="vo">
+						<option value="{$vo.id}">{$vo.code_name_zh}</option>
+						</volist>
 					</select>
 				</td>
 			  </tr>
 			  <tr>
 				<td class="newsite_w155">网站简介：</td>
 				<td class="textbox_td">
-					<textarea rows="5" class="site_about" name="description" value="{$vo.description}">{$vo.description}</textarea>
+					<textarea rows="5" class="site_about" name="description"></textarea>
 				</td>
 			  </tr>
 			</tbody></table>
@@ -61,8 +56,41 @@
 			<input class="confirm_btn" type="submit" name="dosubmit" value=" ">
 			<input class="back_btn" type="button" onclick="javascript:history.back(-1);" value=" ">
 		</div>
-		</volist>
        </form>
 	</div>
 </div>
+<script>
+function verify()
+{
+	var site_name   = $("input[name='site_name']").val();
+	var site_domain = $("input[name='site_domain']").val();
+
+	if(site_name == '')
+	{
+		$("input[name='site_name'] + span").html("网站名称不能为空");
+	    return false;
+	}
+	else
+	{
+		$("input[name='site_name'] + span").html("");
+	}
+
+	if(site_domain == '')
+	{
+		$("input[name='site_domain'] + span").html("网站地址不能为空");
+	    return false;
+	}
+	/*
+	else
+	{
+		var strRegex = "^[a-z0-9A-Z]{1,3}\.[a-z0-9A-Z]{0,61}]\.[a-zA-Z]{2,3}/$";
+        var reg = new RegExp(strRegex);alert(reg.test(site_domain));
+        if (! reg.test(site_domain))
+        {
+        	$("input[name='site_domain'] + span").html("网站地址不正确");
+    	    return false;
+        }
+	}*/
+}
+</script>
 <include file="Index:footer" />
