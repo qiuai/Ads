@@ -36,7 +36,7 @@ class WebAction extends CommonAction {
 		$this		->display();
 	}
 	// 按条件查询网站
-	public function site_search(){
+	public function siteSearch(){
 		$content	= $_GET["content"]; // 查询条件
 		$condition	= $_GET["condition"]; // 查询条件类型
 		switch($condition){
@@ -129,7 +129,7 @@ class WebAction extends CommonAction {
 		$this		->display();
 	}
 	// 批量操作，改变网站状态
-	public function site_multi(){
+	public function siteMulti(){
 		$ids 		= $_POST["ids"]; // 得到选中的ID
 		$ids 		= rtrim($ids,","); 
 		$status 	= (int)($_POST["status"]);
