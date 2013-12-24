@@ -129,7 +129,7 @@ class WebAction extends CommonAction {
 		$this		->display();
 	}
 	// 批量操作，改变网站状态
-	public function site_multi(){
+	public function siteMulti(){
 		$ids 		= $_POST["ids"]; // 得到选中的ID
 		$ids 		= rtrim($ids,","); 
 		$status 	= (int)($_POST["status"]);
