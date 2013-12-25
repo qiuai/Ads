@@ -42,6 +42,7 @@
 						<div class="onShow">请填写正确的目标网址</div></td>
 					</tr>
 					<if condition="$AdManageInfo['picFlag'] eq 1">
+						<input type="hidden" name="picFlag" value="1" />
 						<tr>
 							<td class="w155"><em class="red">*</em>图片/FLASH：</td>
 							<td class="textbox_td">
@@ -55,6 +56,7 @@
 				    			</td>
 			  			</tr>
 			  		<else />
+			  			<input type="hidden" name="picFlag" value="0" />
 			  			<tr>
 							<td class="w155"><em class="red">*</em>文字内容：</td>
 							<td class="textbox_td">

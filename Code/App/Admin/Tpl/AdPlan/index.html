@@ -45,7 +45,7 @@ a{
         </form>
         </td>
                 <td style="border-top:1px solid #ccc" align="right">
-            <input value="导出报表" class="button1" onclick="location.href='http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_export&amp;keyword=&amp;search_type=&amp;status=&amp;pay_type=&amp;uid='" type="button">
+            <input value="导出报表" class="button1" onclick="location.href='SITE_URL?m=AdPlan&a=exportReport'" type="button">
         </td>
     </tr>
     <tr>
@@ -111,7 +111,7 @@ a{
 			</td>
 			<td colspan="13" style="text-align:left;">
 				<span style="display: none;" id="quick_{$vo['id']}" class="quick_operation">
-					<if condition="$vo['plan_status'] eq '待审核'">
+					<if condition="($vo['plan_status'] eq '新增待审') or ($vo['plan_status'] eq '修改待审')">
 				    <a href="SITE_URL?m=AdPlan&a=plan_verify&id={$vo['id']}" title="审核计划" style="color: red">
 						审核计划
 					</a>
@@ -125,9 +125,9 @@ a{
 						编辑
 					</a>
 					|
-					<a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id={$vo['id']}" title="编辑计划">
+					<!--  <a href="http://adu.phpad.cn/admin.php?m=plan&amp;a=plan_advanced&amp;plan_id={$vo['id']}" title="编辑计划">
 						高级设置
-					</a>					
+					</a>-->					
 					|
 					<a title="激活计划" onclick="activate({$vo['id']})">
 						激活
@@ -137,21 +137,22 @@ a{
 						暂停
 					</a>					
 					|
-					<!--  					
-					<a title="删除计划" onclick="delete_plan(134)">
+					  					
+					<a title="删除计划" onclick="delete_plan({$vo['id']})">
 						删除
 					</a>
+					<!-- 
 					|
 					<a title="标记" onclick="mark_plan(134)">
 						标记
 					</a>
 					|
 					-->
-					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_add&amp;plan_id={$vo['id']}" title="新增广告">
+					<a href="SITE_URL?m=AdManage&a=add&pid={$vo['id']}" title="新增广告">
 						新增广告
 					</a>
 					|
-					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id={$vo['id']}" title="查看广告">
+					<a href="SITE_URL?m=AdManage&a=index&pid={$vo['id']}" title="查看广告">
 						查看广告
 					</a>
 				
@@ -207,7 +208,7 @@ function activate(id){
             if (data == 'ok') {
                 document.location.reload();
             } else {
-                alert('提交失败或已经激活');
+                alert('广告计划没有通过审核或本来就处于激活状态或者已过期不可以激活');
             }
         });
     }
@@ -223,7 +224,7 @@ function locks(plan_id){
             if (data == 'ok') {
                 document.location.reload();
             } else {
-                alert('提交失败或已经锁定');
+                alert('广告计划本来不是处于激活状态不可以暂停');
             }
         });
     }
@@ -231,9 +232,8 @@ function locks(plan_id){
 function delete_plan(plan_id){
 	var psub = confirm("是否确认删除？");
     if (psub) {
-        $.post("http://adu.phpad.cn/admin.php?m=plan&a=plan_active&", {
-            "plan_id": plan_id,
-            "action":"delete",
+        $.post("SITE_URL?m=AdPlan&a=plan_delete", {
+            "id": plan_id,
         },function(data) {
             if (data == 'ok') {
                 document.location.reload();

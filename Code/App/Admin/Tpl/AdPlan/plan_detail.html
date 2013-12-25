@@ -26,7 +26,7 @@
     	<td>接入网址：</td>
     	<td class="textbox_td">{$AdPlanInfo['track_url']}</td>
     </tr>
-     <tr>
+    <tr>
     	<td>目标网址：</td>
     	<td class="textbox_td"><a href="{$AdPlanInfo['jump_url']}" target="_blank">{$AdPlanInfo['jump_url']}</a></td>
     </tr>
@@ -34,11 +34,11 @@
     	<td >计划LOGO：</td>
     	<td class="textbox_td"><img src="UPLOAD_URL/{$AdPlanInfo['plan_logo']}" width="120" height="45" /></td>
     </tr>
-    <tr>
+   <tr>
 		<td>行业类别：</td>
 		<td class="textbox_td">{$AdPlanInfo['name']}</td>
 	 </tr>	
-	 <tr>
+	<tr>
 		<td>计费形式：</td>
 		<td class="textbox_td">{$AdPlanInfo['pay_type']}</td>
 	</tr>
@@ -46,55 +46,52 @@
 		<td>审核方式：</td>
 		<td>{$AdPlanInfo['plan_check']}</td>
 	</tr>
-		<tr>
+	<tr>
 		<td>结算周期：</td>
 		<td class="textbox_td">{$AdPlanInfo['clearing_form']}</td>
 	</tr>
     <tr>
     	<td>计划周期：</td>
     	<td class="textbox_td">{$AdPlanInfo['start_date']} 至  {$AdPlanInfo['end_date']}</td>
-    </tr>	
+    </tr>
     
-        <tbody id="cps" class="price">
-          <tr>
-              <td>数据返回机制(时间)：</td>
-              <td class="textbox_td">{$AdPlanInfo['cps_data_return']}</td>
-          </tr>
-          <tr>
-              <td>效果认定期：</td>
-              <td class="textbox_td">{$AdPlanInfo['cpa_return_day']}天</td>
-          </tr>
-          <tr>
-              <td>网站主显示价格：</td>
-              <td class="textbox_td">$AdPlanInfo['price_desc']}</td>
-          </tr>
-          <tr>
-        	<td>费用设置：</td>
-        	<td class="textbox_td">
-        		<table style="width:99%;margin:5px auto;text-align:center" id="price_area">
-        		    <tr style="height:27px;"><th>类目标识</th><th>类目名称</th><th>真实价格</th><th>网站主结算价格</th><th>佣金说明</th></tr>
-        		            		    <tr style="background-color:#eee">
-        		        <td>A</td>
-        		        <td>a cateory</td>
-        		        <td>5.00%</td>
-        		        <td>2.00%</td>
-        		        <td></td>       		        
-        		    </tr>
-        		            		    <tr>
-        		      <td>阶梯类型：当日PV</td>
-        		      <td>10000 ~ 0</td>
-        		      <td>7.00%</td>
-        		      <td>2.00%</td>
-        		      <td></td>
-        		    </tr>
-        		            		</table>
-        	</td>
-          </tr>	
-	</tbody>
-		
+    	
 		  
         
                 
+			  <tbody id="cpm" class="price">
+			  <tr>
+				<td>真实价格(千次点击或浏览价格)：</td>
+				<td class="textbox_td">￥{$AdPlanInfo['price']} </td>
+			  </tr>	
+			 <!-- <tr>
+				<td>真实价格描述：</td>
+				<td class="textbox_td">￥100</td>
+			  </tr>	-->
+			  <tr>
+				<td>网站主结算价格：</td>
+				<td class="textbox_td">{$AdPlanInfo['site_master_pay_price']}</td>
+			  </tr>	
+			  <tr>
+				<td>网站主显示价格：</td>
+				<td class="textbox_td">{$AdPlanInfo['site_master_display_price']}</td>
+			  </tr>
+			 <!-- <tr>
+				<td>是否按网站等级：</td>
+				<td class="textbox_td">
+					不分网站等级									</td>
+			  </tr>-->
+					
+			  <tr>
+				<td>单日<if condition="$AdPlanInfo['pay_type'] eq 'cpc'">点击<else />pv</if>限额：</td>
+				<td class="textbox_td">{$AdPlanInfo['max_per_day']}</td>
+			  </tr>	
+			  <tr>
+				<td>单站<if condition="$AdPlanInfo['pay_type'] eq 'cpc'">点击<else />pv</if>限额：</td>
+				<td class="textbox_td">{$AdPlanInfo['max_per_site']}</td>
+			  </tr>
+			  </tbody>			  
+	            
         	
           <tr>
         	<td class="newsite_w155">计划介绍：</td>
@@ -105,24 +102,45 @@
           </tr>
           <tr>
             <td>网站类型定向：</td>
-			<td class="textbox_td">无</td>
+			<td class="textbox_td">
+				<if condition="$AdPlanInfo['directional_site_type'] eq 1">
+					<volist name="AdPlanInfo['directional_site_type_arr']" id="vo">
+						{$vo}&nbsp;&nbsp;
+					</volist>
+				<else />
+				  否
+				</if>
+				
+			</td>
 		</tr>
-		<tr>
+		<!--<tr>
             <td>地区定向：</td>
 			<td class="textbox_td">
 			否	
 			</td>
-		</tr>
+		</tr>-->
 		<tr>
             <td>星期定向：</td>
 			<td class="textbox_td">
-			无	
+				<if condition="$AdPlanInfo['directional_week'] eq 1">
+					<volist name="AdPlanInfo['directional_week_arr']" id="vo">
+						{$vo}&nbsp;&nbsp;
+					</volist>
+				<else />
+				  否
+				</if>
 			</td>
 		</tr>
 		<tr>
             <td>时间定向：</td>
 			<td class="textbox_td">
-			否	
+				<if condition="$AdPlanInfo['directional_time'] eq 1">
+					<volist name="AdPlanInfo['directional_time_arr']" id="vo">
+						{$vo}&nbsp;&nbsp;
+					</volist>
+				<else />
+				  否
+				</if>
 			</td>
 		</tr>    
     </table>

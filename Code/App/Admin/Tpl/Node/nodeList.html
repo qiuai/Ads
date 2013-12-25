@@ -49,7 +49,7 @@
 	        <td>{$item.module}</td>
 	        <td>{$item.action}</td>
 	        <td>{$item.title}</td>
-	        <td><if condition="$item.status eq 1">是<else />否</if></td>
+	        <td><if condition="$item.record eq 1">是<else />否</if></td>
 	        <td>
 	            <a href="SITE_URL?m=Node&a=nodeEdit&id={$item.id}">编辑</a>
 	            <a href="SITE_URL?m=Node&a=delete&id={$item.id}">删除</a>
@@ -65,7 +65,7 @@
 	        <td>{$child.module}</td>
 	        <td>{$child.action}</td>
 	        <td>{$child.title}</td>
-	        <td><if condition="$item.status eq 1">是<else />否</if></td>
+	        <td><if condition="$item.record eq 1">是<else />否</if></td>
 	        <td>
 	            <a href="SITE_URL?m=Node&a=nodeEdit&id={$child.id}">编辑</a>
 	            <a href="SITE_URL?m=Node&a=delete&id={$child.id}">删除</a>

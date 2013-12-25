@@ -1,19 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0052)http://adu.phpad.cn/admin.php?m=report&a=report_plan -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <title></title>
 <link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
 <script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
-<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script><script type="text/javascript" src="STATIC_URL/admin/js/calendar.js"></script><link href="./admin.php_files/calendar-blue.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/calendar.js"></script>
+<link href="STATIC_URL/admin/css/calendar-blue.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="main">
    <div class="body_title">计划报表</div>
 		<div class="listmain">
 <table align="center" class="list" cellspacing="0">
-    <tbody><tr>
+    <tr>
         <td style="border-right:none;">
             <form method="get">
                 <input type="hidden" name="m" value="Report">
@@ -21,7 +21,7 @@
                 计划ID：
                 <input type="text" name="pid" value="{$pid}">
                 选择时间段：
-                <input type="text" name="start_date" id="start_date" class="input_text" size="12" value="20131128">
+                <input type="text" name="start_date" id="start_date" class="input_text" size="12" value="{$start_date}">
                 <script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "start_date",
@@ -29,7 +29,7 @@
                             });
                 </script>
                 -
-                <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="20131128">
+                <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="{$end_date}">
                 <script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "end_date",
@@ -42,28 +42,17 @@
         <td align="right">
             <input type="button" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=report&amp;a=report_plan_export&amp;start_date=20131128&amp;end_date=20131128&#39;" class="button1" value="导出数据">
         </td>
-    </tr>
-    <!--  
-    <tr>
-        <td colspan="2" id="css1" style="font-size:13px;">支付状态：
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=" class="link-checked">全部</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=待支付"  class="link_before_checked">未支付</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=已支付"  class="link_before_checked">已支付</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=异常"  class="link_before_checked">异常</a>
-        </td>
-    </tr>
-    -->
-</tbody></table>		
+</table>		
 <table align="center" cellspacing="0" class="list" style="text-align:center">
-	<tbody><tr class="tb_title">
+	<tr class="tb_title">
         <td>计划名称</td>
         <td>计划类型</td>
         <td>IP</td>
         <td>PV</td>
         <td>点击量</td>
         <td>CTR</td>
-        <td>CPS效果数</td>      
-        <td>CPA效果数</td> 
+        <td>CPM效果数</td>      
+        <td>CPC效果数</td> 
         <td>广告费</td>     
         <td>盈利</td>
     </tr>
@@ -71,11 +60,12 @@
     <if condition="$list">
     <Volist name='list' id='vo'>
    	<tr>
-        <td>{$vo.uid}</td>
+        <td>{$vo.plan_name}</td>
+        <td>{$vo.name}</td>
         <td>{$vo.ip}</td>
         <td>{$vo.pv}</td>
         <td>{$vo.click}</td>
-        <td><?php echo 'CTR'; ?></td>
+        <td><?php echo sprintf("%.2f", (intval($vo['click'])/intval($vo['impressions']))); ?></td>
         <td>{$vo.cpm}</td>      
         <td>{$vo.cpc}</td> 
         <td>{$vo.real_income}</td>     
@@ -89,7 +79,7 @@
    	</if>
    	
 </table>
-<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr"><span>共0 条记录 1/0 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="page_first" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=1">首页</a>&nbsp;&nbsp;<a class="page_prev" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=0">上一页</a>&nbsp;&nbsp;<a class="page_next" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=2">下一页</a>&nbsp;&nbsp;<a class="page_last" href="http://adu.phpad.cn/admin.php?m=report&a=report_plan&page=0">尾页</a>&nbsp;&nbsp;</div></div>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div></div>
 </div>
 </div>
 

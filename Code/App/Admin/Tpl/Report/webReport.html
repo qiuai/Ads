@@ -23,7 +23,7 @@
                 UID：
                 <input type="text" name="uid" value={$uid}>
                 选择时间段：
-                <input type="text" name="start_date" id="start_date" class="input_text" size="12" value="{:date('Ymd')}">
+                <input type="text" name="start_date" id="start_date" class="input_text" size="12" value="{$start_date}">
                 <script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "start_date",
@@ -31,7 +31,7 @@
                             });
                 </script>
                 -
-                <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="{:date('Ymd')}">
+                <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="{$end_date}">
                 <script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "end_date",
@@ -45,16 +45,6 @@
             <input type="button" onclick="location.href=&#39;http://adu.phpad.cn/admin.php?m=report&amp;a=report_web_export&amp;start_date=20131128&amp;end_date=20131128&#39;" class="button1" value="导出数据">
         </td>
     </tr>
-    <!--  
-    <tr>
-        <td colspan="2" id="css1" style="font-size:13px;">支付状态：
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=" class="link-checked">全部</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=待支付"  class="link_before_checked">未支付</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=已支付"  class="link_before_checked">已支付</a>
-            <a href="http://adu.phpad.cn/admin.php?m=report_finance&a=index&status=异常"  class="link_before_checked">异常</a>
-        </td>
-    </tr>
-    -->
 </table>		
 <table align="center" cellspacing="0" class="list" style="text-align:center">
 	<tr class="tb_title">
@@ -76,7 +66,7 @@
         <td>{$vo.ip}</td>
         <td>{$vo.pv}</td>
         <td>{$vo.click}</td>
-        <td><?php echo 'CTR'; ?></td>
+        <td><?php echo sprintf("%.2f", (intval($vo['click'])/intval($vo['impressions']))); ?></td>
         <td>{$vo.cpm}</td>      
         <td>{$vo.cpc}</td> 
         <td>{$vo.real_income}</td>     
