@@ -193,14 +193,24 @@ class AdManageAction  extends CommonAction{
 	 * @CreateDate: 2013-12-3 下午4:15:02
 	 */
 	public function add(){
-				
+		
 		// 查询计划列表的信息
 		$adPlan = M('AdPlan');
-		$adPlanInfo = $adPlan->where('plan_status in (1,2)')->field('id,plan_name')->select();
-						
-		// 数据分配到前端模版
-		$this->assign('adPlanInfo',$adPlanInfo);
-		
+		if($_GET['pid']){
+			$_GET['pid'] = intval($_GET['pid']);
+			
+			$adPlanInfo = $adPlan->where("id = ".$_GET['pid'])->find();
+			if($adPlanInfo['plan_status'] != 2 ){ // 说明计划不再激活状态 不可以添加广告
+					
+				$this->error('广告计划不在激活状态中不可以添加广告',C('SITE_URL')."?m=AdPlan&a=index");
+			}else{
+				$this->assign("pid",$_GET['pid']);
+			}
+		}else{						
+			$adPlanInfo = $adPlan->where('plan_status = 2')->field('id,plan_name')->select();
+			// 数据分配到前端模版
+			$this->assign('adPlanInfo',$adPlanInfo);
+		}
 		// 调用函数把广告展示形式列表数据分配到前端
 		$this->dealSizeTypeInfo();
 		//dump($adPlanInfo);
@@ -384,8 +394,10 @@ class AdManageAction  extends CommonAction{
 	 * @CreateDate: 2013-12-14 下午3:00:31
 	 */
 	public function doAdd(){
+				
+		// 处理添加广告数据前对数据的处理
+		$this->dealAddData();
 		
-	
 		// 创建数据库对象资源
 		$adManage = D('AdManage');
 		
@@ -444,6 +456,28 @@ class AdManageAction  extends CommonAction{
 			}else{
 				$this->error("数据添加失败",C('SITE_URL')."?m=".$this->actionName.'&a=add');
 			}							
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * 处理广告投放前的数据
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-25 上午9:55:05
+	 */
+	private function dealAddData(){
+		$_POST['pid'] = intval($_POST['pid']);
+		
+		// 查询计划是否处于投放中
+		$adPlan = M('AdPlan');
+		$adPlanInfo = $adPlan->where("id = ".$_POST['pid']." and plan_status = 2")->find();
+		if(!$adPlanInfo){
+			if(!$_POST['adPlanFlag']){
+				$this->error("当前广告计划不存在或者不是处于激活状态不能添加广告",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+			}else{
+				$this->error("当前广告计划不存在或者不是处于激活状态不能添加广告",C('SITE_URL')."?m=".$this->actionName.'&a=add&pid='.$_POST['pid']);
+			}
 		}
 		
 	}
