@@ -18,132 +18,103 @@ class SiteWebAction extends CommonAction {
     public function index(){ 
 		$this		->assign("title","网站列表");
 		$st 		= M('site');
-		import('ORG.Util.Page');
-		$count		= $st->count();
-		$Page     	= new Page($count,15);
-		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
-		$Page 		-> setConfig("first","首页");
-		$Page 		-> setConfig("last", "尾页");
-		$Page 		-> setConfig("prev","上一页");
-		$Page 		-> setConfig("next","下一页");
-		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
-		$show     	= $Page->show();
-		// 一页时分页不显示
-		if($count<16){
-			$show 	= '';
-		}
-		$site     	= $st->order('id')->page($nowPage.','.$Page->listRows)->select();
-		// 创建网站分类对象
+		$site		= $this->memberPage($st, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$stp 		= M("site_type");
 		foreach($site as $key =>$val){
-			$sitetype= $stp->where("id=".$val["site_type"])->select();
-			$site[$key]["code_name_zh"]=$sitetype[0]["code_name_zh"];//显示网站类型
+			$sitetype= $stp->where("id=".$val["site_type"])->select(); // 网站类型，对应site_type表id
+			$site[$key]["code_name_zh"]=$sitetype[0]["code_name_zh"]; // 显示网站类型
 		}
-		$this		->assign('page',$show);
-		$this		->assign('count',$count);
 		$this		->assign("site",$site);
 		$this		->display();
     }
 	// 新增网站
-	public function site_add(){
-		$this->assign("title","新增网站");
-		$this->display();
+	public function siteAdd(){
+		$this		->assign("title","新增网站");
+		$site_type	= M("site_type");
+		$site		= $site_type->select(); // 获取网站类型
+		$this		->assign("site",$site);
+		$this		->display();
 	}
+	// 处理新增网站
 	public function addCheck(){
-		$this->assign("title","新增网站");
-		// 创建数据库对象
+		$this				->assign("title","新增网站");
 		$site 				= M('site');
-		$site->site_name	= $_POST["site_name"];
-		$site->site_domain	= $_POST["site_domain"];
-		$site->site_type	= $_POST["site_type"];
-		$site->description	= $_POST["description"];
-		$site->uid			= 300200;
-		$site->pr			= 0;
-		$site->weight		= 0;
-		$site->rank			= 0;
-		$site->register		= 0;
-		$site->addtime		= time();
-		// 往数据库中添加
-		$flag = $site->add();
-		if($flag){
-			$this->success('数据添加成功','SITE_URL/?m=SiteWeb&a=index');
+		$data["site_name"]	= $_POST["site_name"]; // 网站名称
+		$data["site_domain"]= $_POST["site_domain"]; // 网站域名
+		$data["site_type"]	= $_POST["site_type"]; // 网站类型，对应site_type表id
+		$data["description"]= $_POST["description"]; // 网站简介
+		$data["uid"]		= $_SESSION[C("WEB_AUTH_KEY")]; // 网站主ID
+		$data["addtime"]	= time(); // 添加时间
+		if(empty($data["site_name"])){
+			$this			->error("网站名称不能为空！",'WEB_URL/?m=SiteWeb&a=siteAdd');
+		}elseif(empty($data["site_domain"])){
+			$this			->error("网站域名不能为空！",'WEB_URL/?m=SiteWeb&a=siteAdd');
 		}else{
-			$this->error("数据添加失败",'SITE_URL/?m=SiteWeb&a=site_add');
+			$site			->data($data)->add(); // 添加网站
+			$this			->success('网站添加成功！','WEB_URL/?m=SiteWeb&a=index');
 		}
 	}
 	// 编辑网站
-	public function site_edit(){
-		$id 				= (int)($_GET["site_id"]);//dump($id);exit;
-		// 创建数据库对象
-		$site 				= M('site');
-		$siteOld			= $site->where("id =".$id)->select();
-		$this				->assign("siteOld",$siteOld);
+	public function siteEdit(){
+		$id 				= (int)($_GET["site_id"]);
+		$st 				= M('site');
+		$site				= $st->where("id =".$id)->select();
+		$stp				= M("site_type");
+		$site_type			= $stp->select();
+		$this				->assign("site",$site);
+		$this				->assign("site_type",$site_type);
 		$this				->display();
 	}
+	// 处理编辑网站
 	public function editCheck(){
-		// 创建数据库对象
 		$site 	 			= M('site');
-		$st['id']			= $_POST["site_id"];
-		$st['site_name']	= $_POST["site_name"];
-		$st['site_domain']	= $_POST["site_domain"];
-		$st['site_type']	= $_POST["site_type"];
-		$st['description']	= $_POST["description"];
-		// 更改数据库数据
-		$site->where("id =".$_POST["site_id"])->data($st)->save();
-		$this->success('数据更改成功','SITE_URL/?m=SiteWeb&a=index');
+		$data['id']			= (int)($_POST["site_id"]);
+		$data['site_name']	= $_POST["site_name"];
+		$data['site_domain']= $_POST["site_domain"];
+		$data['site_type']	= $_POST["site_type"];
+		$data['description']= $_POST["description"];
+		if(empty($data["site_name"])){
+			$this			->error("网站名称不能为空！",'WEB_URL/?m=SiteWeb&a=siteEdit&site_id='.$data['id']);
+		}elseif(empty($data["site_domain"])){
+			$this			->error("网站域名不能为空！",'WEB_URL/?m=SiteWeb&a=siteEdit&site_id='.$data['id']);
+		}else{
+			$site			->where("id =".$data['id'])->data($data)->save(); // 编辑网站
+			$this			->success('网站更改成功！','WEB_URL/?m=SiteWeb&a=index');
+		}
 	}
 	// 删除网站
-	public function site_delete(){
+	public function siteDelete(){
 		$id		= (int)($_GET["site_id"]);
 		$site 	= M("site");
 		$site	->where("id =".$id)->delete();
-		$this	->success('删除成功','SITE_URL/?m=SiteWeb&a=index');
+		$this	->success('删除成功','WEB_URL/?m=SiteWeb&a=index');
 	}
 	// 频道列表
-	public function channel_list(){
-		// 创建数据库对象
+	public function channelList(){
 		$ch			= M('channel');
-		import('ORG.Util.Page');
-		$count		= $ch->count();
-		$Page     	= new Page($count,15);
-		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
-		$Page 		-> setConfig("first","首页");
-		$Page 		-> setConfig("last", "尾页");
-		$Page 		-> setConfig("prev","上一页");
-		$Page 		-> setConfig("next","下一页");
-		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
-		$show     	= $Page->show();
-		if($count<16){
-			$show 	= '';
-		}
-		$channel    = $ch->order('id')->page($nowPage.','.$Page->listRows)->select();
-		$this		->assign('page',$show);
-		$this		->assign('count',$count);
+		$channel	= $this->memberPage($ch, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$this		->assign("channel",$channel);
 		$this		->display();
 	}
 	// 新增频道
-	public function channel_add(){
-		// 创建数据库对象
+	public function channelAdd(){
 		$st 	= M('site');
-		$site	=$st->field("id,site_name")->select();
+		$site	= $st->field("id,site_name")->select(); // 获取id，网站名称
 		$this	->assign("site",$site);
 		$this	->display();
 	}
-	public function  channel_addCheck(){
-		// 创建数据库对象
-		$channel 				= M('channel');
-		$channel->sort			= $_POST["sort"];
-		$channel->sid			= $_POST["site_type"];
-		$channel->name			= $_POST["name"];
-		$channel->status		= $_POST["status"];
-		$channel->desc			= $_POST["desc"];
-		// 往数据库中添加
+	public function  channelAddCheck(){
+		$ch				= M('channel');
+		$data["sort"]			= $_POST["sort"];
+		$data["sid"]			= $_POST["site_type"];
+		$data["name"]			= $_POST["name"];
+		$data["status"]			= $_POST["status"];
+		$data["desc"]			= $_POST["desc"];
 		$flag = $channel->add();
 		if($flag){
-			$this->success('数据添加成功','SITE_URL/?m=SiteWeb&a=channel_list');
+			$this->success('数据添加成功','WEB_URL/?m=SiteWeb&a=channel_list');
 		}else{
-			$this->error("数据添加失败",'SITE_URL/?m=SiteWeb&a=channel_add');
+			$this->error("数据添加失败",'WEB_URL/?m=SiteWeb&a=channel_add');
 		}
 	}
 	// 编辑频道
@@ -170,13 +141,13 @@ class SiteWebAction extends CommonAction {
 		$channel['desc']		= $_POST["desc"];
 		// 往数据库中添加
 		$ch		-> where("id=".$_POST["id"])->data($channel)->save();
-		$this	-> success('更改成功','SITE_URL/?m=SiteWeb&a=channel_list');
+		$this	-> success('更改成功','WEB_URL/?m=SiteWeb&a=channel_list');
 	}
 	// 删除频道
 	public function channel_delete(){
 		$id		= (int)($_GET["channel_id"]);
 		$ch 	= M("channel");
 		$ch		->where("id =".$id)->delete();
-		$this	->success('删除成功','SITE_URL/?m=SiteWeb&a=channel_list');
+		$this	->success('删除成功','WEB_URL/?m=SiteWeb&a=channel_list');
 	}
 }

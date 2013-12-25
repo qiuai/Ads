@@ -28,6 +28,20 @@ class PublicAction extends Action {
         }
 	}
 	/**
+	 * 用户登出
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-24 上午10:16:18
+	 */
+	public function logout(){
+		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
+			session_destroy();
+			$this->redirect('/?m=Public&a=login');
+		}else {
+			$this->error('已经登出！');
+		}
+	}
+	/**
 	 * 检测用户是否登录
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
@@ -114,5 +128,53 @@ class PublicAction extends Action {
 		$type	 =	 isset($_GET['type'])?$_GET['type']:'gif';
 		import("@.ORG.Util.Image");
 		Image::buildImageVerify(4,1,$type);
+	}
+	/**
+	 * 清除缓存
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-23 下午6:09:49
+	 * @param unknown_type $path
+	 */
+	public function clearCache()
+	{
+		header("Content-type: text/html; charset=utf-8");
+		//清文件缓存
+		$dirs = array(ROOT_PATH . '/Data/');
+		@mkdir($dirs,0777,true);
+		//清理缓存
+		foreach($dirs as $value) {
+		  $this->rmdirr($value);
+		}
+		$this->assign('jumpUrl',C('SITE_URL'));
+		$this->success('系统缓存清除成功！');
+	}
+	/**
+	 * 删除文件夹及文件
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-23 下午7:25:26
+	 * @param unknown_type $dirname
+	 * @return boolean
+	 */
+	public function rmdirr($dirname) {
+		if (!file_exists($dirname)) {
+			return false;
+		}
+		if (is_file($dirname) || is_link($dirname)) {
+			return unlink($dirname);
+		}
+		$dir = dir($dirname);
+		if($dir){
+			while (false !== $entry = $dir->read()) {
+				if ($entry == '.' || $entry == '..') {
+					continue;
+				}
+				//递归
+				$this->rmdirr($dirname . DIRECTORY_SEPARATOR . $entry);
+			}
+		}
+		$dir->close();
+		return rmdir($dirname);
 	}
 }

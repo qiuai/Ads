@@ -34,7 +34,7 @@
 					<td><b>手机：</b><span>{$info.mobilephone}</span></td>
 				  </tr>
 				  <tr>
-					<td><b>个人/法人</b>：<span>{$info.user_type}</span></td>
+					<td><b>个人/法人</b>：<span><if condition="$info.legal_status eq 1">法人<else />个人</if></span></td>
 					<td><b>QQ：</b><span>{$info.qq}</span></td>
 				  </tr>
 				  <tr>
@@ -43,7 +43,7 @@
 				  </tr>
 				  <tr>
 					<td><b>身份证号：</b><span>{$info_detail.id_card}</span></td>					
-					<td><b>是否接受邮件：<span><if condition="$info.is_feed">是<else />否</if></span></td>
+					<td><b>是否接受邮件：<span><if condition="$info['is_feed']">是<else />否</if></span></td>
 				  </tr>
 				</tbody></table>
             </div>

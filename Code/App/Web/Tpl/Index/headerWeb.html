@@ -18,21 +18,20 @@
             <li>用户ID：<a href="" class="orange">{$Think.session.authId}</a></li>
             <li>专属媒介：暂无</li>         
             <li class="msg"><a href="http://adu.phpad.cn/center.php?m=sms&a=sms_list" class="orange">站内信</a></li>
-            <li class="last"><a href="SITE_URL?m=Public&a=logout" class="orange">退出</a></li>
+            <li class="last"><a href="WEB_URL?m=Public&a=logout" class="orange">退出</a></li>
         </ul>
     </div>
     <div class="siter_nav">
     	<div class="main_nav clearfix">
         <div class="mn_l fl"></div>
     	<ul class="fl" id="nav_list">
-		
-			<li <if condition="$flag eq 'Index'">class="selected"</if>><a href="/web.php?m=Index&a=index">首页</a></li>
-			<li <if condition="$flag eq 'PlanWeb'">class="selected"</if>><a href="/web.php?m=PlanWeb&a=index">广告计划</a></li>
-			<li <if condition="$flag eq 'ReportWeb'">class="selected"</if>><a href="/web.php?m=ReportWeb&a=index">查看报表</a></li>
-			<li <if condition="$flag eq 'SiteWeb'">class="selected"</if>><a href="/web.php?m=SiteWeb&a=index">网站管理</a></li>
-			<li <if condition="$flag eq 'ZoneWeb'">class="selected"</if>><a href="/web.php?m=ZoneWeb&a=index">代码位管理</a></li>
-			<li <if condition="$flag eq 'FinanceWeb'">class="selected"</if>><a href="/web.php?m=FinanceWeb&a=index">财务管理</a></li>
-			<li <if condition="$flag eq 'Profile'">class="selected"</if>><a href="/web.php?m=Profile">个人信息</a></li>
+			<li <if condition="$flag eq 'Index'">class="selected"</if>><a href="WEB_URL/?m=Index&a=index">首页</a></li>
+			<li <if condition="$flag eq 'PlanWeb'">class="selected"</if>><a href="WEB_URL/?m=PlanWeb&a=index">广告计划</a></li>
+			<li <if condition="$flag eq 'ReportWeb'">class="selected"</if>><a href="WEB_URL/?m=ReportWeb&a=index">查看报表</a></li>
+			<li <if condition="$flag eq 'SiteWeb'">class="selected"</if>><a href="WEB_URL/?m=SiteWeb&a=index">网站管理</a></li>
+			<li <if condition="$flag eq 'ZoneWeb'">class="selected"</if>><a href="WEB_URL/?m=ZoneWeb&a=index">代码位管理</a></li>
+			<li <if condition="$flag eq 'FinanceWeb'">class="selected"</if>><a href="WEB_URL/?m=FinanceWeb&a=index">财务管理</a></li>
+			<li <if condition="$flag eq 'Profile'">class="selected"</if>><a href="WEB_URL/?m=Profile">个人信息</a></li>
 			<li ><a href="#"></a></li>
 		</ul>
         <div class="mn_r fr"></div>
@@ -43,10 +42,10 @@
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-				<li ><a href="/web.php?m=PlanWeb&a=plan_list">计划列表</a></li> 
-				<li ><a href="/web.php?m=PlanWeb&a=plan_mine">我申请的计划</a></li> 
-				<li ><a href="/web.php?m=PlanWeb&a=plan_coupon_my">我的优惠券</a></li> 
-				<li ><a href="/web.php?m=PlanWeb&a=&a=plan_coupon_list">申请优惠券</a></li>            	
+				<li ><a href="WEB_URL/?m=PlanWeb&a=plan_list">计划列表</a></li> 
+				<li ><a href="WEB_URL/?m=PlanWeb&a=plan_mine">我申请的计划</a></li> 
+				<li ><a href="WEB_URL/?m=PlanWeb&a=plan_coupon_my">我的优惠券</a></li> 
+				<li ><a href="WEB_URL/?m=PlanWeb&a=&a=plan_coupon_list">申请优惠券</a></li>            	
             </ul>
             <div class="sn_r fr"></div>
         </div>
@@ -55,11 +54,11 @@
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-				<li ><a href="/web.php?m=ReportWeb&a=report_all">综合报表</a></li> 
-				<li ><a href="/web.php?m=ReportWeb&a=report_cps">CPS明细报表</a></li> 
-				<li ><a href="/web.php?m=ReportWeb&a=report_cpa">CPA明细报表</a></li> 
-				<li ><a href="/web.php?m=ReportWeb&a=report_cpc">CPC明细报表</a></li> 
-				<li ><a href="/web.php?m=ReportWeb&a=report_cpm">CPM明细报表</a></li>            	
+				<li ><a href="WEB_URL/?m=ReportWeb&a=report_all">综合报表</a></li> 
+				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cps">CPS明细报表</a></li> 
+				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cpa">CPA明细报表</a></li> 
+				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cpc">CPC明细报表</a></li> 
+				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cpm">CPM明细报表</a></li>            	
             </ul>
             <div class="sn_r fr"></div>
         </div>
@@ -68,10 +67,10 @@
 		 <div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-				<li ><a href="/web.php?m=SiteWeb&a=index">网站列表</a></li> 
-				<li ><a href="/web.php?m=SiteWeb&a=site_add">新增网站</a></li> 
-				<li ><a href="/web.php?m=SiteWeb&a=channel_list">频道列表</a></li> 
-				<li ><a href="/web.php?m=SiteWeb&a=channel_add">新增频道</a></li> 
+				<li ><a href="WEB_URL/?m=SiteWeb&a=index">网站列表</a></li> 
+				<li ><a href="WEB_URL/?m=SiteWeb&a=siteAdd">新增网站</a></li> 
+				<li ><a href="WEB_URL/?m=SiteWeb&a=channelList">频道列表</a></li> 
+				<li ><a href="WEB_URL/?m=SiteWeb&a=channelAdd">新增频道</a></li> 
             </ul>
             <div class="sn_r fr"></div>
         </div>
@@ -80,8 +79,8 @@
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-                <li ><a href="/web.php?m=ZoneWeb&a=index">代码位管理</a></li> 
-				<li ><a href="/web.php?m=ZoneWeb&a=zone_add">新增代码位</a></li>      	
+                <li ><a href="WEB_URL/?m=ZoneWeb&a=index">代码位管理</a></li> 
+				<li ><a href="WEB_URL/?m=ZoneWeb&a=zone_add">新增代码位</a></li>      	
             </ul>
             <div class="sn_r fr"></div>
         </div>
@@ -90,10 +89,10 @@
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-				<li><a href="/web.php?m=FinanceWeb&a=index">提现明细</a></li> 
-				<li><a href="/web.php?m=FinanceWeb&a=financePay">申请提现</a></li> 
-				<li><a href="/web.php?m=FinanceWeb&a=financeDetail">结算明细</a></li> 
-				<li><a href="/web.php?m=FinanceWeb&a=financeBank">银行信息</a></li>
+				<li><a href="WEB_URL/?m=FinanceWeb&a=index">提现明细</a></li> 
+				<li><a href="WEB_URL/?m=FinanceWeb&a=financePay">申请提现</a></li> 
+				<li><a href="WEB_URL/?m=FinanceWeb&a=financeDetail">结算明细</a></li> 
+				<li><a href="WEB_URL/?m=FinanceWeb&a=financeBank">银行信息</a></li>
             </ul>
             <div class="sn_r fr"></div>
         </div>
@@ -102,11 +101,8 @@
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-				<li ><a href="/web.php?m=Profile">个人信息</a></li> 
-				<li ><a href="/web.php?m=Profile&a=profilePassword">修改密码</a></li> 
-				<!-- <li ><a href="/web.php?m=InfoWeb&a=info_orderlist">我的兑换订单</a></li> 
-				<li ><a href="/web.php?m=InfoWeb&a=info_address">收货地址管理</a></li> 
-				<li ><a href="/web.php?m=InfoWeb&a=info_goods">兑换物品</a></li> -->			
+				<li ><a href="WEB_URL/?m=Profile">个人信息</a></li> 
+				<li ><a href="WEB_URL/?m=Profile&a=profilePassword">修改密码</a></li> 		
             </ul>
             <div class="sn_r fr"></div>
         </div>
