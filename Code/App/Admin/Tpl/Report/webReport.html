@@ -66,7 +66,7 @@
         <td>{$vo.ip}</td>
         <td>{$vo.pv}</td>
         <td>{$vo.click}</td>
-        <td><?php echo 'CTR'; ?></td>
+        <td><?php echo sprintf("%.2f", (intval($vo['click'])/intval($vo['impressions']))); ?></td>
         <td>{$vo.cpm}</td>      
         <td>{$vo.cpc}</td> 
         <td>{$vo.real_income}</td>     

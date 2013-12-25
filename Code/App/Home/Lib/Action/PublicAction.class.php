@@ -93,16 +93,14 @@ class PublicAction extends CommonAction {
                 return $info;
             }
             $_SESSION[C('MEMBER_AUTH_KEY')]	=	$authInfo['id'];
-            $_SESSION['email']	=	$authInfo['email'];
-            $_SESSION['loginUserName']		=	$authInfo['username'];
-            $_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
-            $_SESSION['login_count']	=	$authInfo['username'];
             if($authInfo['user_type']=='web') {
                 $_SESSION[C('WEB_AUTH_KEY')]	=	$authInfo['id'];
-                unset($_SESSION[C('ADV_AUTH_KEY')]);
+                $_SESSION['loginWebName']		=	$authInfo['username'];
+//                 unset($_SESSION[C('ADV_AUTH_KEY')]);
             }else{
             	$_SESSION[C('ADV_AUTH_KEY')]	=	$authInfo['id'];
-            	unset($_SESSION[C('WEB_AUTH_KEY')]);
+            	$_SESSION['loginAdvName']		=	$authInfo['username'];
+//             	unset($_SESSION[C('WEB_AUTH_KEY')]);
             }
             //保存登录信息
             $User	=	M('Member');
@@ -185,6 +183,72 @@ class PublicAction extends CommonAction {
 		}else{
 			$this->error($info['error']);
 		}
+	}
+	/**
+	 * 忘记密码，返回新密码
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-25 下午1:33:55
+	 */
+	public function forgetPwd(){
+		if($this->isPost()){
+			$username = $_POST['username'];
+			$match = '/^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$/i';
+			if (preg_match($match,$username)){
+				// 判断用户名是否存在
+				$model = M("Member");
+				$member = $model->field('id,real_name')->where("username = '$username'")->find();
+				if(empty($member)){
+					echo "用户名不存在！";
+				}else{
+					// 生成新密码
+					$num = 8;	// 新密码长度
+					$newPwd = $this->generatePwd($num);
+					
+					// 修改原密码
+					$member['password'] = $this->pwdHash($newPwd);	
+					if($model->save($member)){
+						$Email = A('Admin://Email');
+						// 发送邮件
+						$title = "找回密码";
+						$content = "您的新密码是：" . $newPwd . "【" . $num . "位】,登录后请修改新密码！";
+						if($Email->thinkSendEmail($username, $member['real_name'], $title, $content)){
+							$this->assign('jumpUrl',C('HOME_URL'));
+							$this->success('密码已发送，请查收！');
+						}else{
+							$this->success('密码发送失败，请重新找回！');
+						}
+					}
+				}
+			}else{
+				echo "邮箱格式不正确！";
+			}
+		}else{
+			$this->display();
+		}
+	}
+	/**
+	 * 随机生成密码
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-25 下午2:04:32
+	 * @param unknown_type $length
+	 */
+	public function generatePwd( $length = 8 ) {
+		// 密码字符集，可任意添加你需要的字符
+		$chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	
+		$password = '';
+		for ( $i = 0; $i < $length; $i++ )
+		{
+			// 这里提供两种字符获取方式
+			// 第一种是使用 substr 截取$chars中的任意一位字符；
+			// 第二种是取字符数组 $chars 的任意元素
+			// $password .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+			$password .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+		}
+	
+		return $password;
 	}
 	/**
 	 * 验证码
