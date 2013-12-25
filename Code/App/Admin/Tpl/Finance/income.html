@@ -33,13 +33,13 @@
                                 ifFormat       :    "%Y-%m-%d",
                             });
                         </script>
-                    　广告计划ID：<input type="text" name="plan_id" />
-                   　 网站主UID：<input type="text" name="uid" />
+                    　广告计划ID：<input type="text" name="plan_id" value="{$plan_id}"/>
+                   　 网站主UID：<input type="text" name="uid" value="{$uid}"/>
                     　<input type="submit" value="查询" class="button" />
                 </td>
                 <td align="right">
 					<a style="font-size:11px;color:#000;" href="SITE_URL/?m=Finance&a=reportIncomeListRule">定制报表</a>
-                    <input type="button" value="导出报表" class="button1" onclick="location.href='SITE_URL/?m=Finance&a=incomeExport'" />
+                    <input type="button" value="导出报表" class="button1" onclick="location.href='SITE_URL/?m=Finance&a=incomeExport&status={$status}&start_date={$start_date}&end_date={$end_date}&uid={$uid}&plan_id={$plan_id}'" />
                 </td>
             </tr>
             <tr>
@@ -63,8 +63,10 @@
         <td>IP</td>
         <td>PV</td>
         <td>CLICK</td>
+		<!--
         <td>CPS</td>
         <td>CPA</td>
+		-->
         <td>业绩状态</td>
         <td>结算状态</td>
         <td>操作</td>
@@ -79,8 +81,10 @@
         <td>{$vo.ip}</td>
         <td>{$vo.pv}</td>
         <td>{$vo.click}</td>
+		<!--
         <td>{$vo.cps}</td>
         <td>{$vo.cpa}</td>
+		-->
         <td>{$vo.performance_status}</td>
         <td>{$vo.settlement_status}</td>
         <td><a href="SITE_URL/?m=Finance&a=incomeDo&id={$vo.id}"><if condition="$vo.frozen_status eq 1">冻结</if></a></td>
@@ -88,7 +92,7 @@
 	</volist>
 </table>
 </div>
-<div class="admin_do index_page" style="text-align:center;"></div>
+<div class="admin_do index_page" style="text-align:center;">{$page}</div>
 </div>
 </body>
 </html>

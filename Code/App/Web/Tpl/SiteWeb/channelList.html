@@ -32,22 +32,23 @@
 						<th>操作</th>
 					  </tr>
 					  <volist name="channel" id="vo">
-					  <tr class="color_td">
+					  <tr>
 						<td>{$vo.id}</td>
 						<td>{$vo.name}</td>
 						<td>{$vo.sort}</td>
 						<td><if condition="$vo.status eq 0">启用<else />不启用</if></td>
 						<td>{$vo.desc}</td>
 						<td>
-							<a href="WEB_URL/?m=SiteWeb&a=channel_edit&channel_id={$vo.id}" class="blue">修改</a>&nbsp;|&nbsp;
-							<a href="WEB_URL/?m=SiteWeb&a=channel_delete&channel_id={$vo.id}" class="red" onclick="return confirm('确认删除网站？');">删除</a>
+							<a href="WEB_URL/?m=SiteWeb&a=channelEdit&channel_id={$vo.id}" class="blue">修改</a>&nbsp;|&nbsp;
+							<a href="WEB_URL/?m=SiteWeb&a=channelDelete&channel_id={$vo.id}" class="red" onclick="return confirm('确认删除网站？');">删除</a>
 						</td>
-					  <tr>
+					  </tr>
 					  </volist>
-					<td class="br_none" colspan="12">
-						<div class='page_bar fr'>{$page}<div>
-					</td>
-	                </tr>
+					  <tr>
+						<td class="br_none" colspan="12">
+							<div class='page_bar'>{$page}<div>
+						</td>
+					</tr>
 					</tbody>
 				  </table>
 			</div>

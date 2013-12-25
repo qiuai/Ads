@@ -11,14 +11,14 @@
 				<table class="table_list">
 				  <tbody>
 				  <tr>
-				  <form action="SITE_URL/?m=FinanceWeb&a=index" method="post">
+				  <form action="WEB_URL/?m=FinanceWeb&a=index" method="post">
 					<td colspan="8" style="padding:10px;" class="notb">
 					<span class="fl" style="margin-left:10px;">支付状态：</span>
 					<select name="status" class="fl">
 						<option value="">选择状态</option>
-						<option value="1">未支付</option>
-						<option value="2">已支付</option>
-						<option value="3">异常</option>
+						<option value="1" <if condition="$status eq 1">selected</if>>未支付</option>
+						<option value="2" <if condition="$status eq 2">selected</if>>已支付</option>
+						<option value="3" <if condition="$status eq 3">selected</if>>异常</option>
 					</select>
 					<input type="submit" class="report_searchbtn fr" value="">
 					</td>
@@ -48,9 +48,7 @@
 				  </volist>
 				  <tr>
 					<td colspan="8">
-						<div class='page_bar fr'>
-						<!--分页-->
-						</div>
+						<div class='page_bar'>{$page}</div>
 					</td>
 				</tr>
 				</tbody>

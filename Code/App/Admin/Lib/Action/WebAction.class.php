@@ -32,6 +32,7 @@ class WebAction extends CommonAction {
 				$site[$key]["code_name_zh"]= $value["code_name_zh"];
 			}
 		}
+		$this		->assign("status",$status);
 		$this		->assign("site",$site);
 		$this		->display();
 	}
@@ -67,52 +68,59 @@ class WebAction extends CommonAction {
 		$this		->assign("site",$site);
 		$this		->display(index); // 调用首页模板
 	}
-	// 导出网站列表报表
+	// 导出网站列表
 	public function siteExport(){
-		// 输出的文件类型为excel
-		header("Content-type:application/vnd.ms-excel");
-		// 提示下载
-		header("Content-Disposition:attachement;filename=网站列表_".date("Y-m-d").".xls");
-		// 查询提现申请表
+		// 报表名称
+		$filename		= "网站列表_".date("Y-m-d");
+		// 输出内容
 		$st				= M("site");
 		$sp				= M("site_type");
-		$site	 	  	= $st->select();
-		$ReportArr	  	= array();
+		$status	  		= (int)($_GET["status"]); // 获取状态信息
+		if(empty($status)){ // 按关键字搜索
+			$content	= $_GET["content"]; // 搜索关键字
+			$condition	= $_GET["condition"]; // 搜索类型，网站id，网站域名，网站主id
+			if(empty($content)){
+				$where 		= "1"; // 全部状态
+			}else{
+				switch($condition){
+					case "site_id": // 按网站ID查询
+						$where = "id =".$content;
+					break;
+					case "site_domain": // 按网站域名查询
+						$where = "site_domain ='".$content."'";
+					break;
+					case "uid": // 按用户ID查询
+						$where = "uid =".$content;
+					break;
+					default:
+					break;
+				}
+			}
+		}else{ // 按网站状态搜索
+			$where		= "status=".$status; 
+		}
+		$site	 	  	= $st->where($where)->select();
+		$ReportArr	  	= array(); // 组建内容输出数组
 		// 将关系数组转换成索引数组
 		foreach($site as $key =>$val){
-			$ReportArr[$key][]	=	$val["id"]; // 网站ID
-			$ReportArr[$key][]	=	$val["site_name"]; // 网站名称
-			$ReportArr[$key][]	=	$val["site_domain"]; // 网站域名
+			$ReportArr[$key][]	= $val["id"]; // 网站ID
+			$ReportArr[$key][]	= $val["site_name"]; // 网站名称
+			$ReportArr[$key][]	= $val["site_domain"]; // 网站域名
 			$type=$sp->where("id=".$val["site_type"])->field("code_name_zh")->select(); // 查询网站类型
-			$ReportArr[$key][]	=	$type[0]["code_name_zh"]; // 网站类型
-			$ReportArr[$key][]	=	$val["uid"]; // 网站主ID
-			$status			  	= 	C("SITE_STATUS"); // 获取网站状态
-			$ReportArr[$key][]	=	$status[$val["status"]]; // 网站状态		
+			$ReportArr[$key][]	= $type[0]["code_name_zh"]; // 网站类型
+			$ReportArr[$key][]	= $val["uid"]; // 网站主ID
+			$status			  	= C("SITE_STATUS"); // 获取网站状态
+			$ReportArr[$key][]	= $status[$val["status"]]; // 网站状态		
 		}
-		// 报表数据
-		$ReportContent = '';
-		$num1 = count($ReportArr);
-		for($i=0;$i<$num1;$i++){
-			$num2 = count($ReportArr[$i]);
-			for($j=0;$j<$num2;$j++){
-				// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
-				$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
-			}
-			// 最后连接\n 表示换行
-			$ReportContent .= "\n";
-		}
-		$t[]="网站ID";// 判断是否要导出网站ID信息 
-		$t[]="网站名称";// 判断是否要导出网站名称信息
-		$t[]="网站域名";// 判断是否要导出网站域名信息
-		$t[]="网站类型";// 判断是否要导出网站类型信息
-		$t[]="网站主ID";// 判断是否要导出网站主ID信息
-		$t[]="网站状态";// 判断是否要导出网站状态信息
-		for($k=0;$k<count($t);$k++){
-			// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
-			$ReportTitle .= '"'.$t[$k].'"'."\t";
-		}
-		// 输出即提示下载
-		echo $ReportTitle."\n".$ReportContent;
+		$HeaderArr		= array();    // 组建excel表头数组
+		$HeaderArr[]	= "网站ID";   // 判断是否要导出网站ID信息 
+		$HeaderArr[]	= "网站名称"; // 判断是否要导出网站名称信息
+		$HeaderArr[]	= "网站域名"; // 判断是否要导出网站域名信息
+		$HeaderArr[]	= "网站类型"; // 判断是否要导出网站类型信息
+		$HeaderArr[]	= "网站主ID"; // 判断是否要导出网站主ID信息
+		$HeaderArr[]	= "网站状态"; // 判断是否要导出网站状态信息
+		// 下载excel表方法
+		$this->downloadExcel($filename,$ReportArr,$HeaderArr);
 	}
 	// 删除网站
 	public function siteDelete(){
@@ -238,14 +246,28 @@ class WebAction extends CommonAction {
 	}
 	// 导出代码位报表
 	public function zoneExport(){
-		// 输出的文件类型为excel
-		header("Content-type:application/vnd.ms-excel");
-		// 提示下载
-		header("Content-Disposition:attachement;filename=代码位列表_".date("Y-m-d").".xls");
-		// 查询代码位表
+		// 报表名称
+		$filename		= "代码位列表_".date("Y-m-d");
+		// 下载内容
 		$zo				= M("zone");
 		$ad_size		= M("ad_size");
-		$zone	 	  	= $zo->select();
+		// 搜索条件
+		$content		= (int)($_GET["content"]); // 查询条件
+		$condition		= $_GET["condition"]; // 查询条件类型
+		switch($condition){
+			case "zone_id": // 按网站ID查询
+				$where	= "id =".$content;
+			break;
+			case "site_id": // 按网站域名查询
+				$where	= "sid =".$content;
+			break;
+			case "uid": // 按用户ID查询
+				$where	= "uid =".$content;
+			break;
+			default:
+			break;
+		}
+		$zone	 	  	= $zo->where($where)->select();
 		$ReportArr	  	= array();
 		$ad_pay_type	= C("AD_PAY_TYPE"); // 广告计费类型
 		$ad_size_type	= C("AD_SIZE_TYPE"); // 获取代码位类型 
@@ -261,31 +283,16 @@ class WebAction extends CommonAction {
 			$ReportArr[$key][]	=	$ad[0]["width"]."X".$ad[0]["height"]; // 代码位尺寸
 			$ReportArr[$key][]	=	$val["auto_ad"]; // 智能广告
 		}
-		// 报表数据
-		$ReportContent = '';
-		$num1 = count($ReportArr);
-		for($i=0;$i<$num1;$i++){
-			$num2 = count($ReportArr[$i]);
-			for($j=0;$j<$num2;$j++){
-				// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
-				$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
-			}
-			// 最后连接\n 表示换行
-			$ReportContent .= "\n";
-		}
-		$t[]="代码位ID";// 判断是否要导出代码位ID信息 
-		$t[]="代码位名称";// 判断是否要导出代码位名称信息
-		$t[]="所属网站ID";// 判断是否要导出所属网站ID信息
-		$t[]="所属用户ID";// 判断是否要导出所属用户ID信息
-		$t[]="计费类型";// 判断是否要导出计费类型信息
-		$t[]="展示方式";// 判断是否要导出展示方式信息
-		$t[]="尺寸";// 判断是否要导出尺寸信息
-		$t[]="智能广告";// 判断是否要导出智能广告信息
-		for($k=0;$k<count($t);$k++){
-			// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
-			$ReportTitle .= '"'.$t[$k].'"'."\t";
-		}
-		// 输出即提示下载
-		echo $ReportTitle."\n".$ReportContent;
+		$HeaderArr		= array();		// 组建excel表头数组
+		$HeaderArr[]	= "代码位ID";	// 判断是否要导出代码位ID信息 
+		$HeaderArr[]	= "代码位名称";	// 判断是否要导出代码位名称信息
+		$HeaderArr[]	= "所属网站ID";	// 判断是否要导出所属网站ID信息
+		$HeaderArr[]	= "所属用户ID";	// 判断是否要导出所属用户ID信息
+		$HeaderArr[]	= "计费类型";	// 判断是否要导出计费类型信息
+		$HeaderArr[]	= "展示方式";	// 判断是否要导出展示方式信息
+		$HeaderArr[]	= "尺寸";		// 判断是否要导出尺寸信息
+		$HeaderArr[]	= "智能广告";	// 判断是否要导出智能广告信息
+		// 下载Excel方法
+		$this->downloadExcel($filename,$ReportArr,$HeaderArr);
 	}
 }

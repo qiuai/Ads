@@ -594,4 +594,38 @@ class CommonAction extends Action {
     		unlink(ROOT_PATH."/../Uploadfile/".$filePath);
     	}
     }
+
+	/**
+     * 下载Excel报表
+     *
+     * @author Xieyihong <zhts_nimei@163.com>
+     * @CreateDate: 2013-12-24 下午3:43:41
+	 * $filename    报表名称
+	 * $ReportArr 	输出内容，为二维数组
+	 * $HeaderArr   表头，为一维数组
+     */
+	public function downloadExcel($filename,$ReportArr,$HeaderArr){
+		//输出的文件类型为excel
+		header("Content-type:application/vnd.ms-excel");
+		//提示下载
+		header("Content-Disposition:attachement;filename=".$filename.".xls");
+		//报表数据
+		$ReportContent = '';
+		$num1 = count($ReportArr);
+		for($i=0;$i<$num1;$i++){
+			$num2 = count($ReportArr[$i]);
+			for($j=0;$j<$num2;$j++){
+				//ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+				$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
+			}
+			//最后连接\n 表示换行
+			$ReportContent .= "\n";
+		}
+		for($k=0;$k<count($HeaderArr);$k++){
+			// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+			$ReportTitle .= '"'.$HeaderArr[$k].'"'."\t";
+		}
+		//输出即提示下载
+		echo $ReportTitle."\n".$ReportContent;
+	}
 }
