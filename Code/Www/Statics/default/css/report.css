@@ -1,0 +1,57 @@
+/* tables */
+.table-list table {
+	font-family:arial;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+.table-list table thead tr th, .table-list table tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+}
+
+.table-list table thead tr .header {
+	background-image: url(../../image/default/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+.table-list table tbody tr .odd td {
+	background-color:#F0F0F6;
+}
+.table-list table thead tr .headerSortUp {
+	background-image: url(../../image/default/asc.gif);
+}
+.table-list table thead tr .headerSortDown {
+	background-image: url(../../image/default/desc.gif);
+}
+.table-list table thead tr .headerSortDown, .table-list table thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+
+.table-list tr:hover, .table-list table tbody tr:hover{
+    background: none repeat scroll 0 0 #FFFFE1;
+}
+
+/*home*/
+.table_list thead tr th, .table_list tfoot tr th {
+    background: #FDF9F1;
+}
+.table_list thead tr .header {
+	background-image: url(../../image/default/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+.table_list tbody tr .odd td {
+	background-color:#F0F0F6;
+}
+.table_list thead tr .headerSortUp {
+	background-image: url(../../image/default/asc.gif);
+}
+.table_list thead tr .headerSortDown {
+	background-image: url(../../image/default/desc.gif);
+}

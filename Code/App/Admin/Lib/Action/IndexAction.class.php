@@ -196,31 +196,7 @@ class IndexAction extends CommonAction {
 	 * @CreateDate: 2013-12-20 下午1:45:06
 	 */
 	public function tenDaysBefore($uid=''){
-		// 会员报表 
-		if($uid){
-			$where = " and uid = ". intval($uid);
-		}
-		
-		// 查询中心 当日时间或者选择时间
-		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : date('d');
-		
-		// 获取数据
-		$model = M('Income');
-		for($i=9; $i>=0; $i--){
-			$day = mktime(0,0,0,date("m") ,$today-($i+1),date("Y"));
-			$yestoday = mktime(0,0,0,date("m") ,$today-$i,date("Y"));
-			$data = $model->query("select sum(click) as click, sum(pv) as pv, sum(cpm) as cpm, sum(cpc) as cpc, sum(real_income) as income, count(ip) as ip from " . C('DB_PREFIX') . "income where settlement_time < $yestoday and settlement_time >= $day $where");
-			foreach($data[0] as $key=>$value){
-				$data[0][$key] = $value ? $value : 0;
-			}
-			$data[0]['day'] = date('md', $yestoday);
-			$list[] = $data[0];
-		}
-		
-		$json = json_encode($list);
-		
-		$this->assign("chartData", $json);
-		
+		R('Report/tenDaysBefore',array($uid));
 	}
 	/**
 	 * 日历输出
