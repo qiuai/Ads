@@ -20,13 +20,13 @@
     <tbody><tr>
         <td style="border-right:none;">
             <form method="post" action="SITE_URL/?m=Finance&a=index">
-                UID: <input type="text" name="uid">
+                UID: <input type="text" name="uid" value="{$uid}">
                 <input type="submit" value="查询" class="button">
             </form>
         </td>
 			<td align="right">
 			<a style="font-size:11px;color:#000;" href="SITE_URL/?m=Finance&a=withdrawListRule">定制报表</a>
-			<input type="button" onclick="location.href=&#39;SITE_URL/?m=Finance&a=withdrawExport&#39;" class="button1" value="导出数据">
+			<input type="button" onclick="location.href=&#39;SITE_URL/?m=Finance&a=withdrawExport&uid={$uid}&status={$status}&#39;" class="button1" value="导出数据">
         </td>
     </tr>
     <tr>
@@ -66,7 +66,7 @@
 	</volist>
 </tbody>
 </table>
-<div class="admin_do index_page" style="text-align:center;"></div>
+<div class="admin_do index_page" style="text-align:center;">{$page}</div>
 </div>
 </div>
 </body>

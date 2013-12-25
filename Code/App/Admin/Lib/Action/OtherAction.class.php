@@ -17,27 +17,28 @@ class OtherAction extends CommonAction {
     public function index(){
     	$this->display();
 	}
+	// 公告分类列表
+	public function noticeCategoryList(){
+		$noticetype 	= M("notice_type");
+		$category		= $noticetype->select();
+		$this			->assign("category",$category);
+ 		$this			->display();
+	}
 	// 新增公告分类
-	public function notice_category_add(){		
+	public function noticeCategoryAdd(){		
  		$this			->display();
 	}
 	// 处理新增公告分类
-	public function notice_category_save(){
+	public function noticeCategorySave(){
 		$type['pid'] 	= (int)($_POST["pid"]);
 		$type['category_name'] 	= $_POST["category_name"];
 		$category 		= M("notice_type");
 		$category		->data($type)->add();
 		$this			->success("添加成功","SITE_URL/?m=Other&a=notice_category_list");
 	}
-	// 公告分类列表
-	public function notice_category_list(){
-		$noticetype 	= M("notice_type");
-		$category		= $noticetype->select();
-		$this			->assign("category",$category);
- 		$this			->display();
-	}
+	
 	// 编辑公告分类
-	public function notice_category_edit(){
+	public function noticeCategoryEdit(){
 		$id				= (int)($_GET["category_id"]);
 		$noticetype 	= M("notice_type");
 		$category		= $noticetype->where("id=".$id)->select();
@@ -45,7 +46,7 @@ class OtherAction extends CommonAction {
 		$this			->display();
 	}
 	// 处理编辑公告分类
-	public function notice_category_edit_save(){
+	public function noticeCategoryEditSave(){
 		$type['id']		= (int)($_POST['category_id']);
 		$type['pid'] 	= (int)($_POST["pid"]);
 		$type['category_name'] 	= $_POST["category_name"];
@@ -54,14 +55,14 @@ class OtherAction extends CommonAction {
 		$this			->success("添加成功","SITE_URL/?m=Other&a=notice_category_list");
 	}
 	// 删除公告分类
-	public function notice_category_delete(){
+	public function noticeCategoryDelete(){
 		$id				= (int)($_GET["category_id"]);
 		$category 		= M("notice_type");
 		$category		->where("id=".$id)->delete();
 		$this			->success("添加成功","SITE_URL/?m=Other&a=notice_category_list");
 	}
 	// 公告列表
-	public function notice_list(){
+	public function noticeList(){
 		$no			 	= M("notice");
 		$notice			= $no->select();
 		foreach($notice as $key=>$val){
@@ -76,14 +77,14 @@ class OtherAction extends CommonAction {
  		$this			->display();
 	}
 	// 添加公告
-	public function notice_add(){
+	public function noticeAdd(){
 		$no				= M("notice_type");
 		$category		= $no->select();
 		$this			->assign("category",$category);
  		$this			->display();
 	}
 	// 处理添加公告
-	public function notice_save(){
+	public function noticeSave(){
  		$type['title'] 		= $_POST["title"];
  		$type['author'] 	= $_POST["author"];
  		$type['category_id']= (int)($_POST["category_id"]);
@@ -96,7 +97,7 @@ class OtherAction extends CommonAction {
 		$this				->success("添加成功","SITE_URL/?m=Other&a=notice_list");
 	}
 	// 编辑公告
-	public function notice_edit(){
+	public function noticeEdit(){
 		$not			= M("notice_type");
 		$category		= $not->select();
 		$this			->assign("category",$category);
@@ -107,7 +108,7 @@ class OtherAction extends CommonAction {
 		$this			->display();
 	}
 	// 处理编辑公告
-	public function notice_edit_save(){
+	public function noticeEditSave(){
  		$type['id']		= (int)($_POST['notice_id']); //编号
 		$type['title'] 	= $_POST["title"]; //标题
 		$type['author'] = $_POST["author"]; //作者
@@ -120,7 +121,7 @@ class OtherAction extends CommonAction {
 		$this			->success("更改数据成功","SITE_URL/?m=Other&a=notice_list");
 	}
 	// 删除公告
-	public function notice_delete(){
+	public function noticeDelete(){
  		$id				= (int)($_GET["notice_id"]); //得到公告ID
 		$no			 	= M("notice");
 		$no				->where("id=".$id)->delete();

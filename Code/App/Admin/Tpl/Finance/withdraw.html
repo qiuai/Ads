@@ -1,22 +1,42 @@
-<div style="border:1px solid black;margin:15px 50px;padding:20px;width:240px;height:90px">
-	<volist name="member" id="vo">
-    <p style="margin:5px 0px 10px 0px;">账户信息</p>
-    <p style="margin:5px 0px;">　　银行：<span id="bank">{$vo.bank_name}</span></p>
-    <p style="margin:5px 0px;">　　户头：<span id="account">{$vo.card_author}</span></p>
-    <p style="margin:5px 0px;">　　帐号：<span id="accounts">{$vo.card_number}</span></p>
-	</volist>
-</div>
-<form id="widthdraw_do" action="SITE_URL/?m=Finance&a=withdrawDo" method="post">
-    <input type="hidden" name="id" value="{$id}">
-    <p style="margin:10px 0">支付结果：
-		<input type="radio" name="status" value="1" >未支付
-		<input type="radio" name="status" value="2" checked="checked">已支付
-		<input type="radio" name="status" value="3">异常
-	</p>
-    <p style="margin:10px 0">交易单号：<input type="text" name="pay_record" style="width:150px" id="pay_record"><div id="pay_recordTip" class="onShow">请输入正确的交易单号</div></p>
-    <p style="margin:10px 0">备注信息：<input type="text" name="pay_remark" style="width:150px" id="pay_remark"></p>
-    <p style="margin:10px 60px">
-		<input type="submit" class="button" value="确定">　　
-		<input type="reset" class="button" value="重置">
-	</p>
-</form>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet" />
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<div class='body_title'>定制结算明细报表</div>
+			<div class="listmain setting">
+				<div style="border:1px solid #7F9DB9;margin:15px 60px;padding:20px;width:240px;height:90px">
+					<volist name="member" id="vo">
+					<p style="margin:5px 0px 10px 0px;">账户信息</p>
+					<p style="margin:5px 0px;">　　银行：<span id="bank">{$vo.bank_name}</span></p>
+					<p style="margin:5px 0px;">　　户头：<span id="account">{$vo.card_author}</span></p>
+					<p style="margin:5px 0px;">　　帐号：<span id="accounts">{$vo.card_number}</span></p>
+					</volist>
+				</div>
+				<form id="widthdraw_do" action="SITE_URL/?m=Finance&a=withdrawDo" method="post">
+					<input type="hidden" name="id" value="{$id}">
+					<p style="margin:10px 0">支付结果：
+						<input type="radio" name="status" value="1" >未支付
+						<input type="radio" name="status" value="2" checked="checked">已支付
+						<input type="radio" name="status" value="3">异常
+					</p>
+					<p style="margin:10px 0">交易单号：<input type="text" name="pay_record" style="width:150px" id="pay_record"><div id="pay_recordTip" class="onShow">请输入正确的交易单号</div></p>
+					<p style="margin:10px 0">备注信息：<input type="text" name="pay_remark" style="width:150px" id="pay_remark"></p>
+					<p style="margin:10px 60px">
+						<input type="submit" class="button" value="确定">　　
+						<input type="reset" class="button" value="重置">
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

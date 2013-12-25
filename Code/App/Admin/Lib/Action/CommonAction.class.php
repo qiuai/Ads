@@ -625,57 +625,38 @@ class CommonAction extends Action {
     		unlink(ROOT_PATH."/../Uploadfile/".$filePath);
     	}
     }
-    
-    // 导出代码位报表
-    public function zoneExport($zone,$t){
-    	// 输出的文件类型为excel
-    	header("Content-type:application/vnd.ms-excel");
-    	// 提示下载
-    	header("Content-Disposition:attachement;filename=代码位列表_".date("Y-m-d").".xls");
-    	// 查询代码位表
-    	$zo				= M("zone");
-    	$ad_size		= M("ad_size");
-    	$zone	 	  	= $zo->select();
-    	$ReportArr	  	= array();
-    	$ad_pay_type	= C("AD_PAY_TYPE"); // 广告计费类型
-    	$ad_size_type	= C("AD_SIZE_TYPE"); // 获取代码位类型
-    	// 将关系数组转换成索引数组
-    	foreach($zone as $key =>$val){
-    		$ReportArr[$key][]	=	$val["id"]; // 代码位ID
-    		$ReportArr[$key][]	=	$val["name"]; // 代码位名称
-    		$ReportArr[$key][]	=	$val["sid"]; // 所属网站ID
-    		$ReportArr[$key][]	=	$val["uid"]; // 所属用户ID
-    		$ReportArr[$key][]	=	$ad_pay_type[$val["pay_type"]]; // 广告计费类型
-    		$ad					=	$ad_size->where("id=".$val["size"])->select(); // 查询广告尺寸信息
-    		$ReportArr[$key][]	=	$ad_size_type[$ad[0]["size_type"]]; // 代码位类型
-    		$ReportArr[$key][]	=	$ad[0]["width"]."X".$ad[0]["height"]; // 代码位尺寸
-    		$ReportArr[$key][]	=	$val["auto_ad"]; // 智能广告
-    	}
-    	// 报表数据
-    	$ReportContent = '';
-    	$num1 = count($ReportArr);
-    	for($i=0;$i<$num1;$i++){
-    		$num2 = count($ReportArr[$i]);
-    		for($j=0;$j<$num2;$j++){
-    			// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
-    			$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
-    		}
-    		// 最后连接\n 表示换行
-    		$ReportContent .= "\n";
-    	}
-    	$t[]="代码位ID";// 判断是否要导出代码位ID信息
-    	$t[]="代码位名称";// 判断是否要导出代码位名称信息
-    	$t[]="所属网站ID";// 判断是否要导出所属网站ID信息
-    	$t[]="所属用户ID";// 判断是否要导出所属用户ID信息
-    	$t[]="计费类型";// 判断是否要导出计费类型信息
-    	$t[]="展示方式";// 判断是否要导出展示方式信息
-    	$t[]="尺寸";// 判断是否要导出尺寸信息
-    	$t[]="智能广告";// 判断是否要导出智能广告信息
-    	for($k=0;$k<count($t);$k++){
-    		// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
-    		$ReportTitle .= '"'.$t[$k].'"'."\t";
-    	}
-    	// 输出即提示下载
-    	echo $ReportTitle."\n".$ReportContent;
-    }
+
+	/**
+     * 下载Excel报表
+     *
+     * @author Xieyihong <zhts_nimei@163.com>
+     * @CreateDate: 2013-12-24 下午3:43:41
+	 * $filename    报表名称
+	 * $ReportArr 	输出内容，为二维数组
+	 * $HeaderArr   表头，为一维数组
+     */
+	public function downloadExcel($filename,$ReportArr,$HeaderArr){
+		//输出的文件类型为excel
+		header("Content-type:application/vnd.ms-excel");
+		//提示下载
+		header("Content-Disposition:attachement;filename=".$filename.".xls");
+		//报表数据
+		$ReportContent = '';
+		$num1 = count($ReportArr);
+		for($i=0;$i<$num1;$i++){
+			$num2 = count($ReportArr[$i]);
+			for($j=0;$j<$num2;$j++){
+				//ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+				$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
+			}
+			//最后连接\n 表示换行
+			$ReportContent .= "\n";
+		}
+		for($k=0;$k<count($HeaderArr);$k++){
+			// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+			$ReportTitle .= '"'.$HeaderArr[$k].'"'."\t";
+		}
+		//输出即提示下载
+		echo $ReportTitle."\n".$ReportContent;
+	}
 }

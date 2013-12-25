@@ -37,9 +37,22 @@ class AdManageAction  extends CommonAction{
 		
 		// 查询所有的数据
 		$AdManage = D('AdManage');
-
+		$where = 'admanage.show_type = adsize.id';
+		if($_GET['isSearch']){ // 代表是搜索状态
+			$_GET['status'] = intval($_GET['status']);
+			// 组装条件查询的条件
+			if($_GET['status']===0 || $_GET['status'] ){
+				$_GET['status'] = intval($_GET['status']);
+				$where = $where." and admanage.status =".$_GET['status'];
+			}
+		}
+		if($_GET['pid']){
+			$_GET['pid'] = intval($_GET['pid']);
+			$where = $where." and admanage.pid =".$_GET['pid'];
+		}
 		// 查询出所有的信息
-		$AdManageInfo = $AdManage->table(array($this->table_pre.'ad_manage'=>'admanage',$this->table_pre.'ad_size'=>'adsize'))->field('admanage.*,adsize.size_type')->where('admanage.show_type = adsize.id')->select();
+		$AdManageInfo = $this->memberLinkPage($AdManage,$where,5,'id desc',array($this->table_pre.'ad_manage'=>'admanage',$this->table_pre.'ad_size'=>'adsize'),'admanage.*,adsize.size_type');
+		//$AdManageInfo = $AdManage->table(array($this->table_pre.'ad_manage'=>'admanage',$this->table_pre.'ad_size'=>'adsize'))->field('admanage.*,adsize.size_type')->where('admanage.show_type = adsize.id')->select();
 		
 		//$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
 		
@@ -51,9 +64,21 @@ class AdManageAction  extends CommonAction{
 		
 		// 把数据分配到前台模版
 		$this->assign('AdManageInfo',$AdManageInfo);
+		$this->getAdStatusInfo();
 		$this->display();
 	}
 	
+	/**
+	 * 
+	 * 获取广告的所有的状态信息
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-25 下午1:42:49
+	 */
+	private function getAdStatusInfo(){
+		$adStatusInfo = C('AD_STATUS');
+		$this->assign("adStatusInfo",$adStatusInfo);
+		//dump($adPlanStatusInfo);
+	}
 	/**
 	 * 
 	 * 把修改数据插入到数据库
@@ -62,11 +87,20 @@ class AdManageAction  extends CommonAction{
 	 */
 	public function doEdit(){
 		
+		
+		
 		// 创建数据库对象
 		$adManage = D('AdManage');
 		$adManageD = M($this->actionName); // 创建另外一个数据库句柄专门用来查询广告信息
 		// 得到aid进行处理
 		$this->dealSubmitData();
+		
+		// 查询广告的数据如果广告处于新增待审状态则不能进行修改
+		// 查询相关的数据
+		$AdManageInfo =$adManageD->where("aid = ".$_POST['aid'])->find();
+		if($AdManageInfo['status']==0){ // 新增待审核状态不可是修改
+			$this->error('广告处于新增待审核状态不可以修改',C('SITE_URL')."?m=".$this->actionName.'&a=edit&aid='.$_POST['aid']);
+		}
 		
 		if(!$adManage->create()){
 				
@@ -76,8 +110,7 @@ class AdManageAction  extends CommonAction{
 		}else{
 			if($_FILES['content']['error'] === 0){	// 说明有图片上传代表当前广告为图片广告 且用户更换换图片
 					
-				// 查询相关的数据
-				$AdManageInfo =$adManageD->field('ad_pic,show_type')->where("aid = ".$_POST['aid'])->find();
+				
 				$adSizeInfo = $this->getAdSize($AdManageInfo['show_type']);
 			
 			
@@ -105,7 +138,7 @@ class AdManageAction  extends CommonAction{
 					$this->error("图片上传失败".$info['message'],C('SITE_URL')."?m=".$this->actionName.'&a=edit&aid='.$_POST['aid']);
 				}
 			}else{  // 说明是文字广告
-				if(!$_REQUEST['content']){ // 说明没有提交广告的数据跳转
+				if(!$_REQUEST['content'] && $_REQUEST['picFlag']==0){ // 说明没有提交广告的数据跳转
 
 					// 提示图片上传失败
 					$this->error("必须填写广告的内容".$info['message'],C('SITE_URL')."?m=".$this->actionName.'&a=edit&aid='.$_POST['aid']);
@@ -114,13 +147,15 @@ class AdManageAction  extends CommonAction{
 				
 			}
 			
+			// 把广告的状态改成修改待审
+			$adManage->status = 1;
 			if($adManage->save()){
 			
 				$this->success('数据修改成功',C('SITE_URL')."?m=".$this->actionName.'&a=index');
 			}else{
 				//echo $this->AdPlan->getLastSql()."<br/>";
 				//exit;
-				$this->error('数据修改失败',C('SITE_URL')."?m=".$this->actionName.'&a=edit&aid='.$_POST['aid']);
+				$this->error('数据修改失败或数据没有改动',C('SITE_URL')."?m=".$this->actionName.'&a=edit&aid='.$_POST['aid']);
 			}
 		}
 	}
@@ -275,6 +310,7 @@ class AdManageAction  extends CommonAction{
 	 */
 	public function doCheck(){
 		
+		
 		if($_POST['submitPass']){
 			
 			// 表明管理员点击的是通过则把状态值改为2 
@@ -283,7 +319,7 @@ class AdManageAction  extends CommonAction{
 		}elseif($_POST['submitRefuse']){
 			
 			// 表明管理员点击的是拒绝则把状态值改为3
-			$_POST['submitRefuse']=3;
+			$_POST['status']=3;
 		}
 		
 		$this->dealSubmitData();
@@ -305,6 +341,7 @@ class AdManageAction  extends CommonAction{
 	 * @see CommonAction::edit()
 	 */
 	public function edit(){
+		
 		
 		// 得到aid进行处理
 		$this->dealSubmitData();
@@ -480,7 +517,22 @@ class AdManageAction  extends CommonAction{
 			}
 		}
 		
+		// 判断当前展现形式是否存在
+		$_POST['show_type'] = intval($_POST['show_type']);
+		
+		$adSize = M("AdSize");
+		$adSizeInfo = $adSize->where("id = ".$_POST['show_type'])->find();
+		
+		if(!$adSizeInfo){
+			if(!$_POST['adPlanFlag']){
+				$this->error("当前广告展现形式不存在请重新选择",C('SITE_URL')."?m=".$this->actionName.'&a=add');
+			}else{
+				$this->error("当前广告展现形式不存在请重新选择",C('SITE_URL')."?m=".$this->actionName.'&a=add&pid='.$_POST['pid']);
+			}
+		}	
 	}
+	
+	
 	
 	/**
 	 * 

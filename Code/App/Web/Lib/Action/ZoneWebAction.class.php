@@ -14,155 +14,97 @@
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
 class ZoneWebAction extends CommonAction {
+	// 代码位列表
     public function index(){ 
 		$this		->assign("title","代码位管理");
 		$zo 		= M('zone');
-		// 分页
-		import('ORG.Util.Page');
-		$count		= $zo->count();
-		$Page     	= new Page($count,15);
-		$nowPage  	= isset($_GET['p'])?$_GET['p']:1;
-		$Page 		-> setConfig("first","首页");
-		$Page 		-> setConfig("last", "尾页");
-		$Page 		-> setConfig("prev","上一页");
-		$Page 		-> setConfig("next","下一页");
-		$Page 		-> setConfig("theme","%first%%upPage%%linkPage%%downPage%%end% 共%totalPage%页");
-		$show     	= $Page->show();
-		// 一页时的分页不显示
-		if($count<16){
-			$show 	= '';
-		}
-		$zone     	= $zo->order('id')->page($nowPage.','.$Page->listRows)->select();
+		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$as			= M('ad_size');
 		foreach($zone as $key=>$val){
-			$zone[$key]["refresh_time"]=date("Y-m-d",$val["refresh_time"]);
-			// 连表查询代码位尺寸展示类型
-			$adsize	= $as->where("id=".$val['size'])->select();
+			$zone[$key]["refresh_time"]	= date("Y-m-d",$val["refresh_time"]); // 更新时间
+			$adsize	= $as->where("id=".$val['size'])->select(); // 查询代码位类型表
 			foreach($adsize as $keys=>$value){
-				$zone[$key]['display']	=$value['size_type'];
-				$zone[$key]['width']	=$value['width'];
-				$zone[$key]['height']	=$value['height'];
+				$zone[$key]['display']	= $value['size_type']; // 代码位类型
+				$zone[$key]['width']	= $value['width']; // 代码位宽
+				$zone[$key]['height']	= $value['height']; // 代码位高
 			}
 		}
-		$this		->assign('page',$show);
-		$this		->assign('count',$count);
 		$this		->assign("zone",$zone);
 		$this		->display();
     }
 	// 添加代码位
-	public function zone_add(){
+	public function zoneAdd(){
 		$this	->assign("title","新增代码位");
 		$st		= M('site');
-		$site	= $st->field("id,site_domain")->select();
-		$this   ->assign("site",$site);
+		$site	= $st->field("id,site_domain")->select(); // 网站id，网站域名
+		$this   ->assign("site",$site); 
 		$ads	= M('ad_size');
 		$adsize = $ads->select();
+		$ad_size_type	= C("AD_SIZE_TYPE"); // 获取代码为类型		
 		foreach($adsize as $key=>$val){
-			switch($val['size_type']){
-				case 1:
-					$adsize[$key]["size_type"]="图片";
-				break;
-				case 2:
-					$adsize[$key]["size_type"]="漂浮";
-				break;
-				case 3:
-					$adsize[$key]["size_type"]="对联";
-				break;
-				case 4:
-					$adsize[$key]["size_type"]="文本";
-				break;
-				case 5:
-					$adsize[$key]["size_type"]="右下角悬浮";
-				break;
-				case 6:
-					$adsize[$key]["size_type"]="弹窗";
-				break;
-				default:
-				break;
-			}
+			$adsize[$key]["size_type"]=$ad_size_type[$val['size_type']];
 		}
 		$this   ->assign("adsize",$adsize);
 		$this	->display();
 	}
+	// 处理添加代码位
 	public function addCheck(){
-		// 创建数据库对象
-		$zone 				= M('zone');
-		$zone->name			= $_POST["zone_name"];
-		$zone->sid			= $_POST["site_id"];
-		$zone->pay_type		= $_POST["pay_type"];
-		$zone->size			= $_POST["show_type"];
-		$zone->uid			= 320000;
-		$zone->refresh_time	= time();
-		// 往数据库中添加
-		$flag = $zone->add();
-		if($flag){
-			$this->success('数据添加成功','SITE_URL/?m=ZoneWeb&a=index');
+		$zone 					= M('zone');
+		$data["name"]			= $_POST["zone_name"]; // 代码位名称
+		$data["sid"]			= (int)($_POST["site_id"]); // 所属网站ID
+		$data["pay_type"]		= (int)($_POST["pay_type"]); // 计费类型（1CPM 2CPC）
+		$data["size"]			= (int)($_POST["show_type"]); // 代码位尺寸
+		$data["uid"]			= $_SESSION[C("WEB_USER_KEY")]; // 网站主ID
+		$data["refresh_time"]	= time(); // 更新时间
+		if(empty($data["name"])){
+			$this->error("代码位名称不能为空！",'WEB_URL/?m=ZoneWeb&a=zoneAdd');
 		}else{
-			$this->error("数据添加失败",'SITE_URL/?m=ZoneWeb&a=zone_add');
+			$zone->data($data)->add();
+			$this->success('代码位添加成功','WEB_URL/?m=ZoneWeb&a=index');
 		}
 	}
 	// 编辑代码位
-	public function zone_edit(){
+	public function zoneEdit(){
 		$this	->assign("title","编辑代码位");
-		$id 	= (int)($_GET["zone_id"]);
+		$id 	= (int)($_GET["zone_id"]); // 获取代码位id
 		$zo  	= M("zone");
-		// 创建代码位尺寸对象
 		$ads  	= M("ad_size");
-		$zone 	= $zo->where("id=".$id)->select();
-		$adsize = $ads->where("id=".$zone[0]["size"])->select();
+		$zone 	= $zo->where("id=".$id)->select(); // 查找选中的代码位
+		$adsize = $ads->where("id=".$zone[0]["size"])->select(); // 所属的代码位类型
+		$ad_size_type	= C("AD_SIZE_TYPE"); // 获取代码为类型
 		foreach($adsize as $key=>$val){
-			switch($val['size_type']){
-				case 1:
-					$adsize[$key]["size_type"]="图片";
-				break;
-				case 2:
-					$adsize[$key]["size_type"]="漂浮";
-				break;
-				case 3:
-					$adsize[$key]["size_type"]="对联";
-				break;
-				case 4:
-					$adsize[$key]["size_type"]="文本";
-				break;
-				case 5:
-					$adsize[$key]["size_type"]="右下角悬浮";
-				break;
-				case 6:
-					$adsize[$key]["size_type"]="弹窗";
-				break;
-				default:
-				break;
-			}
+			$adsize[$key]["size_type"]=$ad_size_type[$val['size_type']];
 		}
 		$this	->assign("zone",$zone);
 		$this	->assign("adsize",$adsize);
 		$this	->display();
 	}
+	// 处理编辑代码位
 	public function editCheck(){
-		// 创建数据库对象
-		$zo 	= M('zone');
-		$id		= $_POST["zone_id"];
+		$zone 	= M('zone');
+		$id		= (int)($_POST["zone_id"]);
 		$name	= $_POST["zone_name"];
-		// 更改数据库数据
-		$zo		->where("id =".$id)->setField("name",$name);
-		$this	->success('数据更改成功','SITE_URL/?m=ZoneWeb&a=index');
+		if(empty($name)){
+			$this	->error("代码位名称不能为空！",'WEB_URL/?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
+		}else{
+			$zone	->where("id =".$id)->setField("name",$name);
+			$this	->success('代码位更改成功','WEB_URL/?m=ZoneWeb&a=index');
+		}
 	}
-	// 删除代码位
-	public function zone_delete(){
+	// 编辑代码位状态（0启用、1停用）
+	public function zoneDelete(){
 		$status	= (int)($_GET["status"]);
 		$id		= (int)($_GET["zone_id"]);
 		$zone  	= M("zone");
 		if($status ==0){
-			$zone->where("id =".$id)->setField("status","1");
+			$zone->where("id =".$id)->setField("status","1"); // 停用
 		}else{
-			$zone->where("id =".$id)->setField("status","0");
+			$zone->where("id =".$id)->setField("status","0"); // 启用
 		}
-		$this	->success('状态修改成功','SITE_URL/?m=ZoneWeb&a=index');
+		$this	->success('状态修改成功','WEB_URL/?m=ZoneWeb&a=index');
 	}
 	// 获取代码
-	public function get_code(){
-		
-		
+	public function getCode(){
 		$this->display();
 	}
 }
