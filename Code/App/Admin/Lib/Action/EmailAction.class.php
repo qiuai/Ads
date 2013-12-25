@@ -79,7 +79,7 @@ class EmailAction extends CommonAction {
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-12-13 下午2:11:04
 	 */
-	function thinkSendEmail($to, $name, $subject = '', $body = '', $attachment = null){
+	public function thinkSendEmail($to, $name, $subject = '', $body = '', $attachment = null){
 		$config = C('THINK_EMAIL');
 		vendor('PHPMailer.class#phpmailer'); //从PHPMailer目录导class.phpmailer.php类文件
 		$mail             = new PHPMailer(); //PHPMailer对象

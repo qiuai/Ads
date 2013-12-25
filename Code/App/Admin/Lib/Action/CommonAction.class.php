@@ -121,6 +121,7 @@ class CommonAction extends Action {
     	$this->assign('list',$list);// 赋值数据集
     	import("ORG.Util.Page");// 导入分页类
     	$count      = $model->query($countSql);;// 查询满足要求的总记录数
+//     	echo $model->getLastSql();
     	$Page       = new Page($count[0]['num'],$pageNum);// 实例化分页类 传入总记录数和每页显示的记录数
     	
     	$Page->setConfig('first','首页');

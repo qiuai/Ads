@@ -60,12 +60,12 @@
     <if condition="$list">
     <Volist name='list' id='vo'>
    	<tr>
-        <td>{$vo.pid}</td>
-        <td>{$vo.pid}</td>
+        <td>{$vo.plan_name}</td>
+        <td>{$vo.name}</td>
         <td>{$vo.ip}</td>
         <td>{$vo.pv}</td>
         <td>{$vo.click}</td>
-        <td><?php echo 'CTR'; ?></td>
+        <td><?php echo sprintf("%.2f", (intval($vo['click'])/intval($vo['impressions']))); ?></td>
         <td>{$vo.cpm}</td>      
         <td>{$vo.cpc}</td> 
         <td>{$vo.real_income}</td>     

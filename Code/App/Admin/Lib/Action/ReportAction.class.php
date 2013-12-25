@@ -26,20 +26,20 @@ class ReportAction extends CommonAction {
 		
 		// 搜索UID
 		if($uid){
-			$where['uid'] = intval($uid);
+			$where = " where i.uid = " . intval($uid);
+		}else{
+			$where = " where i.uid != " . intval($uid);
 		}
 		
 		// 搜索日期
 		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
-			$where['start_date'] = array('gt', strtotime(intval($_REQUEST['start_date'])));
-			$where['end_date'] = array('lt', strtotime(intval($_REQUEST['end_date'])));
+			$where .= " and i.start_date >= " . strtotime(intval($_REQUEST['start_date']));
+			$where .= " and i.end_date < " . strtotime(intval($_REQUEST['end_date']));
 		}
 		
 		// 列表数据
-		$model = M('Income');
+		$this->getReportData($where);
 		
-		// 结算时间降序
-		$income = $this->memberPage($model, $where, 10, 'settlement_time desc');
 		$this->assign('uid', $uid);
 		$this->assign('start_date', $_REQUEST['start_date']);
 		$this->assign('end_date', $_REQUEST['end_date']);
@@ -57,23 +57,51 @@ class ReportAction extends CommonAction {
 	
 		// 搜索PID
 		if($pid){
-			$where['pid'] = intval($pid);
+			$where = " where pid = " . intval($pid);
+		}else{
+			$where = " where pid != " . intval($pid);
 		}
 	
 		// 搜索日期
 		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
-			$where['start_date'] = array('gt', strtotime(intval($_REQUEST['start_date'])));
-			$where['end_date'] = array('lt', strtotime(intval($_REQUEST['end_date'])));
+			$where .= " and i.start_date >= " . strtotime(intval($_REQUEST['start_date']));
+			$where .= " and i.end_date < " . strtotime(intval($_REQUEST['end_date']));
 		}
 	
 		// 列表数据
-		$model = M('Income');
-	
-		// 结算时间降序
-		$income = $this->memberPage($model, $where, 10, 'settlement_time desc');
+		$this->getReportData($where);
+		
 		$this->assign('pid', $pid);
 		$this->assign('start_date', $_REQUEST['start_date']);
 		$this->assign('end_date', $_REQUEST['end_date']);
 		$this->display();
+	}
+	/**
+	 * CPM今日订单
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-25 上午10:49:43
+	 */
+	public function cpmTodayOrder(){
+		$this->display();
+	}
+	/**
+	 * 获取报表数据
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-25 上午10:24:03
+	 */
+	public function getReportData($where, $num=10, $order=''){
+		// 排序	结算时间降序
+		$order = " order by i.settlement_time desc ";
+		
+		// 分页
+		$p = $_GET['p'] ? $_GET['p'] : 1;
+		$limit = " limit ". ($p-1)*$num .",".$num;
+		
+		$sql = "select * from " . C('DB_PREFIX') . "ad_plan p join " . C('DB_PREFIX') . "income i on p.id = i.pid join " . C('DB_PREFIX') . "ad_plan_category c on p.category_id = c.id $where $order $limit";
+		$count = "select count(i.id) as num from " . C('DB_PREFIX') . "ad_plan p join " . C('DB_PREFIX') . "income i on p.id = i.pid $where limit 1";
+		
+		$this->pageList($sql, $count, $num);
 	}
 }
