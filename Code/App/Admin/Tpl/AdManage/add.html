@@ -21,7 +21,11 @@
 			<div class="listmain setting">
 			<form action="SITE_URL?m=AdManage&a=doAdd" method="post" enctype="multipart/form-data">
 				<table align="center" cellspacing="0" class="list">
-					<tr>
+					<if condition="$pid neq ''">
+						<input type="hidden" name="pid" value="{$pid}" />
+						<input type="hidden" name="adPlanFlag" value="1" />
+					<else />
+						<tr>
 						<td style="width: 120px"><em class="red">*</em>所属计划：</td>
 						<td class="textbox_td">
 						    <select class="newsite_select" name="pid" >
@@ -30,7 +34,9 @@
 						    	</volist>
                              </select>
                         </td>
-					</tr>
+						</tr>
+					</if>
+					
 					<tr>
 						<td><em class="red">*</em>广告标题：</td>
 						<td class="textbox_td"><input type="text" name="title" class="textbox"/>

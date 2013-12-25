@@ -56,17 +56,17 @@
     
     	
 		<tbody id="cpa" class="price">
-			  <tr>
+			 <!--   <tr>
 			      <td>数据返回机制：</td>
 			      <td class="textbox_td">{$AdPlanInfo['cps_data_return']}</td>
-			  </tr>
-			  <tr>
+			  </tr>-->
+			  <!-- <tr>
 			      <td>效果认定期：</td>
 			      <td class="textbox_td">{$AdPlanInfo['cpa_return_day']} 天</td>
-			  </tr>
+			  </tr>-->
 			  <tr>
 				<td>真实价格：</td>
-				<td class="textbox_td">￥{$AdPlanInfo['real_price']}</td>
+				<td class="textbox_td">￥{$AdPlanInfo['price']}</td>
 			  </tr>	
 			 <!--  <tr>
 				<td>真实价格描述：</td>
@@ -74,11 +74,11 @@
 			  </tr>	-->
 			  <tr>
 				<td>网站主结算价格：<em class="require">*</em></td>
-				<td class="textbox_td">￥<input type="text" name="price" value="{$AdPlanInfo['price']}" /></td>
+				<td class="textbox_td">￥<input type="text" name="site_master_pay_price" value="" /></td>
 			  </tr>	
 			  <tr>
 				<td>网站主显示价格：<em class="require">*</em></td>
-				<td class="textbox_td"><input type="text" name="price_desc" value="{$AdPlanInfo['price_desc']}"  /></td>
+				<td class="textbox_td"><input type="text" name="site_master_display_price" value=""  /></td>
 			  </tr>	
 		</tbody>
 	       <tr>

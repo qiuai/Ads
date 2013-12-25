@@ -107,6 +107,41 @@ class CommonAction extends Action {
     	
     	return $list;
     }
+    
+    /**
+     * 
+     * 连表查询分页
+     * @author Yumao <815227173@qq.com>
+     * @CreateDate: 2013-12-23 下午8:44:19
+     * @param unknown_type $model
+     * @param unknown_type $where
+     * @param unknown_type $pageNum
+     * @param unknown_type $order
+     * @return unknown
+     */
+    public function memberLinkPage($model, $where=array(), $pageNum=10, $order='',$table="",$field=""){
+    	$_GET['p'] = $_GET['p'] ? $_GET['p'] : 0;
+    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    
+    	$list = $model->table($table)->where($where)->field($field)->order($order)->page($_GET['p'].','.$pageNum)->select();
+    	//echo $model->getLastSql();
+    	$this->assign('list',$list);// 赋值数据集
+    	//     	echo $model->getLastSql();
+    	import("ORG.Util.Page");// 导入分页类
+    	$count      = $model->table($table)->where($where)->count();// 查询满足要求的总记录数
+    	$Page       = new Page($count,$pageNum);// 实例化分页类 传入总记录数和每页显示的记录数
+    
+    	$Page->setConfig('first','首页');
+    	$Page->setConfig('last','尾页');
+    
+    	$Page->setConfig('theme','共%totalRow% %header% %nowPage%/%totalPage% 页  %first% %upPage% %prePage% %linkPage% %downPage% %end%');
+    
+    	$show       = $Page->show();// 分页显示输出
+    
+    	$this->assign('page',$show);// 赋值分页输出
+    	 
+    	return $list;
+    }
     /**
      * SQL 分页
      *
@@ -589,5 +624,58 @@ class CommonAction extends Action {
     	if(file_exists(ROOT_PATH."/../Uploadfile/".$filePath)){
     		unlink(ROOT_PATH."/../Uploadfile/".$filePath);
     	}
+    }
+    
+    // 导出代码位报表
+    public function zoneExport($zone,$t){
+    	// 输出的文件类型为excel
+    	header("Content-type:application/vnd.ms-excel");
+    	// 提示下载
+    	header("Content-Disposition:attachement;filename=代码位列表_".date("Y-m-d").".xls");
+    	// 查询代码位表
+    	$zo				= M("zone");
+    	$ad_size		= M("ad_size");
+    	$zone	 	  	= $zo->select();
+    	$ReportArr	  	= array();
+    	$ad_pay_type	= C("AD_PAY_TYPE"); // 广告计费类型
+    	$ad_size_type	= C("AD_SIZE_TYPE"); // 获取代码位类型
+    	// 将关系数组转换成索引数组
+    	foreach($zone as $key =>$val){
+    		$ReportArr[$key][]	=	$val["id"]; // 代码位ID
+    		$ReportArr[$key][]	=	$val["name"]; // 代码位名称
+    		$ReportArr[$key][]	=	$val["sid"]; // 所属网站ID
+    		$ReportArr[$key][]	=	$val["uid"]; // 所属用户ID
+    		$ReportArr[$key][]	=	$ad_pay_type[$val["pay_type"]]; // 广告计费类型
+    		$ad					=	$ad_size->where("id=".$val["size"])->select(); // 查询广告尺寸信息
+    		$ReportArr[$key][]	=	$ad_size_type[$ad[0]["size_type"]]; // 代码位类型
+    		$ReportArr[$key][]	=	$ad[0]["width"]."X".$ad[0]["height"]; // 代码位尺寸
+    		$ReportArr[$key][]	=	$val["auto_ad"]; // 智能广告
+    	}
+    	// 报表数据
+    	$ReportContent = '';
+    	$num1 = count($ReportArr);
+    	for($i=0;$i<$num1;$i++){
+    		$num2 = count($ReportArr[$i]);
+    		for($j=0;$j<$num2;$j++){
+    			// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+    			$ReportContent .= '"'.$ReportArr[$i][$j].'"'."\t";
+    		}
+    		// 最后连接\n 表示换行
+    		$ReportContent .= "\n";
+    	}
+    	$t[]="代码位ID";// 判断是否要导出代码位ID信息
+    	$t[]="代码位名称";// 判断是否要导出代码位名称信息
+    	$t[]="所属网站ID";// 判断是否要导出所属网站ID信息
+    	$t[]="所属用户ID";// 判断是否要导出所属用户ID信息
+    	$t[]="计费类型";// 判断是否要导出计费类型信息
+    	$t[]="展示方式";// 判断是否要导出展示方式信息
+    	$t[]="尺寸";// 判断是否要导出尺寸信息
+    	$t[]="智能广告";// 判断是否要导出智能广告信息
+    	for($k=0;$k<count($t);$k++){
+    		// ecxel都是一格一格的，用\t将每一行的数据连接起来 \t制表符
+    		$ReportTitle .= '"'.$t[$k].'"'."\t";
+    	}
+    	// 输出即提示下载
+    	echo $ReportTitle."\n".$ReportContent;
     }
 }
