@@ -545,7 +545,7 @@ class AdPlanAction extends CommonAction{
 		}*/
 			
 		// 处理审核的状态
-		$adStatus = C('AD_STATUS');
+		$adStatus = C('AD_PLAN_STATUS');
 		$AdPlanInfoOne['plan_status_flag'] = $AdPlanInfoOne['plan_status']; 
 		$AdPlanInfoOne['plan_status'] = $adStatus[$AdPlanInfoOne['plan_status']];
 		
@@ -667,7 +667,7 @@ class AdPlanAction extends CommonAction{
 	 * @CreateDate: 2013-12-23 上午11:50:41
 	 */
 	private function getAdPlanStatusInfo(){
-		$adPlanStatusInfo = C('AD_STATUS');
+		$adPlanStatusInfo = C('AD_PLAN_STATUS');
 		$this->assign("adPlanStatusInfo",$adPlanStatusInfo);
 		//dump($adPlanStatusInfo);
 	}

@@ -119,7 +119,7 @@ a{
 			</td>
 			<td colspan="13" style="text-align:left;">
 				<span style="display: none;" id="quick_{$vo['id']}" class="quick_operation">
-					<if condition="$vo['plan_status'] eq '新增待审') or ($vo['plan_status'] eq '修改待审')">
+					<if condition="($vo['plan_status'] eq '新增待审') or ($vo['plan_status'] eq '修改待审')">
 				    <a href="SITE_URL?m=AdPlan&a=plan_verify&id={$vo['id']}" title="审核计划" style="color: red">
 						审核计划
 					</a>
@@ -160,7 +160,7 @@ a{
 						新增广告
 					</a>
 					|
-					<a href="http://adu.phpad.cn/admin.php?m=webad&amp;a=ad_list&amp;plan_id={$vo['id']}" title="查看广告">
+					<a href="SITE_URL?m=AdManage&a=index&pid={$vo['id']}" title="查看广告">
 						查看广告
 					</a>
 				

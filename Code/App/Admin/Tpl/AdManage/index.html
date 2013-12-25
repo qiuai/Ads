@@ -18,8 +18,9 @@
 				<tr>
 					<td style="border-right: 0px;">
 						<form method="get">
-							<input type="hidden" name="m" value="webad" />
-							计划ID：<input type="text" name="plan_id" value="" />
+							<input type="hidden" name="m" value="AdManage" />
+							<input type="hidden" name="a" value="index" />
+							计划ID：<input type="text" name="pid" value="" />
 							<input type="submit" value="查询"class="button" />
 						</form>
 					</td>
@@ -29,12 +30,18 @@
 				</tr>
 				<tr>
 					<td colspan="2" style="font-size: 13px;">广告状态：
-					    <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&" class="link-checked">全部状态</a>                        
-                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=3"  class="link_before_checked">新增待审</a>
+					    <a href="SITE_URL?m=AdManage&a=index" <if condition="($Think.get.pid neq '') or ($Think.get.isSearch neq 1)">class="link-checked"<else /> class="link_before_checked" </if>>全部状态</a>                     
+					      <!--<volist name="adStatusInfo" id="vo">
+            				<a href="SITE_URL?m=AdManage&a=index&status={$vo['key']}" class="link_before_checked">{$vo['val']}</a>
+           				 </volist>--> 
+           				  <foreach name="adStatusInfo" item="vo" key="key" >                  		
+                   			<a href="SITE_URL?m=AdManage&a=index&status={$key}&isSearch=1" <if condition="( $Think.get.status eq $key) and ($Think.get.isSearch eq 1)">class="link-checked" <else/> class="link_before_checked"</if> >{$vo}</a>
+                  		 </foreach>  
+                       <!--<a href="SITE_URL?m=AdManage&a=index&status="  class="link_before_checked">新增待审</a>
                         <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=4"  class="link_before_checked">修改待审</a>
                         <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=1"  class="link_before_checked">投放中</a> 
                         <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=2"  class="link_before_checked">审核拒绝</a>                                              
-                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=0"  class="link_before_checked">计划停止</a>
+                        <a href="http://adu.phpad.cn/admin.php?m=webad&a=ad_list&status=0"  class="link_before_checked">计划停止</a>-->
 					</td>
 				</tr>
 			</table>
@@ -85,15 +92,18 @@
                         </if> 
                         >{$vo['status_name']}</span>                    </td>
 					<td>
-						<if condition="$vo['status'] eq 2"> 
-						<a href="SITE_URL?m=AdManage&a=show&aid={$vo['aid']}"  >查看广告</a>&nbsp;<a href="SITE_URL?m=AdManage&a=edit&aid={$vo['aid']}"  >修改</a><else/><a href="SITE_URL?m=AdManage&a=check&aid={$vo['aid']}"  >审核广告</a>&nbsp;<a href="SITE_URL?m=AdManage&a=edit&aid={$vo['aid']}"  >修改</a></if>
-					    					   
-					    					</td>
+					<a href="SITE_URL?m=AdManage&a=show&aid={$vo['aid']}"  >查看广告</a>&nbsp;
+						<if condition="$vo['status'] neq 2 "> 
+						<a href="SITE_URL?m=AdManage&a=check&aid={$vo['aid']}"  >审核广告</a></if>
+						<if condition="$vo['status'] neq 0">
+							  &nbsp;<a href="SITE_URL?m=AdManage&a=edit&aid={$vo['aid']}"  >修改</a> 
+						</if>
+					  </td>
 				</tr>
 				</volist>
                 </table>
 
-<div class="admin_do index_page" style="text-align: center;"><div class='page_bar fr'><span>共29 条记录 1/2 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/admin.php?m=webad&a=ad_list&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/admin.php?m=webad&a=ad_list&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a href='/admin.php?m=webad&a=ad_list&page=2'> 2 </a>&nbsp;&nbsp;<a class='page_next' href='/admin.php?m=webad&a=ad_list&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/admin.php?m=webad&a=ad_list&page=2'>尾页</a>&nbsp;&nbsp;</div></div>
+<div class="admin_do index_page" style="text-align: center;"><div class='page_bar fr'>{$page}</div></div>
 </div>
 </body>
 </html>
