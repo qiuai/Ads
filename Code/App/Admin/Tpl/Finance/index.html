@@ -31,10 +31,10 @@
     </tr>
     <tr>
         <td colspan="2" id="css1" style="font-size:13px;">支付状态：
-            <a href="SITE_URL/?m=Finance&a=index&status=" class="link_before_checked">全部</a>
-            <a href="SITE_URL/?m=Finance&a=index&status=1" class="link_before_checked">未支付</a>
-            <a href="SITE_URL/?m=Finance&a=index&status=2" class="link_before_checked">已支付</a>
-            <a href="SITE_URL/?m=Finance&a=index&status=3" class="link_before_checked">异常</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=" <if condition="$status eq ''">class="link-checked"<else />class="link_before_checked"</if>>全部</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=1" <if condition="$status eq '1'">class="link-checked"<else />class="link_before_checked"</if>>未支付</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=2" <if condition="$status eq '2'">class="link-checked"<else />class="link_before_checked"</if>>已支付</a>
+            <a href="SITE_URL/?m=Finance&a=index&status=3" <if condition="$status eq '3'">class="link-checked"<else />class="link_before_checked"</if>>异常</a>
         </td>
     </tr>
 </tbody></table>		

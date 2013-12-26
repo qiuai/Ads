@@ -88,10 +88,13 @@ class FinanceWebAction extends CommonAction {
 			$where		= "settlement_time >= ".$start." and settlement_time <= ".$end; // 介于开始结束时间之间
 		}
 		$income			= $this->memberPage($in, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
+		$ap				= M("ad_plan"); // 活动计划表
 		foreach($income as $key =>$val){
 			$income[$key]["start_date"]		= date("Y-m-d",$val["start_date"]); // 周期开始时间
 			$income[$key]["end_date"]		= date("Y-m-d",$val["end_date"]); // 周期结束时间
 			$income[$key]["settlement_time"]= date("Y-m-d",$val["settlement_time"]); // 结算时间
+			$ad_plan						= $ap->where("id=".$val["pid"])->select(); // pid关联活动计划表id
+			$income[$key]["plan_name"]		= $ad_plan[0]["plan_name"]; // 计划名称
 		}
 		// 标注开始日期
 		if(empty($start_date)){
@@ -105,6 +108,7 @@ class FinanceWebAction extends CommonAction {
 		}else{
 			$this		->assign("end_date",$end_date);
 		}
+		$this			->assign("title","结算明细");
 		$this			->assign("income",$income);
 		$this			->display();
 	}

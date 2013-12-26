@@ -33,12 +33,12 @@
 			</tr>
 			<tr>
 				<td style="font-size:13px;height:40px;" colspan="2">网站状态：
-					<a href="SITE_URL/?m=Web&a=index&" class="link_before_checked">全部状态</a>
-					<a href="SITE_URL/?m=Web&a=index&status=1" class="link_before_checked">未验证</a>
-					<a href="SITE_URL/?m=Web&a=index&status=2" class="link_before_checked">审核中</a>
-					<a href="SITE_URL/?m=Web&a=index&status=3" class="link_before_checked">正常</a>
-					<a href="SITE_URL/?m=Web&a=index&status=4" class="link_before_checked">锁定</a>
-					<a href="SITE_URL/?m=Web&a=index&status=5" class="link_before_checked">拒绝</a>
+					<a href="SITE_URL/?m=Web&a=index&" <if condition="$status eq ''">class="link-checked"<else />class="link_before_checked"</if>>全部状态</a>
+					<a href="SITE_URL/?m=Web&a=index&status=1" <if condition="$status eq '1'">class="link-checked"<else />class="link_before_checked"</if>>未验证</a>
+					<a href="SITE_URL/?m=Web&a=index&status=2" <if condition="$status eq '2'">class="link-checked"<else />class="link_before_checked"</if>>审核中</a>
+					<a href="SITE_URL/?m=Web&a=index&status=3" <if condition="$status eq '3'">class="link-checked"<else />class="link_before_checked"</if>>正常</a>
+					<a href="SITE_URL/?m=Web&a=index&status=4" <if condition="$status eq '4'">class="link-checked"<else />class="link_before_checked"</if>>锁定</a>
+					<a href="SITE_URL/?m=Web&a=index&status=5" <if condition="$status eq '5'">class="link-checked"<else />class="link_before_checked"</if>>拒绝</a>
 				</td>
 			</tr>
 		</tbody>
@@ -58,7 +58,7 @@
         <td>网站名称</td>
         <td>网站域名</td>
         <td>网站类型</td>
-        <td>联盟网站登记</td>
+        <td>联盟等级</td>
         <td>谷歌PR</td>
         <td>Alexa排名</td>
         <td>百度权重</td>
