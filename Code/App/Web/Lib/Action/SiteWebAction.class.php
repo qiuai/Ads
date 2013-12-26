@@ -63,6 +63,7 @@ class SiteWebAction extends CommonAction {
 		$site_type			= $stp->select();
 		$this				->assign("site",$site);
 		$this				->assign("site_type",$site_type);
+		$this				->assign("title","编辑网站");
 		$this				->display();
 	}
 	// 处理编辑网站
@@ -94,14 +95,16 @@ class SiteWebAction extends CommonAction {
 		$ch				= M('channel');
 		$channel		= $this->memberPage($ch, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$this			->assign("channel",$channel);
+		$this			->assign("title","频道列表");
 		$this			->display();
 	}
 	// 新增频道
 	public function channelAdd(){
-		$st 	= M('site');
-		$site	= $st->field("id,site_name")->select(); // 获取id，网站名称
-		$this	->assign("site",$site);
-		$this	->display();
+		$st 			= M('site');
+		$site			= $st->field("id,site_name")->select(); // 获取id，网站名称
+		$this			->assign("site",$site);
+		$this			->assign("title","新增频道");
+		$this			->display();
 	}
 	// 处理新增频道
 	public function  channelAddCheck(){
@@ -122,25 +125,26 @@ class SiteWebAction extends CommonAction {
 	}
 	// 编辑频道
 	public function channelEdit(){
-		$id 			= (int)($_GET["channel_id"]);
+		$id 			= (int)($_GET["channel_id"]); // 获取频道ID
 		$ch 			= M('channel');
 		$channel		= $ch->where("id=".$id)->select();
 		$st 			= M('site');
 		$site			= $st->field("id,site_name")->select();
 		$this			->assign("channel",$channel);
 		$this			->assign("site",$site);
+		$this			->assign("title","编辑频道");
 		$this			->display();
 	}
 	// 处理编辑频道
 	public function  channelEditCheck(){
 		$this			->assign("title","编辑频道");
 		$channel		= M('channel');
-		$data['id']		= (int)($_POST["id"]);
-		$data['sort']	= (int)($_POST["sort"]);
-		$data['sid']	= (int)($_POST["site_type"]);
-		$data['name']	= $_POST["name"];
-		$data['status']	= (int)($_POST["status"]);
-		$data['desc']	= $_POST["desc"];
+		$data['id']		= (int)($_POST["id"]); // 频道ID
+		$data['sort']	= (int)($_POST["sort"]); // 排序
+		$data['sid']	= (int)($_POST["site_type"]); // 所属网站ID
+		$data['name']	= $_POST["name"]; // 频道名称
+		$data['status']	= (int)($_POST["status"]); // 频道状态
+		$data['desc']	= $_POST["desc"]; // 频道简介
 		if(empty($data["name"])){
 			$this		->error("频道名称不能为空！",'WEB_URL/?m=SiteWeb&a=channelEdit&channel_id='.$data['id']);
 		}elseif(empty($data["desc"])){
