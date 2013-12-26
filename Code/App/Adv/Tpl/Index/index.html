@@ -3,10 +3,10 @@
 <script>
 var chart;
 // 统计图数据 
-var chartData = [{day:"1215",outlay:0,ip:0,pv:0,click:0},{day:"1216",outlay:0,ip:0,pv:0,click:0},{day:"1217",outlay:0,ip:0,pv:0,click:0},{day:"1218",outlay:0,ip:0,pv:0,click:0},{day:"1219",outlay:0,ip:0,pv:0,click:0},{day:"1220",outlay:0,ip:0,pv:0,click:0},{day:"1221",outlay:0,ip:0,pv:0,click:0},{day:"1222",outlay:0,ip:0,pv:0,click:0},{day:"1223",outlay:0,ip:0,pv:0,click:0},{day:"1224",outlay:0,ip:0,pv:0,click:0}];
-AmCharts.ready(function() {
+	var chartData = {$chartData};
+	AmCharts.ready(function() {
 	chart = new AmCharts.AmSerialChart();
-	chart.pathToImages = "http://adu.phpad.cn/static/image/default/";
+	chart.pathToImages = 'STATIC_URL/default/images/';
 	chart.dataProvider = chartData;
 	chart.categoryField = "day";
 	chart.startDuration = 1;
@@ -19,7 +19,7 @@ AmCharts.ready(function() {
 	var graph1 = new AmCharts.AmGraph();
 	graph1.type = "column";
 	graph1.title = "预计支出(￥)";
-	graph1.valueField = "outlay";
+	graph1.valueField = "income";
 	graph1.lineAlpha = 0;
 	graph1.fillAlphas = 1;
 	chart.addGraph(graph1);
