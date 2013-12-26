@@ -30,7 +30,7 @@ class IndexAction extends CommonAction {
      * @CreateDate: 2013-12-25 下午4:49:19
      */
     public function tenDaysBefore(){
-    	R('Admin://Report/tenDaysBefore',array($_SESSION[C('WEB_AUTH_KEY')]));
+    	R('Report/tenDaysBefore');
     }
     /**
      * 最近十天数据

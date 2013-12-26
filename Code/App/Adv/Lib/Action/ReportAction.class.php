@@ -62,12 +62,20 @@ class ReportAction extends CommonAction {
 	 * @CreateDate: 2013-12-20 下午1:45:06
 	 */
 	public function tenDaysBefore(){
+		// 获取计划列表
+		$this->getPlan();
+		
 		// 会员报表
 		if($_SESSION[C('WEB_AUTH_KEY')]){
-			$where = " and uid = ". intval($_SESSION[C('WEB_AUTH_KEY')]);
+			$where = " and i.uid = ". intval($_SESSION[C('WEB_AUTH_KEY')]);
 		}
 		
 		$model = M('Income');
+		
+		// 搜索计划
+		if($pid = intval($_REQUEST['plan_id'])){
+			$where .= " and i.pid = $pid";
+		}
 		
 		// 搜索日期
 		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
@@ -132,5 +140,18 @@ class ReportAction extends CommonAction {
 		$this->assign("chartData", $json);
 		$this->assign("list", $list);
 		$this->assign("sum", $sum);
+	}
+	/**
+	 * 获取广告计划列表
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-26 下午3:46:49
+	 */
+	public function getPlan(){
+		$model = M('ad_plan');
+		$where['uid'] = $_SESSION[C('ADV_AUTH_KEY')];
+		$data = $model->where($where)->select();
+		
+		$this->assign('planList',$data);
 	}
 }
