@@ -268,7 +268,7 @@ class RBAC {
                     $table['node']." as node ".
                     "where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and access.node_id=node.id and node.level=4 and node.pid={$moduleId} and node.status=1";
                 $rs =   $db->query($sql);
-//                 $action = array();
+                $action = array();
                 foreach ($rs as $a){
                     $action[$a['action']]	 =	 $a['id'];
                 }
