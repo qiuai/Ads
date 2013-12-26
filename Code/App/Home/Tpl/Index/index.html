@@ -194,153 +194,54 @@
 		<div class="throughbar news">
 		<div class="news_box">
 			<h3>
-				<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=8">更多&gt;&gt;</a>
+				<a target="_blank" href="HOME_URL/?m=Notice&a=index&category_id=1">更多&gt;&gt;</a>
 				全部公告
 			</h3>
 			<ul>
-			  
+				<volist name="all" id="all" key="key">
 			    <li>
-					<em class="orange_bg">1</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=53">
-						<font color="red">					&nbsp;&nbsp;〖广告主〗广告投放之后可以进行修改吗					</font>					</a>
-					<span class="fl">07-12</span>
+					<em <if condition="$key lt 4">class="orange_bg"<else />class="blue_bg"</if>>{$key}</em>
+					<a href="HOME_URL/?m=Notice&a=index&category_id={$all.category_id}&notice_id={$all.id}">
+						<font color="red">					&nbsp;&nbsp;{$all.title}</font>
+					</a>
+					<span class="fl">{$all.pubdate}</span>
 				</li>
-			  
-			    <li>
-					<em class="orange_bg">2</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=52">
-						<font color="red">					&nbsp;&nbsp;〖广告主〗联盟有哪些广告类型					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="orange_bg">3</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=51">
-						<font color="red">					&nbsp;&nbsp;联盟于12月8号满10元日付更新为满50元日付					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">4</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=50">
-						<font color="red">					&nbsp;&nbsp;获取广告代码的时候，请选智能代码					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">5</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=49">
-						<font color="red">					&nbsp;&nbsp;关于联盟网站模版错位					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">6</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=48">
-						<font color="red">					&nbsp;&nbsp;联盟新上线50%高提成CPS广告					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-					    </ul>
+				</volist>
+			</ul>
 		</div>
 		<div class="news_box">
 			<h3>
-				<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=9">更多&gt;&gt;</a>
+				<a target="_blank" href="HOME_URL/?m=Notice&a=index&category_id=2">更多&gt;&gt;</a>
 				网站主公告
 			</h3>
             <ul>
-			  
+				<volist name="web" id="web" key="key_web">
 			    <li>
-					<em class="orange_bg">1</em> 
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=51">
-						<font color="red">					&nbsp;&nbsp;联盟于12月8号满10元日付更新为满50元日付					</font>					</a>
-					<span class="fl">07-12</span>
+					<em <if condition="$key_web lt 4">class="orange_bg"<else />class="blue_bg"</if>>{$key_web}</em>
+					<a href="HOME_URL/?m=Notice&a=index&category_id={$web.category_id}&notice_id={$web.id}">
+						<font color="red">					&nbsp;&nbsp;{$web.title}</font>
+					</a>
+					<span class="fl">{$web.pubdate}</span>
 				</li>
-			  
-			    <li>
-					<em class="orange_bg">2</em> 
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=50">
-						<font color="red">					&nbsp;&nbsp;获取广告代码的时候，请选智能代码					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="orange_bg">3</em> 
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=49">
-						<font color="red">					&nbsp;&nbsp;关于联盟网站模版错位					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">4</em> 
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=45">
-						<font color="red">					&nbsp;&nbsp;网站主注意：网站被删除说明					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">5</em> 
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=9">
-						<font color="red">					&nbsp;&nbsp;”专栏“的制作					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">6</em> 
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=7">
-						<font color="red">					&nbsp;&nbsp;27号佣金已经发放完毕					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-					    </ul>
+				</volist>
+			</ul>
 		</div>
 		<div class="news_box last">
 			<h3>
-				<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=10">更多&gt;&gt;</a>
+				<a target="_blank" href="HOME_URL/?m=Notice&a=index&category_id=3">更多&gt;&gt;</a>
 				广告主公告
 			</h3>
              <ul>
-			  
+				<volist name="adv" id="adv" key="key_adv">
 			    <li>
-					<em class="orange_bg">1</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=53">
-						<font color="red">					&nbsp;&nbsp;〖广告主〗广告投放之后可以进行修改吗					</font>					</a>
-					<span class="fl">07-12</span>
+					<em <if condition="$key_adv lt 4">class="orange_bg"<else />class="blue_bg"</if>>{$key_adv}</em>
+					<a href="HOME_URL/?m=Notice&a=index&category_id={$adv.category_id}&notice_id={$adv.id}">
+						<font color="red">					&nbsp;&nbsp;{$adv.title}</font>
+					</a>
+					<span class="fl">{$adv.pubdate}</span>
 				</li>
-			  
-			    <li>
-					<em class="orange_bg">2</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=52">
-						<font color="red">					&nbsp;&nbsp;〖广告主〗联盟有哪些广告类型					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="orange_bg">3</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=48">
-						<font color="red">					&nbsp;&nbsp;联盟新上线50%高提成CPS广告					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">4</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=44">
-						<font color="red">					&nbsp;&nbsp;富媒体右下角CPV广告代码暂停两天					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">5</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=37">
-						<font color="red">					&nbsp;&nbsp;排版方法					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-			  
-			    <li>
-					<em class="blue_bg">6</em>
-										<a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=10&notice_id=26">
-						<font color="red">					&nbsp;&nbsp;2013秋季服饰7折上新满249返50					</font>					</a>
-					<span class="fl">07-12</span>
-				</li>
-					    </ul>
+				</volist>
+			</ul>
 		</div>
 		<div class="clear"></div>
 	</div>

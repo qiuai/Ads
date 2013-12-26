@@ -63,49 +63,14 @@ var chart;
 <div class="main clearfix">
 	<div class="sidebar fr">
     	<div class="notice clearfix">
-        	<h3><span>最新公告</span><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=10" class="more" target="_blank">更多&gt;&gt;</a></h3>
+        	<h3><span>最新公告</span><a href="HOME_URL/?m=Notice&a=index&category_id=3" class="more" target="_blank">更多&gt;&gt;</a></h3>
             <ul>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=53" target="_blank">
-                        〖广告主〗广告投放之后可以进行修改吗                    </a>                  
+				<volist name="notice" id="no">
+                <li>                   
+                    <a href="HOME_URL/?m=Notice&a=index&category_id={$no.category_id}&notice_id={$no.id}" target="_blank">{$no.title}</a>                  
                 </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=52" target="_blank">
-                        〖广告主〗联盟有哪些广告类型                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=48" target="_blank">
-                        联盟新上线50%高提成CPS广告                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=44" target="_blank">
-                        富媒体右下角CPV广告代码暂停两天                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=37" target="_blank">
-                        排版方法                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=26" target="_blank">
-                        2013秋季服饰7折上新满249返50                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=25" target="_blank">
-                        大量收购麦冬                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=23" target="_blank">
-                        网站主，广告主，推广助手                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=11" target="_blank">
-                        【唯品会】719 大家一起来排队~                    </a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&&category_id=10&notice_id=8" target="_blank">
-                        服务条款的对象                    </a>                  
-                </li>
-                            </ul>
+				</volist>
+            </ul>
         </div>              
     </div>
     
