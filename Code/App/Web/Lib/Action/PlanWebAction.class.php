@@ -53,9 +53,26 @@ class PlanWebAction extends CommonAction {
 		// 查询广告广告计划的相关的信息
 		// 查询相关的数据
 		$adPlan = M('AdPlan');
+		
 		//$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
 		// 组装查询的条件
 		$where = "ad_plan_category.id = adplan.category_id and adplan.plan_status=2";
+		foreach ($_GET as $key => $val){
+			if($val){
+				
+				if($key == 'plan_name'){
+					$where = $where." and adplan.".$key." like '%".$val."%'";
+				}elseif ($key == 'search'){
+					continue;
+				}else{
+					$where = $where." and adplan.".$key." = ".$val;
+				}
+				
+			}
+			
+		}
+		//echo $where;
+		
 		$AdPlanInfo  = $this->memberLinkPage($adPlan,$where,5,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
 		//dump($AdPlanInfo);
 		
@@ -74,6 +91,63 @@ class PlanWebAction extends CommonAction {
      * @see Action::show()
      */
     public function show(){
+    	
+    	// 获取id值查询相关的数据
+		$this->AdPlan = D($this->actionName);
+		$AdPlanInfo =$this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->where('ad_plan_category.id = adplan.category_id and adplan.id = '.$_GET['id'])->field('adplan.*,ad_plan_category.name')->find();
+		
+		// 处理数据
+		$AdPlanInfo = $this->dealDataOne($AdPlanInfo);
+		
+		// 数据分配到前端
+		$this->assign('AdPlanInfo',$AdPlanInfo);
+		
+		//dump($AdPlanInfo);
+		// 显示相关的信息
+		$this->display();
+    }
+    
+    /**
+     * 
+     * 广告的展示
+     * @author Yumao <815227173@qq.com>
+     * @CreateDate: 2013-12-26 上午11:01:42
+     */
+    public function showAdv(){
+    	
+    	if($_GET['pid']){
+    		$_GET['pid'] = intval($_GET['pid']);
+    	
+    	}else{
+    	
+    		// 如果没有得到广告计划id则直接退出
+    		echo "必须传递计划id值";
+    		exit;
+    	}
+    	// 查询计划相关的信息
+    	$adPlan = M('AdPlan');
+    	
+    	$AdPlanInfo =$adPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->where('ad_plan_category.id = adplan.category_id and adplan.id = '.$_GET['pid'])->field('adplan.*,ad_plan_category.name')->find();
+    	$AdPlanInfo = $this->dealDataOne($AdPlanInfo);
+    	$this->assign("AdPlanInfo",$AdPlanInfo);
+    	//dump($AdPlanInfo);
+    	$AdManage = M("AdManage");
+    	$where = 'admanage.show_type = adsize.id and admanage.status = 2';
+    	$where = $where." and admanage.pid =".$_GET['pid'];
+    	
+    	
+    	// 查询出所有的信息
+    	 $AdManageInfo = $this->memberLinkPage($AdManage,$where,5,'id desc',array($this->table_pre.'ad_manage'=>'admanage',$this->table_pre.'ad_size'=>'adsize'),'admanage.*,adsize.size_type');
+    	 
+    	 // 处理数据添加
+    	 $AdManageInfo = $this->dealDataArrAdv($AdManageInfo);
+    	 //dump($AdManageInfo);
+    	 
+    	 
+    	 // 把数据分配到前台模版
+    	 $this->assign('AdManageInfo',$AdManageInfo);
+    	//dump($AdManageInfo);
+    	// 根据计划id查询当前计划的广告   	
     	$this->display();
     }
 	public function plan_list(){
@@ -328,5 +402,66 @@ class PlanWebAction extends CommonAction {
 							}
 						}
 						return $AdPlanInfoOne;
+	}
+	
+	/**
+	 *
+	 * 处理查询出的数据转化为相应的格式（主要用于二维数组的数据）
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-16 下午1:54:01
+	 */
+	private function dealDataArrAdv($AdManageInfo){
+	
+		// 创建数据库连接句柄
+		foreach ($AdManageInfo as $key=>$val){
+			$AdManageInfo[$key] = $this->dealDataAdv($AdManageInfo[$key]);
+		}
+	
+		return $AdManageInfo;
+	}
+	
+	/**
+	 *
+	 * 处理查询出的数据转化为相应的格式 （主要对于一维数组的数据）
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-16 下午1:57:11
+	 */
+	private function dealDataOneAdv($AdManageInfo){
+	
+		$AdManageInfo = $this->dealData($AdManageInfo);
+		return $AdManageInfo;
+	}
+	
+	/**
+	 *
+	 * 具体处理某一条数据的方法
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-16 下午1:59:55
+	 */
+	private function dealDataAdv($AdManageInfo){
+	
+		// 获取广告位置分类信息 （先存储在配置文件中读取配置文件)
+		$sizeType = C('AD_SIZE_TYPE');
+	
+		// 获取配置文件中对应的广告状态值
+		$adStatus = C('AD_STATUS');
+	
+		// 把广告尺寸类型根据传递过去的size_type转化为相对应的类别值
+		$AdManageInfo['size_type'] = $sizeType[$AdManageInfo['size_type']];
+	
+		// 把审核状态值转化为文字的形式添加到数组中
+		$AdManageInfo['status_name'] =$adStatus[$AdManageInfo['status']];
+	
+		// 把添加时间转换为相应的格式
+		$AdManageInfo['time'] = date("Y-m-d",$AdManageInfo['time']);
+	
+		// 如果是图片广告则添加图片广告的标志变量
+		if (preg_match('/^<img/is', $AdManageInfo['content'])){
+			$AdManageInfo['picFlag']=1;
+		}else{
+			$AdManageInfo['picFlag']=0;
+		}
+	
+		return $AdManageInfo;
 	}
 }
