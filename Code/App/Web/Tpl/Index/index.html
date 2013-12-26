@@ -6,7 +6,7 @@ var chartData = {$chartData};
 AmCharts.ready(function() {
 	// SERIAL CHART  
 	chart = new AmCharts.AmSerialChart();
-	chart.pathToImages = "http://adu.phpad.cn/static/image/default/";
+	chart.pathToImages = "STATIC_URL/default/images/";
 	chart.dataProvider = chartData;
 	chart.categoryField = "day";
 	chart.startDuration = 1;

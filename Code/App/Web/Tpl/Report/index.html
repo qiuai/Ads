@@ -11,7 +11,7 @@
 	chart = new AmCharts.AmSerialChart();
 	chart.pathToImages = 'STATIC_URL/default/images/';
 	chart.dataProvider = chartData;
-	chart.categoryField = "field";
+	chart.categoryField = "day";
 	chart.startDuration = 1;
 
 	// AXES
@@ -71,7 +71,7 @@
 <div class="main clearfix">
 	<div class="report_attestation">
 		<div class="report_attestation_head">
-			<h3 class="fl">综合报表</h3>
+			<h3 class="fl">{$location}</h3>
 			<div class="export fr">
 				<div class="export_left fl"></div>
 				<div class="export_center fl">
@@ -89,17 +89,18 @@
 		<div class="report_attestation_body">
 			<div class="body_head">
 				<form action="" method="get" id="report_form">
-					<input type="hidden" name="m" value="report">
+					<input type="hidden" name="m" value="{$module_name}">
+					<input type="hidden" name="a" value="{$action_name}">
 					<div class="fl" style="margin-right: 20px;">
 						<span class="fl">选择时间段：</span> 
-						<input type="text" name="start_date" id="start_date" class="input_text" size="12" value="2013-11-22">
+						<input type="text" name="start_date" id="start_date" class="input_text" size="12" value="{$start_date}">
 						<script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "start_date",
                                 ifFormat       :    "%Y-%m-%d",
                             });
                         </script>
-						- <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="2013-11-28">
+						- <input type="text" name="end_date" id="end_date" class="input_text" size="12" value="{$end_date}">
 						<script language="javascript" type="text/javascript">
                             Calendar.setup({
                                 inputField     :    "end_date",
@@ -123,62 +124,27 @@
 							<th class="header">&nbsp;&nbsp;&nbsp;&nbsp;预计收入&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						</tr>
 					</thead>
-					<tbody>
-										<tr>
-					    <td>20131127</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
+					
+					<Volist name='list' id='vo'>
+					<tr>
+					    <td>{$vo.day}</td>
+					    <td>{$vo.ip}</td>
+					    <td>{$vo.pv}</td>
+					    <td>{$vo.click}</td>
+					    <td>{$vo.income}</td>
 					</tr>
-										<tr>
-					    <td>20131126</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
+					</Volist>
+					
+					<tr class="tr_strong6">
+						<td>{$sum.day}</td>						
+						<td>{$sum.ip}</td>
+						<td>{$sum.pv}</td>
+						<td>{$sum.click}</td>
+						<td><em class="orange">{$sum.income}</em></td>
 					</tr>
-										<tr>
-					    <td>20131125</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
+					<tr>
+						<td colspan="11"></td>
 					</tr>
-										<tr>
-					    <td>20131124</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					</tr>
-										<tr>
-					    <td>20131123</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					</tr>
-										<tr>
-					    <td>20131122</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					    <td>0</td>
-					</tr>
-										</tbody>
-					<tbody>
-						<tr class="tr_strong6">
-							<td>合计</td>						
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td><em class="orange">0</em></td>
-						</tr>
-						<tr>
-							<td colspan="11"></td>
-						</tr>
-					</tbody>
 				</table>
 			</div>
 		</div>
