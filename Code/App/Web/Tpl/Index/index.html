@@ -83,40 +83,13 @@ AmCharts.ready(function() {
 <div class="main clearfix">
 	<div class="sidebar fr">
     	<div class="notice clearfix">
-        	<h3><span>最新公告</span><a href="http://adu.phpad.cn/index.php?m=notice&a=notice_list&category_id=9" target="_blank" class="more">更多&gt;&gt;</a></h3>
+        	<h3><span>最新公告</span><a href="HOME_URL/?m=Notice&a=index&category_id=2" target="_blank" class="more">更多&gt;&gt;</a></h3>
             <ul>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=51" target="_blank">联盟于12月8号满10元日付更新为满50元日付</a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=50" target="_blank">获取广告代码的时候，请选智能代码</a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=49" target="_blank">关于联盟网站模版错位</a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=45" target="_blank">网站主注意：网站被删除说明</a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=9" target="_blank">”专栏“的制作</a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=7" target="_blank">27号佣金已经发放完毕</a>                  
-                </li>
-                                <li>                   
-                    <a href="http://adu.phpad.cn/index.php?m=notice&a=notice_detail&category_id=9&notice_id=2" target="_blank">网站主 推广助手</a>                  
-                </li>
-                            </ul>
-        </div>
-                
-        <!--  
-        <div class="help clearfix">
-        	<h3>赚钱教程</h3>
-            <ul>
-                <li><a href="">数据认证</a></li>
+				<volist name="notice" id="no">
+					<li><a href="HOME_URL/?m=Notice&a=index&category_id={$no.category_id}&notice_id={$no.id}" target="_blank">{$no.title}</a></li>
+				</volist>
             </ul>
         </div>
-        -->
     </div>
     
     <div class="main_left">

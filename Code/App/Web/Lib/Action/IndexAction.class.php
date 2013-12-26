@@ -15,12 +15,13 @@
  */
 class IndexAction extends CommonAction {
     public function index(){
-		$this->assign("title","网站主-首页");
-		
+		$this	->assign("title","网站主-首页");
 		//  报表查询
-		$this->tenDaysBefore();
-		
-		$this->display();
+		$this	->tenDaysBefore();
+		$no		= M("notice"); // 查询公告表
+		$notice	= $no->order("id desc")->limit("0,10")->select();
+		$this	->assign("notice",$notice);
+		$this	->display();
     }
     /**
      * 最近十天数据
