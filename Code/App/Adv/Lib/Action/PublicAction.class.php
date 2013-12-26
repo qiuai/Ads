@@ -47,7 +47,7 @@ class PublicAction extends Action {
 	public function logout(){
 		if(isset($_SESSION[C('ADV_AUTH_KEY')])) {
 			session_destroy();
-			$this->redirect(__URL__.'&a=login');
+			$this->redirect(C('HOME_URL'));
 		}else {
 			$this->error('已经登出！');
 		}

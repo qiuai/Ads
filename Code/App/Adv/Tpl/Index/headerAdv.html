@@ -19,7 +19,7 @@
             <li>用户ID：<a href="" class="orange">600043</a></li>
             <li>专属媒介：暂无<a href=""></a></li>
 			<li class="msg"><a href="ADV_URL/?m=sms&a=sms_list" class="orange">站内信</a></li>
-            <li class="last"><a href="http://adu.phpad.cn/index.php?m=index&a=login_out&" class="orange">退出</a></li>
+            <li class="last"><a href="SITE_URL?m=Public&a=logout" class="orange">退出</a></li>
         </ul>
     </div>
     <div class="siter_nav">
@@ -29,7 +29,7 @@
 			<li <if condition="$flag eq 'Index'">class="selected"</if>><a href="ADV_URL/?m=Index&a=index">首页</a></li>
 			<li <if condition="$flag eq 'PlanAdv'">class="selected"</if>><a href="ADV_URL/?m=PlanAdv&a=index">计划管理</a></li>
 			<li <if condition="$flag eq 'AdAdv'">class="selected"</if>><a href="ADV_URL/?m=AdAdv&a=index">广告管理</a></li>
-			<li <if condition="$flag eq 'ReportAdv'">class="selected"</if>><a href="ADV_URL/?m=ReportAdv&a=index">查看报表</a></li>
+			<li <if condition="$flag eq 'Report'">class="selected"</if>><a href="ADV_URL/?m=Report">查看报表</a></li>
 			<!--
 			<li <if condition="$flag eq 'ApplyAdv'">class="selected"</if>><a href="ADV_URL/?m=ApplyAdv&a=index">投放申请</a></li>
 			<li <if condition="$flag eq 'FinanceAdv'">class="selected"</if>><a href="ADV_URL/?m=FinanceAdv&a=index">财务管理</a></li>
@@ -61,15 +61,13 @@
             <div class="sn_r fr"></div>
         </div>
 		<!--查看报表-->
-		<elseif condition="$flag eq 'ReportAdv'" />
+		<elseif condition="$flag eq 'Report'" />
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-				<li ><a href="ADV_URL/?m=ReportAdv&a=reportAll">综合报表</a></li> 
-				<li ><a href="ADV_URL/?m=ReportAdv&a=reportCps">CPS明细报表</a></li> 
-				<li ><a href="ADV_URL/?m=ReportAdv&a=reportCpa">CPA明细报表</a></li> 
-				<li ><a href="ADV_URL/?m=ReportAdv&a=reportCpc">CPC明细报表</a></li> 
-				<li ><a href="ADV_URL/?m=ReportAdv&a=reportCpm">CPM明细报表</a></li>
+				<li ><a href="ADV_URL?m=Report">综合报表</a></li> 
+				<li ><a href="ADV_URL?m=Report&a=cpcReport">CPC明细报表</a></li> 
+				<li ><a href="ADV_URL?m=Report&a=cpmReport">CPM明细报表</a></li>
             </ul>
             <div class="sn_r fr"></div>
         </div>

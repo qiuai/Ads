@@ -116,7 +116,7 @@ class ReportAction extends CommonAction {
 					$data[0][$key] = $value ? $value : 0;
 					$sum[$key] = intval($value) + intval($sum[$key]);
 				}
-				$data[0]['day'] = date('md', $yestoday);
+				$data[0]['day'] = date('Ymd', $yestoday);
 					
 				$list[] = $data[0];
 			}

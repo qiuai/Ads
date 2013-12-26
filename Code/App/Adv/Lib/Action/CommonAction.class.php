@@ -23,6 +23,8 @@ class CommonAction extends Action {
 	function _initialize(){
     	$this->checkUser();
 		$this->assign("flag",MODULE_NAME);
+		$this->assign("module_name",MODULE_NAME);
+		$this->assign("action_name",ACTION_NAME);
     }
     /**
      * 检测登录
