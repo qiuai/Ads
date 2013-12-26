@@ -1,4 +1,4 @@
-<include file="Index:headerWeb" />
+<include file="Index:headerAdv" />
 <div class="main clearfix">
 	<div class="sidebar fr">
     	<div class="text_box clearfix">
@@ -16,9 +16,9 @@
     	<div class="huiyuan_xinxi gray_box">
         	<div class="gb_t">
             	<div class="gb_tr">
-					<h3 class="fl">会员信息</h3>
+					<h3 class="fl">修改个人信息</h3>
 					<div class="xiugai_xinxi fr">
-						<a href="SITE_URL?m=Profile&a=profileEdit">修改会员信息</a>
+						<a href="ADV_URL/?m=Profile&a=profileEdit">修改用户信息</a>
 					</div>
 					<div class="cb"></div>
 				</div>
@@ -26,24 +26,24 @@
             <div class="gb_m">
 				<table border="0">
 				  <tbody><tr>
-					<td><b>用户名：</b><span>{$info.username}&nbsp;&nbsp;(用户ID：{$info.id})</span></td>
-					<td><b>电话：</b><span>{$info.tel}</span></td>
+					<td><b>用户名：</b><span>adv&nbsp;&nbsp;(用户ID：600043)</span></td>
+					<td><b>电话：</b><span></span></td>
 				  </tr>
 				  <tr>
-					<td><b>密码：</b><span>****** </span><a class="orange" href="SITE_URL?m=Profile&a=profilePassword">修改密码</a></td>
-					<td><b>手机：</b><span>{$info.mobilephone}</span></td>
+					<td><b>密码：</b><span>****** </span><a class="orange" href="ADV_URL/?m=Profile&a=profilePassword">修改密码</a></td>
+					<td><b>手机：</b><span></span></td>
 				  </tr>
 				  <tr>
-					<td><b>个人/法人</b>：<span><if condition="$info.legal_status eq 1">法人<else />个人</if></span></td>
-					<td><b>QQ：</b><span>{$info.qq}</span></td>
+					<td><b>个人/法人</b>：<span>个人</span></td>
+					<td><b>QQ：</b><span>123456789</span></td>
 				  </tr>
 				  <tr>
-					<td><b>姓名：</b><span>{$info.real_name}</span></td>
+					<td><b>姓名：</b><span></span></td>
 					<td><b>旺旺：</b><span></span></td>
 				  </tr>
 				  <tr>
-					<td><b>身份证号：</b><span>{$info_detail.id_card}</span></td>					
-					<td><b>是否接受邮件：<span><if condition="$info['is_feed']">是<else />否</if></span></td>
+					<td><b>身份证号：</b><span></span></td>					
+					<td><b>是否接受邮件：<span>是</span></td>
 				  </tr>
 				</tbody></table>
             </div>
