@@ -18,7 +18,7 @@
             <li>用户ID：<a href="" class="orange">{$Think.session.webId}</a></li>
             <li>专属媒介：暂无</li>         
             <li class="msg"><a href="http://adu.phpad.cn/center.php?m=sms&a=sms_list" class="orange">站内信</a></li>
-            <li class="last"><a href="WEB_URL?m=Public&a=logout" class="orange">退出</a></li>
+            <li class="last"><a href="WEB_URL/?m=Public&a=logout" class="orange">退出</a></li>
         </ul>
     </div>
     <div class="siter_nav">
@@ -27,7 +27,7 @@
     	<ul class="fl" id="nav_list">
 			<li <if condition="$flag eq 'Index'">class="selected"</if>><a href="WEB_URL/?m=Index&a=index">首页</a></li>
 			<li <if condition="$flag eq 'PlanWeb'">class="selected"</if>><a href="WEB_URL/?m=PlanWeb&a=index">广告计划</a></li>
-			<li <if condition="$flag eq 'ReportWeb'">class="selected"</if>><a href="WEB_URL/?m=ReportWeb&a=index">查看报表</a></li>
+			<li <if condition="$flag eq 'Report'">class="selected"</if>><a href="WEB_URL/?m=Report">查看报表</a></li>
 			<li <if condition="$flag eq 'SiteWeb'">class="selected"</if>><a href="WEB_URL/?m=SiteWeb&a=index">网站管理</a></li>
 			<li <if condition="$flag eq 'ZoneWeb'">class="selected"</if>><a href="WEB_URL/?m=ZoneWeb&a=index">代码位管理</a></li>
 			<li <if condition="$flag eq 'FinanceWeb'">class="selected"</if>><a href="WEB_URL/?m=FinanceWeb&a=index">财务管理</a></li>
@@ -49,16 +49,14 @@
             </ul>
             <div class="sn_r fr"></div>
         </div>
-		<elseif condition="$flag eq 'ReportWeb'"/>
+		<elseif condition="$flag eq 'Report'"/>
 		<!--广告管理-->
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
-				<li ><a href="WEB_URL/?m=ReportWeb&a=report_all">综合报表</a></li> 
-				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cps">CPS明细报表</a></li> 
-				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cpa">CPA明细报表</a></li> 
-				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cpc">CPC明细报表</a></li> 
-				<li ><a href="WEB_URL/?m=ReportWeb&a=report_cpm">CPM明细报表</a></li>            	
+				<li ><a href="WEB_URL/?m=Report">综合报表</a></li> 
+				<li ><a href="WEB_URL/?m=Report&a=cpcReport">CPC明细报表</a></li> 
+				<li ><a href="WEB_URL/?m=Report&a=cpmReport">CPM明细报表</a></li>            	
             </ul>
             <div class="sn_r fr"></div>
         </div>

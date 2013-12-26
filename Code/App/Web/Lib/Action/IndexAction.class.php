@@ -18,13 +18,22 @@ class IndexAction extends CommonAction {
 		$this->assign("title","网站主-首页");
 		
 		//  报表查询
-		$this->tenDaysBefores();
+		$this->tenDaysBefore();
 		
 		$this->display();
     }
     /**
      * 最近十天数据
      *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-12-25 下午4:49:19
+     */
+    public function tenDaysBefore(){
+    	R('Admin://Report/tenDaysBefore',array($_SESSION[C('WEB_AUTH_KEY')]));
+    }
+    /**
+     * 最近十天数据
+     * backup
      * cpm cpc
      *
      * @author Vonwey <VonweyWang@gmail.com>
@@ -34,7 +43,7 @@ class IndexAction extends CommonAction {
     	$uid = $_SESSION[C('WEB_AUTH_KEY')];
     	// 查询中心 当日时间或者选择时间
     	$today = date('d');
-    	
+    	 
     	// 获取数据
     	$model = M('Income');
     	for($i=9; $i>=0; $i--){
@@ -47,9 +56,9 @@ class IndexAction extends CommonAction {
     		$data[0]['day'] = date('md', $yestoday);
     		$list[] = $data[0];
     	}
-    	
+    	 
     	$json = json_encode($list);
-    	
+    	 
     	$this->assign("chartData", $json);
     }
 }
