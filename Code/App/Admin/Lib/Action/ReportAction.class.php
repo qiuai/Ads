@@ -120,6 +120,7 @@ class ReportAction extends CommonAction {
 			$_GET['plan_name'] =  strip_tags($_GET['keyword']);
 			$_GET['plan_name'] = array("like","%".$_GET['plan_name']."%");
 		}
+		$this->assign("action_name",$_GET['aa']);
 		R('AdPlan/search', array(30));
 	}
 	/**
