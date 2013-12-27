@@ -36,10 +36,10 @@ a{
         <form method="get">
         <input name="m" value="AdPlan" type="hidden">
         <input name="a" value="search" type="hidden">
-        <input name="keyword" type="text">
+        <input name="keyword" type="text" <if condition="$Think.get.plan_name  neq ''"> value="{$Think.get.plan_name}" <elseif condition="$Think.get.id  neq ''"/> value="{$Think.get.id}"</if> >
         <select name="search_type">
-            <option selected="selected" value="plan_id">计划ID</option>
-            <option value="plan_name">计划名称</option>
+            <option  value="plan_id" <if condition="$search_type  eq 'plan_id'" >selected="selected"</if> >计划ID</option>
+            <option value="plan_name" <if condition="$search_type  eq 'plan_name'" >selected="selected"</if> >计划名称</option>
         </select>
         <input value="查询" class="button" type="submit">
         </form>
@@ -52,7 +52,7 @@ a{
         <td style="font-size:13px;height:40px;border-top:1px solid #ccc" colspan="2">计划状态：
                     <a href="SITE_URL?m=AdPlan&a=index"   class="link_before_checked">全部</a>
                    <foreach name="adPlanStatusInfo" item="vo" key="key" >
-                   	<if condition="($Think.get.plan_status eq $key) and ($Think.get.pay_type eq '') and ($Think.get.plan_name eq '') and ($Think.get.id eq '') ">
+                   	<if condition="($Think.get.plan_status eq $key) and ($Think.get.pay_type eq '') and ($Think.get.plan_name eq '') and ($Think.get.id eq '') and ($Think.get.plan_name eq '') and ($idSearch eq '')">
                    		<a href="SITE_URL?m=AdPlan&a=search&plan_status={$key}" class="link-checked">{$vo}</a>
                    	<else />
                    		<a href="SITE_URL?m=AdPlan&a=search&plan_status={$key}" class="link_before_checked">{$vo}</a>

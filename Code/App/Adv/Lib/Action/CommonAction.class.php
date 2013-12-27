@@ -25,6 +25,8 @@ class CommonAction extends Action {
 		$this->assign("flag",MODULE_NAME);
 		$this->assign("module_name",MODULE_NAME);
 		$this->assign("action_name",ACTION_NAME);
+		$this->assign("advId",$_SESSION[C('ADV_AUTH_KEY')]);
+		$this->assign("loginAdvName",$_SESSION['loginAdvName']);
     }
     /**
      * 检测登录

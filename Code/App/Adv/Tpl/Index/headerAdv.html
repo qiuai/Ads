@@ -15,8 +15,8 @@
 	<div class="header_info">
     	<a href="ADV_URL/" class="logo"></a>
         <ul class="user_info">
-            <li>欢迎您：<a href="" class="orange">adv</a></li>
-            <li>用户ID：<a href="" class="orange">600043</a></li>
+            <li>欢迎您：<a href="" class="orange">{$loginAdvName}</a></li>
+            <li>用户ID：<a href="" class="orange">{$advId}</a></li>
             <li>专属媒介：暂无<a href=""></a></li>
 			<li class="msg"><a href="ADV_URL/?m=sms&a=sms_list" class="orange">站内信</a></li>
             <li class="last"><a href="SITE_URL?m=Public&a=logout" class="orange">退出</a></li>
@@ -104,3 +104,7 @@
 		<!--二级导航END-->
     </div>
 </div>
+<if condition="$flag eq 'PlanAdv'">
+<link rel="stylesheet" type="text/css" href="STATIC_URL/adv/css/calendar-blue.css">
+<script type="text/javascript" src="STATIC_URL/adv/js/calendar.js"></script>
+</if>

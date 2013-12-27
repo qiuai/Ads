@@ -62,7 +62,7 @@ class PlanWebAction extends CommonAction {
 				
 				if($key == 'plan_name'){
 					$where = $where." and adplan.".$key." like '%".$val."%'";
-				}elseif ($key == 'search'){
+				}elseif ($key == 'search' || $key == "p"){
 					continue;
 				}else{
 					$where = $where." and adplan.".$key." = ".$val;
