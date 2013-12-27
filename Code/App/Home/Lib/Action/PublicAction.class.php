@@ -140,14 +140,20 @@ class PublicAction extends CommonAction {
 		if(!empty($authInfo)) {
 			
 			$_SESSION[C('MEMBER_AUTH_KEY')]	=	$authInfo['id'];
-			$_SESSION['email']	=	$authInfo['email'];
+			$_SESSION['email']				=	$authInfo['email'];
 			$_SESSION['loginUserName']		=	$authInfo['username'];
 			$_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
-			$_SESSION['login_count']	=	$authInfo['username'];
+			$_SESSION['login_count']		=	$authInfo['username'];
 			if($authInfo['user_type']=='web') {
-				$_SESSION[C('WEB_AUTH_KEY')]	=	$authInfo['id'];
+				$_SESSION[C('WEB_AUTH_KEY')]=	$authInfo['id']; // 登入ID
+				$_SESSION['loginWebName']	=	$authInfo['username']; // 登入账号
 				unset($_SESSION[C('ADV_AUTH_KEY')]);
-				redirect(C("WEB_URL"));
+				if(empty($_GET["zone_id"])){ // 判断是否获取代码位ID
+					redirect(C("WEB_URL"));	// 没得到跳转WEB首页
+				}else{
+					redirect(C("WEB_URL").'?m=ZoneWeb&a=zoneEdit&zone_id='.$_GET["zone_id"]); // 否则跳转代码位编辑页面
+				}
+				
 			}else{
 				$_SESSION[C('ADV_AUTH_KEY')]	=	$authInfo['id'];
 				unset($_SESSION[C('WEB_AUTH_KEY')]);

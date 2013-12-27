@@ -19,7 +19,7 @@ class IndexAction extends CommonAction {
 		//  报表查询
 		$this	->tenDaysBefore();
 		$no		= M("notice"); // 查询通知公告表_网站主公告
-		$notice	= $no->where("categroy_id = 2")->order("id desc")->limit("0,10")->select();
+		$notice	= $no->where("category_id = 2")->order("id desc")->limit("0,10")->select();
 		$this	->assign("notice",$notice);
 		$this	->display();
     }

@@ -57,7 +57,7 @@
 			<td>{$vo.display}</td>
 			<td>{$vo.width}*{$vo.height}</td>
 			<td><if condition="$vo.status eq 0">是<elseif condition="$vo.status eq 1"/>否</if></td>
-			<td><a target="_blank" href="WEB_URL/?m=ZoneWeb&a=zoneEdit&zone_id={$vo.id}">编辑</a></td>
+			<td><a target="_blank" href="SITE_URL/?m=Web&a=loginMemberHome&zone_id={$vo.id}&uid={$vo.uid}">编辑</a></td>
 		</tr>
 		</volist>
 	</tbody>
