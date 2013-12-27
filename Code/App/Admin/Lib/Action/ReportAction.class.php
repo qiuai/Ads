@@ -112,6 +112,9 @@ class ReportAction extends CommonAction {
 	public function historyDetailReport(){
 		$this->display();
 	}
+	public function choosePlan(){
+		R('AdPlan/index', array(30));
+	}
 	/**
 	 * 获取报表数据
 	 *

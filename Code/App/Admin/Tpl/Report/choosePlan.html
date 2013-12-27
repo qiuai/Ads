@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link type="text/css" href="STATIC_URL/admin/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="STATIC_URL/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidator.js"></script>
+<script type="text/javascript" src="STATIC_URL/admin/js/formvalidatorregex.js"></script></head>
+<body>
+ <div class="main">
+  <div class="body_title">选择广告计划</div>
+  <div class="listmain">	
+      <table align="center" class="list" cellspacing="0">
+        <tr>
+        <td width="40%" style="border-right:none;">
+            <form method="get">
+                <input type="hidden" name="ac" value="report_detail">
+                <input type="text" name="content">
+                <select name="condition">
+                    <option value="plan_name">计划名称</option>
+                    <option value="plan_id">计划ID</option>
+                </select>
+                <input type="submit" value="查询" class="button">
+            </form>
+        </td>
+        </tr>
+        <!--  
+        <tr>
+            <td style="font-size:13px;height:40px;" colspan="2">网站状态：
+                <a href="http://adu.phpad.cn/admin.php?m=report_detail&a=site_list&" class="link-checked">全部状态</a>
+                <a href="http://adu.phpad.cn/admin.php?m=report_detail&a=site_list&status=未验证"  class="link_before_checked">未验证</a>
+                <a href="http://adu.phpad.cn/admin.php?m=report_detail&a=site_list&status=审核中"  class="link_before_checked">审核中</a>
+                <a href="http://adu.phpad.cn/admin.php?m=report_detail&a=site_list&status=正常"  class="link_before_checked">正常</a>
+            </td>
+        </tr>
+        -->
+    </table>
+		
+		
+<form method="post" id="sitelist_form">
+<table cellspacing="0" class="list" style="text-align:center">
+
+<volist name="AdPlanInfo" id="vo" key="k" >
+	<if condition="$k%6 eq 0 ">
+    <tr>
+    </if>
+       <td>
+          <p style="margin:10px"><a href="http://adu.phpad.cn/admin.php?m=report_detail&a=choose_plan_do&plan_id=88&plan_name=yougou%20cps&plan_logo=13758410672727.jpg"></a></p>
+          <p><a href="http://adu.phpad.cn/admin.php?m=report_detail&a=choose_plan_do&plan_id=88&plan_name=yougou%20cps&plan_logo=13758410672727.jpg"><img width="120" height="45" src="UPLOAD_URL/{$vo['plan_logo']}"></a></p>
+          <a href="http://adu.phpad.cn/admin.php?m=report_detail&a=choose_plan_do&plan_id=88&plan_name=yougou%20cps&plan_logo=13758410672727.jpg">
+          <p style="margin:5px">yougou cps</p></a>
+          <p></p>
+       </td>
+    <if condition="$k%5 eq 0 ">
+    </tr>
+    </if>
+</volist>
+
+</table>
+</form>
+<div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div>
+</div>
+</div>
+
+</body></html>

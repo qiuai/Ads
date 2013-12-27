@@ -32,7 +32,7 @@ class AdPlanAction extends CommonAction{
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-4 上午11:26:12
 	 */
-	public function index(){
+	public function index($pageNum = 5){
 		
 		// 查询获取所有的计划
 		$this->AdPlan = D($this->actionName);
@@ -42,7 +42,7 @@ class AdPlanAction extends CommonAction{
 		
 		// 查询相关的数据
 		//$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
-		$AdPlanInfo  = $this->memberLinkPage($this->AdPlan,'ad_plan_category.id = adplan.category_id',5,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
+		$AdPlanInfo  = $this->memberLinkPage($this->AdPlan,'ad_plan_category.id = adplan.category_id',$pageNum,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
 		//dump($AdPlanInfo);
 		
 		// 处理数据
