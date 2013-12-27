@@ -1,11 +1,11 @@
 <include file="Index:headerWeb" />
-<link rel="stylesheet" type="text/css" href="http://adu.phpad.cn/static/css/default/ads.css">
+<link rel="stylesheet" type="text/css" href="STATIC_URL/web/css/ads.css">
 <form action="" method="get" id="frm">
-<input type="hidden" name="m" value="plan">
-<input type="hidden" name="a" value="plan_list">
-<input type="hidden" name="pay_type" value="">
-<input type="hidden" name="category_id" value="">
-<input type="hidden" name="plan_check" value="">
+<input type="hidden" name="m" value="PlanWeb">
+<input type="hidden" name="a" value="index">
+<input type="hidden" name="pay_type" value="{$Think.get.pay_type}">
+<input type="hidden" name="category_id" value="{$Think.get.category_id}">
+<input type="hidden" name="plan_check" value="{$Think.get.plan_check}">
 <input type="hidden" name="search" value="">
 <div class="hd_list overall clearfix">
         <div class="list_info">
@@ -14,10 +14,10 @@
                 <tr>
                     <td colspan="2" class="list_info_tt">
                         <h2>广告活动列表</h2>
-                        <p>选择网站：
+                        <!-- <p>选择网站：
                             <select name="site_id" id="site_id" onchange="window.location.href='http://adu.phpad.cn/center.php?m=plan&a=plan_list&site_id=' + this.value">
                                 <option value="31">www.51tao.com</option><option value="19">www.52fl.com</option><option value="33">www.etao.com</option><option value="34">www.aifanxian.com</option><option value="26">www.zenmeyang.com</option><option value="35">www.qfanqie.com</option><option value="37">www.test.com</option>                            </select>
-                        </p>
+                        </p>-->
                     </td>
                 </tr>
                 <tr>
@@ -30,7 +30,7 @@
                         
                         <option value="">全部</option>
                          <volist name="adPayTypeInfo" id="vo">
-                         	<option value="{$vo['key']}">{$vo['val']}</option>  
+                         	<option value="{$vo['key']}" <if condition="$Think.get.pay_type eq $vo['key']"> selected="selected"</if> >{$vo['val']}</option>  
                           </volist>
                         </select>
                         </ul>
@@ -42,11 +42,11 @@
                     </td>
                     <td>
                         <ul id="category_id">
-                            <li cid=""><span class="bg_fe6c00">全部</span></li>
+                            <li cid=""><span <if condition="$Think.get.category_id eq ''">class="bg_fe6c00"</if>>全部</span></li>
                    				<volist name="industryInfo" id="vo">
-                   					<li cid="{$vo['id']}"><span>{$vo['name']}</span></li>
+                   					<li cid="{$vo['id']}" ><span <if condition="$Think.get.category_id eq $vo['id']">class="bg_fe6c00"</if> >{$vo['name']}</span></li>
                    				</volist>
-                             </ul>   
+                        </ul>   
                     </td>
                 </tr>
                 <tr>
@@ -55,9 +55,9 @@
                     </td>
                     <td>
                         <ul id="plan_check">
-                            <li plan_check=""><span class="bg_fe6c00">全部</span></li>
+                            <li plan_check=""><span <if condition="$Think.get.plan_check eq ''"> class="bg_fe6c00" </if>>全部</span></li>
                             <volist name="adPlanCheckInfo" id="vo">
-                            	 <li plan_check="{$vo['key']}"><span >{$vo['val']}</span></li>
+                            	 <li plan_check="{$vo['key']}"><span <if condition="$Think.get.plan_check eq $vo['key']"> class="bg_fe6c00" </if> >{$vo['val']}</span></li>
                             </volist>                          
                         </ul>
                     </td>
@@ -97,7 +97,7 @@
                 <volist  name="AdPlanInfo" id="vo" key="k" >
                 	<tr>
 	                    <td>
-	                        <a href="SITE_URL?m=PlanWeb&a=show&pid={$vo['id']}">
+	                        <a href="SITE_URL?m=PlanWeb&a=show&id={$vo['id']}">
 	                        <img src="UPLOAD_URL/{$vo['plan_logo']}" width="120" height="45">
 	                        </a>
 	                    </td>
@@ -106,7 +106,7 @@
 	                     </td>
 	                    <td>
 	                        <em>
-	                       	 <a href="SITE_URL?m=PlanWeb&a=show&pid={$vo['id']}" target="_blank" class="blue">{$vo['plan_name']}</a>
+	                       	 <a href="SITE_URL?m=PlanWeb&a=show&id={$vo['id']}" target="_blank" class="blue">{$vo['plan_name']}</a>
 	                        </em>
 	                    </td>
 	                    <td>
@@ -127,7 +127,7 @@
 	                        <span class="green">通过</span>      
 	                    </td>
 	                    <td>
-	                                                    <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_ad_list&plan_id=126" class="blue">广告链接</a>
+	                                                    <a href="SITE_URL?m=PlanWeb&a=showAdv&pid={$vo['id']}" class="blue">广告链接</a>
 	                     </td>
                		 </tr>
                 </volist>

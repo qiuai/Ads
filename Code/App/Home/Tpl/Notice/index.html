@@ -4,18 +4,22 @@
 		if (!$("div#artical>div.artical_menu>ul>li:gt(0)").hasClass("active")) $("div#artical>div.artical_menu>ul>li:eq(0)").addClass("active");
 	})
 </script>
-<script type="text/javascript" charset="utf-8">function mysub(ob){
-    	var keyword = $('#key_id').val();
-    	var cate_id = $('#cate_id').val();
-    	$('#sub_id').attr('href','http://www.ads.me/?m=Notice&a=index&category_id='+cate_id+'&keyword='+keyword);
-    } </script> 
+<script type="text/javascript" charset="utf-8">
+function mysub(ob){
+	var keyword = $('#key_id').val();
+	var cate_id = $('#cate_id').val();
+	$('#sub_id').attr('href','HOME_URL/?m=Notice&a=index&category_id=' + cate_id + '&keyword=' + keyword);
+}
+</script> 
 <div id="artical">
 	<div class="artical_menu">
 		<h2>消息中心</h2>
 		<ul>
 			<volist name="category" id="list">
-			<li <if condition="$gid eq $list['id']">class='active'</if>><a href="SITE_URL/?m=Notice&a=index&category_id={$list.id}">{$list.category_name}</a></li>
-			</volist>		
+			<li <if condition="$gid eq $list['id']">class='active'</if>>
+				<a href="HOME_URL/?m=Notice&a=index&category_id={$list.id}">{$list.category_name}</a>
+			</li>
+			</volist>	
 		</ul>
 	</div>
 	<div class="artical_list">
@@ -26,8 +30,8 @@
 				<volist name="cate" id="cate">
 				<span>
 					<a>您的位置</a>&gt;
-					<a href="SITE_URL/?m=Notice&a=notice_list&category_id=1">消息中心</a>&gt;
-					<a href="SITE_URL/?m=Notice&a=notice_list&category_id={$cate.id}" class="orange">{$cate.category_name}</a>
+					<a href="HOME_URL/?m=Notice&a=index&category_id=1">消息中心</a>&gt;
+					<a href="HOME_URL/?m=Notice&a=index&category_id={$cate.id}" class="orange">{$cate.category_name}</a>
 				</span>
 				<strong>{$cate.category_name}</strong>
 				</volist>
@@ -35,10 +39,12 @@
 			<div class="artical_search">
 				<select id='cate_id' name="category_id">
 					<volist name="category" id="list">
-					<option value="{$list.id}">{$list.category_name}</option>
+					<option value="{$list.id}" <if condition="$gid eq $list['id']">selected</if>>
+						{$list.category_name}
+					</option>
 					</volist>
 				</select>
-				<input id='key_id' name="keyword" type="text" class="artical_search_input" value="">
+				<input id='key_id' name="keyword" type="text" class="artical_search_input" value="{$keyword}">
 				<a id="sub_id" onclick='mysub(this)' class="artical_search_btn">
 					<span style="height:28px;line-height:28px;margin-left:25px">检索</span>
 				</a>
@@ -50,13 +56,13 @@
 			<ul class="artical_list_ul">
 				<volist name="notice" id="vo">
 				<li>
-					<em>{$vo.pubdate}</em>
-					<a href="SITE_URL/?m=Notice&a=index&category_id={$vo.category_id}&notice_id={$vo.id}">{$vo.title}</a>
+					<em>[{$vo.pubdate}]</em>
+					<a href="HOME_URL/?m=Notice&a=index&category_id={$vo.category_id}&notice_id={$vo.id}">{$vo.title}</a>
 				</li>
 				</volist>
 			</ul>
 			<div class="activity_right_foot">
-				<!--分页-->
+				{$page}
 			</div>
 			</div>
 			<!--##############################内容页######################################-->

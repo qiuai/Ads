@@ -15,6 +15,22 @@
  */
 class IndexAction extends CommonAction {
     public function index(){ 
-		$this->display();
+		$no		= M("notice"); // 查询通知公告表
+		$all	= $no->where("category_id=1")->order("id desc")->limit("0,6")->select();
+		foreach($all as $key=>$val){
+			$all[$key]["pubdate"]	= date("m-d",$val["pubdate"]);
+		}
+		$web	= $no->where("category_id=2")->order("id desc")->limit("0,6")->select();
+		foreach($web as $key=>$val){
+			$web[$key]["pubdate"]	= date("m-d",$val["pubdate"]);
+		}
+		$adv	= $no->where("category_id=3")->order("id desc")->limit("0,6")->select();
+		foreach($adv as $key=>$val){
+			$adv[$key]["pubdate"]	= date("m-d",$val["pubdate"]);
+		}
+		$this	->assign("all",$all);
+		$this	->assign("web",$web);
+		$this	->assign("adv",$adv);
+		$this	->display();
     }
 }

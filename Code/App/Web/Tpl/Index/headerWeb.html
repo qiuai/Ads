@@ -12,12 +12,12 @@
 <body>
 <div class="siter_header">
 	<div class="header_info">
-		<a href="http://adu.phpad.cn/center.php" class="logo">PHPADU广告联盟</a>
+		<a href="#" class="logo">PHPADU广告联盟</a>
         <ul class="user_info">
             <li>欢迎您：<a href="" class="orange">{$Think.session.loginWebName}</a></li>
             <li>用户ID：<a href="" class="orange">{$Think.session.webId}</a></li>
             <li>专属媒介：暂无</li>         
-            <li class="msg"><a href="http://adu.phpad.cn/center.php?m=sms&a=sms_list" class="orange">站内信</a></li>
+            <li class="msg"><a href="WEB_URL/?m=Sms&a=smsList" class="orange">站内信</a></li>
             <li class="last"><a href="WEB_URL/?m=Public&a=logout" class="orange">退出</a></li>
         </ul>
     </div>
@@ -39,6 +39,7 @@
         <!--二级导航-->
 		<if condition="$flag eq 'PlanWeb'">
 		<!--计划管理-->
+		<!-- 
 		<div class="sub_nav clearfix">
         	<div class="sn_l fl"></div>
             <ul class="fl">
@@ -48,7 +49,7 @@
 				<li ><a href="WEB_URL/?m=PlanWeb&a=&a=plan_coupon_list">申请优惠券</a></li>            	
             </ul>
             <div class="sn_r fr"></div>
-        </div>
+        </div> -->
 		<elseif condition="$flag eq 'Report'"/>
 		<!--广告管理-->
 		<div class="sub_nav clearfix">

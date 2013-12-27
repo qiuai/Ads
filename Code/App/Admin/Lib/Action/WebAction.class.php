@@ -295,4 +295,19 @@ class WebAction extends CommonAction {
 		// 下载Excel方法
 		$this->downloadExcel($filename,$ReportArr,$HeaderArr);
 	}
+	/**
+	 * 进入会员中心
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-12 下午5:32:59
+	 */
+	public function loginMemberHome(){
+		$model			= M("Member"); // 会员信息表
+		$id				= $_REQUEST['uid']; // 网站主ID
+		$member			= $model->find($id); // 查找网站主账号密码
+		$zone_id		= (int)($_GET["zone_id"]); // 代码位ID
+		if(!empty($member)){
+			redirect(C('HOME_URL').'?m=Public&a=adminLogin&username=' . $member['username'] . '&password=' . $member['password'].'&zone_id='.$zone_id); // 传参验证登入信息
+		}
+	}
 }

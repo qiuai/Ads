@@ -19,8 +19,10 @@ class IndexAction extends CommonAction {
 		
 		//  报表查询
 		$this->tenDaysBefore();
-		
-		$this->display();
+		$no		= M("notice"); // 查询通知公告表_广告主公告
+		$notice	= $no->where("category_id = 3")->order("id desc")->limit("0,10")->select();
+		$this	->assign("notice",$notice);
+		$this	->display();
     }
     /**
      * 最近十天数据

@@ -1,0 +1,138 @@
+<include file="Index:headerWeb" />
+<script>
+$(function(){
+	$(".show_view").toggle(
+		function(){
+		    var linkid = $(this).attr('linkid');
+		    $("#view_"+linkid).children(0).html($("#code_content_"+linkid).val());
+			$("#view_"+linkid).show();
+			$(this).html("（点击收起）");
+		},
+		function(){
+			var linkid = $(this).attr('linkid');
+			$("#view_"+linkid).hide();
+			$(this).html("（点击查看）");
+		}
+	);
+	
+	$(".show_view_btn").toggle(
+		function(){
+		    var linkid = $(this).attr('linkid');
+                        $("#view_"+linkid).children(0).html($("#code_content_"+linkid).val());
+			$("#view_"+linkid).show();
+			$(this).html("关闭预览");
+		},
+		function(){
+			var linkid = $(this).attr('linkid');
+			$("#view_"+linkid).hide();
+			$(this).html("显示预览");
+		}
+	);
+});
+</script>
+<div class="main clearfix" style="position:relative;">   
+	<div class="actlist gray_box">
+        	<div class="gb_t">
+            	<div class="gb_tr">
+            	    <p class="fr">选择网站：
+                            <select name="site_id" id="site_id" onchange="window.location.href='http://adu.phpad.cn/center.php?m=plan&a=plan_ad_list&site_id=' + this.value">
+                                <option value="45">www.longliqicc.cn</option>                            </select>
+                    </p>
+            	    <h3>活动链接</h3>
+            	    
+            	</div>
+            </div>
+            <div class="gb_m">
+            	<table class="table_list" width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td colspan="5" class="notb">
+                    	<table width="100%" border="0" class="noborder" style="margin:15px 0;">
+                          <tr>
+                            <td width="160" rowspan="2" align="center"><img src="UPLOAD_URL/{$AdPlanInfo['plan_logo']}" width="120" height="45" /></td>
+                            <td width="200">活动名称：<span class="orange">{$AdPlanInfo['plan_name']}</span></td>
+                            <td>活动分类：{$AdPlanInfo['name']}</td>
+                            <td rowspan="2">
+                                                            </td>
+                          </tr>
+                          <tr>
+                            <td>佣金：{$AdPlanInfo['site_master_display_price']}</td>
+                            <td>申请状态：
+                            <span class="green">通过</span>
+                            </td>                          
+                          </tr>
+                        </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th align="center">链接名称</th>
+                    <th align="center">类型</th>
+                    <th align="center">尺寸</th>
+                    <th align="center">创建时间</th>
+                    <th width="220" align="center">操作</th>
+                  </tr>
+                  <volist name="AdManageInfo" id="vo" >                  	
+                  	<tr height="40px">
+                    <td align="center">{$vo['title']}<a href="#" linkid="{$vo['aid']}" class="show_view orange">（点击查看）</a></td>
+                    <td align="center">{$vo['size_type']}</td>
+                    <td align="center">{$vo['size']}</td>
+                    <td align="center">{$vo['time']}</td>
+                    <td align="center">
+                                        	<!--  <a href="javascript:putAd('195')" class="links_btn">投放广告</a>-->
+                                             <a href="javascript:void(0);" linkid="{$vo['aid']}" class="show_view_btn links_btn">显示预览</a>
+                    </td>
+                  </tr>
+                  <tr id="view_{$vo['aid']}" style="display:none;">
+                  	<td colspan="5" style="padding:10px 0; text-align:center;"></td>
+                  </tr>
+                  <textarea id="code_content_{$vo['aid']}" style="display:none;">
+                       <a href="" target="_blank">
+                            {$vo['content']}
+                        </a>
+                  </textarea>                    		
+                 </volist>
+                  <tr><td colspan="5" style="padding:10px 0; text-align:center;">{$page}</td></tr>                                        
+			</table>
+		</div>
+	</div>
+<script>
+var ad_id_global;
+function putAd(ad_id)
+{
+	ad_id_global = ad_id;
+    art.dialog({  
+        content: document.getElementById("put_ad"),    
+        title:'投放广告至',  
+    }); 
+}
+
+function putNew()
+{
+	location.href = "http://adu.phpad.cn/center.php?m=zone&a=zone_edit&ad_id=" + ad_id_global;
+}
+
+function putOld()
+{
+	$.getJSON("http://adu.phpad.cn/center.php?m=zone&a=zone_list_ajax", {site_id:site_id}, function(data){
+        if(data.status == 1)
+        {
+            $("input[name='verify_code']").val(data.data.code);
+            $("#verify_code_span").html(data.data.code);
+        }
+        else
+       {
+        	$("#msg").html(data.msg);
+        }
+
+        });
+}
+</script>
+<div id="put_ad" style="display:none">
+<p>
+<input type="radio" name="put_type" onclick="putNew()">新代码位
+<input type="radio" name="put_type" onclick="putOld()">已有代码位
+</p>
+<p id="zone_list"></p>
+</div>
+</div>
+<include file="Index:footer" />
+</body></html>
