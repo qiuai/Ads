@@ -1,11 +1,11 @@
 <include file="Index:headerAdv" />
 <link rel="stylesheet" type="text/css" href="STATIC_URL/adv/css/ads.css">
 <form action="" method="get" id="frm">
-<input type="hidden" name="m" value="plan">
-<input type="hidden" name="a" value="plan_list">
-<input type="hidden" name="pay_type" value="">
-<input type="hidden" name="category_id" value="">
-<input type="hidden" name="plan_check" value="">
+<input type="hidden" name="m" value="PlanAdv">
+<input type="hidden" name="a" value="index">
+<input type="hidden" name="pay_type" value="{$Think.get.pay_type}">
+<input type="hidden" name="category_id" value="{$Think.get.category_id}">
+<input type="hidden" name="plan_check" value="{$Think.get.plan_check}">
 <input type="hidden" name="search" value="">
 <div class="hd_list overall clearfix">
         <div class="list_info">
@@ -23,7 +23,12 @@
                     <td width="832" id="pay_type">
                         <ul>
                         <select class="newsite_select" name="pay_type">
-                        <option value="">全部</option><option value="cps">cps</option><option value="cpa">cpa</option><option value="cpc">cpc</option><option value="cpm">cpm</option>                        </select>
+                        
+                        <option value="">全部</option>
+                         <volist name="adPayTypeInfo" id="vo">
+                         	<option value="{$vo['key']}" <if condition="$Think.get.pay_type eq $vo['key']"> selected="selected"</if> >{$vo['val']}</option>  
+                          </volist>
+                        </select>
                         </ul>
                     </td>
                 </tr>
@@ -33,18 +38,11 @@
                     </td>
                     <td>
                         <ul id="category_id">
-                            <li cid=""><span class="bg_fe6c00">全部</span></li>
-                                                        <li cid="1"><span >综合商城</span></li>
-                                                        <li cid="2"><span >服装服饰</span></li>
-                                                        <li cid="3"><span >手机/数码/家电</span></li>
-                                                        <li cid="4"><span >美容化妆</span></li>
-                                                        <li cid="5"><span >家居家饰</span></li>
-                                                        <li cid="6"><span >女性/内衣</span></li>
-                                                        <li cid="7"><span >母婴/儿童用品</span></li>
-                                                        <li cid="8"><span >图书音像</span></li>
-                                                        <li cid="9"><span >鲜花礼品</span></li>
-                                                        <li cid="10"><span >珠宝首饰</span></li>
-                                                    </ul>    
+                            <li cid=""><span <if condition="$Think.get.category_id eq ''">class="bg_fe6c00"</if>>全部</span></li>
+                   				<volist name="industryInfo" id="vo">
+                   					<li cid="{$vo['id']}" ><span <if condition="$Think.get.category_id eq $vo['id']">class="bg_fe6c00"</if> >{$vo['name']}</span></li>
+                   				</volist>
+                        </ul>   
                     </td>
                 </tr>
                 <tr>
@@ -53,9 +51,10 @@
                     </td>
                     <td>
                         <ul id="plan_check">
-                            <li plan_check=""><span class="bg_fe6c00">全部</span></li>
-                            <li plan_check="手动审核"><span >手动审核</span></li>
-                            <li plan_check="自动审核"><span >自动审核</span></li>
+                            <li plan_check=""><span <if condition="$Think.get.plan_check eq ''"> class="bg_fe6c00" </if>>全部</span></li>
+                            <volist name="adPlanCheckInfo" id="vo">
+                            	 <li plan_check="{$vo['key']}"><span <if condition="$Think.get.plan_check eq $vo['key']"> class="bg_fe6c00" </if> >{$vo['val']}</span></li>
+                            </volist>                          
                         </ul>
                     </td>
                 </tr>
@@ -76,7 +75,7 @@
                 <tbody><tr>
                     <td colspan="12" class="br_none">
                         <div class="top_pager clearfix">
-                            <div class="page_bar fr"><div class='page_bar fr'><span>共17 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/center.php?m=plan&a=index&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/center.php?m=plan&a=index&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a class='page_next' href='/center.php?m=plan&a=index&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/center.php?m=plan&a=index&page=1'>尾页</a>&nbsp;&nbsp;</div></div>
+                            <div class="page_bar fr">{$page}</div>
                         </div>
                     </td>
                 </tr>
@@ -92,498 +91,60 @@
                     <td>投放状态</td>
                     <td>操作</td>
                 </tr>
-                                <tr>                   
+                <volist name="AdPlanInfo" id="vo">
+                
+                 <tr>                   
                     <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=123">
-                        <img src="ad/plan/23/13853602769407.gif" width="120" height="45">
+                        <a href="SITE_URL?m=PlanAdv&a=show&id={$vo['id']}">
+                        <img src="UPLOAD_URL/{$vo['plan_logo']}" width="120" height="45">
                         </a>
                     </td>
                     <td>
-                        123                    </td>
+                        {$vo['id']}                   
+                     </td>
                     <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=123" class="blue">军迷帮WAP站</a></em>
+                        <em><a href="SITE_URL?m=PlanAdv&a=show&id={$vo['id']}" class="blue">{$vo['plan_name']}</a></em>
                     </td>
                     <td>
-                        cpc                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        ￥350                    </td>
-                    <td>
-                        2013-11-25至2013-12-25                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=123" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=122">
-                        <img src="ad/plan/22/13853495597095.jpg" width="120" height="45">
-                        </a>
+                       {$vo['pay_type']}
                     </td>
                     <td>
-                        122                    </td>
+                    	{$vo['category_name']}                      
+                     </td>
                     <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=122" class="blue">tt</a></em>
-                    </td>
+                        ￥{$vo['price']}                   </td>
                     <td>
-                        cps                    </td>
+                        {$vo['start_date']}至{$vo['end_date']}                    </td>
                     <td>
-                        综合商城                    </td>
+                        {$vo['plan_check']}                 
+                     </td>
                     <td>
-                        2%-5%                    </td>
-                    <td>
-                        2013-11-25至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=122" class="blue">修改计划<a>
-                                           
+                        <span 
+		        		<if condition="($vo['plan_status_flag'] eq 0) or ($vo['plan_status_flag'] eq 1)">style="color:orange"
+		        		<elseif condition="$vo['plan_status_flag'] eq 5" />style="color:blue"
+		        		<elseif condition="$vo['plan_status_flag'] eq 2" />style="color:green"
+		        		<else />style="color:red"        		
+		        		</if>>{$vo['plan_status']}</span>
+		            </td>
+                    <td>  
+                    	<if condition="($vo['plan_status_flag'] eq 2) or ($vo['plan_status_flag'] eq 5)">
+                    	<a href="SITE_URL?m=Report&a=index&start_date=&end_date=&plan_id={$vo['id']}" class="blue">查看报表<a>
+                    	<a href="SITE_URL?m=PlanAdv&a=addAdv&pid={$vo['id']}" class="blue">投放广告</a><a>
+                    	<else />
+                    	<a href="SITE_URL?m=PlanAdv&a=edit" class="blue">修改计划<a>
+                    	</if>                
                     </td>
                 </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=104">
-                        <img src="ad/plan/4/13838130305292.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        104                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=104" class="blue">test</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        2.00%                    </td>
-                    <td>
-                        2013-11-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=104" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=95">
-                        <img src="ad/plan/95/13758416848130.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        95                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=95" class="blue">vps cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        1.74%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=95" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=94">
-                        <img src="ad/plan/94/13758416452558.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        94                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=94" class="blue">lf cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        2.75%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>           
-                                     
-                        <a href="http://adu.phpad.cn/center.php?m=report&a=report_cps&&plan_id=94" class="blue">查看报表</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_add&&plan_id=94" class="blue">投放广告</a>     
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=93">
-                        <img src="ad/plan/93/13758416119268.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        93                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=93" class="blue">1hao cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        4.3%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>           
-                                     
-                        <a href="http://adu.phpad.cn/center.php?m=report&a=report_cps&&plan_id=93" class="blue">查看报表</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_add&&plan_id=93" class="blue">投放广告</a>     
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=92">
-                        <img src="ad/plan/92/13758415307488.gif" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        92                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=92" class="blue">amazon cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        3.5%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:blue">待投放</span>                    </td>
-                    <td>           
-                                     
-                        <a href="http://adu.phpad.cn/center.php?m=report&a=report_cps&&plan_id=92" class="blue">查看报表</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_add&&plan_id=92" class="blue">投放广告</a>     
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=91">
-                        <img src="ad/plan/91/13758414867664.gif" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        91                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=91" class="blue">dd cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        1%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=91" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=90">
-                        <img src="ad/plan/90/13758413115691.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        90                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=90" class="blue">zdf cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        3.5%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>           
-                                     
-                        <a href="http://adu.phpad.cn/center.php?m=report&a=report_cps&&plan_id=90" class="blue">查看报表</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_add&&plan_id=90" class="blue">投放广告</a>     
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=89">
-                        <img src="ad/plan/89/13758411633642.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        89                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=89" class="blue">dd cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        4%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=89" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=88">
-                        <img src="ad/plan/88/13758410672727.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        88                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=88" class="blue">yougou cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        15%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        手动审核                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>           
-                                     
-                        <a href="http://adu.phpad.cn/center.php?m=report&a=report_cps&&plan_id=88" class="blue">查看报表</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_add&&plan_id=88" class="blue">投放广告</a>     
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=87">
-                        <img src="ad/plan/87/13758409162269.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        87                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=87" class="blue">sn cpm</a></em>
-                    </td>
-                    <td>
-                        cpm                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        ￥7.6                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=87" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=86">
-                        <img src="ad/plan/86/13758407924097.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        86                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=86" class="blue">vancl cpa</a></em>
-                    </td>
-                    <td>
-                        cpa                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        ￥7                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:blue">待投放</span>                    </td>
-                    <td>           
-                                     
-                        <a href="http://adu.phpad.cn/center.php?m=report&a=report_cpa&&plan_id=86" class="blue">查看报表</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_add&&plan_id=86" class="blue">投放广告</a>     
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=85">
-                        <img src="ad/plan/85/13758406475370.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        85                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=85" class="blue">DHC CPS</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        7.50%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=85" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=84">
-                        <img src="ad/plan/84/13758405366070.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        84                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=84" class="blue">JD cps</a></em>
-                    </td>
-                    <td>
-                        cpc                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        0.40click                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=84" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=83">
-                        <img src="ad/plan/83/13758398711154.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        83                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=83" class="blue">htc cps</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        1.75%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=83" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>                   
-                    <td>
-                        <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=82">
-                        <img src="ad/plan/82/13758395845395.jpg" width="120" height="45">
-                        </a>
-                    </td>
-                    <td>
-                        82                    </td>
-                    <td>
-                        <em><a href="http://adu.phpad.cn/center.php?m=plan&a=plan_detail&plan_id=82" class="blue">test plan</a></em>
-                    </td>
-                    <td>
-                        cps                    </td>
-                    <td>
-                        综合商城                    </td>
-                    <td>
-                        5%                    </td>
-                    <td>
-                        2013-08-07至0000-00-00                    </td>
-                    <td>
-                        自动审核                    </td>
-                    <td>
-                        <span style="color:orange">待审核</span>                    </td>
-                    <td>           
-                                                <a href="http://adu.phpad.cn/center.php?m=plan&a=plan_edit&plan_id=82" class="blue">修改计划<a>
-                                           
-                    </td>
-                </tr>
-                                <tr>
+                	
+                
+                </volist>
+               
+                
+                             
+                 <tr>
                     <td colspan="12">
                         <div class="top_pager clearfix">
-                            <div class="page_bar fr"><div class='page_bar fr'><span>共17 条记录 1/1 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/center.php?m=plan&a=index&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/center.php?m=plan&a=index&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a class='page_next' href='/center.php?m=plan&a=index&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/center.php?m=plan&a=index&page=1'>尾页</a>&nbsp;&nbsp;</div></div>
+                            <div class="page_bar fr">{$page}</div>
                         </div>
                     </td>
                 </tr>

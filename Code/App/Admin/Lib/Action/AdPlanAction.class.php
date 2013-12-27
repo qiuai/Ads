@@ -32,7 +32,7 @@ class AdPlanAction extends CommonAction{
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-4 上午11:26:12
 	 */
-	public function index($pageNum = 5){
+	public function index($pageNum = 10){
 		
 		// 查询获取所有的计划
 		$this->AdPlan = D($this->actionName);
@@ -63,17 +63,22 @@ class AdPlanAction extends CommonAction{
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-23 上午11:19:09
 	 */
-	public function search($pageNum=''){
+	public function search($pageNum=10){
 		$this->AdPlan = D($this->actionName);
+		
+		$search_type = $_GET['search_type'];
+		$this->assign('search_type',$search_type);
 		if($_GET['search_type'] == 'plan_id'){
-			
+			$idSearch = 1;
+			$this->assign('idSearch',$idSearch);
 			$_GET['id'] = intval($_GET['keyword']);
 			unset($_GET['keyword']);
 			unset($_GET['search_type']);
 			
 		}elseif($_GET['search_type'] == 'plan_name'){
-			$_GET['plan_name'] =  strip_tags($_GET['keyword']);
-			$_GET['plan_name'] = array("like","%".$_GET['plan_name']."%");
+			/*$_GET['plan_name'] =  strip_tags($_GET['keyword']);
+			$_GET['plan_name'] = array("like","%".$_GET['plan_name']."%");*/
+			$_GET['plan_name'] = $_GET['keyword'];
 			unset($_GET['keyword']);
 			unset($_GET['search_type']);
 		}elseif($_GET['plan_status']===0){
@@ -89,12 +94,19 @@ class AdPlanAction extends CommonAction{
 		}
 		
 		$where= 'ad_plan_category.id = adplan.category_id';
+		//dump($_GET);
 		// 遍历$_GET组装查询的条件
 		foreach ($_GET as $key=>$val){
-			if($key=="p"){
-				continue;
-			}
-			$where =$where." and adplan.".$key."=".$val;
+			
+				if($key=="p"){
+					continue;
+				}elseif($key=="plan_name"){
+					
+				$where =$where." and adplan.".$key." like '%".$val."%'";
+				}else{
+					$where =$where." and adplan.".$key." = ".$val;
+				}
+			
 		}
 // 		echo $where;
 		$AdPlanInfo  = $this->memberLinkPage($this->AdPlan,$where,$pageNum,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
@@ -102,7 +114,8 @@ class AdPlanAction extends CommonAction{
 		
 		// 处理数据
 		$AdPlanInfo=$this->dealDataArr($AdPlanInfo);
-// 		dump($AdPlanInfo);
+		
+		//dump($AdPlanInfo);
 		// 广告计划的状态信息列表
 		$this->getAdPlanStatusInfo();
 		
