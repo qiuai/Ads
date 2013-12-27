@@ -92,7 +92,9 @@ class ReportAction extends CommonAction {
 	 * @CreateDate: 2013-12-27 上午10:30:15
 	 */
 	public function todayDetailReport(){
-		$this->getPlanData();
+		$yestoday = mktime(0,0,0,date("m") ,date('d')-1,date("Y"));
+		$where = " z. visit_time > $yestoday ";
+		$this->getPlanData($where);
 		$this->display();
 	}
 	/**
@@ -102,6 +104,7 @@ class ReportAction extends CommonAction {
 	 * @CreateDate: 2013-12-27 上午10:30:15
 	 */
 	public function uniqueDetailReport(){
+		$order = " order by z.visit_ip desc";
 		$this->getPlanData();
 		$this->display('todayDetailReport');
 	}
@@ -112,6 +115,8 @@ class ReportAction extends CommonAction {
 	 * @CreateDate: 2013-12-27 上午10:30:15
 	 */
 	public function historyDetailReport(){
+		$yestoday = mktime(0,0,0,date("m") ,date('d')-1,date("Y"));
+		$where = " z. visit_time <= $yestoday ";
 		$this->getPlanData();	
 		$this->display('todayDetailReport');
 	}
@@ -138,7 +143,7 @@ class ReportAction extends CommonAction {
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-12-27 下午3:16:17
 	 */
-	public function getPlanData(){
+	public function getPlanData($where='', $order=''){
 		if(!$_GET['plan_id'] && !$_SESSION['pid']){
 // 			$this->assign('msgTitle',"提示信息");
 			$this->error("请选择要查看的计划！",C('SITE_URL') . "?m=Report&a=choosePlan&aa=" . ACTION_NAME);
@@ -149,10 +154,13 @@ class ReportAction extends CommonAction {
 		}
 		
 		// 查询条件
-		$where = " where z.pid = " .$_SESSION['pid'];
+		$where = " where z.pid = " .$_SESSION['pid'] . " $where ";
 		
-		// 排序	结算时间降序
-		$order = " order by z.visit_time desc ";
+		if(!$order){
+			// 排序	结算时间降序
+			$order = " order by z.visit_time desc ";
+		}
+		
 		
 		// 分页
 		$p = $_GET['p'] ? $_GET['p'] : 1;
