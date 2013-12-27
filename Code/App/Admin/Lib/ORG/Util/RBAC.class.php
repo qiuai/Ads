@@ -256,7 +256,7 @@ class RBAC {
         			break;
         		}
         	}
-        	 
+        	
             // 依次读取模块的操作权限
             foreach($modules as $key=>$module) {
                 $moduleId	 =	 $module['id'];
@@ -274,7 +274,7 @@ class RBAC {
                 }
                 // 和公共模块的操作权限合并
                 $action += $publicAction;
-                $access[strtoupper($appName)][strtoupper($moduleName)]  =  array_merge(array_change_key_case($action,CASE_UPPER),$access[strtoupper($appName)][strtoupper($moduleName)]);
+                $access[strtoupper($appName)][strtoupper($moduleName)]  =  array_merge($publicAction,array_change_key_case($action,CASE_UPPER),(array)$access[strtoupper($appName)][strtoupper($moduleName)]);
             }
         }
         return $access;

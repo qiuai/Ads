@@ -67,15 +67,6 @@ class MemberAction extends CommonAction {
 		}
 	}
 	/**
-	 * 会员搜索
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-12-12 上午10:13:11
-	 */
-	public function memberSearch(){
-		
-	}
-	/**
 	 * 全部会员列表
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>

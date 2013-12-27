@@ -86,6 +86,33 @@ class ReportAction extends CommonAction {
 		$this->display();
 	}
 	/**
+	 * 今日明细
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-27 上午10:30:15
+	 */
+	public function todayDetailReport(){
+		$this->display();
+	}
+	/**
+	 * 独立IP明细
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-27 上午10:30:15
+	 */
+	public function uniqueDetailReport(){
+		$this->display();
+	}
+	/**
+	 * 历史明细
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-27 上午10:30:15
+	 */
+	public function historyDetailReport(){
+		$this->display();
+	}
+	/**
 	 * 获取报表数据
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>

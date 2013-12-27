@@ -65,9 +65,16 @@ class ReportAction extends CommonAction {
 		// 会员报表
 		if($_SESSION[C('WEB_AUTH_KEY')]){
 			$where = " and uid = ". intval($_SESSION[C('WEB_AUTH_KEY')]);
+		}else{
+			return;
 		}
 		
 		$model = M('Income');
+		
+		// 搜索代码位
+		if(intval($_REQUEST['zone_id'])){
+			$where .= " and i.zid = " . intval($_REQUEST['zone_id']);
+		}
 		
 		// 搜索日期
 		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
