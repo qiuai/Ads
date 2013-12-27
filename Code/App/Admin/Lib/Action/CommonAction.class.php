@@ -571,7 +571,7 @@ class CommonAction extends Action {
      * @param unknown_type $uploadPathDir
      * @return Ambigous <string, multitype:number NULL string >
      */
-   protected  function upload($uploadPathDir){
+	protected  function upload($uploadPathDir){
     
     	// 定义变量保存上传图片的相关信息
     	$info = array();
