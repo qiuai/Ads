@@ -56,7 +56,7 @@
                             <a href="WEB_URL/?m=ZoneWeb&a=zoneEdit&zone_id={$vo.id}" class="blue">修改</a>
                             <a href="WEB_URL/?m=ZoneWeb&a=getCode&zone_id={$vo.id}" class="blue">获取代码</a>
                             <a href="WEB_URL/?m=ZoneWeb&a=zoneDelete&status={$vo.status}&zone_id={$vo.id}" class="blue" onclick="return confirm(&#39;确认停用该代码位？&#39;);"><if condition="$vo.status eq 0">启用<else />停用</if></a>
-                            <a href="WEB_URL/?m=ReportWeb&a=report_all&zone_id={$vo.id}" class="blue">查看报表</a>
+                            <a href="WEB_URL/?m=Report&a=index&zone_id={$vo.id}" class="blue">查看报表</a>
                         </td>
 					</tr>
 					</volist>
