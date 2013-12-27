@@ -94,6 +94,9 @@ class AdPlanAction extends CommonAction{
 		}
 		
 		$where= 'ad_plan_category.id = adplan.category_id';
+		
+		unset($_GET['aa']); // 计划选择
+		
 		//dump($_GET);
 		// 遍历$_GET组装查询的条件
 		foreach ($_GET as $key=>$val){

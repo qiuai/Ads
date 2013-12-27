@@ -10,7 +10,7 @@
 <body>
 <div class="wrap">
     <div class="main">
-    <div class="body_title">yougou cps今日明细　　<a href="SITE_URL?m=Report&a=choosePlan&aa={$action_name}">切换计划</a></div>
+    <div class="body_title">{$plan_name} 今日明细　　<a href="SITE_URL?m=Report&a=choosePlan&aa={$action_name}">切换计划</a></div>
 		<div class="listmain">
 		<table align="center" class="list" cellspacing="0">
 	        <tbody><tr>
@@ -20,7 +20,8 @@
 	        </tr>
 	    </tbody></table>       
         <table cellspacing="0" class="list" style="text-align:center">
-	       <tbody><tr class="tb_title">
+        
+        	<tr class="tb_title">
                 <td>IP地址</td>
                 <td>来自(省市)</td>
                 <td>来源网址</td>
@@ -30,10 +31,27 @@
                 <td>最后一次访问时间</td>
                 <td width="7%">回访次数</td>
             </tr>
-            <tr>
-                            <td colspan="8">没有数据</td>
-                        </tr>
-        </tbody></table>
+        
+	        <if condition="$list">
+		    <Volist name='list' id='vo'>
+		   	<tr>
+		        <td>{$vo.visit_ip}</td>
+		        <td>{$vo.visit_address}</td>
+		        <td>{$vo.track_url}</td>
+		        <td>{$vo.view_count}</td>
+		        <td>{$vo.click_count}</td>
+		        <td>{$vo.first_visit_time}</td>      
+		        <td>{$vo.last_visit_time}</td> 
+		        <td>{$vo.return_num}</td>
+		    </tr>
+		   	</Volist>
+		   	<else />
+		   	<tr>
+		   		<td colspan="10">没有数据</td>
+		   	</tr>
+		   	</if>
+		   	
+        </table>
     </div>
 <div class="admin_do index_page" style="text-align:center;"><div class="page_bar fr">{$page}</div>
 </div>
