@@ -15,12 +15,13 @@
         <tr>
         <td width="40%" style="border-right:none;">
             <form method="get">
-                <input type="hidden" name="ac" value="report_detail">
-                <input type="text" name="content">
-                <select name="condition">
-                    <option value="plan_name">计划名称</option>
-                    <option value="plan_id">计划ID</option>
-                </select>
+                <input type="hidden" name="m" value="{$module_name}">
+                <input type="hidden" name="a" value="{$action_name}">
+                <input type="text" name="keyword">
+                <select name="search_type">
+		            <option selected="selected" value="plan_id">计划ID</option>
+		            <option value="plan_name">计划名称</option>
+		        </select>
                 <input type="submit" value="查询" class="button">
             </form>
         </td>

@@ -124,7 +124,7 @@ class CommonAction extends Action {
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     
     	$list = $model->table($table)->where($where)->field($field)->order($order)->page($_GET['p'].','.$pageNum)->select();
-    	//echo $model->getLastSql();
+//     	echo $model->getLastSql();
     	$this->assign('list',$list);// 赋值数据集
     	//     	echo $model->getLastSql();
     	import("ORG.Util.Page");// 导入分页类

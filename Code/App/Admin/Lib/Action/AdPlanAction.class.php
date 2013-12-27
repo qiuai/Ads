@@ -63,8 +63,7 @@ class AdPlanAction extends CommonAction{
 	 * @author Yumao <815227173@qq.com>
 	 * @CreateDate: 2013-12-23 上午11:19:09
 	 */
-	public function search(){
-		
+	public function search($pageNum=''){
 		$this->AdPlan = D($this->actionName);
 		if($_GET['search_type'] == 'plan_id'){
 			
@@ -97,13 +96,13 @@ class AdPlanAction extends CommonAction{
 			}
 			$where =$where." and adplan.".$key."=".$val;
 		}
-		//echo $where;
-		$AdPlanInfo  = $this->memberLinkPage($this->AdPlan,$where,5,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
+// 		echo $where;
+		$AdPlanInfo  = $this->memberLinkPage($this->AdPlan,$where,$pageNum,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
 		//$AdPlanInfo  = $this->memberPage($this->AdPlan,$_GET,5,'id desc');
 		
 		// 处理数据
 		$AdPlanInfo=$this->dealDataArr($AdPlanInfo);
-	//	dump($AdPlanInfo);
+// 		dump($AdPlanInfo);
 		// 广告计划的状态信息列表
 		$this->getAdPlanStatusInfo();
 		

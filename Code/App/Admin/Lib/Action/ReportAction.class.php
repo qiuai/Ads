@@ -113,7 +113,14 @@ class ReportAction extends CommonAction {
 		$this->display();
 	}
 	public function choosePlan(){
-		R('AdPlan/index', array(30));
+		if($_GET['search_type'] == 'plan_id'){
+			$_GET['id'] = intval($_GET['keyword']);
+				
+		}elseif($_GET['search_type'] == 'plan_name'){
+			$_GET['plan_name'] =  strip_tags($_GET['keyword']);
+			$_GET['plan_name'] = array("like","%".$_GET['plan_name']."%");
+		}
+		R('AdPlan/search', array(30));
 	}
 	/**
 	 * 获取报表数据
