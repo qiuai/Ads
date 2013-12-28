@@ -57,10 +57,10 @@ class ZoneWebAction extends CommonAction {
 		$data["uid"]			= $_SESSION[C("WEB_USER_KEY")]; // 网站主ID
 		$data["refresh_time"]	= time(); // 更新时间
 		if(empty($data["name"])){
-			$this->error("代码位名称不能为空！",'WEB_URL/?m=ZoneWeb&a=zoneAdd');
+			$this->error("代码位名称不能为空！",'WEB_URL?m=ZoneWeb&a=zoneAdd');
 		}else{
 			$zone->data($data)->add();
-			$this->success('代码位添加成功','WEB_URL/?m=ZoneWeb&a=index');
+			$this->success('代码位添加成功','WEB_URL?m=ZoneWeb&a=index');
 		}
 	}
 	// 编辑代码位
@@ -85,10 +85,10 @@ class ZoneWebAction extends CommonAction {
 		$id		= (int)($_POST["zone_id"]);
 		$name	= $_POST["zone_name"];
 		if(empty($name)){
-			$this	->error("代码位名称不能为空！",'WEB_URL/?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
+			$this	->error("代码位名称不能为空！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
 		}else{
 			$zone	->where("id =".$id)->setField("name",$name);
-			$this	->success('代码位更改成功','WEB_URL/?m=ZoneWeb&a=index');
+			$this	->success('代码位更改成功','WEB_URL?m=ZoneWeb&a=index');
 		}
 	}
 	// 编辑代码位状态（0启用、1停用）
@@ -101,7 +101,7 @@ class ZoneWebAction extends CommonAction {
 		}else{
 			$zone->where("id =".$id)->setField("status","0"); // 启用
 		}
-		$this	->success('状态修改成功','WEB_URL/?m=ZoneWeb&a=index');
+		$this	->success('状态修改成功','WEB_URL?m=ZoneWeb&a=index');
 	}
 	// 获取代码
 	public function getCode(){

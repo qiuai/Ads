@@ -36,7 +36,7 @@ class PublicAction extends Action {
 	public function logout(){
 		if(isset($_SESSION[C('USER_AUTH_KEY')])) {
 			session_destroy();
-			$this->redirect('/?m=Public&a=login');
+			$this->redirect('?m=Public&a=login');
 		}else {
 			$this->error('已经登出！');
 		}
@@ -49,7 +49,7 @@ class PublicAction extends Action {
 	 */
 	public function checkUser(){
 		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
-            $this->redirect('/?m=Public&a=login');
+            $this->redirect('?m=Public&a=login');
         }
 	}
 	/**
@@ -105,7 +105,7 @@ class PublicAction extends Action {
 	
 			// 缓存访问权限
 			RBAC::saveAccessList();
-			$this->redirect('/?m=Index&a=index');
+			$this->redirect('?m=Index&a=index');
 	
 		}
 	}
