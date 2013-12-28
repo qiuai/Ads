@@ -13,14 +13,14 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class AdServiceAction extends Action {
+abstract class AdServiceAction {
 	/**
-	 * 初始化
+	 * 构造函数
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
 	 * @CreateDate: 2013-12-28 下午4:28:47
 	 */
-	function _initialize(){
-		
-	}
+	public function __construct() {
+//        print "In BaseClass constructor\n";
+   }
 }
