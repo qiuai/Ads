@@ -138,13 +138,11 @@ class WebAction extends CommonAction {
 	}
 	// 批量操作，改变网站状态
 	public function siteMulti(){
-		$ids 		= $_REQUEST["ids"]; // 得到选中的ID
+		$ids 		= $_POST["ids"]; // 得到选中的ID
 		$ids 		= rtrim($ids,","); 
-		$status 	= intval($_REQUEST["status"]);
-		var_dump($ids,$status);
+		$status 	= (int)($_POST["status"]);
 		$st 		= M("site");
 		$num 		= $st->where("id in (".$ids.")")->setField("status",$status); // 批量改变网站状态
-		//echo $st->getLastSql();exit;
 		if(empty($num)){
 			echo "1"; // 失败
 		}else{
