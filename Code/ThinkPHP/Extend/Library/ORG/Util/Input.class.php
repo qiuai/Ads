@@ -385,7 +385,7 @@ class Input {
         $text =  preg_replace('/<('.$allowTags.')( [^><\[\]]*)>/i','[\1\2]',$text);
         //过滤多余html
         if ( empty($banTag) ) { $banTag = self::$htmlTags['ban']; }
-        $text =  preg_replace('/<\/?('.$banTag.')[^><]*>/i','',$text);
+        $text =  preg_replace('/<\?('.$banTag.')[^><]*>/i','',$text);
         //过滤合法的html标签
         while(preg_match('/<([a-z]+)[^><\[\]]*>[^><]*<\/\1>/i',$text,$mat)){
             $text=str_replace($mat[0],str_replace('>',']',str_replace('<','[',$mat[0])),$text);
