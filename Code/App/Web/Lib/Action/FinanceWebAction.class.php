@@ -58,15 +58,15 @@ class FinanceWebAction extends CommonAction {
 		$data["withdraw_balance"] 	= $_POST["balance"]; // 申请提现金额
 		$data["withdraw_auto"]		= (int)($_POST["withdraw_auto"]); // 是否托管
 		if(empty($data["withdraw_balance"])){
-			$this					->error("申请提现金额不能为空！","WEB_URL/?m=FinanceWeb&a=financePay"); 
+			$this					->error("申请提现金额不能为空！","WEB_URL?m=FinanceWeb&a=financePay"); 
 		}elseif($data["withdraw_balance"]<20){
-			$this					->error("申请提现金额不能低于20.00","WEB_URL/?m=FinanceWeb&a=financePay"); 
+			$this					->error("申请提现金额不能低于20.00","WEB_URL?m=FinanceWeb&a=financePay"); 
 		}else{
 			$finance_apply	  		= M("finance_apply"); // 提现申请表
 			$finance		  		= $finance_apply->where("uid=".$uid)->data($data)->add(); // 添加提现申请数据
 			$web_balance	  		= M("web_balance");
 			$web_balance			->where('uid='.$uid)->setInc('withdraw_num',1); // 提现次数+1
-			$this					->success("提现申请提交成功","WEB_URL/?m=FinanceWeb&a=index"); // 成功跳转提交明细页面
+			$this					->success("提现申请提交成功","WEB_URL?m=FinanceWeb&a=index"); // 成功跳转提交明细页面
 		}
 	}
 	// 结算明细
@@ -153,22 +153,22 @@ class FinanceWebAction extends CommonAction {
 		$data_member_detail["bank_name"]	= $bank_name; // 银行名称
 		$data_member_detail["card_number"]	= $card_number; // 银行卡号
 		if(empty($real_name)){
-			$this->error("收款人名称不能为空!","WEB_URL/?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
+			$this->error("收款人名称不能为空!","WEB_URL?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
 		}elseif(empty($bank_name)){
-			$this->error("银行全称不能为空!","WEB_URL/?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
+			$this->error("银行全称不能为空!","WEB_URL?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
 		}elseif(empty($card_number)){
-			$this->error("收款人账号不能为空!","WEB_URL/?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
+			$this->error("收款人账号不能为空!","WEB_URL?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
 		}elseif(empty($accounts_again)){
-			$this->error("请再次输入收款人账号!","WEB_URL/?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
+			$this->error("请再次输入收款人账号!","WEB_URL?m=FinanceWeb&a=financeBankEdit"); // 失败返回重新编辑
 		}elseif($card_number!=$accounts_again){ // PHP判断两次账号输入是否相同
-			$this->error("两次银行卡卡号或存折账号输入不一致!","WEB_URL/?m=FinanceWeb&a=financeBankEdit");
+			$this->error("两次银行卡卡号或存折账号输入不一致!","WEB_URL?m=FinanceWeb&a=financeBankEdit");
 		}else{
 			$uid			= $_SESSION[C('WEB_AUTH_KEY')]; // 获取会员id
 			$me				= M("member");
 			$member			= $me->where("id =".$uid)->data($data_member)->save(); // 更改真实姓名、法人信息
 			$med			= M("member_detail");
 			$memberDetail	= $med->where("uid=".$uid)->data($data_member_detail)->save(); // 更改收款人银行卡信息
-			$this			->success("数据更改成功","WEB_URL/?m=FinanceWeb&a=financeBank"); // 成功则跳转银行信息页面
+			$this			->success("数据更改成功","WEB_URL?m=FinanceWeb&a=financeBank"); // 成功则跳转银行信息页面
 		}	
 	}
 }

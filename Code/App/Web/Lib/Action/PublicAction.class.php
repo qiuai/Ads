@@ -22,7 +22,7 @@ class PublicAction extends Action {
 	 */
 	public function checkUser() {
 		if(!isset($_SESSION[C('WEB_AUTH_KEY')])) {
-			$this->redirect('/?m=Public&a=login');
+			$this->redirect('?m=Public&a=login');
 		}
 	}
 	/**
@@ -47,7 +47,7 @@ class PublicAction extends Action {
 	public function logout(){
 		if(isset($_SESSION[C('WEB_AUTH_KEY')])) {
 			session_destroy();
-            $this->redirect('/?m=Public&a=login');
+            $this->redirect('?m=Public&a=login');
         }else {
             $this->error('已经登出！');
         }
