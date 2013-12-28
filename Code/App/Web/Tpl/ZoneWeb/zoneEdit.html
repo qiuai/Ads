@@ -48,7 +48,7 @@ $(function(){
             </div>
             <div class="gb_m">
             	<table class="table_list" width="100%" border="0" cellpadding="0" cellspacing="0">
-            	<form id="zone_edit" action="SITE_URL/?m=ZoneWeb&a=editCheck" method="post">
+            	<form id="zone_edit" action="SITE_URL?m=ZoneWeb&a=editCheck" method="post">
 				<volist name="zone" id="vo">
             	<input type="hidden" name="zone_id" value="{$vo.id}">
             	<input type="hidden" name="pay_type" value="{$vo.pay_type}">

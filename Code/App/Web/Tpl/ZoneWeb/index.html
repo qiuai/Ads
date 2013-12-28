@@ -16,7 +16,7 @@
 				<span>代码位管理</span>
 				<div class="add_newsite fr">
 					<em class="add">+</em>
-					<a href="WEB_URL/?m=ZoneWeb&a=zoneAdd">新增代码位</a>
+					<a href="WEB_URL?m=ZoneWeb&a=zoneAdd">新增代码位</a>
 				</div>
 				<div class="cb"></div>
 			</div>
@@ -53,10 +53,10 @@
                         <td>{$vo.refresh_time}</td>   
                         <td><span <if condition="$vo.status eq 0">class="red"<else />class="green"</if>><if condition="$vo.status eq 1">正常<else />停用</if></span></td>
                         <td>                          
-                            <a href="WEB_URL/?m=ZoneWeb&a=zoneEdit&zone_id={$vo.id}" class="blue">修改</a>
-                            <a href="WEB_URL/?m=ZoneWeb&a=getCode&zone_id={$vo.id}" class="blue">获取代码</a>
-                            <a href="WEB_URL/?m=ZoneWeb&a=zoneDelete&status={$vo.status}&zone_id={$vo.id}" class="blue" onclick="return confirm(&#39;确认停用该代码位？&#39;);"><if condition="$vo.status eq 0">启用<else />停用</if></a>
-                            <a href="WEB_URL/?m=Report&a=index&zone_id={$vo.id}" class="blue">查看报表</a>
+                            <a href="WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id={$vo.id}" class="blue">修改</a>
+                            <a href="WEB_URL?m=ZoneWeb&a=getCode&zone_id={$vo.id}" class="blue">获取代码</a>
+                            <a href="WEB_URL?m=ZoneWeb&a=zoneDelete&status={$vo.status}&zone_id={$vo.id}" class="blue" onclick="return confirm(&#39;确认停用该代码位？&#39;);"><if condition="$vo.status eq 0">启用<else />停用</if></a>
+                            <a href="WEB_URL?m=Report&a=index&zone_id={$vo.id}" class="blue">查看报表</a>
                         </td>
 					</tr>
 					</volist>

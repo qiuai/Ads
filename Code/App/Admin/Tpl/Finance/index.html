@@ -19,22 +19,22 @@
 <table align="center" class="list" cellspacing="0">
     <tbody><tr>
         <td style="border-right:none;">
-            <form method="post" action="SITE_URL/?m=Finance&a=index">
+            <form method="post" action="SITE_URL?m=Finance&a=index">
                 UID: <input type="text" name="uid" value="{$uid}">
                 <input type="submit" value="查询" class="button">
             </form>
         </td>
 			<td align="right">
-			<a style="font-size:11px;color:#000;" href="SITE_URL/?m=Finance&a=withdrawListRule">定制报表</a>
-			<input type="button" onclick="location.href=&#39;SITE_URL/?m=Finance&a=withdrawExport&uid={$uid}&status={$status}&#39;" class="button1" value="导出数据">
+			<a style="font-size:11px;color:#000;" href="SITE_URL?m=Finance&a=withdrawListRule">定制报表</a>
+			<input type="button" onclick="location.href=&#39;SITE_URL?m=Finance&a=withdrawExport&uid={$uid}&status={$status}&#39;" class="button1" value="导出数据">
         </td>
     </tr>
     <tr>
         <td colspan="2" id="css1" style="font-size:13px;">支付状态：
-            <a href="SITE_URL/?m=Finance&a=index&status=" <if condition="$status eq ''">class="link-checked"<else />class="link_before_checked"</if>>全部</a>
-            <a href="SITE_URL/?m=Finance&a=index&status=1" <if condition="$status eq '1'">class="link-checked"<else />class="link_before_checked"</if>>未支付</a>
-            <a href="SITE_URL/?m=Finance&a=index&status=2" <if condition="$status eq '2'">class="link-checked"<else />class="link_before_checked"</if>>已支付</a>
-            <a href="SITE_URL/?m=Finance&a=index&status=3" <if condition="$status eq '3'">class="link-checked"<else />class="link_before_checked"</if>>异常</a>
+            <a href="SITE_URL?m=Finance&a=index&status=" <if condition="$status eq ''">class="link-checked"<else />class="link_before_checked"</if>>全部</a>
+            <a href="SITE_URL?m=Finance&a=index&status=1" <if condition="$status eq '1'">class="link-checked"<else />class="link_before_checked"</if>>未支付</a>
+            <a href="SITE_URL?m=Finance&a=index&status=2" <if condition="$status eq '2'">class="link-checked"<else />class="link_before_checked"</if>>已支付</a>
+            <a href="SITE_URL?m=Finance&a=index&status=3" <if condition="$status eq '3'">class="link-checked"<else />class="link_before_checked"</if>>异常</a>
         </td>
     </tr>
 </tbody></table>		
@@ -61,7 +61,7 @@
         <td>{$vo.amount_payable}</td> 
         <td>{$vo.process_time}</td>
         <td><if condition="$vo.status eq 1">未支付<elseif condition="$vo.status eq 2"/>已支付<else />异常</if></td>
-        <td><a href="SITE_URL/?m=Finance&a=withdraw&uid={$vo.uid}&id={$vo.id}"><if condition="$vo.process_time eq null">处理提现</if></a></td>
+        <td><a href="SITE_URL?m=Finance&a=withdraw&uid={$vo.uid}&id={$vo.id}"><if condition="$vo.process_time eq null">处理提现</if></a></td>
     </tr>
 	</volist>
 </tbody>

@@ -22,7 +22,7 @@ class PublicAction extends Action {
 	 */
 	public function checkUser(){
 		if(!isset($_SESSION[C('ADV_AUTH_KEY')])) {
-			$this->redirect('/?m=Public&a=login');
+			$this->redirect('?m=Public&a=login');
 		}
 	}
 	/**

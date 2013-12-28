@@ -8,7 +8,7 @@
 function mysub(ob){
 	var keyword = $('#key_id').val();
 	var cate_id = $('#cate_id').val();
-	$('#sub_id').attr('href','HOME_URL/?m=Notice&a=index&category_id=' + cate_id + '&keyword=' + keyword);
+	$('#sub_id').attr('href','HOME_URL?m=Notice&a=index&category_id=' + cate_id + '&keyword=' + keyword);
 }
 </script> 
 <div id="artical">
@@ -17,7 +17,7 @@ function mysub(ob){
 		<ul>
 			<volist name="category" id="list">
 			<li <if condition="$gid eq $list['id']">class='active'</if>>
-				<a href="HOME_URL/?m=Notice&a=index&category_id={$list.id}">{$list.category_name}</a>
+				<a href="HOME_URL?m=Notice&a=index&category_id={$list.id}">{$list.category_name}</a>
 			</li>
 			</volist>	
 		</ul>
@@ -30,8 +30,8 @@ function mysub(ob){
 				<volist name="cate" id="cate">
 				<span>
 					<a>您的位置</a>&gt;
-					<a href="HOME_URL/?m=Notice&a=index&category_id=1">消息中心</a>&gt;
-					<a href="HOME_URL/?m=Notice&a=index&category_id={$cate.id}" class="orange">{$cate.category_name}</a>
+					<a href="HOME_URL?m=Notice&a=index&category_id=1">消息中心</a>&gt;
+					<a href="HOME_URL?m=Notice&a=index&category_id={$cate.id}" class="orange">{$cate.category_name}</a>
 				</span>
 				<strong>{$cate.category_name}</strong>
 				</volist>
@@ -57,7 +57,7 @@ function mysub(ob){
 				<volist name="notice" id="vo">
 				<li>
 					<em>[{$vo.pubdate}]</em>
-					<a href="HOME_URL/?m=Notice&a=index&category_id={$vo.category_id}&notice_id={$vo.id}">{$vo.title}</a>
+					<a href="HOME_URL?m=Notice&a=index&category_id={$vo.category_id}&notice_id={$vo.id}">{$vo.title}</a>
 				</li>
 				</volist>
 			</ul>
