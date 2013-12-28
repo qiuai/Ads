@@ -46,12 +46,12 @@ class SiteWebAction extends CommonAction {
 		$data["uid"]		= $_SESSION[C("WEB_AUTH_KEY")]; // 网站主ID
 		$data["addtime"]	= time(); // 添加时间
 		if(empty($data["site_name"])){
-			$this			->error("网站名称不能为空！",'WEB_URL/?m=SiteWeb&a=siteAdd');
+			$this			->error("网站名称不能为空！",'WEB_URL?m=SiteWeb&a=siteAdd');
 		}elseif(empty($data["site_domain"])){
-			$this			->error("网站域名不能为空！",'WEB_URL/?m=SiteWeb&a=siteAdd');
+			$this			->error("网站域名不能为空！",'WEB_URL?m=SiteWeb&a=siteAdd');
 		}else{
 			$site			->data($data)->add(); // 添加网站
-			$this			->success('网站添加成功！','WEB_URL/?m=SiteWeb&a=index');
+			$this			->success('网站添加成功！','WEB_URL?m=SiteWeb&a=index');
 		}
 	}
 	// 编辑网站
@@ -75,12 +75,12 @@ class SiteWebAction extends CommonAction {
 		$data['site_type']	= $_POST["site_type"];
 		$data['description']= $_POST["description"];
 		if(empty($data["site_name"])){
-			$this		->error("网站名称不能为空！",'WEB_URL/?m=SiteWeb&a=siteEdit&site_id='.$data['id']);
+			$this		->error("网站名称不能为空！",'WEB_URL?m=SiteWeb&a=siteEdit&site_id='.$data['id']);
 		}elseif(empty($data["site_domain"])){
-			$this		->error("网站域名不能为空！",'WEB_URL/?m=SiteWeb&a=siteEdit&site_id='.$data['id']);
+			$this		->error("网站域名不能为空！",'WEB_URL?m=SiteWeb&a=siteEdit&site_id='.$data['id']);
 		}else{
 			$site		->where("id =".$data['id'])->data($data)->save(); // 编辑网站
-			$this		->success('网站更改成功！','WEB_URL/?m=SiteWeb&a=index');
+			$this		->success('网站更改成功！','WEB_URL?m=SiteWeb&a=index');
 		}
 	}
 	// 删除网站
@@ -88,7 +88,7 @@ class SiteWebAction extends CommonAction {
 		$id				= (int)($_GET["site_id"]);
 		$site 			= M("site");
 		$site			->where("id =".$id)->delete();
-		$this			->success('删除成功','WEB_URL/?m=SiteWeb&a=index');
+		$this			->success('删除成功','WEB_URL?m=SiteWeb&a=index');
 	}
 	// 频道列表
 	public function channelList(){
@@ -115,12 +115,12 @@ class SiteWebAction extends CommonAction {
 		$data["status"]	= (int)($_POST["status"]); // 频道状态0是1否
 		$data["desc"]	= $_POST["desc"]; // 频道简介
 		if(empty($data["name"])){
-			$this		->error("频道名称不能为空！",'WEB_URL/?m=SiteWeb&a=channelAdd');
+			$this		->error("频道名称不能为空！",'WEB_URL?m=SiteWeb&a=channelAdd');
 		}elseif(empty($data["desc"])){
-			$this		->error("频道简介不能为空！",'WEB_URL/?m=SiteWeb&a=channelAdd');
+			$this		->error("频道简介不能为空！",'WEB_URL?m=SiteWeb&a=channelAdd');
 		}else{
 			$channel	->data($data)->add();
-			$this		->success('数据添加成功','WEB_URL/?m=SiteWeb&a=channelList');
+			$this		->success('数据添加成功','WEB_URL?m=SiteWeb&a=channelList');
 		}
 	}
 	// 编辑频道
@@ -146,12 +146,12 @@ class SiteWebAction extends CommonAction {
 		$data['status']	= (int)($_POST["status"]); // 频道状态
 		$data['desc']	= $_POST["desc"]; // 频道简介
 		if(empty($data["name"])){
-			$this		->error("频道名称不能为空！",'WEB_URL/?m=SiteWeb&a=channelEdit&channel_id='.$data['id']);
+			$this		->error("频道名称不能为空！",'WEB_URL?m=SiteWeb&a=channelEdit&channel_id='.$data['id']);
 		}elseif(empty($data["desc"])){
-			$this		->error("频道简介不能为空！",'WEB_URL/?m=SiteWeb&a=channelEdit&channel_id='.$data['id']);
+			$this		->error("频道简介不能为空！",'WEB_URL?m=SiteWeb&a=channelEdit&channel_id='.$data['id']);
 		}else{
 			$channel	->where("id=".$data['id'])->data($data)->save(); // 更改数据成功
-			$this		->success('频道更改成功','WEB_URL/?m=SiteWeb&a=channelList');
+			$this		->success('频道更改成功','WEB_URL?m=SiteWeb&a=channelList');
 		}
 	}
 	// 删除频道
@@ -159,6 +159,6 @@ class SiteWebAction extends CommonAction {
 		$id				= (int)($_GET["channel_id"]);
 		$channel 		= M("channel");
 		$channel		->where("id =".$id)->delete();
-		$this			->success('删除成功','WEB_URL/?m=SiteWeb&a=channelList');
+		$this			->success('删除成功','WEB_URL?m=SiteWeb&a=channelList');
 	}
 }

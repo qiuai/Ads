@@ -14,7 +14,7 @@
  <div class="main">
     <div class='body_title'>结算明细列表</div>
 		<div class="listmain">
-		<form method="post" action="SITE_URL/?m=Finance&a=income">
+		<form method="post" action="SITE_URL?m=Finance&a=income">
        <table align="center" class="list" cellspacing="0">
             <tr>
                 <td style="border-right:none;">
@@ -38,16 +38,16 @@
                     　<input type="submit" value="查询" class="button" />
                 </td>
                 <td align="right">
-					<a style="font-size:11px;color:#000;" href="SITE_URL/?m=Finance&a=reportIncomeListRule">定制报表</a>
-                    <input type="button" value="导出报表" class="button1" onclick="location.href='SITE_URL/?m=Finance&a=incomeExport&status={$status}&start_date={$start_date}&end_date={$end_date}&uid={$uid}&plan_id={$plan_id}'" />
+					<a style="font-size:11px;color:#000;" href="SITE_URL?m=Finance&a=reportIncomeListRule">定制报表</a>
+                    <input type="button" value="导出报表" class="button1" onclick="location.href='SITE_URL?m=Finance&a=incomeExport&status={$status}&start_date={$start_date}&end_date={$end_date}&uid={$uid}&plan_id={$plan_id}'" />
                 </td>
             </tr>
             <tr>
                 <td colspan="2" id="css1" style="font-size:13px;">业绩状态：
-                    <a href="SITE_URL/?m=Finance&a=income&status=all" <if condition="$status eq 'all'">class="link-checked"<else />class="link_before_checked"</if>>全部</a>
-                    <a href="SITE_URL/?m=Finance&a=income&status=1"  <if condition="$status eq '1'">class="link-checked"<else />class="link_before_checked"</if>>未确认</a>
-                    <a href="SITE_URL/?m=Finance&a=income&status=2"  <if condition="$status eq '2'">class="link-checked"<else />class="link_before_checked"</if>>已确认</a>
-                    <a href="SITE_URL/?m=Finance&a=income&status=3"  <if condition="$status eq '3'">class="link-checked"<else />class="link_before_checked"</if>>无效</a>
+                    <a href="SITE_URL?m=Finance&a=income&status=all" <if condition="$status eq 'all'">class="link-checked"<else />class="link_before_checked"</if>>全部</a>
+                    <a href="SITE_URL?m=Finance&a=income&status=1"  <if condition="$status eq '1'">class="link-checked"<else />class="link_before_checked"</if>>未确认</a>
+                    <a href="SITE_URL?m=Finance&a=income&status=2"  <if condition="$status eq '2'">class="link-checked"<else />class="link_before_checked"</if>>已确认</a>
+                    <a href="SITE_URL?m=Finance&a=income&status=3"  <if condition="$status eq '3'">class="link-checked"<else />class="link_before_checked"</if>>无效</a>
                 </td>
             </tr>
         </table>
@@ -87,7 +87,7 @@
 		-->
         <td>{$vo.performance_status}</td>
         <td>{$vo.settlement_status}</td>
-        <td><a href="SITE_URL/?m=Finance&a=incomeDo&id={$vo.id}"><if condition="$vo.frozen_status eq 1">冻结</if></a></td>
+        <td><a href="SITE_URL?m=Finance&a=incomeDo&id={$vo.id}"><if condition="$vo.frozen_status eq 1">冻结</if></a></td>
     </tr>
 	</volist>
 </table>

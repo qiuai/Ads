@@ -92,6 +92,9 @@ class ReportAction extends CommonAction {
 	 * @CreateDate: 2013-12-27 上午10:30:15
 	 */
 	public function todayDetailReport(){
+		$yestoday = mktime(0,0,0,date("m") ,date('d')-1,date("Y"));
+		$where = " z. visit_time > $yestoday ";
+		$this->getPlanData($where);
 		$this->display();
 	}
 	/**
@@ -101,7 +104,9 @@ class ReportAction extends CommonAction {
 	 * @CreateDate: 2013-12-27 上午10:30:15
 	 */
 	public function uniqueDetailReport(){
-		$this->display();
+		$order = " order by z.visit_ip desc";
+		$this->getPlanData();
+		$this->display('todayDetailReport');
 	}
 	/**
 	 * 历史明细
@@ -110,8 +115,17 @@ class ReportAction extends CommonAction {
 	 * @CreateDate: 2013-12-27 上午10:30:15
 	 */
 	public function historyDetailReport(){
-		$this->display();
+		$yestoday = mktime(0,0,0,date("m") ,date('d')-1,date("Y"));
+		$where = " z. visit_time <= $yestoday ";
+		$this->getPlanData();	
+		$this->display('todayDetailReport');
 	}
+	/**
+	 * 计划选择
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-27 下午3:12:00
+	 */
 	public function choosePlan(){
 		if($_GET['search_type'] == 'plan_id'){
 			$_GET['id'] = intval($_GET['keyword']);
@@ -120,8 +134,45 @@ class ReportAction extends CommonAction {
 			$_GET['plan_name'] =  strip_tags($_GET['keyword']);
 			$_GET['plan_name'] = array("like","%".$_GET['plan_name']."%");
 		}
-		$this->assign("action_name",$_GET['aa']);
+		$this->assign("action_names",$_GET['aa']);
 		R('AdPlan/search', array(30));
+	}
+	/**
+	 * 获取计划明细数据
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2013-12-27 下午3:16:17
+	 */
+	public function getPlanData($where='', $order=''){
+		if(!$_GET['plan_id'] && !$_SESSION['pid']){
+// 			$this->assign('msgTitle',"提示信息");
+			$this->error("请选择要查看的计划！",C('SITE_URL') . "?m=Report&a=choosePlan&aa=" . ACTION_NAME);
+			exit;
+		}else{
+			$_SESSION['pid'] = $_GET['plan_id'] ? $_GET['plan_id'] : $_SESSION['pid'];
+			$_SESSION['pname'] = $_GET['plan_name'] ? $_GET['plan_name'] : $_SESSION['pname'];
+		}
+		
+		// 查询条件
+		$where = " where z.pid = " .$_SESSION['pid'] . " $where ";
+		
+		if(!$order){
+			// 排序	结算时间降序
+			$order = " order by z.visit_time desc ";
+		}
+		
+		
+		// 分页
+		$p = $_GET['p'] ? $_GET['p'] : 1;
+		$num = 10;
+		$limit = " limit ". ($p-1)*$num .",".$num;
+		
+		$sql = "select * from " . C('DB_PREFIX') . "ad_plan p join " . C('DB_PREFIX') . "zone_visit z on p.id = z.pid $where $order $limit";
+		$count = "select count(z.id) as num from " . C('DB_PREFIX') . "ad_plan p join " . C('DB_PREFIX') . "zone_visit z on p.id = z.pid $where limit 1";
+		
+		$this->pageList($sql, $count, $num);
+		
+		$this->assign('plan_name',$_SESSION['pname']);
 	}
 	/**
 	 * 获取报表数据

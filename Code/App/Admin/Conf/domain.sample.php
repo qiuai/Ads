@@ -3,6 +3,5 @@
 return array(
 	// 网站地址
 	'SITE_URL'		   => 'http://a.ads.me/index.php',
-	'SITE_WEB_URL'	   => 'http://www.ads.me',
 );
 

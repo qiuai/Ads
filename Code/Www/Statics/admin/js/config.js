@@ -1,1 +1,1 @@
-var $CONFIG={};$CONFIG['url'] = "http://a.ads.me";
+var $CONFIG={};$CONFIG['url'] = "http://a.lianmeng.cc";

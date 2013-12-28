@@ -194,14 +194,14 @@
 		<div class="throughbar news">
 		<div class="news_box">
 			<h3>
-				<a target="_blank" href="HOME_URL/?m=Notice&a=index&category_id=1">更多&gt;&gt;</a>
+				<a target="_blank" href="HOME_URL?m=Notice&a=index&category_id=1">更多&gt;&gt;</a>
 				全部公告
 			</h3>
 			<ul>
 				<volist name="all" id="all" key="key">
 			    <li>
 					<em <if condition="$key lt 4">class="orange_bg"<else />class="blue_bg"</if>>{$key}</em>
-					<a href="HOME_URL/?m=Notice&a=index&category_id={$all.category_id}&notice_id={$all.id}">
+					<a href="HOME_URL?m=Notice&a=index&category_id={$all.category_id}&notice_id={$all.id}">
 						<font color="red">					&nbsp;&nbsp;{$all.title}</font>
 					</a>
 					<span class="fl">{$all.pubdate}</span>
@@ -211,14 +211,14 @@
 		</div>
 		<div class="news_box">
 			<h3>
-				<a target="_blank" href="HOME_URL/?m=Notice&a=index&category_id=2">更多&gt;&gt;</a>
+				<a target="_blank" href="HOME_URL?m=Notice&a=index&category_id=2">更多&gt;&gt;</a>
 				网站主公告
 			</h3>
             <ul>
 				<volist name="web" id="web" key="key_web">
 			    <li>
 					<em <if condition="$key_web lt 4">class="orange_bg"<else />class="blue_bg"</if>>{$key_web}</em>
-					<a href="HOME_URL/?m=Notice&a=index&category_id={$web.category_id}&notice_id={$web.id}">
+					<a href="HOME_URL?m=Notice&a=index&category_id={$web.category_id}&notice_id={$web.id}">
 						<font color="red">					&nbsp;&nbsp;{$web.title}</font>
 					</a>
 					<span class="fl">{$web.pubdate}</span>
@@ -228,14 +228,14 @@
 		</div>
 		<div class="news_box last">
 			<h3>
-				<a target="_blank" href="HOME_URL/?m=Notice&a=index&category_id=3">更多&gt;&gt;</a>
+				<a target="_blank" href="HOME_URL?m=Notice&a=index&category_id=3">更多&gt;&gt;</a>
 				广告主公告
 			</h3>
              <ul>
 				<volist name="adv" id="adv" key="key_adv">
 			    <li>
 					<em <if condition="$key_adv lt 4">class="orange_bg"<else />class="blue_bg"</if>>{$key_adv}</em>
-					<a href="HOME_URL/?m=Notice&a=index&category_id={$adv.category_id}&notice_id={$adv.id}">
+					<a href="HOME_URL?m=Notice&a=index&category_id={$adv.category_id}&notice_id={$adv.id}">
 						<font color="red">					&nbsp;&nbsp;{$adv.title}</font>
 					</a>
 					<span class="fl">{$adv.pubdate}</span>

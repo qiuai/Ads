@@ -65,7 +65,7 @@ class FinanceAction extends CommonAction {
 		$data["process_time"]	= time(); //操作时间
 		$finance_apply 			= M("finance_apply");
 		$finance				= $finance_apply->where("id=".$id)->data($data)->save();
-		$this					->success("提现处理成功！","SITE_URL/?m=Finance&a=index");
+		$this					->success("提现处理成功！","SITE_URL?m=Finance&a=index");
 	}
 	//申请提现状态报表
 	public function withdrawListRule(){
@@ -86,7 +86,7 @@ class FinanceAction extends CommonAction {
 		$data["status"]			= (int)($_POST["status"]); // 支付状态（显隐）
 		$with					= M("withdraw_list_rule");
 		$withdraw				= $with->where("id=1")->data($data)->save(); // 修改各字段的状态
-		$this					->success("订制申请提现报表成功","SITE_URL/?m=Finance&a=index");
+		$this					->success("订制申请提现报表成功","SITE_URL?m=Finance&a=index");
 	}
 	// 导出申请提现报表
 	public function withdrawExport(){
@@ -231,7 +231,7 @@ class FinanceAction extends CommonAction {
 		$data["frozen_status"]=0;
 		$in 			= M("income");
 		$in				->where("id=".$id)->data($data)->save(); //冻结成功，改成冻结状态
-		$this			->success("冻结成功！","SITE_URL/?m=Finance&a=income");
+		$this			->success("冻结成功！","SITE_URL?m=Finance&a=income");
 	}
 	// 订制结算明细报表
 	public function reportIncomeListRule(){
@@ -256,7 +256,7 @@ class FinanceAction extends CommonAction {
 		$data["settlement_status"]= (int)($_POST["pay_status"]); // 支付状态（显隐）
 		$report_income			= M("report_income_list_rule");
 		$report					= $report_income->where("id=1")->data($data)->save(); //修改各字段的状态
-		$this					->success("订制结算明细报表成功","SITE_URL/?m=Finance&a=income");
+		$this					->success("订制结算明细报表成功","SITE_URL?m=Finance&a=income");
 	}
 	// 导出结算明细报表
 	public function incomeExport(){
