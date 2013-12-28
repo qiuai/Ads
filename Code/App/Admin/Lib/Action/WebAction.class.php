@@ -141,6 +141,7 @@ class WebAction extends CommonAction {
 		$ids 		= $_REQUEST["ids"]; // 得到选中的ID
 		$ids 		= rtrim($ids,","); 
 		$status 	= intval($_REQUEST["status"]);
+		var_dump($ids,$status);
 		$st 		= M("site");
 		$num 		= $st->where("id in (".$ids.")")->setField("status",$status); // 批量改变网站状态
 		//echo $st->getLastSql();exit;
