@@ -138,9 +138,9 @@ class WebAction extends CommonAction {
 	}
 	// 批量操作，改变网站状态
 	public function siteMulti(){
-		$ids 		= $_POST["ids"]; // 得到选中的ID
+		$ids 		= $_GET["ids"]; // 得到选中的ID
 		$ids 		= rtrim($ids,","); 
-		$status 	= (int)($_POST["status"]);
+		$status 	= (int)($_GET["status"]);
 		$st 		= M("site");
 		$num 		= $st->where("id in (".$ids.")")->setField("status",$status); // 批量改变网站状态
 		echo $st->getLastSql();exit;
