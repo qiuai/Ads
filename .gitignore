@@ -13,3 +13,6 @@
 /Uploadfile/
 /Uploadfile
 /Uploadfile/*
+/Code/App/Adv/Conf/domain.php
+/Code/App/Home/Conf/domain.php
+/Code/App/Web/Conf/domain.php
