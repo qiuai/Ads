@@ -129,9 +129,9 @@
                     <td>  
                     	<if condition="($vo['plan_status_flag'] eq 2) or ($vo['plan_status_flag'] eq 5)">
                     	<a href="SITE_URL?m=Report&a=index&start_date=&end_date=&plan_id={$vo['id']}" class="blue">查看报表<a>
-                    	<a href="SITE_URL?m=PlanAdv&a=addAdv&pid={$vo['id']}" class="blue">投放广告</a><a>
+                    	<a href="SITE_URL?m=AdAdv&a=adAdd&pid={$vo['id']}" class="blue">投放广告</a><a>
                     	<else />
-                    	<a href="SITE_URL?m=PlanAdv&a=edit" class="blue">修改计划<a>
+                    	<a href="SITE_URL?m=PlanAdv&a=edit&id={$vo['id']}" class="blue">修改计划<a>
                     	</if>                
                     </td>
                 </tr>

@@ -1,9 +1,9 @@
 <include file="Index:headerAdv" />
 <link rel="stylesheet" type="text/css" href="STATIC_URL/adv/css/ads.css">
 <form action="" method="get" id="frm">
-<input type="hidden" name="m" value="ad">
-<input type="hidden" name="a" value="ad_list">
-<input type="hidden" name="plan_id" value="">
+<input type="hidden" name="m" value="AdAdv">
+<input type="hidden" name="a" value="index">
+<input type="hidden" name="pid" value="">
 <input type="hidden" name="search" value="">
 <div class="hd_list overall clearfix">
         <div class="list_info">
@@ -23,7 +23,14 @@
                     <td width="832">
                         <ul>
                         <select class="newsite_select" name="show_type">
-                        <option value="">全部</option><option value="image">image</option><option value="txt">txt</option><option value="pf">pf</option><option value="dl">dl</option><option value="pop">pop</option><option value="yxj">yxj</option>                        </select>
+                        <option value="">全部</option>
+                        <volist name="sizeTypeInfo" id="vo">
+						    	 <optgroup label="{$vo[0]['size_type_name']}" style="background-color:#ccc"></optgroup>
+						    	 <volist name='vo' id='item'>
+						    	 	<option value='{$item["id"]}' <if condition="$Think.get.show_type eq $item['id']">selected="selected"</if> <if condition=" $item['size_type'] eq 2">show_type='txt'<else />show_type='image'</if>>{$item['description']}</option>
+						    	 </volist>
+						    </volist>                     
+						   </select>
                         </ul>
                     </td>
                 </tr>
@@ -34,35 +41,11 @@
                     </td>
                     <td>
                         <ul id="plan_id">
-                            <li pid=""><span class="bg_fe6c00">全部</span></li>
-                                                        <li pid="82"><span >test plan</span></li>
-                                                        <li pid="83"><span >htc cps</span></li>
-                                                        <li pid="84"><span >JD cps</span></li>
-                                                        <li pid="85"><span >DHC CPS</span></li>
-                                                        <li pid="86"><span >vancl cpa</span></li>
-                                                        <li pid="87"><span >sn cpm</span></li>
-                                                        <li pid="88"><span >yougou cps</span></li>
-                                                        <li pid="89"><span >dd cps</span></li>
-                                                        <li pid="90"><span >zdf cps</span></li>
-                                                        <li pid="91"><span >dd cps</span></li>
-                                                        <li pid="92"><span >amazon cps</span></li>
-                                                        <li pid="93"><span >1hao cps</span></li>
-                                                        <li pid="94"><span >lf cps</span></li>
-                                                        <li pid="95"><span >vps cps</span></li>
-                                                        <li pid="104"><span >test</span></li>
-                                                        <li pid="132"><span >一号店</span></li>
-                                                        <li pid="129"><span >jd</span></li>
-                                                        <li pid="130"><span >sdfsfsdfdsf</span></li>
-                                                        <li pid="131"><span >sdfsfsdfdsf</span></li>
-                                                        <li pid="134"><span >xtmall-uat</span></li>
-                                                        <li pid="135"><span >1206test</span></li>
-                                                        <li pid="136"><span >1206test</span></li>
-                                                        <li pid="137"><span >test2</span></li>
-                                                        <li pid="138"><span >testjihuaaaa</span></li>
-                                                        <li pid="139"><span >测试计划</span></li>
-                                                        <li pid="140"><span >斯蒂芬森</span></li>
-                                                        <li pid="141"><span >test</span></li>
-                                                    </ul>   
+                            <li pid=""><span <if condition="$Think.get.pid eq ''" >class="bg_fe6c00" </if> >全部</span></li>
+                            	<volist name="adPlanInfo" id="vo">
+                            		 <li pid="{$vo['id']}" ><span  <if condition="$Think.get.pid eq $vo['id']" >class="bg_fe6c00" </if>>{$vo['plan_name']}</span></li>                           	
+                            	</volist>                              
+                         </ul>   
                     </td>
                 </tr>
             </tbody></table>
@@ -73,13 +56,13 @@
                 <tbody><tr>
                     <td colspan="12" class="br_none">
                         <div class="top_pager clearfix">
-                            <div class="page_bar fr"><div class='page_bar fr'><span>共26 条记录 1/2 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/center.php?m=ad&a=index&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/center.php?m=ad&a=index&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a href='/center.php?m=ad&a=index&page=2'> 2 </a>&nbsp;&nbsp;<a class='page_next' href='/center.php?m=ad&a=index&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/center.php?m=ad&a=index&page=2'>尾页</a>&nbsp;&nbsp;</div></div>
+                            <div class="page_bar fr">{$page}</div>
                         </div>
                     </td>
                 </tr>
                 <tr class="bg_f5f5f5">
                     <td>广告ID</td>
-                    <td>计划ID</td>
+                    <td>计划名称</td>
                     <td>展示类型</td>
                     <td>标题</td>
                     <td>尺寸</td>
@@ -87,393 +70,55 @@
                     <td>状态</td>
                     <td>操作</td>
                 </tr>
-                                <tr>
+                <volist name="AdManageInfo" id="vo">
+                   <tr>
                     <td>
-                        208                    </td>
+                        {$vo['aid']} 
+                    </td>
                     <td>
-                        vancl cpa                    </td>
+                       	{$vo['plan_name']}                  
+                    </td>
                     <td>
-                        图片                    </td>
+                         {$vo['size_type']}    
+                     </td>
                     <td>
-                        测试                    </td>
+                        {$vo['title']}
+                    </td>
                     <td>
-                        960*90                    </td>
+                         {$vo['size']}
+                    </td>
                     <td>
-                        2013-12-19                    </td>
+                    	{$vo['time']}
+                     </td>
                     <td>
-                        <span style="color:orange">新增待审</span>                    </td>
+                        <span 
+                        <if condition="$vo['status'] eq 2" >
+                        style="color:green"
+                        <elseif condition="($vo['status'] eq 0) or ($vo['status'] eq 1)"/>
+                        style="color:orange"
+                        <else />
+                        style="color:red"
+                        </if> 
+                        >{$vo['status_name']}</span> 
+                     </td>
                     <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="208" img_url="ad/plan/86/13874416263870.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=208" class="blue">修改</a>                        
+                        <a href="javascript:void(0);" class="blue show_pre" id="{$vo['aid']}" img_url="UPLOAD_URL/{$vo['ad_pic']}">显示预览</a>                       
+                        <a href="SITE_URL?m=AdAdv&a=edit&aid={$vo['aid']}" class="blue">修改</a>                        
                     </td>
                 </tr>
-                <tr id="208_pre" style="display:none">
+                <tr id="{$vo['aid']}_pre" style="display:none">
                     <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="208_img" />
-                                        </td>
+                             {$vo['content']}
+                     </td>
                 </tr>
-                                <tr>
-                    <td>
-                        207                    </td>
-                    <td>
-                        测试计划                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        cccccccccc                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-17                    </td>
-                    <td>
-                        <span style="color:orange">新增待审</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="207" img_url="ad/plan/39/13872701128481.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=207" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="207_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="207_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        206                    </td>
-                    <td>
-                        测试计划                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        aaaaaaa                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-17                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="206" img_url="ad/plan/39/13872698217634.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=206" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="206_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="206_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        205                    </td>
-                    <td>
-                        测试计划                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        aaaaaaa                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-17                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="205" img_url="ad/plan/39/13872697799111.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=205" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="205_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="205_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        204                    </td>
-                    <td>
-                        vancl cpa                    </td>
-                    <td>
-                        对联                    </td>
-                    <td>
-                        hello                    </td>
-                    <td>
-                        100*400                    </td>
-                    <td>
-                        2013-12-16                    </td>
-                    <td>
-                        <span style="color:orange">新增待审</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="204" img_url="ad/plan/86/13871888512235.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=204" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="204_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="100" height="400" id="204_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        203                    </td>
-                    <td>
-                        vancl cpa                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        测试用广告121602                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-16                    </td>
-                    <td>
-                        <span style="color:orange">新增待审</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="203" img_url="ad/plan/86/13871621696340.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=203" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="203_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="203_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        201                    </td>
-                    <td>
-                        一号店                    </td>
-                    <td>
-                        文字                    </td>
-                    <td>
-                        1111                    </td>
-                    <td>
-                        240*60                    </td>
-                    <td>
-                        2013-12-12                    </td>
-                    <td>
-                        <span style="color:orange">新增待审</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="201" img_url="ad/plan/32/22222222222222222">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=201" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="201_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <table border="0" cellpadding="0" cellspacing="0" width="240" height="60" style="margin:0 auto">
-                            <tr>
-                                <td style="text-align: left">
-                                    <div style="font-size:14px;color:blue;font-family:Arial">1111</div>
-                                    <div style="font-size:12px;">22222222222222222</div>
-                                    <div style="font-size:12px;color:#008000;font-family:Arial;">http://wwwwwwww</div>
-                                </td>
-                            </tr>
-                        </table>
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        200                    </td>
-                    <td>
-                        zdf cps                    </td>
-                    <td>
-                        弹窗                    </td>
-                    <td>
-                        企乐无忧                    </td>
-                    <td>
-                        50*50                    </td>
-                    <td>
-                        2013-12-12                    </td>
-                    <td>
-                        <span style="color:orange">新增待审</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="200" img_url="ad/plan/90/13868329983823.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=200" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="200_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="50" height="50" id="200_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        199                    </td>
-                    <td>
-                        斯蒂芬森                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        sdf                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-11                    </td>
-                    <td>
-                        <span style="color:orange">新增待审</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="199" img_url="ad/plan/40/13867645267955.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=199" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="199_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="199_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        198                    </td>
-                    <td>
-                        斯蒂芬森                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        sdf                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-11                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="198" img_url="ad/plan/40/13867645131844.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=198" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="198_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="198_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        197                    </td>
-                    <td>
-                        vancl cpa                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        eref                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-11                    </td>
-                    <td>
-                        <span style="color:red">审核拒绝</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="197" img_url="ad/plan/86/13867644815829.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=197" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="197_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="197_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        196                    </td>
-                    <td>
-                        测试计划                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        测试广告                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-11                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="196" img_url="ad/plan/39/13867460117936.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=196" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="196_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="196_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        195                    </td>
-                    <td>
-                        1206test                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        cpc投放1206                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-06                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="195" img_url="ad/plan/36/13863116529308.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=195" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="195_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="195_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        193                    </td>
-                    <td>
-                        vancl cpa                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        test1206                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-12-06                    </td>
-                    <td>
-                        <span style="color:orange">新增待审</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="193" img_url="ad/plan/86/13863086159136.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=193" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="193_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="193_img" />
-                                        </td>
-                </tr>
-                                <tr>
-                    <td>
-                        192                    </td>
-                    <td>
-                        jd                    </td>
-                    <td>
-                        图片                    </td>
-                    <td>
-                        dsfsdfdsfdsf                    </td>
-                    <td>
-                        960*90                    </td>
-                    <td>
-                        2013-11-30                    </td>
-                    <td>
-                        <span style="color:green">投放中</span>                    </td>
-                    <td>                        
-                        <a href="javascript:void(0);" class="blue show_pre" id="192" img_url="ad/plan/29/13858095748559.jpg">显示预览</a>                       
-                        <a href="http://adu.phpad.cn/center.php?m=ad&a=ad_edit&ad_id=192" class="blue">修改</a>                        
-                    </td>
-                </tr>
-                <tr id="192_pre" style="display:none">
-                    <td colspan="8" style="text-align:center">
-                                            <img src="" width="960" height="90" id="192_img" />
-                                        </td>
-                </tr>
+                
+              </volist>
+                              
+               
                                 <tr>
                     <td colspan="12">
                         <div class="top_pager clearfix">
-                            <div class="page_bar fr"><div class='page_bar fr'><span>共26 条记录 1/2 页</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class='page_first' href='/center.php?m=ad&a=index&page=1'>首页</a>&nbsp;&nbsp;<a class='page_prev' href='/center.php?m=ad&a=index&page=0'>上一页</a>&nbsp;&nbsp;<span class='current'> 1 </span>&nbsp;&nbsp;<a href='/center.php?m=ad&a=index&page=2'> 2 </a>&nbsp;&nbsp;<a class='page_next' href='/center.php?m=ad&a=index&page=2'>下一页</a>&nbsp;&nbsp;<a class='page_last' href='/center.php?m=ad&a=index&page=2'>尾页</a>&nbsp;&nbsp;</div></div>
+                            <div class="page_bar fr">{$page}</div>
                         </div>
                     </td>
                 </tr>
@@ -488,7 +133,7 @@ $("select[name='show_type']").change(function(){
 });
 $("#plan_id li").click(function(){
 	var plan_id = $(this).attr('pid');
-    $("input[name='plan_id']").val(plan_id);
+    $("input[name='pid']").val(plan_id);
     $('#frm').submit();
 	
 });

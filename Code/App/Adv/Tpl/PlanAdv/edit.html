@@ -1,0 +1,477 @@
+<include file="Index:headerAdv" />
+<div class="main clearfix">
+	<div class="huiyuan_change">
+    	<form action="SITE_URL?m=PlanAdv&a=doEdit" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="{$AdPlanInfo['id']}" />
+		<div class="huiyuan_change_head">
+			<span>修改计划</span>
+			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
+			<div class="cb"></div>
+		</div>
+		<div class="huiyuan_change_body">
+			<table class="table_list">
+			  <tr>
+				<td class="w155"><em class="red">*</em>计划名称：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="plan_name" value="{$AdPlanInfo['plan_name']}" >				
+				</td>
+			  </tr>
+			  <tr>
+				  <td class="w155"><em class="red">&nbsp;</em>接入网址：</td>
+				  <td class="textbox_td">
+					  <input class="newsite_textw160" type="text" name="track_url"   value="{$AdPlanInfo['track_url']}" />
+				  </td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>目标网址：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="jump_url" value="{$AdPlanInfo['jump_url']}">	 <div class="onShow">请填写正确的目标网址 ，目标网址不能为空</div>							
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>LOGO：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="file" name="plan_logo">
+					 <img src="UPLOAD_URL/{$AdPlanInfo['plan_logo']}" width="120" height="45" title="原LOGO" /> 留空则保留原LOGO
+				</td>
+			  </tr>	
+			  <tr>
+				<td class="w155">行业类别：</td>
+				<td class="textbox_td">
+				    <select name="category_id">
+					 <volist name="industryInfo" id="vo">
+						<option value="{$vo.id}" <if condition="$vo['id'] eq $AdPlanInfo['category_id']">selected="selected"</if> >{$vo.name}</option>
+					 </volist>
+					</select>	
+				</td>
+			  </tr>			  
+			  <tr>
+				<td class="w155"><em class="red">*</em>计费形式：</td>
+				<td class="textbox_td">
+					<select class="newsite_select" name="pay_type">
+				<volist name="adPayTypeInfo" id="vo" >
+					<if condition="$AdPlanInfo['pay_type'] eq $vo['key']">
+						<option value="{$vo['key']}" selected="selected">{$vo['val']}</option>
+					<else />
+						<option value="{$vo['key']}">{$vo['val']}</option>
+					</if>				
+				</volist>            
+			</select>
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>审核方式：</td>
+				<td class="textbox_td">
+					<volist name="adPlanCheckInfo" id="vo" key="k">
+						<input type="radio" name="plan_check" value="{$vo['key']}" <if condition="$k eq 1">checked="checked"</if> /> 
+					{$vo['val']}	
+					</volist>
+				</td>
+			  </tr>
+			  <!--<tbody id="plan_check_tbody" style="display:none">
+				<tr>
+				   <td class="w155">自动审核条件</td>
+				   <td>
+					   <span style="margin-right:15px">联盟等级不低于：<input type="text" name="plan_check_level" style="width:30px" value="0" /></span>
+					   					   <span style="margin-right:15px">PR不低于：<input type="text" name="plan_check_pr" style="width:30px" value="0" /></span>
+					   					   
+					   					   <span style="margin-right:15px">ALEXA排名不低于：<input type="text" name="plan_check_alexa" style="width:100px" value="0" /></span>
+					   					   
+					   					   <span style="margin-right:15px">百度指数不低于：<input type="text" name="plan_check_baidu" style="width:30px" value="0" /></span>
+					   				   </td>
+				</tr>
+			  </tbody>-->
+			  <tr>
+				<td class="w155"><em class="red">*</em>结算周期：</td>
+				<td class="textbox_td">
+					<volist name="adClearingFormInfo" id="vo" key="k" >
+						<input type="radio" name="clearing_form" value="{$vo['key']}" <if condition="$AdPlanInfo['clearing_form'] eq $vo['key']">checked="checked"</if> />{$vo['val']}			
+					</volist>				
+				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>计划周期：</td>
+				<td class="textbox_td">
+					开始时间：<input type="text" name="start_date" id="start_date" class="input_text" size="12" value="{$AdPlanInfo['start_date']}">
+					<script>
+                            Calendar.setup({
+                                inputField     :    "start_date",
+                                ifFormat       :    "%Y-%m-%d",
+                            });
+                     </script>
+                     - 结束时间：<input type="text" name="end_date" id="end_date" class="input_text" size="12" value="{$AdPlanInfo['end_date']}">
+					<script>
+                            Calendar.setup({
+                                inputField     :    "end_date",
+                                ifFormat       :    "%Y-%m-%d",
+                            });
+                     </script>
+				</td>
+			  </tr>	
+			  			  
+			 <!-- <tbody id="cps" class="price">
+			  <tr>
+			      <td class="w155"><em class="red">*</em>数据返回机制：</td>
+			      <td class="textbox_td">
+			          <input type="radio" name="cps_data_return" value="0" onclick="returnDate1('cps')"  checked="checked" />实时返回
+			          <input type="radio" name="cps_data_return" value="1" onclick="returnDate2('cps')" />延时返回
+			          <span style="display:none" id="cps_return_date_span">
+			              延时 <input type="text" name="cps_data_return" style="width:20px" value="0" /> 天
+			          </span>
+			      </td>
+			  </tr>
+			  <tr>
+			      <td class="w155"><em class="red">*</em>效果认定期：</td>
+			      <td class="textbox_td">
+			          <input type="text" name="cps_return_day" style="width:30px"> 天
+			      </td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>费用设置：</td>
+				<td class="textbox_td">
+					<table style="width:99%;margin:5px auto;text-align:center" id="price_area">
+						<tr style="height:27px"><th><em class="red">*</em>类目标识</th><th><em class="red">*</em>类目名称</th><th><em class="red">*</em>佣金比率</th><th>佣金说明</th><th>操作</th></tr>
+						<tr class="cps_price_tr">
+							<td style="width:20%"><input type="text" name="cps_category_id[]" /></td>
+							<td style="width:20%"><input type="text" name="cps_category_name[]" /></td>
+							<td style="width:20%"><input type="text" name="cps_real_price[]" style="width:50px" /> %</td>
+							<td style="width:20%"><input type="text" name="cps_remark[]" /></td>
+							<td style="width:20%">
+								<input type="hidden" name="is_step[]" value="0" />
+								<a class="add_price">添加一项 </a>|
+								<a class="add_step">阶梯价格</a>|
+								<a class="remove_price">移除</a>
+							</td>
+						</tr>      		    
+					</table>
+				</td>
+			  </tr>	
+			  </tbody>	-->
+			  
+			  <!--<tbody id="cpa" class="price" style="display:none;">
+				  <tr>
+					  <td class="w155"><em class="red">*</em>数据返回机制：</td>
+					  <td class="textbox_td">
+						  <input type="radio" name="cpa_data_return" value="0" onclick="returnDate1('cpa')" />实时返回
+						  <input type="radio" name="cpa_data_return" value="1" onclick="returnDate2('cpa')" />延时返回
+						  <span style="display:none" id="cpa_return_date_span">
+							  延时 <input type="text" name="cpa_data_return" style="width:20px" value="0" /> 天
+						  </span>
+					  </td>
+				  </tr>
+				  <tr>
+					  <td class="w155"><em class="red">*</em>效果认定期：</td>
+					  <td class="textbox_td">
+						  <input type="text" name="cpa_return_day" style="width:30px"> 天
+					  </td>
+				  </tr>
+				  <tr>
+					<td class="w155"><em class="red">*</em>价格：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="cpa_price">	
+					</td>
+				  </tr>	
+				  <tr>
+					<td class="w155"><em class="red">*</em>价格描述：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="cpa_price_desc">	
+					</td>
+				  </tr>	
+			  </tbody>-->
+			  
+			  <tbody id="1" class="price"  <if condition="$AdPlanInfo['pay_type'] eq 2" >style="display:none"</if>>
+				  <tr>
+					<td class="w155"><em class="red">*</em>千次价格：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="price" value="{$AdPlanInfo['price']}">	
+					</td>
+				  </tr>	
+				  <tr>
+					<td class="w155">每日pv限额：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="max_per_day" value="{$AdPlanInfo['max_per_day']}" /> 0为不限制
+					</td>
+				  </tr> 
+				  <tr>
+					<td class="w155"><em class="red">*</em>单站pv限额：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="max_per_site" value="{$AdPlanInfo['max_per_site']}" /> 0为不限制
+					</td>
+				  </tr>
+			  </tbody>
+			  
+			  <tbody id="2" class="price" <if condition="$AdPlanInfo['pay_type'] eq 1" >style="display:none"</if> >
+				  <tr>
+					<td class="w155"><em class="red">*</em>价格：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="price" value="{$AdPlanInfo['price']}">	
+					</td>
+				  </tr>			  
+				  <tr>
+					<td class="w155"><em class="red">*</em>单站点击限额：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="max_per_site_c" value="{$AdPlanInfo['max_per_site']}" /> 0为不限制
+					</td>
+				  </tr>	  
+				  <tr>
+					<td class="w155"><em class="red">*</em>单日点击限额：</td>
+					<td class="textbox_td">
+						<input class="newsite_textw160" type="text" name="max_per_day_c" value="{$AdPlanInfo['max_per_day']}" /> 0为不限制
+					</td>
+				  </tr>	
+			  </tbody>
+			  			  	  			  			  		  
+			  <tr>
+				<td class="w155">计划介绍：</td>
+				<td class="textbox_td">
+					<textarea rows="5" class="site_about" name="description">{$AdPlanInfo['description']}</textarea>
+				</td>
+			  </tr>
+			  
+			  <!--定向投放开始-->
+			  <tbody>
+				  <tr>
+					<td colspan="2" style="background-color:#fdf9f1;">定向投放</td>
+				  </tr>
+				  <tr>
+					  <td class="w155">网站类型定向：</td>
+					  <td class="textbox_td">
+						  	<input type="radio" name="directional_site_type" value="0" <if condition="$AdPlanInfo['directional_site_type'] eq  0 "> checked="checked" </if> >否 <input type="radio"  name="directional_site_type" value="1"  <if condition="$AdPlanInfo['directional_site_type'] eq  1 "> checked="checked" </if> >是 	 			 
+					  </td>
+				  </tr>
+				  <!--     -->
+				  <tbody id="directional_site_type_tbody"  <if condition="$AdPlanInfo['directional_site_type'] eq  0 " >style="display:none"</if> >
+					  <tr>
+						  <td>
+						  </td>
+						  <td>
+							  <table class="none_border" style="width:100%;">
+								  <tr>
+									  <td>
+										  <input type="checkbox" name="directional_site_type_check_all" /> 全选
+									  </td>
+								  </tr>
+								  <tr>             
+								  	 <volist name="directionalSiteTypeArrInfo" id="vo">
+									<td>
+										<input type="checkbox" name="directional_site_type_arr[]" value="{$vo['key']}" <if condition="$vo['selectFlag'] eq 1" >checked="checked"</if> />{$vo['val']}
+									<td>
+									</volist>
+								   </tr>
+							 </table>
+						  </td>
+					  </tr>
+				  </tbody>
+				  <!--     -->
+<!-- 				  <tr> -->
+<!-- 					  <td class="w155">地区定向：</td> -->
+<!-- 					  <td class="textbox_td"> -->
+<!-- 						  <input type="radio" name="directional_area" value="0" checked="checked" />否 -->
+<!-- 						  <input type="radio" name="directional_area" value="1" />是 -->
+<!-- 					  </td> -->
+<!-- 				  </tr> -->
+				  <tr>
+					  <td class="w155">星期定向：</td>
+					  <td class="textbox_td">
+						 <input type="radio" name="directional_week" value="0" <if condition="$AdPlanInfo['directional_week'] eq  0 "> checked="checked" </if> >否 <input type="radio"  name="directional_week" value="1" <if condition="$AdPlanInfo['directional_week'] eq  1 "> checked="checked" </if> >是 	
+					  </td>
+				  </tr>
+				  <tbody id="directional_week_tbody"  <if condition="$AdPlanInfo['directional_week'] eq  0 "> style="display:none;" </if> >
+					<tr>
+					  <td></td>
+					  <td>
+						  <table class="none_border" style="width:100%;">
+							  <tr>
+								  <td>
+									  <input type="checkbox" name="directional_week_check_all" /> 全选
+								  </td>
+							  </tr>
+							  <tr>             
+							  	<volist name="directionalWeekArrInfo" id="vo">
+										<td>
+											<input type="checkbox" name="directional_week_arr[]" value="{$vo['key']}" <if condition="$vo['selectFlag'] eq 1" >checked="checked"</if> /> {$vo['val']}
+										</td>
+								</volist>       
+							  </tr>
+						 </table>
+					  </td>	  
+					</tr>
+				  </tbody>
+				  <tr>
+					<td class="w155">时间定向：</td>
+					<td class="textbox_td">
+					<input type="radio" name="directional_time" value="0" <if condition="$AdPlanInfo['directional_time'] eq  0 "> checked="checked" </if> >否 <input type="radio"  name="directional_time"  value="1" <if condition="$AdPlanInfo['directional_time'] eq  1 "> checked="checked" </if>  >是 	
+					</td>
+				  </tr>
+				  <tbody id="directional_time_tbody" <if condition="$AdPlanInfo['directional_time'] eq  0 "> style="display:none;" </if> >
+					  <tr>
+						  <td></td>
+						  <td>
+							  <table class="none_border" style="width:100%;">
+							  <tr>
+								  <td>
+									  <input type="checkbox" name="directional_time_check_all" /> 全选
+								  </td>
+							  </tr>
+							   <volist name="directionalTimeArrInfo" id="vo" key="k">
+								<if condition="$k%6 eq 1">
+									<tr>
+								</if>
+								 <td>
+									 <input type="checkbox" name="directional_time_arr[]" value="{$vo['key']}" <if condition="$vo['selectFlag'] eq 1" >checked="checked"</if> /> {$k}{$vo['val']}
+								</td>
+								<if condition="$k%6 eq 0">
+									</tr>
+								</if>
+							</volist> 
+							</table>
+						  </td>
+					  </tr>
+				</tbody>	      	  
+				</tbody>
+			  <!--定向投放结束-->
+			</table>
+		</div>
+		<div class="huiyuan_change_foot">
+			<input class="confirm_btn" type="submit" name="dosubmit" value=" ">
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);" value=" ">
+		</div>
+       </form>
+	</div>
+</div>
+<script>
+// ### PAY TYPE		  
+$("select[name='pay_type']").change(
+		function(){
+			var pay_type = $(this).val();
+			$(".price").hide();
+			$("#"+pay_type).show();
+		}
+);
+
+// ### PLAN CHECK
+$("input[name='plan_check']").change(function(){
+	if ($(this).val() == '自动审核'){
+		$("#plan_check_tbody").show();
+	} else {
+		$("#plan_check_tbody").hide();
+	}
+});
+
+// add cps price
+var price_html = '<tr class="cps_price_tr">';
+	price_html += '<td style="width:20%"><input type="text" name="cps_category_id[]" /></td>';
+	price_html += '<td style="width:20%"><input type="text" name="cps_category_name[]" /></td>';
+	price_html += '<td style="width:20%"><input type="text" name="cps_real_price[]" style="width:50px" /> %</td>';
+	price_html += '<td style="width:20%"><input type="text" name="cps_remark[]" /></td>';
+	price_html += '<td style="width:20%">';
+	price_html += '<input type="hidden" name="is_step[]" value="0" />';
+	price_html += '<a class="add_price">添加一项 </a>|';
+	price_html += '<a class="add_step">阶梯价格</a>|';
+	price_html += '<a class="remove_price">移除</a>';
+	price_html += '</td>';
+	price_html += '</tr> ';
+$(".add_price").live('click',
+	    function(){
+		    $(this).parent().parent().parent().append(price_html);
+	    }
+);
+
+$(".remove_price").live('click',
+	    function(){
+		    $(this).parent().parent().remove();
+	    }
+);
+
+function returnDate1(pay_type){
+	var span_id = '#'+pay_type+'_return_date_span';
+	$(span_id).hide();
+	$("input[name='"+pay_type+"_data_return']").val("0");
+}
+
+function returnDate2(pay_type){
+	var span_id = '#'+pay_type+'_return_date_span';
+	$("input[name='"+pay_type+"_data_return']").val("");
+	$(span_id).show();
+}
+
+// step price TD html
+$(".add_step").live('click',
+function(){
+	var price_index = $(this).parent().parent().index(".cps_price_tr");
+	var step_price_html = '<tr><td>阶梯类型：<select name="cps_step_type[' + price_index + '][]"><option value="pv">当日PV</option></td>';
+	step_price_html += '<td>起始：<input type="text" name="cps_step_start[' + price_index + '][]" style="width:80px" /></td>';
+	step_price_html += '<td>结束：<input type="text" name="cps_step_end[' + price_index + '][]" style="width:80px" /></td>';
+	step_price_html += '<td>价格：<input type="text" name="cps_step_real_price[' + price_index + '][]" style="width:80px" />%</td>';
+	step_price_html += '<td><a class="remove_step">移除</a></td></tr>';
+
+	$(this).parent().parent().after(step_price_html);
+	$(this).parent().parent().prev();
+    $(this).prev().prev().val('1');
+}
+);
+
+$(".remove_step").live('click', function(){
+    $(this).parent().parent().remove();
+}
+);
+
+// ###### plan directional #######
+// site type
+$("input[name='directional_site_type']").change(function(){
+	if ($(this).val() == 0){
+		$("#directional_site_type_tbody").hide();
+	} else {
+		$("#directional_site_type_tbody").show();
+	}
+});
+
+$("input[name='directional_site_type_check_all']").change(function(){
+    if ($(this).attr("checked") == ""){
+    	$(this).attr("checked", "");
+	    $("input[name='directional_site_type_arr[]']").removeAttr("checked");
+    } else {
+    	$(this).attr("checked", "checked");
+	    $("input[name='directional_site_type_arr[]']").attr("checked", "checked");
+    }
+});
+
+// time
+$("input[name='directional_time']").change(function(){
+	if ($(this).val() == 0){
+		$("#directional_time_tbody").hide();
+	} else {
+		$("#directional_time_tbody").show();
+	}
+});
+
+$("input[name='directional_time_check_all']").change(function(){
+    if ($(this).attr("checked") == ""){
+    	$(this).attr("checked", "");
+	    $("input[name='directional_time_arr[]']").removeAttr("checked");
+    } else {
+    	$(this).attr("checked", "checked");
+	    $("input[name='directional_time_arr[]']").attr("checked", "checked");
+    }
+});
+
+// week
+$("input[name='directional_week']").change(function(){
+	if ($(this).val() == 0){
+		$("#directional_week_tbody").hide();
+	} else {
+		$("#directional_week_tbody").show();
+	}
+});
+
+$("input[name='directional_week_check_all']").change(function(){
+    if ($(this).attr("checked") == ""){
+    	$(this).attr("checked", "");
+	    $("input[name='directional_week_arr[]']").removeAttr("checked");
+    } else {
+    	$(this).attr("checked", "checked");
+	    $("input[name='directional_week_arr[]']").attr("checked", "checked");
+    }
+});
+</script>            
+<include file="Index:footer" />

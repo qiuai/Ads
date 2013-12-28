@@ -83,7 +83,10 @@
 	<tr>
 		<td><em class="red">*</em>审核方式：</td>
 		<td>
-		    <input type="radio" checked="checked" name="plan_check" value="无需审核">自动审核 <input type="radio" name="plan_check" value="手动审核">手动审核 <input type="radio" name="plan_check" value="自动审核">自动审核 		
+		   	<volist name="adPlanCheckInfo" id="vo" key="k">
+						<input type="radio" name="plan_check" value="{$vo['key']}" <if condition="$k eq 1">checked="checked"</if> /> 
+					{$vo['val']}	
+					</volist>
 		</td>
 	</tr>
 	<!--<tbody id="plan_check_tbody" style="display:none">
@@ -100,8 +103,7 @@
 	</tr>
 	</tbody>-->
 	<tr>
-		<td><em class="red">*</em>结算周期：</td>
-		
+		<td><em class="red">*</em>结算周期：</td>		
 		<td class="textbox_td">
 		   <volist name="adClearingFormInfo" id="vo" key="k" >
 		    <input type="radio" name="clearing_form" value="{$vo['key']}" <if condition="$AdPlanInfo['clearing_form'] eq $vo['key']">checked="checked"</if> />{$vo['val']}			
@@ -276,7 +278,7 @@
 			<input type="radio" name="directional_site_type" value="0" <if condition="$AdPlanInfo['directional_site_type'] eq  0 "> checked="checked" </if> >否 <input type="radio"  name="directional_site_type" value="1"  <if condition="$AdPlanInfo['directional_site_type'] eq  1 "> checked="checked" </if> >是 	 
 			</td>
 		</tr>
-		<tbody id="directional_site_type_tbody" >
+		<tbody id="directional_site_type_tbody"  <if condition="$AdPlanInfo['directional_site_type'] eq  0 " >style="display:none"</if> >
 		<tr>
 		  <td>
 		  </td>

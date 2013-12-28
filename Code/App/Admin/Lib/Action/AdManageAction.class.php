@@ -529,7 +529,9 @@ class AdManageAction  extends CommonAction{
 			}else{
 				$this->error("当前广告展现形式不存在请重新选择",C('SITE_URL')."?m=".$this->actionName.'&a=add&pid='.$_POST['pid']);
 			}
-		}	
+		}
+		$_POST['sid'] = $adPlanInfo['uid'];
+		
 	}
 	
 	
