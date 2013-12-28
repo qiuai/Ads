@@ -68,7 +68,7 @@ class OtherAction extends CommonAction {
 	// 公告列表
 	public function noticeList(){
 		$no			 	= M("notice");
-		$notice			= $this->memberPage($no, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
+		$notice			= $this->memberPage($no, $where, $pageNum=15, $order='id desc'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		foreach($notice as $key=>$val){
 			$notice[$key]["pubdate"]=date("Y-m-d",$val["pubdate"]); // 发布时间
 			if($val["is_display"]==0){ // 是否显示 
