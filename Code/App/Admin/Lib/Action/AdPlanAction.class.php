@@ -924,9 +924,7 @@ class AdPlanAction extends CommonAction{
 		
 		// 处理价格
 		//$_POST['price'] = intval($_POST['price']);
-		if(!is_numeric($_POST['price'])){
-			$this->error("每千次的价格必须为数值",$errorUrl);			
-		}
+		
 		
 		// 处理每日pv限额或每日点击限额 必须为整型数值
 		if($_POST['pay_type'] == 1){
@@ -935,14 +933,18 @@ class AdPlanAction extends CommonAction{
 			
 			// 处理某个网站的pv或者点击限额
 			$_POST['max_per_site'] = intval($_POST['max_per_site']);
+			$_POST['price'] = intval($_POST['price']);
 			
 		}elseif($_POST['pay_type'] == 2){
 			$_POST['max_per_day'] = intval($_POST['max_per_day_c']);
 				
 			// 处理某个网站的pv或者点击限额
 			$_POST['max_per_site'] = intval($_POST['max_per_site_c']);
+			$_POST['price'] = intval($_POST['price_c']);
 		}
-		
+		if(!is_numeric($_POST['price'])){
+			$this->error("每千次的价格必须为数值",$errorUrl);			
+		}
 		// 处理描述的内容过滤特殊的字符
 		$_POST['description'] = strip_tags($_POST['description']);
 		
