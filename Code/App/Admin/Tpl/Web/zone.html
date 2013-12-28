@@ -28,7 +28,7 @@
 				</form>
 							</td>
 				<td align="right">
-				<input type="button" value="导出报表" class="button1" onclick="location.href=&#39;SITE_URL/?m=Web&a=zoneExport&condition={$condition}&content={$content}&#39;">
+				<input type="button" value="导出报表" class="button1" onclick="location.href=&#39;SITE_URL?m=Web&a=zoneExport&condition={$condition}&content={$content}&#39;">
 				</td>
 			</tr>
 		</tbody>
@@ -57,7 +57,7 @@
 			<td>{$vo.display}</td>
 			<td>{$vo.width}*{$vo.height}</td>
 			<td><if condition="$vo.status eq 0">是<elseif condition="$vo.status eq 1"/>否</if></td>
-			<td><a target="_blank" href="SITE_URL/?m=Web&a=loginMemberHome&zone_id={$vo.id}&uid={$vo.uid}">编辑</a></td>
+			<td><a target="_blank" href="SITE_URL?m=Web&a=loginMemberHome&zone_id={$vo.id}&uid={$vo.uid}">编辑</a></td>
 		</tr>
 		</volist>
 	</tbody>

@@ -127,7 +127,7 @@ class WebAction extends CommonAction {
 		$id		= (int)($_GET["site_id"]);
 		$site 	= M("site");
 		$site	->where("id =".$id)->delete();
-		$this	->success('删除成功','SITE_URL/?m=Web&a=index');
+		$this	->success('删除成功','SITE_URL?m=Web&a=index');
 	}
 	// 网站分类列表
 	public function siteType(){
@@ -167,12 +167,12 @@ class WebAction extends CommonAction {
 		$data["sort"]		=	(int)($_POST["sort"]); // 排序
 		// 验证录入信息
 		if(empty($data["code_name_zh"])){
-			$this->error("分类名称不能为空！",'SITE_URL/?m=Web&a=siteTypeAdd');
+			$this->error("分类名称不能为空！",'SITE_URL?m=Web&a=siteTypeAdd');
 		}elseif(empty($data["code_name_en"])){
-			$this->error("英文名称不能为空！",'SITE_URL/?m=Web&a=siteTypeAdd');
+			$this->error("英文名称不能为空！",'SITE_URL?m=Web&a=siteTypeAdd');
 		}else{
 			$siteType->data($data)->add(); // 往数据库中添加
-			$this->success('数据添加成功','SITE_URL/?m=Web&a=siteType');
+			$this->success('数据添加成功','SITE_URL?m=Web&a=siteType');
 		}
 	}
 	// 编辑站点分类
@@ -185,12 +185,12 @@ class WebAction extends CommonAction {
 		$data['sort']		=	(int)($_POST["sort"]);
 		// 验证录入信息
 		if(empty($data["code_name_zh"])){
-			$this->error("分类名称不能为空！",'SITE_URL/?m=Web&a=siteTypeEdit&code_id='.$data['id']);
+			$this->error("分类名称不能为空！",'SITE_URL?m=Web&a=siteTypeEdit&code_id='.$data['id']);
 		}elseif(empty($data["code_name_en"])){
-			$this->error("英文名称不能为空！",'SITE_URL/?m=Web&a=siteTypeEdit&code_id='.$data['id']);
+			$this->error("英文名称不能为空！",'SITE_URL?m=Web&a=siteTypeEdit&code_id='.$data['id']);
 		}else{
 			$siteType->where("id =".$data['id'])->data($data)->save(); // 更改数据
-			$this->success('数据更改成功','SITE_URL/?m=Web&a=siteType');
+			$this->success('数据更改成功','SITE_URL?m=Web&a=siteType');
 		}
 	}
 	// 代码位列表

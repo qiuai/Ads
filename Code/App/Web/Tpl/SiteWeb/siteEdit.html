@@ -4,7 +4,7 @@
 <script type="text/javascript">
 	$(function(){
 		$.formValidator.initConfig({formid:"site_edit",autotip:true});
-		$("#site_domain").formValidator({onshow:"您将使用此网站地址，请正确填写 ",onfocus:"请输入正确的网站地址",oncorrect:"输入正确"}).regexValidator({regexp:"^([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$",onerror:"您输入的网站格式不正确"});
+		$("#site_domain").formValidator({onshow:"您将使用此网站地址，请正确填写 ",onfocus:"请输入正确的网站地址",oncorrect:"输入正确"}).regexValidator({regexp:"^([\\w-]+\\.)+[\\w-]+([\\w-.?%&=]*)?$",onerror:"您输入的网站格式不正确"});
 		$("#site_name").formValidator({onshow:"您将使用此网站名，请正确填写",onfocus:"请输入正确的网站名"}).inputValidator({min:1,onerror:"网站名不能为空"});		
 		function allEmpty(val,elem)
 		{
@@ -14,7 +14,7 @@
 </script>
 <div class="main clearfix">
 	<div class="huiyuan_change">
-    	<form id="site_edit" action="SITE_URL/?m=SiteWeb&a=editCheck" method="post">
+    	<form id="site_edit" action="SITE_URL?m=SiteWeb&a=editCheck" method="post">
 		<volist name="site" id="vo">
     	<input type="hidden" name="site_id" value="{$vo.id}">
 		<div class="huiyuan_change_head">

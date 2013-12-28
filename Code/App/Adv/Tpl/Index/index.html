@@ -63,11 +63,11 @@ var chart;
 <div class="main clearfix">
 	<div class="sidebar fr">
     	<div class="notice clearfix">
-        	<h3><span>最新公告</span><a href="HOME_URL/?m=Notice&a=index&category_id=3" class="more" target="_blank">更多&gt;&gt;</a></h3>
+        	<h3><span>最新公告</span><a href="HOME_URL?m=Notice&a=index&category_id=3" class="more" target="_blank">更多&gt;&gt;</a></h3>
             <ul>
 				<volist name="notice" id="no">
                 <li>                   
-                    <a href="HOME_URL/?m=Notice&a=index&category_id={$no.category_id}&notice_id={$no.id}" target="_blank">{$no.title}</a>                  
+                    <a href="HOME_URL?m=Notice&a=index&category_id={$no.category_id}&notice_id={$no.id}" target="_blank">{$no.title}</a>                  
                 </li>
 				</volist>
             </ul>

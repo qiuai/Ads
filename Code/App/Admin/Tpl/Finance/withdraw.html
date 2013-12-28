@@ -21,7 +21,7 @@
 					<p style="margin:5px 0px;">　　帐号：<span id="accounts">{$vo.card_number}</span></p>
 					</volist>
 				</div>
-				<form id="widthdraw_do" action="SITE_URL/?m=Finance&a=withdrawDo" method="post">
+				<form id="widthdraw_do" action="SITE_URL?m=Finance&a=withdrawDo" method="post">
 					<input type="hidden" name="id" value="{$id}">
 					<p style="margin:10px 0">支付结果：
 						<input type="radio" name="status" value="1" >未支付
