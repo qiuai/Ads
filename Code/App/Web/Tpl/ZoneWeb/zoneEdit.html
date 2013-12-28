@@ -60,8 +60,8 @@ $(function(){
                     	<table border="0" class="noborder" style="margin:15px;">                    
                           <tr>
                             <td>计费类型：</td>   
-                            <td><if condition="$vo.pay_type eq 1">CPS<elseif condition="$vo.pay_type eq 2"/>CPA<elseif condition="$vo.pay_type eq 3"/>CPC<else />CPM</if></td>                         
-                          </tr>
+                            <td><if condition="$vo.pay_type eq 1">CPM<elseif condition="$vo.pay_type eq 2"/>CPC</if></td>
+						  </tr>
 						  <volist name="adsize" id="list">
                           <tr>
                             <td>展示类型：</td>   
