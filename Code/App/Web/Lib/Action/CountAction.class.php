@@ -43,9 +43,9 @@ class CountAction extends Action{
 		
 		// 查询代码位相关的信息必须是启用状态的代码位
 		$zoneInfo = $zone->where("id = ".$_GET['id']." and status = 1")->find();
-		
+
 		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
-		$this->verifyVisitSource($zoneInfo);
+		//$this->verifyVisitSource($zoneInfo);
 		
 		if(!$zoneInfo){   // 没有查询到数据代表代码位不存在或未启用
 			echo "当前代码位有误 或未启用";
@@ -287,16 +287,51 @@ class CountAction extends Action{
 // 			 */
 			//$codeRandNum = md5(rand(100,10000).md5(time()).rand(100,10000));
 			
-			// 把随机数保存到当前广告
-			// 组装url连接地址
-			$jumpUrl = C('SITE_URL')."?m=".$this->actionName.'&a=clickAdJump&zoneId='.$_GET['id'].'&aid='.$adManageInfo['aid'];
-			// 组装div框中的图片或文字的广告
-		
-		
-			$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
-			/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
-			$code.="<div width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$jumpUrl."\' target=\"_blank\" >".$adManageInfo['content']."</a></div>";
-			$code=$code."');";
+			switch ($sizeId){
+				case 1:{	// 文字 广告
+// 					break;
+				}
+				case 2:{	// 图片 广告
+// 					break;
+				}
+				case 3:{	// 文字 广告
+// 					break;
+				}
+				case 4:{	// 文字 广告
+// 					break;
+				}
+				case 5:{	// 文字 广告
+// 					break;
+				}
+				case 6:{	// 文字 广告
+					
+					// 把随机数保存到当前广告
+					// 组装url连接地址
+					$jumpUrl = C('SITE_URL')."?m=".$this->actionName.'&a=clickAdJump&zoneId='.$_GET['id'].'&aid='.$adManageInfo['aid'];
+					// 组装div框中的图片或文字的广告
+					
+					
+					$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
+					/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
+					$code.="<div width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$jumpUrl."\' target=\"_blank\" >".$adManageInfo['content']."</a></div>";
+					$code=$code."');";
+					
+					break;
+				}
+				case 10:{	// 右下角浮窗
+					
+					$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
+					/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
+					$code.="<div style=\"z-index:100000;position:absolute;bottom:0;right:0px;position:fixed;\" width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$adManageInfo['jump_url']."\' target=\"_blank\" >".$adManageInfo['content']."<\/a><\/div>";
+					$code=$code."');";
+					
+					break;
+				}
+				default:	// 匹配失败
+					break;
+			}
+			
+			
 			return $code;
 		}else{
 			
