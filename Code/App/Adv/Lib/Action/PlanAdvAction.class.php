@@ -53,7 +53,11 @@ class PlanAdvAction extends CommonAction {
     	$where = 'ad_plan_category.id = adplan.category_id and adplan.uid = '.$_SESSION[C('ADV_AUTH_KEY')];
     	foreach ($_GET as $key => $val){
     		if($val){
-    	
+    			
+    			// 过滤掉特殊字符
+    			$key = strip_tags($key);
+    			$val = strip_tags($val);
+    			
     			if($key == 'plan_name'){
     				$where = $where." and adplan.".$key." like '%".$val."%'";
     			}elseif ($key == 'search' || $key == "p"){
@@ -351,9 +355,9 @@ class PlanAdvAction extends CommonAction {
 		if($_POST['end_date'] <= $_POST['start_date']){
 			$this->error("计费周期结束时间必须大于开始时间",$errorUrl);
 		}
-		if($_POST['start_date']< $this->createDayStartTime()){
+		/*if($_POST['start_date']< $this->createDayStartTime()){
 			$this->error("计费周期开始时间必须大于等于当前时间",$errorUrl);
-		}
+		}*/
 		
 		// 处理价格
 		//$_POST['price'] = intval($_POST['price']);
@@ -454,7 +458,121 @@ class PlanAdvAction extends CommonAction {
 	 * @see CommonAction::edit()
 	 */
 	public function edit(){
-		echo "bbbbbbbbbbbb";
+		
+		// 查看当前广告是否是属于当前广告主并且当前广告位是否不是处于投放中和待投放状态 只有两个条件同时成立是才可以编辑
+		$adPlan = M('AdPlan');
+		
+		// 查询相关的数据
+		$adPlanInfo =$adPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->where('ad_plan_category.id = adplan.category_id and adplan.id = '.$_GET['id'].' and adplan.plan_status not in (2,5) and adplan.uid = '.$_SESSION[C('ADV_AUTH_KEY')])->field('adplan.*,ad_plan_category.name')->find();
+		if(!$adPlanInfo){
+			$this->error("计划不存在或者处于投放或待投放状态不能修改",C('SITE_URL')."?m=".$this->actionName.'&a=index');
+		}
+		
+		// 获取行业表中的行业相关的信息
+		$industry = M('adPlanCategory');
+		
+		$industryInfo = $industry->select();
+		$this->assign("industryInfo",$industryInfo);
+		
+		// 获取广告计划的计费形式
+		$this->getAdPayTypeInfo();
+			
+		// 或取审核方式的相关信息
+		$this->getAdPlanCheckInfo();
+			
+		// 获取广告的结算方式的信息
+		$this->getAdClearingFormInfo();
+			
+		// 获取网站类型的定向相关的数据
+		$this->getDirectionalSiteTypeArrInfo(json_decode($adPlanInfo['directional_site_type_arr']));
+			
+		// 获取时间定向的相关数据
+		$this->getDirectionalTimeArrInfo(json_decode($adPlanInfo['directional_time_arr']));
+			
+		// 获取网站星期定向的相关信息
+		$this->getDirectionalWeekArrInfo(json_decode($adPlanInfo['directional_week_arr']));
+			
+			
+		// 处理时间
+		$adPlanInfo['start_date'] = date('Y-m-d',$adPlanInfo['start_date']);
+		$adPlanInfo['end_date'] = date('Y-m-d',$adPlanInfo['end_date']);
+			
+		//dump($adPlanInfo);
+		$this->assign('AdPlanInfo',$adPlanInfo);
+		
+		$this->display();
+	}
+	
+	/**
+	 * 
+	 * 广告计划编辑后修改
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2013-12-12 下午3:40:38
+	 */
+	public function doEdit(){
+	
+		// 调用函数处理传递过来的数据
+		$this->dealAddSubmitData(C('SITE_URL')."?m=".$this->actionName.'&a=edit&id='.intval($_POST['id']));
+		
+		// 判断当前广告计划是否可以修改
+		$adPlan = M('AdPlan');
+		// 查询相关的数据
+		$adPlanInfo =$adPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->where('ad_plan_category.id = adplan.category_id and adplan.id = '.intval($_POST['id']).' and adplan.plan_status not in (2,5) and adplan.uid = '.$_SESSION[C('ADV_AUTH_KEY')])->field('adplan.*,ad_plan_category.name')->find();
+		
+		if(!$adPlanInfo){
+			$this->error("计划不存在或者处于投放或待投放状态不能修改",C('SITE_URL')."?m=".$this->actionName.'&a=index');
+		}
+		
+		// 创建数据库对象
+		$this->AdPlan = D("AdPlan");
+		
+		// 把状态改成修改待审
+		$_POST['plan_status'] = 1;
+		$AdPlan = M($this->actionName);
+		
+		if(!$this->AdPlan->create()){
+			
+			//echo $this->AdPlan->getError();
+			// 用jstiao'zhuan
+			$this->error($this->AdPlan->getError(),C('SITE_URL')."?m=".$this->actionName.'&a=edit&id='.$_POST['id']);			
+		}else{
+			
+			// 如果有图片上传删除原来图片
+			if($_FILES['plan_logo']['error'] === 0){
+				
+				// 查询相关的数据
+				$AdPlanInfo =$AdPlan->field('plan_logo')->where("id = ".$_POST['id'])->find();
+				 $this->delUpload($AdPlanInfo['plan_logo']);
+				
+				// 往服务器上传图片
+				$info = $this->upload($this->actionName);
+				
+			// 保存相关的信息
+				if($info['flag']==1){  // 说明文件上传成功保存图片的相关信息
+				
+					$this->AdPlan->plan_logo = $info['message'][0]['completionPath'];
+					
+				}else{
+				
+					// 提示图片上传失败
+					$this->error("图片上传失败".$info['message'],C('SITE_URL')."?m=".$this->actionName.'&a=edit&id='.$_POST['id']);
+				}				
+			}
+			
+			if($this->AdPlan->save()){
+				
+				
+				
+				$this->success('数据修改成功',C('SITE_URL')."?m=".$this->actionName.'&a=index');
+			}else{
+				
+				//echo $this->AdPlan->getLastSql()."<br/>";
+				//exit;
+				$this->error('数据修改失败',C('SITE_URL')."?m=".$this->actionName.'&a=edit&id='.$_POST['id']);
+			}
+			
+		}
+		
 	}
 	/**
 	 *

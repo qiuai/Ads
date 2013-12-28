@@ -96,8 +96,9 @@ class AdPlanAction extends CommonAction{
 		$where= 'ad_plan_category.id = adplan.category_id';
 		//dump($_GET);
 		// 遍历$_GET组装查询的条件
-		foreach ($_GET as $key=>$val){
-			
+		foreach ($_GET as $key=>$val){		
+				$key = strip_tags($key);
+				$val = strip_tags($val);
 				if($key=="p"){
 					continue;
 				}elseif($key=="plan_name"){
@@ -914,9 +915,9 @@ class AdPlanAction extends CommonAction{
 		if($_POST['end_date'] <= $_POST['start_date']){
 			$this->error("计费周期结束时间必须大于开始时间",$errorUrl);
 		}
-		if($_POST['start_date']< $this->createDayStartTime()){
+		/*if($_POST['start_date']< $this->createDayStartTime()){
 			$this->error("计费周期开始时间必须大于等于当前时间",$errorUrl);
-		}
+		}*/
 		
 		// 处理价格
 		//$_POST['price'] = intval($_POST['price']);

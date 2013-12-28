@@ -1,0 +1,67 @@
+<include file="Index:headerAdv" />
+<div class="main clearfix">
+	<div class="huiyuan_change">
+    	<form action="SITE_URL?m=AdAdv&a=doEdit" method="post" enctype="multipart/form-data">
+    	<input type="hidden" name="aid" value="{$AdManageInfo['aid']}" />
+		<div class="huiyuan_change_head">
+			<span>修改广告</span>
+			<div class="bitian fr">以下带<em class="red">*</em>号的为必填</div>
+			<div class="cb"></div>
+		</div>
+		<div class="huiyuan_change_body">
+			<table class="table_list">
+			  <tr>
+				<td class="w155"><em class="red">*</em>所属计划：</td>
+				<td class="textbox_td">
+					{$AdManageInfo['plan_name']}			</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>广告标题：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="title" value="{$AdManageInfo['title']}">				
+				</td>
+			  </tr>			  
+			  <tr>
+				<td class="w155"><em class="red">*</em>展示形式：</td>
+				<td class="textbox_td">
+					{$AdManageInfo['size']}{$AdManageInfo['size_type']}     				</td>
+			  </tr>
+			  <tr>
+				<td class="w155"><em class="red">*</em>目标网址：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="text" name="jump_url" value="{$AdManageInfo['jump_url']}" style="width:400px" />	
+				</td>
+			  </tr>
+			  <if condition="$AdManageInfo['picFlag'] eq 1">	
+					<input type="hidden" name="picFlag" value="1" />
+			  <tr>
+				<td class="w155"><em class="red">*</em>图片/FLASH：</td>
+				<td class="textbox_td">
+					<input class="newsite_textw160" type="file" name="content"> 留空则保留原文件				
+				</td>
+			  </tr>	
+			  <tr>
+				<td class="w155">原图片/FLASH：</td>
+				<td class="textbox_td">
+				    				    {$AdManageInfo['content']}   				    			    
+				    				</td>
+			  </tr>
+			  <else />	
+			<input type="hidden" name="picFlag" value="0" />
+			  			<tr>
+							<td class="w155"><em class="red">*</em>文字内容：</td>
+							<td class="textbox_td">
+								<textarea rows="5" cols="80" name="content" style="margin:5px">{$AdManageInfo['content']}</textarea>
+							</td>
+			  			</tr>			  			
+					</if>
+			</table>
+		</div>
+		<div class="huiyuan_change_foot">
+			<input class="confirm_btn" type="submit" name="dosubmit" value=" ">
+			<input class="back_btn" type="button" onclick="javascript:history.back(-1);" value=" ">
+		</div>
+       </form>
+	</div>
+</div>
+<include file="Index:footer" />
