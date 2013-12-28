@@ -143,6 +143,7 @@ class WebAction extends CommonAction {
 		$status 	= (int)($_POST["status"]);
 		$st 		= M("site");
 		$num 		= $st->where("id in (".$ids.")")->setField("status",$status); // 批量改变网站状态
+		echo $st->getLastSql();exit;
 		if(empty($num)){
 			echo "1"; // 失败
 		}else{
