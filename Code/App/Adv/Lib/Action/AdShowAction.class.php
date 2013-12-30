@@ -1,13 +1,17 @@
 <?php
-
 /**
+ * 广告展现
  * 
- * 网站访问计数专用控制器
- * @copyright (C)2013 ZHTS Inc.
- * @project CHAXUNLE.COM
- * @author Yumao <815227173@qq.com>
- * @CreateDate: 2013-12-17 下午8:37:12
+ * @copyright (C)2012 ZHTS Inc.
+ * @project project_name
+ * @author Vonwey <VonweyWang@gmail.com>
+ * @CreateDate: 2013-12-30 上午10:54:50
  * @version 1.0
+ *
+ * @ModificationHistory  
+ * Who          When                What 
+ * --------     ----------          ------------------------------------------------ 
+ * Vonwey   2013-12-30 上午10:54:50      todo
  */
 class AdShowAction extends Action{
 	
