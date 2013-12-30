@@ -22,6 +22,7 @@ class CommonAction extends Action {
 	 */
 	function _initialize(){
     	$this->checkUser();
+    	$this->filter();	// 安全过滤
 		$this->assign("flag",MODULE_NAME);
 		$this->assign("module_name",MODULE_NAME);
 		$this->assign("action_name",ACTION_NAME);
@@ -147,5 +148,15 @@ class CommonAction extends Action {
     	if(file_exists(ROOT_PATH."/../Uploadfile/".$filePath)){
     		unlink(ROOT_PATH."/../Uploadfile/".$filePath);
     	}
+    }
+    /**
+     * 过滤函数
+     *
+     * @author Vonwey <VonweyWang@gmail.com>
+     * @CreateDate: 2013-12-30 上午9:51:14
+     */
+    public function filter(){
+    	require_once ROOT_PATH . '/Plus/filtration.php';
+//     	test();
     }
 }
