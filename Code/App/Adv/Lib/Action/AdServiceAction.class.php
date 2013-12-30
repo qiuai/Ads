@@ -25,9 +25,10 @@ abstract class AdServiceAction extends Action {
 	 * 初始化
 	 *
 	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-12-28 下午4:28:47
+	 * @CreateDate: 2013-12-30 下午1:03:06
 	 */
 	function _initialize() {
+		
    }
    /**
     * 记录访问
@@ -64,5 +65,23 @@ abstract class AdServiceAction extends Action {
     */
    function adShow(){
 	   	
+   }
+   /**
+    * 禁用广告
+    *
+    * @author Vonwey <VonweyWang@gmail.com>
+    * @CreateDate: 2013-12-30 下午12:02:32
+    */
+   function forbiddenAd(){
+   	
+   }
+   /**
+    * 锁定用户
+    *
+    * @author Vonwey <VonweyWang@gmail.com>
+    * @CreateDate: 2013-12-30 下午12:02:53
+    */
+   function forbiddenMember(){
+   	
    }
 }
