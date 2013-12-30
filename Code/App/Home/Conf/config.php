@@ -2,8 +2,8 @@
 $dbConfig			=	require ROOT_PATH . '/Conf/db.global.php';
 $systemConfig		=	require ROOT_PATH . '/Conf/config.system.php';
 $commonConfig   	=   require ROOT_PATH . '/Conf/config.global.php';
-$domainCommonConfig =   require ROOT_PATH . '/Conf/domain.php';
-$domainConfig 		=   require 'domain.php';
+$domainCommonConfig =   require ROOT_PATH . '/Conf/domains.php';
+$domainConfig 		=   require 'domains.php';
 $domain = array_merge($domainConfig,$domainCommonConfig);
 
 $array=array(
