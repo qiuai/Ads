@@ -5,24 +5,13 @@
 /.buildpath
 /.project
 /.settings
-/Code/Conf/domain.php
-/Code/App/Ads/Conf/domain.php
-/Code/App/Authority/Conf/domain.php
-/Code/App/Admin/Conf/domain.php
 /Code/Conf/config.setting.php
 /Uploadfile/
 /Uploadfile
 /Uploadfile/*
-/Code/App/Adv/Conf/domain.php
-/Code/App/Home/Conf/domain.php
-/Code/App/Web/Conf/domain.php
 
 /Code/App/Admin/Conf/domains.php
-
 /Code/App/Adv/Conf/domains.php
-
 /Code/App/Home/Conf/domains.php
-
 /Code/App/Web/Conf/domains.php
-
 /Code/Conf/domains.php
