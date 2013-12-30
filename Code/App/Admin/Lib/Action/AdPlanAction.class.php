@@ -933,14 +933,14 @@ class AdPlanAction extends CommonAction{
 			
 			// 处理某个网站的pv或者点击限额
 			$_POST['max_per_site'] = intval($_POST['max_per_site']);
-			$_POST['price'] = intval($_POST['price']);
+			$_POST['price'] = floatval($_POST['price']);
 			
 		}elseif($_POST['pay_type'] == 2){
 			$_POST['max_per_day'] = intval($_POST['max_per_day_c']);
 				
 			// 处理某个网站的pv或者点击限额
 			$_POST['max_per_site'] = intval($_POST['max_per_site_c']);
-			$_POST['price'] = intval($_POST['price_c']);
+			$_POST['price'] = floatval($_POST['price_c']);
 		}
 		if(!is_numeric($_POST['price'])){
 			$this->error("每千次的价格必须为数值",$errorUrl);			
