@@ -11,7 +11,7 @@
 
 var head = document.getElementsByTagName('HEAD').item(0);
 var style = document.createElement('link');
-style.href = 'static/css/default/calendar-blue.css';
+style.href = '../css/calendar-blue.css';
 style.rel = 'stylesheet';
 style.type = 'text/css';
 head.appendChild(style);
@@ -295,9 +295,9 @@ this.title.style.cursor = "move";
 hh("&#x00d7;", 1, 200).ttip = Calendar._TT["CLOSE"];
 }row = Calendar.createElement("tr", thead);
 row.className = "headrow";this._nav_py = hh("&#x00ab;", 1, -2);
-this._nav_py.ttip = Calendar._TT["PREV_YEAR"];this._nav_pm = hh("鈥�", 1, -1);
+this._nav_py.ttip = Calendar._TT["PREV_YEAR"];this._nav_pm = hh("‹", 1, -1);
 this._nav_pm.ttip = Calendar._TT["PREV_MONTH"];this._nav_now = hh(Calendar._TT["TODAY"], this.weekNumbers ? 4 : 3, 0);
-this._nav_now.ttip = Calendar._TT["GO_TODAY"];this._nav_nm = hh("鈥�", 1, 1);
+this._nav_now.ttip = Calendar._TT["GO_TODAY"];this._nav_nm = hh("›", 1, 1);
 this._nav_nm.ttip = Calendar._TT["NEXT_MONTH"];this._nav_ny = hh("&#x00bb;", 1, 2);
 this._nav_ny.ttip = Calendar._TT["NEXT_YEAR"];
 row = Calendar.createElement("tr", thead);
@@ -1106,43 +1106,43 @@ this.__msh_oldSetFullYear(y);
 
 
 Calendar._DN = new Array
-("鏄熸湡鏃�","鏄熸湡涓€","鏄熸湡浜�","鏄熸湡涓�","鏄熸湡鍥�","鏄熸湡浜�","鏄熸湡鍏�","鏄熸湡鏃�");
+("星期日","星期一","星期二","星期三","星期四","星期五","星期六","星期日");
 Calendar._SDN = new Array
-("鏃�","涓€","浜�","涓�","鍥�","浜�","鍏�","鏃�");
+("日","一","二","三","四","五","六","日");
 Calendar._FD = 0;
 Calendar._MN = new Array
-("涓€鏈�","浜屾湀","涓夋湀","鍥涙湀","浜旀湀","鍏湀","涓冩湀","鍏湀","涔濇湀","鍗佹湀","鍗佷竴鏈�","鍗佷簩鏈�");
+("一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月");
 Calendar._SMN = new Array
-("涓€鏈�","浜屾湀","涓夋湀","鍥涙湀","浜旀湀","鍏湀","涓冩湀","鍏湀","涔濇湀","鍗佹湀","鍗佷竴鏈�","鍗佷簩鏈�");
+("一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月");
 Calendar._TT = {};
-Calendar._TT["INFO"] = "甯姪";
+Calendar._TT["INFO"] = "帮助";
 Calendar._TT["ABOUT"] =
-"閫夋嫨鏃ユ湡:\n" +
-"- 鐐瑰嚮 \xab, \xbb 鎸夐挳閫夋嫨骞翠唤\n" +
-"- 鐐瑰嚮 " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " 鎸夐挳閫夋嫨鏈堜唤\n" +
-"- 闀挎寜浠ヤ笂鎸夐挳鍙粠鑿滃崟涓揩閫熼€夋嫨骞翠唤鎴栨湀浠�";
+"选择日期:\n" +
+"- 点击 \xab, \xbb 按钮选择年份\n" +
+"- 点击 " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " 按钮选择月份\n" +
+"- 长按以上按钮可从菜单中快速选择年份或月份";
 Calendar._TT["ABOUT_TIME"] = "\n\n" +
-"閫夋嫨鏃堕棿:\n" +
-"- 鐐瑰嚮灏忔椂鎴栧垎閽熷彲浣挎敼鏁板€煎姞涓€\n" +
-"- 鎸変綇Shift閿偣鍑诲皬鏃舵垨鍒嗛挓鍙娇鏀规暟鍊煎噺涓€\n" +
-"- 鐐瑰嚮鎷栧姩榧犳爣鍙繘琛屽揩閫熼€夋嫨";
-Calendar._TT["PREV_YEAR"] = "涓婁竴骞� (鎸変綇鍑鸿彍鍗�)";
-Calendar._TT["PREV_MONTH"] = "涓婁竴鏈� (鎸変綇鍑鸿彍鍗�)";
-Calendar._TT["GO_TODAY"] = "杞埌浠婃棩";
-Calendar._TT["NEXT_MONTH"] = "涓嬩竴鏈� (鎸変綇鍑鸿彍鍗�)";
-Calendar._TT["NEXT_YEAR"] = "涓嬩竴骞� (鎸変綇鍑鸿彍鍗�)";
-Calendar._TT["SEL_DATE"] = "閫夋嫨鏃ユ湡";
-Calendar._TT["DRAG_TO_MOVE"] = "鎷栧姩";
-Calendar._TT["PART_TODAY"] = " (浠婃棩)";
-Calendar._TT["DAY_FIRST"] = "鏈€宸﹁竟鏄剧ず%s";
+"选择时间:\n" +
+"- 点击小时或分钟可使改数值加一\n" +
+"- 按住Shift键点击小时或分钟可使改数值减一\n" +
+"- 点击拖动鼠标可进行快速选择";
+Calendar._TT["PREV_YEAR"] = "上一年 (按住出菜单)";
+Calendar._TT["PREV_MONTH"] = "上一月 (按住出菜单)";
+Calendar._TT["GO_TODAY"] = "转到今日";
+Calendar._TT["NEXT_MONTH"] = "下一月 (按住出菜单)";
+Calendar._TT["NEXT_YEAR"] = "下一年 (按住出菜单)";
+Calendar._TT["SEL_DATE"] = "选择日期";
+Calendar._TT["DRAG_TO_MOVE"] = "拖动";
+Calendar._TT["PART_TODAY"] = " (今日)";
+Calendar._TT["DAY_FIRST"] = "最左边显示%s";
 Calendar._TT["WEEKEND"] = "0,6";
-Calendar._TT["CLOSE"] = "鍏抽棴";
-Calendar._TT["TODAY"] = "浠婃棩";
-Calendar._TT["TIME_PART"] = "(Shift-)鐐瑰嚮榧犳爣鎴栨嫋鍔ㄦ敼鍙樺€�";
+Calendar._TT["CLOSE"] = "关闭";
+Calendar._TT["TODAY"] = "今日";
+Calendar._TT["TIME_PART"] = "(Shift-)点击鼠标或拖动改变值";
 Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d";
-Calendar._TT["TT_DATE_FORMAT"] = "%A, %b %e鏃�";
-Calendar._TT["WK"] = "鍛�";
-Calendar._TT["TIME"] = "鏃堕棿:";
+Calendar._TT["TT_DATE_FORMAT"] = "%A, %b %e日";
+Calendar._TT["WK"] = "周";
+Calendar._TT["TIME"] = "时间:";
 
 
 Calendar.setup = function (params) {
