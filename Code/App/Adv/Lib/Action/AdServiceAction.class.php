@@ -56,4 +56,13 @@ abstract class AdServiceAction extends Action {
    function listenterVistit(){
    	
    }
+   /**
+    * 广告展现
+    *
+    * @author Vonwey <VonweyWang@gmail.com>
+    * @CreateDate: 2013-12-30 上午11:09:09
+    */
+   function adShow(){
+	   	
+   }
 }
