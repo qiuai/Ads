@@ -43,9 +43,10 @@
 	<tr class="tb_title">
         <td>会员ID</td>
         <td>申请时间</td>
+		<td>申请提现金额(￥)</td>
         <td>税前总收入(￥)</td>
-        <td>税后(￥)</td>
-        <td>手续费(￥)</td>
+        <td>扣税金额(￥)</td>
+        <td>汇款手续费(￥)</td>
         <td>应付金额(￥)</td>      
         <td>处理时间</td> 
         <td>状态</td>     
@@ -55,8 +56,9 @@
     <tr class="bgcolor3">        
 		<td>{$vo.uid}</td>
         <td>{$vo.apply_date}</td>
-        <td>{$vo.pre_tax}</td>
-        <td>{$vo.after_tax}</td>
+		<td>{$vo.withdraw_balance}</td>
+        <td>{$vo.total_balance}</td>
+        <td>{$vo.deductible_amount}</td>
         <td>{$vo.fee}</td>
         <td>{$vo.amount_payable}</td> 
         <td>{$vo.process_time}</td>
