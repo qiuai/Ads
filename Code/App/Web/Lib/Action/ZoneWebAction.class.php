@@ -18,7 +18,7 @@ class ZoneWebAction extends CommonAction {
     public function index(){ 
 		$this		->assign("title","代码位管理");
 		$zo 		= M('zone');
-		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
+		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id desc'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$as			= M('ad_size');
 		foreach($zone as $key=>$val){
 			$zone[$key]["refresh_time"]	= date("Y-m-d",$val["refresh_time"]); // 更新时间
@@ -36,7 +36,8 @@ class ZoneWebAction extends CommonAction {
 	public function zoneAdd(){
 		$this	->assign("title","新增代码位");
 		$st		= M('site');
-		$site	= $st->field("id,site_domain")->select(); // 网站id，网站域名
+		$uid	= $_SESSION[C("WEB_AUTH_KEY")]; // 获取网站主ID
+		$site	= $st->where("uid=".$uid." and status=3")->field("id,site_domain")->select(); // 查找出属于该网站主下的正常状态网站的网站id，网站域名
 		$this   ->assign("site",$site); 
 		$ads	= M('ad_size');
 		$adsize = $ads->select();
@@ -54,7 +55,7 @@ class ZoneWebAction extends CommonAction {
 		$data["sid"]			= (int)($_POST["site_id"]); // 所属网站ID
 		$data["pay_type"]		= (int)($_POST["pay_type"]); // 计费类型（1CPM 2CPC）
 		$data["size"]			= (int)($_POST["show_type"]); // 代码位尺寸
-		$data["uid"]			= $_SESSION[C("WEB_USER_KEY")]; // 网站主ID
+		$data["uid"]			= $_SESSION[C("WEB_AUTH_KEY")]; // 网站主ID
 		$data["refresh_time"]	= time(); // 更新时间
 		if(empty($data["name"])){
 			$this->error("代码位名称不能为空！",'WEB_URL?m=ZoneWeb&a=zoneAdd');

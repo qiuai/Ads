@@ -17,6 +17,8 @@ class SiteWebAction extends CommonAction {
 	//  网站列表
     public function index(){ 
 		$this		->assign("title","网站列表");
+		$uid		= $_SESSION[C("WEB_AUTH_KEY")]; // 网站主ID
+		$where		= "uid =".$uid;
 		$st 		= M('site');
 		$site		= $this->memberPage($st, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$stp 		= M("site_type");
@@ -92,6 +94,14 @@ class SiteWebAction extends CommonAction {
 	}
 	// 频道列表
 	public function channelList(){
+		$st				= M('site');
+		$uid			= $_SESSION[C("WEB_AUTH_KEY")]; // 获取网站主ID
+		$site			= $st->where("uid = ".$uid)->field("id")->select(); // 获取所属网站ID
+		foreach($site as $key =>$val){
+			$site_id	.= $val["id"].",";
+		}
+		$site_id		= rtrim($site_id,",");
+		$where			= "sid in (".$site_id.")"; // 查找属于网站主网站的频道
 		$ch				= M('channel');
 		$channel		= $this->memberPage($ch, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$this			->assign("channel",$channel);
@@ -100,8 +110,9 @@ class SiteWebAction extends CommonAction {
 	}
 	// 新增频道
 	public function channelAdd(){
-		$st 			= M('site');
-		$site			= $st->field("id,site_name")->select(); // 获取id，网站名称
+		$st				= M('site');
+		$uid			= $_SESSION[C("WEB_AUTH_KEY")]; // 获取网站主ID
+		$site			= $st->where("uid = ".$uid)->field("id,site_name")->select(); // 获取id，网站名称
 		$this			->assign("site",$site);
 		$this			->assign("title","新增频道");
 		$this			->display();
