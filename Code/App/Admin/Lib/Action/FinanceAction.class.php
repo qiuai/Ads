@@ -32,10 +32,15 @@ class FinanceAction extends CommonAction {
 		$wb						= M("web_balance");
 		foreach($apply as $key =>$value){
 			$apply[$key]["apply_date"] = date("Y-m-d H:i:s",$value["apply_date"]); // 申请时间
-			if($value["process_time"]==0){	// 处理时间
-				$apply[$key]["process_time"] = 0;
+			if($value["process_time"]==0){	
+				$apply[$key]["process_time"] = "-"; // 处理时间
 			}else{
-				$apply[$key]["process_time"] = date("Y-m-d H:i:s",$value["process_time"]);
+				$apply[$key]["process_time"] = date("Y-m-d H:i:s",$value["process_time"]); // 处理时间
+			}
+			if($value["paid_time"]==0){
+				$apply[$key]["paid_time"] = "-"; // 支付时间
+			}else{
+				$apply[$key]["paid_time"] = date("Y-m-d H:i:s",$value["paid_time"]); // 支付时间
 			}
 			$web_blance			= $wb->where("uid =".$value["uid"])->select();
 			foreach($web_blance as $keys=>$val){
@@ -69,6 +74,7 @@ class FinanceAction extends CommonAction {
 		$data["pay_record"]		= $_POST["pay_record"]; // 交易单号
 		$data["pay_remark"]		= $_POST["pay_remark"]; // 交易备注
 		$data["process_time"]	= time(); // 处理时间
+		$data["paid_time"]		= time(); // 支付时间
 		$finance_apply 			= M("finance_apply");
 		$web_balance 			= M("web_balance");
 		if(empty($data["pay_channel"])){

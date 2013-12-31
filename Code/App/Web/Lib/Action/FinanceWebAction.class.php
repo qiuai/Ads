@@ -52,7 +52,7 @@ class FinanceWebAction extends CommonAction {
 		$balance		= $web->where("uid=".$uid)->select(); // 查处开户银行信息
 		$me  			= M("member_detail"); // 会员详情表
 		$member			= $me->where("uid=".$uid)->select();
-		$apply_date		= date("Y-m-d H:i:s",time()); // 支付时间
+		$apply_date		= date("Y-m-d H:i:s",time()); // 申请时间
 		$this			->assign("balance",$balance);
 		$this			->assign("member",$member);
 		$this			->assign("apply_date",$apply_date);
@@ -63,6 +63,7 @@ class FinanceWebAction extends CommonAction {
 		$uid						= $_SESSION[C('WEB_AUTH_KEY')]; // 网站主ID
 		$data["uid"] 				= $uid;
 		$data["apply_date"] 		= time(); // 申请时间
+		$data["withdraw_date"]		= time(); // 提现时间
 		$data["withdraw_balance"] 	= $_POST["balance"]; // 申请提现金额
 		$data["withdraw_auto"]		= (int)($_POST["withdraw_auto"]); // 是否托管
 		$web_balance				= M("web_balance");
