@@ -19,10 +19,16 @@ class AdTextAction extends AdServiceAction {
 	 * @see AdServiceAction::createCode()
 	 */
 	function createCode($adManageInfo){
-		$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
-		/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
-		$code.="<div style=\"z-index:100000;position:absolute;bottom:0;right:0px;position:fixed;\" width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$adManageInfo['jump_url']."\' target=\"_blank\" >".$adManageInfo['content']."<\/a><\/div>";
-		$code=$code."');";
+		// 把随机数保存到当前广告
+   		// 组装url连接地址
+   		$jumpUrl = C('SITE_URL')."?m=".$this->actionName.'&a=clickAdJump&zoneId='.$_GET['id'].'&aid='.$adManageInfo['aid'];
+   		// 组装div框中的图片或文字的广告
+   					
+   					
+   		$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
+   		/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
+   		$code.="<div width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$jumpUrl."\' target=\"_blank\" >".$adManageInfo['content']."</a></div>";
+   		$code=$code."');";
 		
 		echo $code;
 		return $code;
