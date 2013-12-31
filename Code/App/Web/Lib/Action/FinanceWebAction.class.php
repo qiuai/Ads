@@ -16,20 +16,28 @@
 class FinanceWebAction extends CommonAction {
 	// 提现明细列表
     public function index(){
-		$fi				= M("finance");
+		$fi				= M("finance_apply");
 		// 按状态检索
 		$status			= (int)($_POST["status"]);
 		if(empty($status)){
 			$where		= "1"; // 默认
 		}else{
-			$where		= "payment_status =".$status; // 支付状态
+			$where		= "status =".$status; // 支付状态
 		}
 		$finance		= $this->memberPage($fi, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$pay_status		= C("PAY_STATUS"); // 获取支付状态
 		foreach($finance as $key =>$val){
-			$finance[$key]["withdraw_date"]		= date("Y-m-d",$val["withdraw_date"]); // 提现时间
-			$finance[$key]["paid_time"]			= date("Y-m-d",$val["paid_time"]); // 支付时间
-			$finance[$key]["payment_status"]	= $pay_status[$val["payment_status"]]; // 支付状态
+			if(empty($val["withdraw_date"])){
+				$finance[$key]["withdraw_date"] = "-";
+			}else{
+				$finance[$key]["withdraw_date"]	= date("Y-m-d",$val["withdraw_date"]); // 提现时间
+			}
+			if(empty($val["paid_time"])){
+				$finance[$key]["paid_time"] = "-";
+			}else{
+				$finance[$key]["paid_time"]	= date("Y-m-d",$val["paid_time"]); // 支付时间
+			}
+			$finance[$key]["status"]		= $pay_status[$val["status"]]; // 支付状态
 		}
 		$this			->assign("title","提现明细");
 		$this			->assign("status",$status);
@@ -57,10 +65,14 @@ class FinanceWebAction extends CommonAction {
 		$data["apply_date"] 		= time(); // 申请时间
 		$data["withdraw_balance"] 	= $_POST["balance"]; // 申请提现金额
 		$data["withdraw_auto"]		= (int)($_POST["withdraw_auto"]); // 是否托管
+		$web_balance				= M("web_balance");
+		$web						= $web_balance->where("uid =".$uid)->select();
 		if(empty($data["withdraw_balance"])){
 			$this					->error("申请提现金额不能为空！","WEB_URL?m=FinanceWeb&a=financePay"); 
 		}elseif($data["withdraw_balance"]<20){
 			$this					->error("申请提现金额不能低于20.00","WEB_URL?m=FinanceWeb&a=financePay"); 
+		}elseif($data["withdraw_balance"]>$web[0]["total_balance"]){
+			$this					->error("申请提现金额大于总余额！","WEB_URL?m=FinanceWeb&a=financePay");
 		}else{
 			$finance_apply	  		= M("finance_apply"); // 提现申请表
 			$finance		  		= $finance_apply->where("uid=".$uid)->data($data)->add(); // 添加提现申请数据

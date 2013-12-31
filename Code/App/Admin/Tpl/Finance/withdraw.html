@@ -11,7 +11,7 @@
 <body>
 	<div class="wrap">
 		<div class="main">
-			<div class='body_title'>定制结算明细报表</div>
+			<div class='body_title'>处理提现</div>
 			<div class="listmain setting">
 				<div style="border:1px solid #7F9DB9;margin:15px 60px;padding:20px;width:240px;height:90px">
 					<volist name="member" id="vo">
@@ -22,11 +22,19 @@
 					</volist>
 				</div>
 				<form id="widthdraw_do" action="SITE_URL?m=Finance&a=withdrawDo" method="post">
+					<input type="hidden" name="uid" value="{$uid}">
 					<input type="hidden" name="id" value="{$id}">
 					<p style="margin:10px 0">支付结果：
-						<input type="radio" name="status" value="1" >未支付
-						<input type="radio" name="status" value="2" checked="checked">已支付
-						<input type="radio" name="status" value="3">异常
+						<input type="radio" name="status" value="2" checked="checked">成功
+						<input type="radio" name="status" value="3" >失败
+					</p>
+					<p style="margin:10px 0">支付渠道：
+						<select name="pay_channel">
+							<option value="">请选择支付银行</option>
+							<foreach name='bank_type' item='bt' key='bk'>
+							<option value="{$bk}">{$bt}</option>
+							</foreach>
+						</select>
 					</p>
 					<p style="margin:10px 0">交易单号：<input type="text" name="pay_record" style="width:150px" id="pay_record"><div id="pay_recordTip" class="onShow">请输入正确的交易单号</div></p>
 					<p style="margin:10px 0">备注信息：<input type="text" name="pay_remark" style="width:150px" id="pay_remark"></p>
