@@ -63,7 +63,7 @@ class FinanceWebAction extends CommonAction {
 		$uid						= $_SESSION[C('WEB_AUTH_KEY')]; // 网站主ID
 		$data["uid"] 				= $uid;
 		$data["apply_date"] 		= time(); // 申请时间
-		$data["$withdraw_date"]		= $data["apply_date"]; // 提现时间
+		$data["withdraw_date"]		= time(); // 提现时间
 		$data["withdraw_balance"] 	= $_POST["balance"]; // 申请提现金额
 		$data["withdraw_auto"]		= (int)($_POST["withdraw_auto"]); // 是否托管
 		$web_balance				= M("web_balance");
