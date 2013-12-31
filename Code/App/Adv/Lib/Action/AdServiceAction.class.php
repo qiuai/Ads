@@ -402,4 +402,40 @@ class AdServiceAction extends Action {
    		}
    	}
    }
+   
+   /**
+    *
+    * 用户点击广告之后所执行的方法
+    * @author Yumao <815227173@qq.com>
+    * @CreateDate: 2013-12-19 上午11:04:04
+    */
+   public function clickAdJump(){
+   
+   	// 查询相关的信息随机生成广告信息
+   	$zone = M("Zone");
+   
+   	// 查询代码位相关的信息必须是启用状态的代码位
+   	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
+   
+   	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
+   	$this->verifyVisitSource($zoneInfo);
+   	//dump($_SERVER['HTTP_REFERER']);
+   
+   	// 获取当前的广告的信息
+   	$adManage = M("adManage");
+   	$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
+   	if($adManageInfo){
+   			
+   		// 接下来做点击计数
+   		$this->addZoneVisit(2);  // 往zone_visit数据表中添加点击的记录的信息
+   			
+   		// 往zone_visit_count 表中添加数据
+   		$this->addZoneVisitCount(2);
+   			
+   		// 跳转
+   		header("location:".$adManageInfo['jump_url']);
+   
+   	}
+   		
+   }
 }
