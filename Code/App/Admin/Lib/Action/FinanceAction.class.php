@@ -32,10 +32,12 @@ class FinanceAction extends CommonAction {
 		$wb						= M("web_balance");
 		foreach($apply as $key =>$value){
 			$apply[$key]["apply_date"] = date("Y-m-d H:i:s",$value["apply_date"]); // 申请时间
-			if($value["process_time"]==0){	// 处理时间
-				$apply[$key]["process_time"] = 0;
+			if($value["process_time"]==0){	
+				$apply[$key]["process_time"] = "-"; // 处理时间
+				$apply[$key]["paid_time"] = "-"; // 处理时间
 			}else{
-				$apply[$key]["process_time"] = date("Y-m-d H:i:s",$value["process_time"]);
+				$apply[$key]["process_time"] = date("Y-m-d H:i:s",$value["process_time"]); // 处理时间
+				$apply[$key]["paid_time"] = $apply[$key]["process_time"]; // 处理时间
 			}
 			$web_blance			= $wb->where("uid =".$value["uid"])->select();
 			foreach($web_blance as $keys=>$val){
