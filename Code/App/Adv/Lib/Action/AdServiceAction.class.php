@@ -21,19 +21,6 @@ class AdServiceAction extends Action {
 	private $adName;	// 广告名
 	private $visitIp;	// 访问者IP
 	
-	
-   /**
-    * 初始化
-    *
-    * @author Vonwey <VonweyWang@gmail.com>
-    * @CreateDate: 2013-12-30 下午4:14:52
-    */
-   function _initialize($zid){
-   		
-   }
-   public function index(){
-   		$this->adShow();
-   }
    /**
     * $view_or_click 代表是展示还是点击 1 为代码位的展示 2 为点击
     * 往代码位记录表中添加数据
