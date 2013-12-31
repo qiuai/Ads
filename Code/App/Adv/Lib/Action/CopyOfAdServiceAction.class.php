@@ -15,10 +15,9 @@
  */
 class AdServiceAction extends Action {
 	
-	protected $planId;	// 广告所属计划ID
-	protected $zoneId;	// 广告位ID
-	protected $sizeId;	// 广告类型
-	protected $visitIp;	// 访问者IP
+	private $planId;	// 广告所属计划ID
+	private $zoneId;	// 广告位ID
+	private $visitIp;	// 访问者IP
 	
    /**
     * $view_or_click 代表是展示还是点击 1 为代码位的展示 2 为点击
@@ -26,7 +25,7 @@ class AdServiceAction extends Action {
     * @author Yumao <815227173@qq.com>
     * @CreateDate: 2013-12-18 下午8:00:36
     */
-   function addZoneVisit($view_or_click){
+   private function addZoneVisit($view_or_click){
    
    	// 创建zone_visit句柄
    	$zoneVisit = M('ZoneVisit');
@@ -55,7 +54,7 @@ class AdServiceAction extends Action {
     * @author Yumao <815227173@qq.com>
     * @CreateDate: 2013-12-18 下午8:24:32
     */
-   function addZoneVisitCount($view_or_click){
+   private function addZoneVisitCount($view_or_click){
    
    	// 创建zone_visit_count句柄
    	$zoneVisitCount = M('ZoneVisitCount');
@@ -166,7 +165,7 @@ class AdServiceAction extends Action {
     * @author Vonwey <VonweyWang@gmail.com>
     * @CreateDate: 2013-12-30 下午5:32:43
     */
-   function checkAdExsit(){
+   function checkAdExsit($id){
 	   	$this->dealSubmitData();
 	   	
 	   	// 查询相关的信息随机生成广告信息
@@ -174,7 +173,6 @@ class AdServiceAction extends Action {
 	   	
 	   	// 查询代码位相关的信息必须是启用状态的代码位
 	   	$zoneInfo = $zone->where("id = ".$this->zoneId." and status = 1")->find();
-	   	 
 	   	if($zoneInfo){
 	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
 // 	   		$this->verifyVisitSource($zoneInfo);
@@ -287,47 +285,16 @@ class AdServiceAction extends Action {
    		$this->zoneId = $id;	// 广告位ID
    		
 	   	if($zoneInfo = ($this->checkAdExsit())){
-	   		$this->sizeId = $zoneInfo['size'];
-	   		switch ($this->sizeId){
-	   			case 1:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 2:{	// 图片 广告
-	   				// 					break;
-	   			}
-	   			case 3:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 4:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 5:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 6:{	// 文字 广告
-	   					
-	   				// 把随机数保存到当前广告
-	   				// 组装url连接地址
-	   				$jumpUrl = C('SITE_URL')."?m=".$this->actionName.'&a=clickAdJump&zoneId='.$_GET['id'].'&aid='.$adManageInfo['aid'];
-	   				// 组装div框中的图片或文字的广告
-	   					
-	   					
-	   				$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
-	   				/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
-	   				$code.="<div width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$jumpUrl."\' target=\"_blank\" >".$adManageInfo['content']."</a></div>";
-	   				$code=$code."');";
-	   					
-	   				break;
-	   			}
-	   			case 10:{	// 右下角浮窗
+	   		$code = $this->createCode($zoneInfo['size']);
+	   		echo $code;
+	   			
+	   		if($code){		// 服务器端开始计录本次访问
 	   				
-	   				$AdFloating = A('AdFloatingFrame');
-	   				$code = $AdFloating->adShow($this->zoneId);
-	   					
-	   				break;
-	   			}
-	   			default:	// 匹配失败
-	   				break;
+	   			// 往数据表zhts_zone_visit中添加数据
+	   			$this->addZoneVisit(1);	 // 参数值为1代表的是展示
+	   				
+	   			// 往数据表zhts_zone_visit_count中添加数据
+	   			$this->addZoneVisitCount(1); // 参数值为1代表的是展示
 	   		}
 	   	}else{
 	   		echo "当前代码位有误 或未启用";
@@ -373,7 +340,7 @@ class AdServiceAction extends Action {
     * @author Yumao <815227173@qq.com>
     * @CreateDate: 2013-12-18 下午7:46:13
     */
-   function getIp(){
+   public function getIp(){
 	   	if(!empty($_SERVER["HTTP_CLIENT_IP"])){
 	   		$cip = $_SERVER["HTTP_CLIENT_IP"];
 	   	}
@@ -394,7 +361,7 @@ class AdServiceAction extends Action {
     * @author Yumao <815227173@qq.com>
     * @CreateDate: 2013-12-18 下午8:40:37
     */
-   function createDayStartTime(){
+   public function createDayStartTime(){
    
    	// 获取当前的年
    	$year = date("Y",time());
@@ -413,46 +380,27 @@ class AdServiceAction extends Action {
     * @author Yumao <815227173@qq.com>
     * @CreateDate: 2013-12-18 下午5:23:52
     */
-   function verifyVisitSource($zoneInfo){
+   private function verifyVisitSource($zoneInfo){
    
-	   	// 根据$zoneInfo中的sid值查询网站的信息
-	   	$site = M("Site");
-	   
-	   	// 查询当前代码位所对应的网站域名
-	   	$siteInfo = $site->where("id = ".$zoneInfo['sid'])->find();
-	   
-	   
-	   	if(!$siteInfo['site_domain']){
-	   			
-	   		// 申请的代码位时网站主未填写用来投放的网站域名
-	   		exit;
-	   	}else{
-	   			
-	   		// 正则匹配 判断本次访问的来源是否与网站主填写的网址相匹配
-	   		if(!preg_match('/^((http)|(ftp)|(https))\:\/\/'.$siteInfo['site_domain'].'/is', $_SERVER['HTTP_REFERER'])){
-	   
-	   			// 访问来源有误
-	   			exit;
-	   		}
-	   	}
-   }
-   /**
-    * 获取广告尺寸信息
-    *
-    * @author Vonwey <VonweyWang@gmail.com>
-    * @CreateDate: 2013-12-31 上午11:29:47
-    */
-   function getAdManageInfo(){
-	   	// 查询当前广告的宽度和高度
-	   	$adSize = M("AdSize");
-	   	 
-	   	// 根据尺寸id值查询相关的广告信息
-	   	$adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
-	   	 
-	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
-	   	$adManage = M("adManage");
-	   	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
-	   	
-	   	return $adManageInfo;
+   	// 根据$zoneInfo中的sid值查询网站的信息
+   	$site = M("Site");
+   
+   	// 查询当前代码位所对应的网站域名
+   	$siteInfo = $site->where("id = ".$zoneInfo['sid'])->find();
+   
+   
+   	if(!$siteInfo['site_domain']){
+   			
+   		// 申请的代码位时网站主未填写用来投放的网站域名
+   		exit;
+   	}else{
+   			
+   		// 正则匹配 判断本次访问的来源是否与网站主填写的网址相匹配
+   		if(!preg_match('/^((http)|(ftp)|(https))\:\/\/'.$siteInfo['site_domain'].'/is', $_SERVER['HTTP_REFERER'])){
+   
+   			// 访问来源有误
+   			exit;
+   		}
+   	}
    }
 }

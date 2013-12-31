@@ -1,6 +1,6 @@
 <?php
 /**
- * 广告联盟系统  右下角浮动窗口
+ * 广告联盟系统  图片广告
  * 
  * @copyright (C)2012 ZHTS Inc.
  * @project project_name
@@ -13,7 +13,7 @@
  * --------     ----------          ------------------------------------------------ 
  * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class AdFloatingFrameAction extends AdServiceAction {
+class AdImageAction extends AdServiceAction {
 	/**
 	 * 生成浮窗代码
 	 * @see AdServiceAction::createCode()
