@@ -29,25 +29,10 @@ class AdServiceAction extends Action {
     * @CreateDate: 2013-12-30 下午4:14:52
     */
    function _initialize($zid){
-   		if($zoneInfo = ($this->checkAdExsit())){
-   			$code = $this->createCode($zoneInfo['size']);
-			echo $code;
-			
-			if($code){		// 服务器端开始计录本次访问
-			
-				// 往数据表zhts_zone_visit中添加数据
-				$this->addZoneVisit(1);	 // 参数值为1代表的是展示
-			
-				// 往数据表zhts_zone_visit_count中添加数据
-				$this->addZoneVisitCount(1); // 参数值为1代表的是展示
-			}
-   		}else{
-   			echo "当前代码位有误 或未启用";
-   			exit;
-   		}
+   		
    }
    public function index(){
-   	
+   		$this->adShow();
    }
    /**
     * $view_or_click 代表是展示还是点击 1 为代码位的展示 2 为点击
@@ -195,17 +180,17 @@ class AdServiceAction extends Action {
     * @author Vonwey <VonweyWang@gmail.com>
     * @CreateDate: 2013-12-30 下午5:32:43
     */
-   function checkAdExsit(){
-	   	// 获取提交过来的代码位信息
-	   	$_GET['id'] = $_GET['zone'];
+   function checkAdExsit($id){
 	   	$this->dealSubmitData();
 	   	
 	   	// 查询相关的信息随机生成广告信息
 	   	$zone = M("Zone");
 	   	
 	   	// 查询代码位相关的信息必须是启用状态的代码位
-	   	$zoneInfo = $zone->where("id = ".$_GET['id']." and status = 1")->find();
+	   	$zoneInfo = $zone->where("id = ".$this->zoneId." and status = 1")->find();
 	   	if($zoneInfo){
+	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
+// 	   		$this->verifyVisitSource($zoneInfo);
 	   		return $zoneInfo;
 	   	}else{
 	   		return false;
@@ -310,8 +295,24 @@ class AdServiceAction extends Action {
     * @author Vonwey <VonweyWang@gmail.com>
     * @CreateDate: 2013-12-30 上午11:09:09
     */
-   function adShow(){
-   	
+   function adShow($id){
+   		$this->zoneId = $id;
+	   	if($zoneInfo = ($this->checkAdExsit())){
+	   		$code = $this->createCode($zoneInfo['size']);
+	   		echo $code;
+	   			
+	   		if($code){		// 服务器端开始计录本次访问
+	   				
+	   			// 往数据表zhts_zone_visit中添加数据
+	   			$this->addZoneVisit(1);	 // 参数值为1代表的是展示
+	   				
+	   			// 往数据表zhts_zone_visit_count中添加数据
+	   			$this->addZoneVisitCount(1); // 参数值为1代表的是展示
+	   		}
+	   	}else{
+	   		echo "当前代码位有误 或未启用";
+	   		exit;
+	   	}
    }
    /**
     * 禁用广告
@@ -340,8 +341,8 @@ class AdServiceAction extends Action {
    function dealSubmitData(){
    
 	   	// 如果有提交过来id值则把id值转化为整型
-	   	if($_REQUEST['aid']){
-	   		$_REQUEST['aid'] = intval($_REQUEST['aid']);
+	   	if($this->zoneId){
+	   		$this->zoneId = intval($this->zoneId);
 	   	}
    	
    }
@@ -383,5 +384,35 @@ class AdServiceAction extends Action {
    	// 获取当前的天
    	$day = date("d",time());
    	return mktime(0,0,0,$month,$day,$year);
+   }
+   /**
+    *
+    * 判断当前的访问是否来源于广告主在代码位申请的时候填写的网站，如果来源不正确则直接退出正确才进行下面的展示广告和计数的问题
+    * 其中参数$zoneInfo 为 代码位的信息
+    * @author Yumao <815227173@qq.com>
+    * @CreateDate: 2013-12-18 下午5:23:52
+    */
+   private function verifyVisitSource($zoneInfo){
+   
+   	// 根据$zoneInfo中的sid值查询网站的信息
+   	$site = M("Site");
+   
+   	// 查询当前代码位所对应的网站域名
+   	$siteInfo = $site->where("id = ".$zoneInfo['sid'])->find();
+   
+   
+   	if(!$siteInfo['site_domain']){
+   			
+   		// 申请的代码位时网站主未填写用来投放的网站域名
+   		exit;
+   	}else{
+   			
+   		// 正则匹配 判断本次访问的来源是否与网站主填写的网址相匹配
+   		if(!preg_match('/^((http)|(ftp)|(https))\:\/\/'.$siteInfo['site_domain'].'/is', $_SERVER['HTTP_REFERER'])){
+   
+   			// 访问来源有误
+   			exit;
+   		}
+   	}
    }
 }
