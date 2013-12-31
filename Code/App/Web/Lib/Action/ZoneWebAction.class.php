@@ -18,7 +18,7 @@ class ZoneWebAction extends CommonAction {
     public function index(){ 
 		$this		->assign("title","代码位管理");
 		$zo 		= M('zone');
-		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
+		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id desc'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$as			= M('ad_size');
 		foreach($zone as $key=>$val){
 			$zone[$key]["refresh_time"]	= date("Y-m-d",$val["refresh_time"]); // 更新时间
