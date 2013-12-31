@@ -19,13 +19,14 @@ class AdFloatingFrameAction extends AdServiceAction {
 	 * @see AdServiceAction::createCode()
 	 */
 	function createCode($adManageInfo){
-		$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
-		/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
-		$code.="<div style=\"z-index:100000;position:absolute;bottom:0;right:0px;position:fixed;\" width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$adManageInfo['jump_url']."\' target=\"_blank\" >".$adManageInfo['content']."<\/a><\/div>";
-		$code=$code."');";
+		// 组装URL
+		$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
 		
-		echo $code;
-		return $code;
+		$this->assign('jumpUrl',$jumpUrl);
+		
+		$this->assign('adManageInfo',$adManageInfo);
+		
+		$this->display('adFloatingFrame');
 	}
 	/**
 	 * 广告展现
@@ -40,9 +41,10 @@ class AdFloatingFrameAction extends AdServiceAction {
 		if($zoneInfo = ($this->checkAdExsit())){
 			
 			$this->sizeId = $zoneInfo['size'];
-			$code = $this->createCode($this->getAdManageInfo());
 			 
-			if($code){		// 服务器端开始计录本次访问
+			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
+				
+				$this->createCode($adManageInfo);
 	
 				// 往数据表zhts_zone_visit中添加数据
 				$this->addZoneVisit(1);	 // 参数值为1代表的是展示

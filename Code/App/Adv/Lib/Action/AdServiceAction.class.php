@@ -469,14 +469,15 @@ class AdServiceAction extends Action {
    
    	// 查询代码位相关的信息必须是启用状态的代码位
    	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
-   
+
    	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
-   	$this->verifyVisitSource($zoneInfo);
+//    	$this->verifyVisitSource($zoneInfo);
    	//dump($_SERVER['HTTP_REFERER']);
    
    	// 获取当前的广告的信息
    	$adManage = M("adManage");
    	$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
+   	
    	if($adManageInfo){
    			
    		// 接下来做点击计数

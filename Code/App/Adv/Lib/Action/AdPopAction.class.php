@@ -15,7 +15,7 @@
  */
 class AdPopAction extends AdServiceAction {
 	/**
-	 * 生成浮窗代码
+	 * 生成弹窗代码
 	 * @see AdServiceAction::createCode()
 	 */
 	function createCode($adManageInfo){
