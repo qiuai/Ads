@@ -51,7 +51,7 @@ class AdManageAction  extends CommonAction{
 			$where = $where." and admanage.pid =".$_GET['pid'];
 		}
 		// 查询出所有的信息
-		$AdManageInfo = $this->memberLinkPage($AdManage,$where,5,'id desc',array($this->table_pre.'ad_manage'=>'admanage',$this->table_pre.'ad_size'=>'adsize'),'admanage.*,adsize.size_type');
+		$AdManageInfo = $this->memberLinkPage($AdManage,$where,5,'admanage.id desc',array($this->table_pre.'ad_manage'=>'admanage',$this->table_pre.'ad_size'=>'adsize'),'admanage.*,adsize.size_type');
 		//$AdManageInfo = $AdManage->table(array($this->table_pre.'ad_manage'=>'admanage',$this->table_pre.'ad_size'=>'adsize'))->field('admanage.*,adsize.size_type')->where('admanage.show_type = adsize.id')->select();
 		
 		//$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
