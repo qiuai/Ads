@@ -67,7 +67,62 @@ class AdManageAction  extends CommonAction{
 		$this->getAdStatusInfo();
 		$this->display();
 	}
-	
+
+	// 导出广告列表报表
+	public function adExport(){
+		$filename		= "广告列表_".date("Y-m-d");
+		// 查询所有的数据
+		$AdManage		= D('AdManage');
+		$where			= 1;
+		if($_GET['isSearch']){ // 代表是搜索状态
+			$_GET['status'] = intval($_GET['status']);
+			// 组装条件查询的条件
+			if($_GET['status']===0 || $_GET['status'] ){
+				$_GET['status'] = intval($_GET['status']);
+				$where	= $where." and admanage.status =".$_GET['status'];
+			}
+		}
+		if($_GET['pid']){
+			$_GET['pid']= intval($_GET['pid']);
+			$where = $where." and admanage.pid =".$_GET['pid'];
+		}
+		$AdManageInfo	= $AdManage->where($where)->select(); // 广告管理表
+		$ReportArr	  	= array();
+		$ad_plan_status	= C("AD_PLAN_STATUS"); // 广告计划对应的状态值
+		$ad_size_type	= C("AD_SIZE_TYPE"); // 广告尺寸类型
+		$ad_size		= M('ad_size');
+		// 将关系数组转换成索引数组
+		foreach($AdManageInfo as $key =>$val){
+			$ReportArr[$key][]	= $val["aid"]; // 广告ID
+			$ReportArr[$key][]	= $val["pid"]; // 计划ID
+			$ReportArr[$key][]	= $val["sid"]; // 广告主ID
+			$adSize				= $ad_size->where("id =".$val["show_type"])->select(); // 广告尺寸表
+			foreach($adSize as $keys => $value){
+				$ReportArr[$key][]=$ad_size_type[$value["size_type"]]; // 展示类型
+			}
+			$ReportArr[$key][]	= $val["title"]; // 广告标题
+			$ReportArr[$key][]	= $val["size"]; // 尺寸
+			if(empty($val["time"])){
+				$ReportArr[$key][]="-";
+			}else{
+				$ReportArr[$key][]= date("Y-m-d H:i:s",$val["time"]); // 添加时间
+			}
+			$ReportArr[$key][]	= $ad_plan_status[$val["status"]]; // 状态
+		}
+		// 需要查询出来的字段信息
+		$HeaderArr	= array(); // 组建Excel表头数组
+		$HeaderArr[]="广告ID";
+		$HeaderArr[]="计划ID";
+		$HeaderArr[]="广告主ID";
+		$HeaderArr[]="展示类型";
+		$HeaderArr[]="广告标题";
+		$HeaderArr[]="尺寸";
+		$HeaderArr[]="添加时间";
+		$HeaderArr[]="状态";
+		// 下载Excel报表，输出即提示下载
+		$this->downloadExcel($filename,$ReportArr,$HeaderArr);
+	}
+
 	/**
 	 * 
 	 * 获取广告的所有的状态信息
