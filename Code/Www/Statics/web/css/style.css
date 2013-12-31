@@ -248,7 +248,7 @@ a:hover{text-decoration:underline;}
 .login_box .entries span{ margin:0 5px;}
 
 /*网站主内页*/
-.sidebar{ width:235px;margin-top:31px;}
+.sidebar{ width:235px;}
 .sidebar .text_box{ border:1px #ccc solid; background:#fffde9; padding-bottom:37px;}
 .sidebar .notice,.sidebar .news,.sidebar .help{ border:1px #ccc solid; background:#fffde9; margin-bottom:12px;}
 .sidebar .notice h3,.sidebar .news h3,.sidebar .help h3,.sidebar .text_box h3{ height:33px; line-height:33px; font-size:12px; color:#666; padding:0 10px;}
