@@ -155,7 +155,7 @@ class FinanceAction extends CommonAction {
 				$ReportArr[$key][]=$val["amount_payable"]?0:0; // 应付金额
 			}
 			if($withdraw[0]["process_time"]==0){
-				$ReportArr[$key][]=date("Y-m-d H:i:s",$val["process_time"])?0:0; // 操作时间
+				$ReportArr[$key][]=date("Y-m-d H:i:s",$val["process_time"]); // 操作时间
 			}
 			if($withdraw[0]["status"]==0){
 				$ReportArr[$key][]=$pay_status[$val["status"]]; // 支付状态
