@@ -39,6 +39,8 @@ class AdFloatingFrameAction extends AdServiceAction {
 		$this->zoneId = $id;	// 广告位ID
 		
 		if($zoneInfo = ($this->checkAdExsit())){
+			
+			$this->sizeId = $zoneInfo['size'];
 			 
 			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
 				
@@ -51,7 +53,6 @@ class AdFloatingFrameAction extends AdServiceAction {
 				$this->addZoneVisitCount(1); // 参数值为1代表的是展示
 			}else{
 				echo "获取代码位尺寸信息失败";
-				exit;
 			}
 		}else{
 			echo "当前代码位有误 或未启用";

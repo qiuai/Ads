@@ -192,7 +192,7 @@ class AdServiceAction extends Action {
 	   	 
 	   	if($zoneInfo){
 	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
-	   		$this->verifyVisitSource($zoneInfo);
+// 	   		$this->verifyVisitSource($zoneInfo);
 
 	   		$this->typeId = $this->zoneIdToSizeType();
 	   		
@@ -489,11 +489,11 @@ class AdServiceAction extends Action {
 	   	$adSize = M("AdSize");
 	   	 
 	   	// 根据尺寸id值查询相关的广告信息
-	   	$adSizeInfo = $adSize->where('id = '.$this->typeId)->find();
+	   	$adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
 	   	 
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 	   	$adManage = M("adManage");
-	   	$adManageInfo = $adManage->where("show_type = ".$this->typeId." and status = 2")->order("rand()")->find();
+	   	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
 
 	   	return $adManageInfo;
    }
