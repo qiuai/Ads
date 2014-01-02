@@ -21,6 +21,19 @@ class AdServiceAction extends Action {
 	protected $visitIp;	// 访问者IP
 	protected $width;	// 广告宽度
 	protected $height;	// 广告高度
+	private  $table_pre; 	// 定义变量保存表前缀
+	
+	/**
+	 * 
+	 *
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2014-1-2 上午10:46:17
+	 */
+	function _initialize(){
+		
+		// 表前缀赋值
+		$this->table_pre = C('DB_PREFIX');
+	}
 	
    /**
     * $view_or_click 代表是展示还是点击 1 为代码位的展示 2 为点击
@@ -181,12 +194,30 @@ class AdServiceAction extends Action {
 	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
 // 	   		$this->verifyVisitSource($zoneInfo);
 
-	   		$this->typeId = id;
+	   		$this->typeId = $this->zoneIdToSizeType();
 	   		
 	   		return $zoneInfo;
 	   	}else{
 	   		return false;
 	   	}
+   }
+   
+  /**
+   * 
+   * 根据代码位id值获取广告尺寸类型的id值
+   * @author Yumao <815227173@qq.com>
+   * @CreateDate: 2014-1-2 上午10:39:03
+   */
+   private function zoneIdToSizeType(){
+		
+   		// 创建数据库对象
+   		$zone = M("Zone");
+   		
+   		// 连接表ad_size查询数据
+   		$sizeTypeInfo = $zone->table(array($this->table_pre.'zone'=>'zone',$this->table_pre.'ad_size'=>'adsize'))->field('adsize.size_type as sizeType')->where("adsize.id = zone.size and zone.id = ".$this->zoneId)->find();
+   		//echo $zone->getLastSql();
+   		//dump($sizeTypeInfo);
+   		return $sizeTypeInfo['sizeType'];
    }
    /**
     * 记录访问
@@ -292,12 +323,12 @@ class AdServiceAction extends Action {
    		$this->zoneId = $id;	// 广告位ID
    		
 	   	if($zoneInfo = ($this->checkAdExsit())){
-	   		
 	   		switch ($this->$typeId){
-	   			case 1:{	// 文字 广告
+	   			case 1:{	// 图片广告
 	   				// 					break;
+
 	   			}
-	   			case 2:{	// 图片 广告
+	   			case 2:{	// 文字 广告
 	   				// 					break;
 	   			}
 	   			case 3:{	// 文字 广告
@@ -450,6 +481,7 @@ class AdServiceAction extends Action {
 	   		}
 	   	}
    }
+   
    /**
     * 获取广告尺寸信息
     *
@@ -485,8 +517,8 @@ class AdServiceAction extends Action {
    	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
 
    	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
-//    	$this->verifyVisitSource($zoneInfo);
-   	//dump($_SERVER['HTTP_REFERER']);
+	// $this->verifyVisitSource($zoneInfo);
+   	// dump($_SERVER['HTTP_REFERER']);
    
    	// 获取当前的广告的信息
    	$adManage = M("adManage");
