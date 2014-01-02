@@ -25,7 +25,7 @@ class AdImageAction extends AdServiceAction{
 		
 		$this->assign('adManageInfo',$adManageInfo);
 		
-		$rs = $this->view->fetch('adFloatingFrame');
+		$rs = $this->view->fetch('adImage');
 		
 		$code = "document.write(\"". $this->jsformat($rs) . "\");";
 		
