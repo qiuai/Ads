@@ -31,6 +31,7 @@ class AdFloatingFrameAction extends AdServiceAction {
 		$code = "document.write(\"". $this->jsformat($rs) . "\");";
 		
 		echo $code;
+		return $code;
 	}
 	
 	/**
@@ -46,11 +47,11 @@ class AdFloatingFrameAction extends AdServiceAction {
 		if($zoneInfo = ($this->checkAdExsit())){
 			
 			$this->sizeId = $zoneInfo['size'];
+			
+			$code = $this->createCode($this->getAdManageInfo());
 			 
-			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
+			if($code){		// 服务器端开始计录本次访问
 				
-				$this->createCode($adManageInfo);
-	
 				// 往数据表zhts_zone_visit中添加数据
 				$this->addZoneVisit(1);	 // 参数值为1代表的是展示
 	
