@@ -17,7 +17,7 @@ class AdServiceAction extends Action {
 	
 	protected $planId;	// 广告所属计划ID
 	protected $zoneId;	// 广告位ID
-	protected $sizeId;	// 广告类型
+	protected $typeId;	// 广告类型
 	protected $visitIp;	// 访问者IP
 	
    /**
@@ -178,6 +178,9 @@ class AdServiceAction extends Action {
 	   	if($zoneInfo){
 	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
 // 	   		$this->verifyVisitSource($zoneInfo);
+
+	   		$this->typeId = id;
+	   		
 	   		return $zoneInfo;
 	   	}else{
 	   		return false;
@@ -287,8 +290,8 @@ class AdServiceAction extends Action {
    		$this->zoneId = $id;	// 广告位ID
    		
 	   	if($zoneInfo = ($this->checkAdExsit())){
-	   		$this->sizeId = $zoneInfo['size'];
-	   		switch ($this->sizeId){
+	   		
+	   		switch ($this->$typeId){
 	   			case 1:{	// 文字 广告
 	   				// 					break;
 	   			}
@@ -323,6 +326,13 @@ class AdServiceAction extends Action {
 	   				
 	   				$AdFloating = A('AdFloatingFrame');
 	   				$code = $AdFloating->adShow($this->zoneId);
+	   					
+	   				break;
+	   			}
+	   			case 12:{	// 全屏弹窗
+	   			
+	   				$AdPop = A('AdPop');
+	   				$code = $AdPop->adShow($this->zoneId);
 	   					
 	   				break;
 	   			}
@@ -452,7 +462,7 @@ class AdServiceAction extends Action {
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 	   	$adManage = M("adManage");
 	   	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
-	   	
+
 	   	return $adManageInfo;
    }
    
