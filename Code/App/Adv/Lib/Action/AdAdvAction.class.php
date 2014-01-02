@@ -334,7 +334,7 @@ class AdAdvAction extends CommonAction {
 			$adPlanInfo = $adPlan->where("id = ".$_GET['pid'])->find();
 			if($adPlanInfo['plan_status'] != 2 ){ // 说明计划不再激活状态 不可以添加广告
 					
-				$this->error('广告计划不在激活状态中不可以添加广告',C('SITE_URL')."?m=AdPlan&a=index");
+				$this->error('广告计划不在激活状态中不可以添加广告',C('SITE_URL')."?m=PlanAdv&a=index");
 			}else{
 				$this->assign("pid",$_GET['pid']);
 			}
