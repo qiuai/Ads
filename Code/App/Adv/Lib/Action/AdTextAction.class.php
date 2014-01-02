@@ -1,54 +1,56 @@
 <?php
+
 /**
- * 广告联盟系统  右下角浮动窗口
  * 
- * @copyright (C)2012 ZHTS Inc.
- * @project project_name
- * @author Vonwey <VonweyWang@gmail.com>
- * @CreateDate: 2013-11-25 上午10:07:57
+ * 广告联盟 文字广告展示代码
+ * @copyright (C)2013 ZHTS Inc.
+ * @project CHAXUNLE.COM
+ * @author Yumao <815227173@qq.com>
+ * @CreateDate: 2014-1-2 下午5:41:01
  * @version 1.0
- *
- * @ModificationHistory  
- * Who          When                What 
- * --------     ----------          ------------------------------------------------ 
- * Vonwey   2013-11-25 上午10:07:57      todo
  */
-class AdTextAction extends AdServiceAction {
+class AdTextAction extends AdServiceAction{
+	
 	/**
-	 * 生成浮窗代码
+	 * 生成文字广告代码
+	 * (non-PHPdoc)
 	 * @see AdServiceAction::createCode()
 	 */
-	function createCode($adManageInfo){
-		// 把随机数保存到当前广告
-   		// 组装url连接地址
-   		$jumpUrl = C('SITE_URL')."?m=".$this->actionName.'&a=clickAdJump&zoneId='.$_GET['id'].'&aid='.$adManageInfo['aid'];
-   		// 组装div框中的图片或文字的广告
-   					
-   					
-   		$code = "document.write('<style>*{margin:0px;padding:0px;border:0px;}</style>";
-   		/*$code.= "<iframe width=\'".$adSizeInfo['width']."\' scrolling=\"no\" height=\"".$adSizeInfo['height']."\" frameborder=\"0\" align=\"center,center\" allowtransparency=\"true\" marginheight=\"0\" marginwidth=\"0\" src=\"./index3.html\" ></iframe>";*/
-   		$code.="<div width=\'".$adSizeInfo['width']."\' height=\'".$adSizeInfo['height']."\' ><a href=\'".$jumpUrl."\' target=\"_blank\" >".$adManageInfo['content']."</a></div>";
-   		$code=$code."');";
-		
+	public function createCode($adManageInfo){
+	
+		// 组装URL
+		$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
+	
+		$this->assign('jumpUrl',$jumpUrl);
+	
+		$this->assign('adManageInfo',$adManageInfo);
+	
+		$rs = $this->view->fetch('adText');
+	
+		$code = "document.write(\"". $this->jsformat($rs) . "\");";
+	
 		echo $code;
-		return $code;
 	}
+	
 	/**
-	 * 广告展现
-	 *
-	 * @author Vonwey <VonweyWang@gmail.com>
-	 * @CreateDate: 2013-12-30 上午11:09:09
+	 * 	广告的展示
+	 * (non-PHPdoc)
+	 * @see AdServiceAction::adShow()
 	 */
-	function adShow($id){
+	public function adShow($id){
+	
 	
 		$this->zoneId = $id;	// 广告位ID
-		
+	
 		if($zoneInfo = ($this->checkAdExsit())){
-			
+	
 			$this->sizeId = $zoneInfo['size'];
-			$code = $this->createCode($this->getAdManageInfo());
-			 
-			if($code){		// 服务器端开始计录本次访问
+	
+			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
+	
+				// 调用进行过滤所用的函数 比如有些代码的代码位没有
+	
+				$this->createCode($adManageInfo);
 	
 				// 往数据表zhts_zone_visit中添加数据
 				$this->addZoneVisit(1);	 // 参数值为1代表的是展示
@@ -60,6 +62,6 @@ class AdTextAction extends AdServiceAction {
 			echo "当前代码位有误 或未启用";
 			exit;
 		}
-		 
+	
 	}
 }

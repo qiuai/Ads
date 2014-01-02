@@ -16,8 +16,20 @@ class AdImageAction extends AdServiceAction{
 	 * (non-PHPdoc)
 	 * @see AdServiceAction::createCode()
 	 */
-	public function createCode($sizeId){
+	public function createCode($adManageInfo){
 		
+		// 组装URL
+		$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
+		
+		$this->assign('jumpUrl',$jumpUrl);
+		
+		$this->assign('adManageInfo',$adManageInfo);
+		
+		$rs = $this->view->fetch('adImage');
+		
+		$code = "document.write(\"". $this->jsformat($rs) . "\");";
+		
+		echo $code;
 	}
 	
 	/**
@@ -35,7 +47,9 @@ class AdImageAction extends AdServiceAction{
 			$this->sizeId = $zoneInfo['size'];
 		
 			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
-		
+				
+				// 调用进行过滤所用的函数 比如有些代码的代码位没有
+				
 				$this->createCode($adManageInfo);
 		
 				// 往数据表zhts_zone_visit中添加数据
