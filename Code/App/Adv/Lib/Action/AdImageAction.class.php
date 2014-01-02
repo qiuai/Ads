@@ -62,7 +62,6 @@ class AdImageAction extends AdServiceAction{
 		}else{
 			echo "当前代码位有误 或未启用";
 			exit;
-		}
-		
+		}		
 	}
 }

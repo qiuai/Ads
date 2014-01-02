@@ -16,6 +16,7 @@
 class AdServiceAction extends Action {
 	
 	protected $planId;	// 广告所属计划ID
+	protected $aid;	// 广告id值
 	protected $zoneId;	// 广告位ID
 	protected $sizeId;	// 广告类型
 	protected $typeId;	// 广告类型
@@ -49,20 +50,21 @@ class AdServiceAction extends Action {
    
    	// 获取当前客户端的ip
    	$this->getIp();
-   
+   	// 获取当前计划的id值
+   	$data['pid'] = $this->planId;
+   	$data['aid'] = $this->aid;
    	// 往数据表中添加一条浏览的数据
    	$data['visit_ip']  = $this->visitIp; // 记录客户端ip
    	$data['view_or_click'] = $view_or_click; // 1表示浏览 2表示点击
    	$data['visit_time'] = time(); // 本次访问的时间戳
    	if($view_or_click==1){
-   		$data['zid'] = $_GET['id']; // 当前广告为的id
+   		$data['zid'] = $this->zoneId; // 当前广告为的id
    	}elseif ($view_or_click==2){
    		$data['zid'] = intval($_GET['zoneId']);
    	}
    
    	// 往zone_visit表添加记录
-   	$zoneVisit->add($data);
-   
+   	$zoneVisit->add($data);  
    }
    
    /**
@@ -518,6 +520,10 @@ class AdServiceAction extends Action {
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 	   	$adManage = M("adManage");
 	   	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
+	   	
+	   	// 把广告id和广告计划id保存下来
+	   	$this->planId = $adManageInfo['pid'];
+	   	$this->aid = $adManageInfo['aid'];
 
 	   	return $adManageInfo;
    }
@@ -544,8 +550,12 @@ class AdServiceAction extends Action {
 	   	$adManage = M("adManage");
 	   	$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
 	   	
+	   	
 	   	if($adManageInfo){
-	   			
+
+	   		// 保存计划id 广告id 
+	   		$this->planId = $adManageInfo['pid'];
+	   		$this->aid = $adManageInfo['aid'];
 	   		// 接下来做点击计数
 	   		$this->addZoneVisit(2);  // 往zone_visit数据表中添加点击的记录的信息
 	   			
