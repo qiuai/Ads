@@ -26,7 +26,32 @@ class AdFloatingFrameAction extends AdServiceAction {
 		
 		$this->assign('adManageInfo',$adManageInfo);
 		
-		$this->display('adFloatingFrame');
+		$rs = $this->view->fetch('adFloatingFrame');
+		
+		$code = "document.write(\"". $this->jsformat($rs) . "\");";
+		
+		echo $code;
+	}
+	/**
+	 * php html 转义字符串
+	 *
+	 * @author Vonwey <VonweyWang@gmail.com>
+	 * @CreateDate: 2014-1-2 下午2:52:25
+	 * @param unknown_type $str
+	 * @return mixed
+	 */
+	function jsformat($str)
+	{
+		$str = trim($str);
+// 		$str = str_replace('\s\s', '\s', $str);
+		$str = str_replace(chr(10), '', $str);
+		$str = str_replace(chr(13), '', $str);
+// 		$str = str_replace(' ', '', $str);
+		$str = str_replace('\\', '\\\\', $str);
+		$str = str_replace('"', '\\"', $str);
+		$str = str_replace('\\\'', '\\\'', $str);
+		$str = str_replace("'", "'", $str);
+		return $str;
 	}
 	/**
 	 * 广告展现
