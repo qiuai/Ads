@@ -51,6 +51,8 @@ class AdFloatingFrameAction extends AdServiceAction {
 	
 				// 往数据表zhts_zone_visit_count中添加数据
 				$this->addZoneVisitCount(1); // 参数值为1代表的是展示
+			}else{
+				echo "获取代码位尺寸信息失败";
 			}
 		}else{
 			echo "当前代码位有误 或未启用";

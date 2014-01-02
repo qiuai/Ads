@@ -21,7 +21,8 @@ class AdPopAction extends AdServiceAction {
 	function createCode($adManageInfo){
 		$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
 		
-		$code = "document.write('<script>window.open('" . $jumpUrl . "');</script>');";
+		$code = "document.write(\"<script>var POPUP_URL = '$jumpUrl';</script>\");";
+		$code .= "document.write('<script language=\"javascript\" type=\"text/javascript\" src=\"" . C('STATIC_URL') . "/default/js/popup.js\"></script>');";
 		
 		echo $code;
 		return $code;

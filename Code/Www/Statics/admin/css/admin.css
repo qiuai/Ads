@@ -21,13 +21,33 @@ a:hover{
 a:visited{
 	font: 12px Arial, Helvetica, sans-serif;
 }
-/*.link-checked{background:#ffb236; padding: 2px 5px; margin: 2px;}*/
-.link-checked{/*background-color:#b1d1e0;*/background:#f3ffe3 url(../images/main_biaoqian_3.png) no-repeat; padding:0 7px 0 23px; margin:2px; height:22px; line-height:22px; border: 1px solid #b3d08f; display:inline-block;}
-/*.link_before_checked{background:#2eb4d8;}*/
-/*.link_before_checked{background:#ffb236;}*/
-.link_before_checked{/*background-color:#b1d1e0;*/background:#f3ffe3 url(../images/main_biaoqian_2.png) no-repeat; padding:0 7px 0 23px; margin:2px; height:22px; line-height:22px; border: 1px solid #b3d08f;display:inline-block;}
-.link_before_checked:hover{height:22px; line-height:22px; background:#f3ffe3 url(../images/main_biaoqian_3.png) no-repeat;}
-.link-checked:hover{height:22px; line-height:22px;}
+.link_before_checked{
+	background:#f3ffe3 url(../images/main_biaoqian_2.png) no-repeat center left; 
+	padding:0 7px 0 23px; 
+	margin:2px; 
+	height:22px; 
+	line-height:22px; 
+	border: 1px solid #b3d08f;
+	display:inline-block;
+}
+.link_before_checked:hover{
+	height:22px; 
+	line-height:22px; 
+	background:#f3ffe3 url(../images/main_biaoqian_3.png) no-repeat center left;
+}
+.link-checked{
+	background:#f3ffe3 url(../images/main_biaoqian_3.png) no-repeat center left; 
+	padding:0 7px 0 23px; 
+	margin:2px; 
+	height:22px; 
+	line-height:22px; 
+	border: 1px solid #b3d08f; 
+	display:inline-block;
+}
+.link-checked:hover{
+	height:22px; 
+	line-height:22px;
+	}
 
 form{
 	margin:0;
