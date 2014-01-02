@@ -24,7 +24,10 @@ class AdTextAction extends AdServiceAction{
 		$this->assign('jumpUrl',$jumpUrl);
 	
 		$this->assign('adManageInfo',$adManageInfo);
-	
+		// 查询广告的尺寸分配到前端
+		$adSizeInfo = $this->adSizeInfo;
+		$this->assign("width",$adSizeInfo['width']);
+		$this->assign("height",$adSizeInfo['height']);
 		$rs = $this->view->fetch('adText');
 	
 		$code = "document.write(\"". $this->jsformat($rs) . "\");";

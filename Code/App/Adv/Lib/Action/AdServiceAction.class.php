@@ -23,6 +23,7 @@ class AdServiceAction extends Action {
 	protected $width;	// 广告宽度
 	protected $height;	// 广告高度
 	private  $table_pre; 	// 定义变量保存表前缀
+	protected   $adSizeInfo;	// 广告尺寸信息
 	
 	/**
 	 * 
@@ -512,7 +513,7 @@ class AdServiceAction extends Action {
 	   	$adSize = M("AdSize");
 	   	 
 	   	// 根据尺寸id值查询相关的广告信息
-	   	$adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
+	   	$this->adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
 	   	 
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 	   	$adManage = M("adManage");
