@@ -19,6 +19,8 @@ class AdServiceAction extends Action {
 	protected $zoneId;	// 广告位ID
 	protected $typeId;	// 广告类型
 	protected $visitIp;	// 访问者IP
+	protected $width;	// 广告宽度
+	protected $height;	// 广告高度
 	
    /**
     * $view_or_click 代表是展示还是点击 1 为代码位的展示 2 为点击
@@ -337,6 +339,8 @@ class AdServiceAction extends Action {
 	   				break;
 	   			}
 	   			default:	// 匹配失败
+	   				$AdPop = A('AdPop');
+	   				$code = $AdPop->adShow($this->zoneId);
 	   				break;
 	   		}
 	   	}else{
