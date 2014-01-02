@@ -20,15 +20,22 @@ class AdPopAction extends AdServiceAction {
 	 */
 	function createCode($adManageInfos){
 		
-		foreach($adManageInfos as $adManageInfo){
-			if(empty($adManageInfo))return false;
+		foreach($adManageInfos as $key=>$adManageInfo){
+			
+			if(empty($adManageInfo)){
+				return false;
+			}
 			$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
 			
-			$code = "document.write(\"<script>var POPUP_URL = '$jumpUrl';</script>\");";
-			$code .= "document.write('<script language=\"javascript\" type=\"text/javascript\" src=\"" . C('STATIC_URL') . "/default/js/popup.js\"></script>');";
+			$adUrl .= "'$jumpUrl',";
 			
-			echo $code;
+			$code .= "document.write(\"<script>var adUrl=[$adUrl]; var POPUP_URL$key = '$jumpUrl';</script>\");";
+			
 		}
+		
+		$code .= "document.write('<script language=\"javascript\" type=\"text/javascript\" src=\"" . C('STATIC_URL') . "/default/js/popup.js\"></script>');";
+			
+		echo $code;
 		
 		return $code;
 	}
@@ -77,7 +84,7 @@ class AdPopAction extends AdServiceAction {
 	
 		// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 		$adManage = M("adManage");
-		$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->limit($numLimit['AD_POP'])->select();
+		$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->limit(2)->select();
 
 		return $adManageInfo;
 	}
