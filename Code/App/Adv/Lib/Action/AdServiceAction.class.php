@@ -327,7 +327,9 @@ class AdServiceAction extends Action {
 	   		switch ($this->typeId){
 	   			case 1:{	// 图片广告
 	   				// 					break;
-
+					$AdImage = A('AdImage');
+					$code = $AdImage->adShow($this->zoneId);
+					break;
 	   			}
 	   			case 2:{	// 文字 广告
 
@@ -374,6 +376,27 @@ class AdServiceAction extends Action {
 	   		exit;
 	   	}
 	   	
+   }
+   /**
+    * php html 转义字符串
+    *
+    * @author Vonwey <VonweyWang@gmail.com>
+    * @CreateDate: 2014-1-2 下午2:52:25
+    * @param unknown_type $str
+    * @return mixed
+    */
+   function jsformat($str)
+   {
+   	$str = trim($str);
+   	// 		$str = str_replace('\s\s', '\s', $str);
+   	$str = str_replace(chr(10), '', $str);
+   	$str = str_replace(chr(13), '', $str);
+   	// 		$str = str_replace(' ', '', $str);
+   	$str = str_replace('\\', '\\\\', $str);
+   	$str = str_replace('"', '\\"', $str);
+   	$str = str_replace('\\\'', '\\\'', $str);
+   	$str = str_replace("'", "'", $str);
+   	return $str;
    }
    /**
     * 禁用广告
