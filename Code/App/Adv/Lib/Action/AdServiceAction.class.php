@@ -289,10 +289,11 @@ class AdServiceAction extends Action {
 	   	if($zoneInfo = ($this->checkAdExsit())){
 	   		$this->sizeId = $zoneInfo['size'];
 	   		switch ($this->sizeId){
-	   			case 1:{	// 文字 广告
-	   				// 					break;
+	   			case 1:{	// 图片 广告
+	   				// 		break;
+	   				
 	   			}
-	   			case 2:{	// 图片 广告
+	   			case 2:{	// 文字 广告
 	   				// 					break;
 	   			}
 	   			case 3:{	// 文字 广告
@@ -436,6 +437,7 @@ class AdServiceAction extends Action {
 	   		}
 	   	}
    }
+   
    /**
     * 获取广告尺寸信息
     *
@@ -471,8 +473,8 @@ class AdServiceAction extends Action {
    	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
 
    	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
-//    	$this->verifyVisitSource($zoneInfo);
-   	//dump($_SERVER['HTTP_REFERER']);
+	// $this->verifyVisitSource($zoneInfo);
+   	// dump($_SERVER['HTTP_REFERER']);
    
    	// 获取当前的广告的信息
    	$adManage = M("adManage");
