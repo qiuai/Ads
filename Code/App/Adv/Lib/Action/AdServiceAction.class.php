@@ -31,7 +31,6 @@ class AdServiceAction extends Action {
 	 * @CreateDate: 2014-1-2 上午10:46:17
 	 */
 	function _initialize(){
-		
 		// 表前缀赋值
 		$this->table_pre = C('DB_PREFIX');
 	}
