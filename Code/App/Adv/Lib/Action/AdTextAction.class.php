@@ -9,7 +9,7 @@
  * @CreateDate: 2014-1-2 下午5:41:01
  * @version 1.0
  */
-class AdTextAction extends Action{
+class AdTextAction extends AdServiceAction{
 	
 	/**
 	 * 生成文字广告代码
