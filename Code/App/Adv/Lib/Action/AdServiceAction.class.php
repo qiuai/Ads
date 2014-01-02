@@ -17,8 +17,21 @@ class AdServiceAction extends Action {
 	
 	protected $planId;	// 广告所属计划ID
 	protected $zoneId;	// 广告位ID
-	protected $sizeId;	// 广告类型
+	protected $typeId;	// 广告类型
 	protected $visitIp;	// 访问者IP
+	private  $table_pre; 	// 定义变量保存表前缀
+	
+	/**
+	 * 
+	 *
+	 * @author Yumao <815227173@qq.com>
+	 * @CreateDate: 2014-1-2 上午10:46:17
+	 */
+	function _initialize(){
+		
+		// 表前缀赋值
+		$this->table_pre = C('DB_PREFIX');
+	}
 	
    /**
     * $view_or_click 代表是展示还是点击 1 为代码位的展示 2 为点击
@@ -178,10 +191,31 @@ class AdServiceAction extends Action {
 	   	if($zoneInfo){
 	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
 // 	   		$this->verifyVisitSource($zoneInfo);
+
+	   		$this->typeId = $this->zoneIdToSizeType();
+	   		
 	   		return $zoneInfo;
 	   	}else{
 	   		return false;
 	   	}
+   }
+   
+  /**
+   * 
+   * 根据代码位id值获取广告尺寸类型的id值
+   * @author Yumao <815227173@qq.com>
+   * @CreateDate: 2014-1-2 上午10:39:03
+   */
+   private function zoneIdToSizeType(){
+		
+   		// 创建数据库对象
+   		$zone = M("Zone");
+   		
+   		// 连接表ad_size查询数据
+   		$sizeTypeInfo = $zone->table(array($this->table_pre.'zone'=>'zone',$this->table_pre.'ad_size'=>'adsize'))->field('adsize.size_type as sizeType')->where("adsize.id = zone.size and zone.id = ".$this->zoneId)->find();
+   		//echo $zone->getLastSql();
+   		//dump($sizeTypeInfo);
+   		return $sizeTypeInfo['sizeType'];
    }
    /**
     * 记录访问
@@ -287,11 +321,10 @@ class AdServiceAction extends Action {
    		$this->zoneId = $id;	// 广告位ID
    		
 	   	if($zoneInfo = ($this->checkAdExsit())){
-	   		$this->sizeId = $zoneInfo['size'];
-	   		switch ($this->sizeId){
-	   			case 1:{	// 图片 广告
-	   				// 		break;
-	   				
+	   		switch ($this->$typeId){
+	   			case 1:{	// 图片广告
+	   				// 					break;
+
 	   			}
 	   			case 2:{	// 文字 广告
 	   				// 					break;
@@ -324,6 +357,13 @@ class AdServiceAction extends Action {
 	   				
 	   				$AdFloating = A('AdFloatingFrame');
 	   				$code = $AdFloating->adShow($this->zoneId);
+	   					
+	   				break;
+	   			}
+	   			case 12:{	// 全屏弹窗
+	   			
+	   				$AdPop = A('AdPop');
+	   				$code = $AdPop->adShow($this->zoneId);
 	   					
 	   				break;
 	   			}
@@ -454,7 +494,7 @@ class AdServiceAction extends Action {
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 	   	$adManage = M("adManage");
 	   	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
-	   	
+
 	   	return $adManageInfo;
    }
    

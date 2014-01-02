@@ -9,6 +9,6 @@
  * @CreateDate: 2014-1-2 上午10:21:56
  * @version 1.0
  */
-class  AdImageAction extends AdServiceAction{
+class AdImageAction extends AdServiceAction{
 	
 }
