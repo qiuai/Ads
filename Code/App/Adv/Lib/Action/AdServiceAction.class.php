@@ -256,10 +256,13 @@ class AdServiceAction extends Action {
 	   		//$codeRandNum = md5(rand(100,10000).md5(time()).rand(100,10000));
 	   			
 	   		switch ($sizeId){
-	   			case 1:{	// 文字 广告
+	   			case 1:{	// 图片 广告
 	   				// 					break;
+	   				$AdImage = A("AdImage");
+	   				//$code = 
+	   				break;
 	   			}
-	   			case 2:{	// 图片 广告
+	   			case 2:{	// 文字 广告
 	   				// 					break;
 	   			}
 	   			case 3:{	// 文字 广告
@@ -327,7 +330,9 @@ class AdServiceAction extends Action {
 	   		switch ($this->typeId){
 	   			case 1:{	// 图片广告
 	   				// 					break;
-
+					$AdImage = A("AdImage");
+					$code = $AdImage->adShow($this->zoneId);
+					break;
 	   			}
 	   			case 2:{	// 文字 广告
 
