@@ -17,6 +17,7 @@ class AdServiceAction extends Action {
 	
 	protected $planId;	// 广告所属计划ID
 	protected $zoneId;	// 广告位ID
+	protected $sizeId;	// 广告尺寸类型
 	protected $typeId;	// 广告类型
 	protected $visitIp;	// 访问者IP
 	protected $width;	// 广告宽度
