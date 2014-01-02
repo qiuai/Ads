@@ -192,7 +192,7 @@ class AdServiceAction extends Action {
 	   	 
 	   	if($zoneInfo){
 	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
-// 	   		$this->verifyVisitSource($zoneInfo);
+	   		$this->verifyVisitSource($zoneInfo);
 
 	   		$this->typeId = $this->zoneIdToSizeType();
 	   		
@@ -216,7 +216,7 @@ class AdServiceAction extends Action {
    		// 连接表ad_size查询数据
    		$sizeTypeInfo = $zone->table(array($this->table_pre.'zone'=>'zone',$this->table_pre.'ad_size'=>'adsize'))->field('adsize.size_type as sizeType')->where("adsize.id = zone.size and zone.id = ".$this->zoneId)->find();
    		//echo $zone->getLastSql();
-   		//dump($sizeTypeInfo);
+//    		dump($sizeTypeInfo);
    		return $sizeTypeInfo['sizeType'];
    }
    /**
@@ -464,6 +464,7 @@ class AdServiceAction extends Action {
 	   	if(!$siteInfo['site_domain']){
 	   			
 	   		// 申请的代码位时网站主未填写用来投放的网站域名
+	   		echo '/*申请的代码位时网站主未填写用来投放的网站域名*/';
 	   		exit;
 	   	}else{
 	   			
@@ -471,6 +472,7 @@ class AdServiceAction extends Action {
 	   		if(!preg_match('/^((http)|(ftp)|(https))\:\/\/'.$siteInfo['site_domain'].'/is', $_SERVER['HTTP_REFERER'])){
 	   
 	   			// 访问来源有误
+	   			echo '/*访问来源有误*/';
 	   			exit;
 	   		}
 	   	}
@@ -487,11 +489,11 @@ class AdServiceAction extends Action {
 	   	$adSize = M("AdSize");
 	   	 
 	   	// 根据尺寸id值查询相关的广告信息
-	   	$adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
+	   	$adSizeInfo = $adSize->where('id = '.$this->typeId)->find();
 	   	 
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 	   	$adManage = M("adManage");
-	   	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
+	   	$adManageInfo = $adManage->where("show_type = ".$this->typeId." and status = 2")->order("rand()")->find();
 
 	   	return $adManageInfo;
    }
@@ -502,34 +504,43 @@ class AdServiceAction extends Action {
     * @author Yumao <815227173@qq.com>
     * @CreateDate: 2013-12-19 上午11:04:04
     */
-   public function clickAdJump(){
+   function clickAdJump(){
    
-   	// 查询相关的信息随机生成广告信息
-   	$zone = M("Zone");
-   
-   	// 查询代码位相关的信息必须是启用状态的代码位
-   	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
-
-   	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
-	// $this->verifyVisitSource($zoneInfo);
-   	// dump($_SERVER['HTTP_REFERER']);
-   
-   	// 获取当前的广告的信息
-   	$adManage = M("adManage");
-   	$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
-   	
-   	if($adManageInfo){
-   			
-   		// 接下来做点击计数
-   		$this->addZoneVisit(2);  // 往zone_visit数据表中添加点击的记录的信息
-   			
-   		// 往zone_visit_count 表中添加数据
-   		$this->addZoneVisitCount(2);
-   			
-   		// 跳转
-   		header("location:".$adManageInfo['jump_url']);
-   
-   	}
+	   	// 查询相关的信息随机生成广告信息
+	   	$zone = M("Zone");
+	   
+	   	// 查询代码位相关的信息必须是启用状态的代码位
+	   	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
+	
+	   	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
+		// $this->verifyVisitSource($zoneInfo);
+	   	// dump($_SERVER['HTTP_REFERER']);
+	   
+	   	// 获取当前的广告的信息
+	   	$adManage = M("adManage");
+	   	$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
+	   	
+	   	if($adManageInfo){
+	   			
+	   		// 接下来做点击计数
+	   		$this->addZoneVisit(2);  // 往zone_visit数据表中添加点击的记录的信息
+	   			
+	   		// 往zone_visit_count 表中添加数据
+	   		$this->addZoneVisitCount(2);
+	   			
+	   		// 跳转
+	   		header("location:".$adManageInfo['jump_url']);
+	   
+	   	}
    		
+   }
+   /**
+    * 广告投放数量限制 
+    *
+    * @author Vonwey <VonweyWang@gmail.com>
+    * @CreateDate: 2014-1-2 下午1:17:51
+    */
+   function adPutInNumLimit(){
+   	
    }
 }
