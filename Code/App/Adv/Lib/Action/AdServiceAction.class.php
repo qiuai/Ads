@@ -387,16 +387,14 @@ class AdServiceAction extends Action {
     */
    function jsformat($str)
    {
-   	$str = trim($str);
-   	// 		$str = str_replace('\s\s', '\s', $str);
-   	$str = str_replace(chr(10), '', $str);
-   	$str = str_replace(chr(13), '', $str);
-   	// 		$str = str_replace(' ', '', $str);
-   	$str = str_replace('\\', '\\\\', $str);
-   	$str = str_replace('"', '\\"', $str);
-   	$str = str_replace('\\\'', '\\\'', $str);
-   	$str = str_replace("'", "'", $str);
-   	return $str;
+	   	$str = trim($str);
+	   	$str = str_replace(chr(10), '', $str);
+	   	$str = str_replace(chr(13), '', $str);
+	   	$str = str_replace('\\', '\\\\', $str);
+	   	$str = str_replace('"', '\\"', $str);
+	   	$str = str_replace('\\\'', '\\\'', $str);
+	   	$str = str_replace("'", "'", $str);
+	   	return $str;
    }
    /**
     * 禁用广告
