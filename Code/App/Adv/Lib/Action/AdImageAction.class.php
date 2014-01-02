@@ -16,7 +16,7 @@ class AdImageAction extends AdServiceAction{
 	 * (non-PHPdoc)
 	 * @see AdServiceAction::createCode()
 	 */
-	public function createCode($sizeId){
+	public function createCode($adManageInfo){
 		
 		// 组装URL
 		$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
