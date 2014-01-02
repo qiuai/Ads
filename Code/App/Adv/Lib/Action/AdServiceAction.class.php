@@ -323,25 +323,13 @@ class AdServiceAction extends Action {
    		$this->zoneId = $id;	// 广告位ID
    		
 	   	if($zoneInfo = ($this->checkAdExsit())){
-	   		switch ($this->$typeId){
+	   		switch ($this->typeId){
 	   			case 1:{	// 图片广告
 	   				// 					break;
 
 	   			}
 	   			case 2:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 3:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 4:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 5:{	// 文字 广告
-	   				// 					break;
-	   			}
-	   			case 6:{	// 文字 广告
-	   					
+
 	   				// 把随机数保存到当前广告
 	   				// 组装url连接地址
 	   				$jumpUrl = C('SITE_URL')."?m=".$this->actionName.'&a=clickAdJump&zoneId='.$_GET['id'].'&aid='.$adManageInfo['aid'];
@@ -354,25 +342,31 @@ class AdServiceAction extends Action {
 	   				$code=$code."');";
 	   					
 	   				break;
+	   				
 	   			}
-	   			case 10:{	// 右下角浮窗
+	   			case 3:{	// 右下角浮窗
 	   				
 	   				$AdFloating = A('AdFloatingFrame');
 	   				$code = $AdFloating->adShow($this->zoneId);
 	   					
 	   				break;
+	   				
 	   			}
-	   			case 12:{	// 全屏弹窗
-	   			
+	   			case 4:{	// 全屏弹窗
+	   				
 	   				$AdPop = A('AdPop');
 	   				$code = $AdPop->adShow($this->zoneId);
-	   					
+	   				
+	   				break;
+	   				
+	   			}
+	   			case 5:{	// 对联 广告
+	   				// 					break;
+	   			}
+	   			default:{	// 匹配失败
+	   				echo '/* failed */';
 	   				break;
 	   			}
-	   			default:	// 匹配失败
-	   				$AdPop = A('AdPop');
-	   				$code = $AdPop->adShow($this->zoneId);
-	   				break;
 	   		}
 	   	}else{
 	   		echo "当前代码位有误 或未启用";
