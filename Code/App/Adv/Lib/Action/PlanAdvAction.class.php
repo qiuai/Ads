@@ -182,9 +182,30 @@ class PlanAdvAction extends CommonAction {
 	 */
 	private function getDirectionalSiteTypeArrInfo($infoSelectArr=0){
 		
+		$siteType = M('SiteType');
+		// 查询网站类型表中的值
+		$directionalSiteTypeArrInfo = $siteType->where("status = 0")->select();
+		//echo $sizeType->getLastSql();
+		//dump($directionalSiteTypeArrInfo);
+		if(!$infoSelectArr){
+			foreach($directionalSiteTypeArrInfo as $key => $val){
+				$directionalSiteTypeArrInfo[$key]['key'] = $val['id'];
+				$directionalSiteTypeArrInfo[$key]['val'] = $val['code_name_zh']; 
+			}
+		}else{
+			foreach($directionalSiteTypeArrInfo as $key => $val){
+				$directionalSiteTypeArrInfo[$key]['key'] = $val['id'];
+				$directionalSiteTypeArrInfo[$key]['val'] = $val['code_name_zh']; 
+				if(in_array($directionalSiteTypeArrInfo[$key]['key'],$infoSelectArr)){
+					$directionalSiteTypeArrInfo[$key]['selectFlag'] = 1;
+				}else{
+					$directionalSiteTypeArrInfo[$key]['selectFlag'] = 0;
+				}
+			}		
+		}
 		// 读取网站类型的定向相关的数据
-		$directionalSiteTypeArr = C('DIRECTIONAL_SITE_TYPE_ARR');
-		$directionalSiteTypeArrInfo = $this->oneDimensionalArrayToTwoDimensionalArray($directionalSiteTypeArr,$infoSelectArr);
+		/*$directionalSiteTypeArr = C('DIRECTIONAL_SITE_TYPE_ARR');
+		$directionalSiteTypeArrInfo = $this->oneDimensionalArrayToTwoDimensionalArray($directionalSiteTypeArr,$infoSelectArr);*/
 		$this->assign("directionalSiteTypeArrInfo",$directionalSiteTypeArrInfo);
 	}
 	
@@ -639,15 +660,29 @@ class PlanAdvAction extends CommonAction {
 		// 查询出计划分类所对应的分类名称
 		// 处理开始日期和结束日期的显示方式
 		$AdPlanInfoOne['start_date'] = date('Y-m-d',$AdPlanInfoOne['start_date']);
-				$AdPlanInfoOne['end_date'] = date('Y-m-d',$AdPlanInfoOne['end_date']);
+		$AdPlanInfoOne['end_date'] = date('Y-m-d',$AdPlanInfoOne['end_date']);
 	
 						// 处理网站定向类型的数据
-						$directionalSiteTypeArr = C('DIRECTIONAL_SITE_TYPE_ARR');
+		//$directionalSiteTypeArr = C('DIRECTIONAL_SITE_TYPE_ARR');
+		$siteType = M('SiteType');
 		if($AdPlanInfoOne['directional_site_type_arr']){
-		
+			
 			$AdPlanInfoOne['directional_site_type_arr'] = json_decode($AdPlanInfoOne['directional_site_type_arr']);
-			foreach ($AdPlanInfoOne['directional_site_type_arr'] as $key=>$val){
-				$AdPlanInfoOne['directional_site_type_arr'][$key] = $directionalSiteTypeArr[$val];
+			
+			// 组装查询语句到网站类型表中查询数据
+			$inSiteTypeId = "";
+			foreach($AdPlanInfoOne['directional_site_type_arr'] as $key=>$val){
+				$inSiteTypeId = $inSiteTypeId.",".$val;
+			}
+			
+			// 去除两边多余的逗号			
+			$inSiteTypeId = trim($inSiteTypeId,",");
+			
+			// 查询网站类型表中的值
+			$directionalSiteTypeArr = $siteType->where("status = 0 and id in (".$inSiteTypeId.")")->select();
+			$AdPlanInfoOne['directional_site_type_arr'] = array();
+			foreach($directionalSiteTypeArr as $key=>$val){
+				$AdPlanInfoOne['directional_site_type_arr'][] = $val['code_name_zh'];
 			}
 		}
 						// 处理星期定向的问题
