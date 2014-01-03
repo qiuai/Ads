@@ -23,8 +23,9 @@ class AdServiceAction extends Action {
 	protected $visitIp;	// 访问者IP
 	protected $width;	// 广告宽度
 	protected $height;	// 广告高度
-	private  $table_pre; 	// 定义变量保存表前缀
-	protected   $adSizeInfo;	// 广告尺寸信息
+	protected $table_pre; 	// 定义变量保存表前缀
+	protected $adSizeInfo;	// 广告尺寸信息
+	
 	
 	/**
 	 * 
@@ -86,27 +87,32 @@ class AdServiceAction extends Action {
    
    	/**
    	 *
-   	 * 查询zone_visit_count表看看是否数据库中存在符合zid为当前代码位id 并且day_start_time为当天0时0分0秒的数据 如果没有则往
-   	 * zone_visit_count中添加一条数据并且把view_pv_num值设为1 view_ip_num值为1 zid 为当前广告的代码位的id值
-   	 * click_pv_num 值为0 click_ip_num 值为0 day_start_time 为当天0时0分0秒的时间
-   	 * 总之同一个zid(即同一个代码为在同一天在zone_visit_count只有一条记录)
+   	 * 查询zone_visit_count表看看是否数据库中存在符合zid为当前代码位id 并且广告id为当前广告id  并且day_start_time为当天0时0分0秒的数据 如果没有则往
+   	 * zone_visit_count中添加一条数据如果$view_or_click=1则把view_pv_num值设为1 view_ip_num值为1 zid 为当前广告的代码位的id值
+   	 * aid为当前广告的id，click_pv_num 值为0 click_ip_num 值为0 day_start_time 为当天0时0分0秒的时间
+   	 * 如果$view_or_click=2 则是点击型广告 click_pv_num 值为1 click_ip_num 值为1 view_pv_num值设为0 view_ip_num值为0 其他的相同 总之同一个zid aid (即同一个代码位同一个广告在同一天在zone_visit_count表中只有一条记录)
    	 */
    	// 组装查询条件的数据
    	$data['day_start_time'] = $dayStartTime;
    	if($view_or_click==1){
-   		$data['zid'] = $_GET['id']; // 当前广告为的id
+   		$data['zid'] = $this->zoneId; // 当前广告为的id
    	}elseif ($view_or_click==2){
    		$data['zid'] = intval($_GET['zoneId']);
    	}
-   
+   	$data['aid'] = $this->aid;
+   	$data['pid'] = $this->planId;
+   //	dump($data);
+  // 	exit;
    	$zoneVisitCountInfo = $zoneVisitCount->where($data)->find();
-   	if(!$zoneVisitCountInfo){
+   	if(!$zoneVisitCountInfo){   // 代表当天还没有数据
    			
    		// 组装添加的数据
-   		$insertData = array();
-   		$insertData['day_start_time'] = $dayStartTime;
-   		$insertData['zid'] = $_GET['id'];
-   			
+   		$insertData = $data;
+   		//$insertData['day_start_time'] = $dayStartTime;
+   		//$insertData['zid'] = $_GET['id'];
+   		// 犹如没有数据所以第一次访问时间和最后一次访问时间都是当前时间
+   		$insertData['first_visit_time'] = time();
+   		$insertData['last_visit_time']	= time();
    		if($view_or_click==1){
    			$insertData['view_pv_num'] = 1;
    			$insertData['view_ip_num'] = 1;
@@ -121,37 +127,49 @@ class AdServiceAction extends Action {
    			
    		// 往数据库中添加数据
    		$zoneVisitCount->add($insertData);
-   	}else{
+   	}else{  // 代表当天本条记录的数据已经存在
    
    		/**
-   		 * 查询zone_visit_count表看看是否数据库中存在符合zid为当前代码位id 并且day_start_time为当天0时0分0秒的数据 如果有则表明
-   		 * 当前代码位当天的记录已经存在 则查询zone_visit表看看是否数据库中存在符合zid为当前代码位id
-   		 * 并且时间在当天0时0分0秒到第二天0时0分0秒之间 并且view_or_click为1（即浏览）并且ip为当前客户端ip的数据 如果存在则
-   		 * 在当前的数据上面view_pv_num加1,view_ip_num不变 如果不存在则view_pv_num加1,view_ip_num也加1
+   		 * if(查询zone_visit_count表看看是否数据库中存在符合zid为当前代码位id 并且 aid 为当前aid 并且day_start_time为当天0时0分0秒的数据 如果有则表明){ 
+   		 * 	当前代码位当天的记录已经存在
+   		 * 	if($view_or_click==1){  
+   		 * 		则查询zone_visit表看看是否数据库中存在符合zid为当前代码位id 并且 aid 为当前aid
+   		 * 		并且时间在当天0时0分0秒到第二天0时0分0秒之间 并且view_or_click为1（即浏览）并且ip为当前客户端ip的数据 如果存在则
+   		 * 		在当前的数据上面view_pv_num加1,view_ip_num不变 如果不存在则view_pv_num加1,view_ip_num也加1
+   		 * 	}elseif($view_or_click==2){
+   		 * 		则查询zone_visit表看看是否数据库中存在符合zid为当前代码位id 并且 aid 为当前aid
+   		 * 		并且时间在当天0时0分0秒到第二天0时0分0秒之间 并且view_or_click为2（即点击）并且ip为当前客户端ip的数据 如果存在则
+   		 * 		在当前的数据上面view_pv_num加1,view_ip_num不变 如果不存在则view_pv_num加1,view_ip_num也加1
+   		 * 	}
+   		 * }
    		 */
    			
    		// 组装查询条件
    		$data = array();
    		//$data['day_start_time'] = $dayStartTime;
    		if($view_or_click==1){
-   			$data['zid'] = $_GET['id']; // 当前广告为的id
+   			$data['zid'] = $this->zoneId; // 当前广告为的id
    		}elseif ($view_or_click==2){
    			$data['zid'] = intval($_GET['zoneId']);
    		}
+   		$data['aid'] = $this->aid;
+   		$data['pid'] = $this->planId;
    		$data['view_or_click'] = $view_or_click;
    		$data['visit_time'] = array(array("egt",$dayStartTime),array("lt",$tomorrowStartTime),'and');
-   		$data['visit_ip'] = $this->getIp();
+   		$data['visit_ip'] = $this->visitIp;
    			
    		// 定义zone_visit句柄
    		$zoneVisit = M('ZoneVisit');
    			
    		// 查询数据
    		$zoneVisitInfo = $zoneVisit->where($data)->select();
-   			
-   		if(count($zoneVisitInfo) >= 2){
+   		//echo $zoneVisit->getLastSql();
+   		//dump($zoneVisitInfo);
+   		if(count($zoneVisitInfo) >= 2){  // 开始时在zone_visit 表中就默认已经插入一条数据 所以这里必须从第二条数据开始进行处理
    
    			// 组装数据库中更新的数据
    			$updateData = array();
+   			$updateData['last_visit_time'] = time();
    			$updateData['id'] = $zoneVisitCountInfo['id'];
    			if($view_or_click==1){
    				$updateData['view_pv_num'] = $zoneVisitCountInfo['view_pv_num']+1;
@@ -165,6 +183,7 @@ class AdServiceAction extends Action {
    
    			// 组装数据更新数据库
    			$updateData = array();
+   			$updateData['last_visit_time'] = time();
    			$updateData['id'] = $zoneVisitCountInfo['id'];
    			if($view_or_click==1){
    				$updateData['view_pv_num'] = $zoneVisitCountInfo['view_pv_num']+1;
