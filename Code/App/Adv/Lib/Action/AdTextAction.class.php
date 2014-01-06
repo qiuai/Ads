@@ -51,7 +51,7 @@ class AdTextAction extends AdServiceAction{
 	
 			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
 	
-				// 调用进行过滤所用的函数 比如有些代码的代码位没有
+				// 调用进行过滤所用的函数 比如有些代码的代码位没有 启用 有些代码位已经超过他的当天的
 	
 				$this->createCode($adManageInfo);
 	
@@ -60,6 +60,12 @@ class AdTextAction extends AdServiceAction{
 	
 				// 往数据表zhts_zone_visit_count中添加数据
 				$this->addZoneVisitCount(1); // 参数值为1代表的是展示
+				
+				// 往zhts_plan_site_visit_count表中添加数据
+				$this->addPlanSiteVisitCount(1); // 参数值为1代表的是展示
+				
+				// 往zhts_plan_all_site_visit_count表中添加数据
+				$this->addPlanAllSiteVisitCount(1);  
 			}
 		}else{
 			echo "当前代码位有误 或未启用";

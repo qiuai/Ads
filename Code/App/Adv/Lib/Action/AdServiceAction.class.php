@@ -25,7 +25,8 @@ class AdServiceAction extends Action {
 	protected $height;	// 广告高度
 	protected $table_pre; 	// 定义变量保存表前缀
 	protected $adSizeInfo;	// 广告尺寸信息
-	
+	protected $sid	;		// 当前代码为所对应的域名的id
+	protected $viewOrClickFlag = 0;// 当前广告在当前代码位在当天是否被当前客户端ip浏览或者被点击 为0表是没有 1表示有
 	
 	/**
 	 * 
@@ -53,7 +54,12 @@ class AdServiceAction extends Action {
    	$this->getIp();
    	// 获取当前计划的id值
    	$data['pid'] = $this->planId;
+   	
+   	// 广告id值
    	$data['aid'] = $this->aid;
+   	
+   	// 当前域名的id值
+   	$data['sid'] = $this->sid;
    	// 往数据表中添加一条浏览的数据
    	$data['visit_ip']  = $this->visitIp; // 记录客户端ip
    	$data['view_or_click'] = $view_or_click; // 1表示浏览 2表示点击
@@ -69,6 +75,136 @@ class AdServiceAction extends Action {
    }
    
    /**
+    * 
+    * 广告计划记录表中添加访问或展示的数据 一个域名一天一个广告计划只在数据库表中有一条数据记录
+    * @author Yumao <815227173@qq.com>
+    * @CreateDate: 2014-1-6 上午9:38:39
+    */
+   function addPlanSiteVisitCount($view_or_click){
+
+   	// 当前广告在当前代码位在当天是否被当前客户端ip浏览或者被点击 
+   	 if ($this->viewOrClickFlag==0){  // 说明没有被浏览或点击
+   	 	// 创建数据库句柄
+   	 	$planSiteVisitCount = M('PlanSiteVisitCount');
+   	 	
+   	 	// 调用函数创建当天0时0分0秒的时间戳
+   		$dayStartTime = $this->createDayStartTime();
+   		
+   	 	
+   	 	// 组装数据往数据库中添加内容
+   	 	$data = array();
+   	 	$data['sid'] = $this->sid;		// 保存域名id值
+   	 	$data['pid'] = $this->planId;	// 保存当前或点击的广告计划id
+   	 	$data['day_start_time'] =  $dayStartTime; // 当天的数据
+   	 	
+   	 	// 查询当前的PlanSiteVisitCount 是否有符合当前条件的数据
+   	 	$planSiteVisitCountInfo = $planSiteVisitCount->where($data)->find();
+
+   	 	if(!$planSiteVisitCountInfo){  // 组装数据往数据库中添加数据
+   	 		
+   	 		if($view_or_click==1){		// 代表当次访问是浏览 
+   	 			
+   	 			// 组装数据
+   	 			$data['view_num'] = 1;
+   	 			$data['click_num'] = 0;
+   	 		}elseif($view_or_click==2){		// 代表当次访问是点击
+   	 			
+   	 			// 组装数据
+   	 			$data['view_num'] = 0;
+   	 			$data['click_num'] = 1;
+   	 		}
+   	 		
+   	 		// 往数据库中添加数据
+   	 		$planSiteVisitCount->add($data);
+   	 		
+   	 	}else{		// 说明数据库中有当前数据记录
+   	 		
+   	 		$updateData = array();
+   	 		$updateData['id'] = $planSiteVisitCountInfo['id'];
+   	 		if($view_or_click==1){
+   	 			
+   	 			$updateData['view_num'] = $planSiteVisitCountInfo['view_num'] + 1;
+   	 		}elseif($view_or_click==2){
+   	 			
+   	 			$updateData['click_num'] = $planSiteVisitCountInfo['click_num'] + 1;
+   	 		}
+   	 		
+   	 		// 更改数据
+   	 		$planSiteVisitCount->save($updateData);
+   	 		
+   	 	}
+   	 	
+   	 	
+   	 	
+   	 }
+   	 
+   }
+   
+   /**
+    * 
+    * 广告计划记录表中添加访问或展示的数据 一天一个广告计划只在数据库表中有一条数据记录
+    * @author Yumao <815227173@qq.com>
+    * @CreateDate: 2014-1-6 下午2:45:48
+    */
+   function addPlanAllSiteVisitCount($view_or_click){
+   	
+   		// 当前广告在当前代码位在当天是否被当前客户端ip浏览或者被点击
+   		if($this->viewOrClickFlag==0){ // 说明没有被浏览或点击
+   			
+   			// 创建数据库句柄
+   			$planAllSiteVisitCount = M('PlanAllSiteVisitCount');
+   			
+   			// 调用函数创建当天0时0分0秒的时间戳
+   			$dayStartTime = $this->createDayStartTime();
+   		
+   	 	
+	   	 	// 组装数据往数据库中添加内容
+	   	 	$data = array();
+	   	 	//$data['sid'] = $this->sid;		// 保存域名id值
+	   	 	$data['pid'] = $this->planId;	// 保存当前或点击的广告计划id
+	   	 	$data['day_start_time'] =  $dayStartTime; // 当天的数据
+   			
+   			// 查询数据库中是否有符合条件的数据
+   			$planAllSiteVisitCountInfo = $planAllSiteVisitCount->where($data)->find();
+   			
+   			if(!$planAllSiteVisitCountInfo){
+   				
+   				if($view_or_click==1){	// 代表浏览
+   					
+   					// 组装数据
+   					$data['view_num'] = 1;
+   					$data['click_num'] = 0;
+   					
+   				}elseif ($view_or_click==2){ // 代表点击
+   					
+   					// 组装数据
+   					$data['view_num'] = 0;
+   					$data['click_num'] = 1;
+   				}
+   				
+   				// 往数据库中添加数据
+   				$planSiteVisitCount->add($data);
+   			}else{   // 说明数据库中有当前数据记录
+   				
+   				$updateData = array();
+   				$updateData['id'] = $planAllSiteVisitCountInfo['id'];
+   				if($view_or_click==1){
+   				
+   					$updateData['view_num'] = $planAllSiteVisitCountInfo['view_num'] + 1;
+   				}elseif($view_or_click==2){
+   				
+   					$updateData['click_num'] = $planAllSiteVisitCountInfo['click_num'] + 1;
+   				}
+   					
+   				// 更改数据
+   				$planSiteVisitCount->save($updateData);
+   				
+   			}  				
+   		}
+   	
+   }
+   
+   /**
     * $view_or_click 代表是展示还是点击 1 为代码的位的展示 2 为点击
     * 往代码位访问计数表中添加数据
     * @author Yumao <815227173@qq.com>
@@ -79,7 +215,7 @@ class AdServiceAction extends Action {
    	// 创建zone_visit_count句柄
    	$zoneVisitCount = M('ZoneVisitCount');
    
-   	// 调用函数创建当前0时0分0秒的时间戳
+   	// 调用函数创建当天0时0分0秒的时间戳
    	$dayStartTime = $this->createDayStartTime();
    
    	// 定义变量保存第二天0时0分0秒的时间戳
@@ -166,7 +302,8 @@ class AdServiceAction extends Action {
    		//echo $zoneVisit->getLastSql();
    		//dump($zoneVisitInfo);
    		if(count($zoneVisitInfo) >= 2){  // 开始时在zone_visit 表中就默认已经插入一条数据 所以这里必须从第二条数据开始进行处理
-   
+   			// 说明此时当前ip 当前广告 在当前代码位下面已经被访问或者点击
+			$this->viewOrClickFlag = 1;
    			// 组装数据库中更新的数据
    			$updateData = array();
    			$updateData['last_visit_time'] = time();
@@ -179,6 +316,8 @@ class AdServiceAction extends Action {
    
    			// 更改数据
    			$zoneVisitCount->save($updateData);
+   			
+   			
    		}else{
    
    			// 组装数据更新数据库
@@ -217,6 +356,7 @@ class AdServiceAction extends Action {
 // 	   		$this->verifyVisitSource($zoneInfo);
 
 	   		$this->typeId = $this->zoneIdToSizeType();
+	   		$this->sid = $zoneInfo['sid'];
 	   		
 	   		return $zoneInfo;
 	   	}else{
@@ -543,7 +683,9 @@ class AdServiceAction extends Action {
 	   	// 把广告id和广告计划id保存下来
 	   	$this->planId = $adManageInfo['pid'];
 	   	$this->aid = $adManageInfo['aid'];
-
+	   	
+		
+	  
 	   	return $adManageInfo;
    }
    
@@ -560,6 +702,10 @@ class AdServiceAction extends Action {
 	   
 	   	// 查询代码位相关的信息必须是启用状态的代码位
 	   	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
+	   	
+	   	// 保存当前的广告代码所对应的域名id
+	   	$this->sid = $zoneInfo['sid'];
+	   	
 	
 	   	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
 		// $this->verifyVisitSource($zoneInfo);
@@ -580,6 +726,12 @@ class AdServiceAction extends Action {
 	   			
 	   		// 往zone_visit_count 表中添加数据
 	   		$this->addZoneVisitCount(2);
+	   		
+	   		// 往zhts_plan_site_visit_count表中添加数据
+	   		$this->addPlanSiteVisitCount(2); // 参数值为1代表的是展示
+	   		
+	   		// 往zhts_plan_all_site_visit_count表中添加数据
+	   		$this->addPlanAllSiteVisitCount(2);
 	   			
 	   		// 跳转
 	   		header("location:".$adManageInfo['jump_url']);

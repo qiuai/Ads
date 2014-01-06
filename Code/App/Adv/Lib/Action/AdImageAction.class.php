@@ -58,6 +58,12 @@ class AdImageAction extends AdServiceAction{
 		
 				// 往数据表zhts_zone_visit_count中添加数据
 				$this->addZoneVisitCount(1); // 参数值为1代表的是展示
+				
+				// 往zhts_plan_site_visit_count表中添加数据
+				$this->addPlanSiteVisitCount(1); // 参数值为1代表的是展示
+				
+				// 往zhts_plan_all_site_visit_count表中添加数据
+				$this->addPlanAllSiteVisitCount(1);
 			}
 		}else{
 			echo "当前代码位有误 或未启用";

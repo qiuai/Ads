@@ -90,7 +90,8 @@ return array(
 	 * 广告计划网站的类型定向 
 	 * 
 	 */
-	'DIRECTIONAL_SITE_TYPE_ARR' => array(
+	/**
+	 ' DIRECTIONAL_SITE_TYPE_ARR' => array(
 		'1' => '电商',
 		'2' => '博客',
 		'3' => '论坛',
@@ -98,7 +99,7 @@ return array(
 		'5' => '门户网站',
 		'6' => '资讯',
 		'7' => 'wijika',					
-	),
+	),*/
 	
 	/**
 	 * 广告计划网站星期定向
