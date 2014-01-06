@@ -183,7 +183,7 @@ class AdServiceAction extends Action {
    				}
    				
    				// 往数据库中添加数据
-   				$planSiteVisitCount->add($data);
+   				$planAllSiteVisitCount->add($data);
    			}else{   // 说明数据库中有当前数据记录
    				
    				$updateData = array();
@@ -197,7 +197,7 @@ class AdServiceAction extends Action {
    				}
    					
    				// 更改数据
-   				$planSiteVisitCount->save($updateData);
+   				$planAllSiteVisitCount->save($updateData);
    				
    			}  				
    		}
