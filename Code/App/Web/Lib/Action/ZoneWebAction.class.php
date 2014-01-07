@@ -90,7 +90,7 @@ class ZoneWebAction extends CommonAction {
 		$uid	= $_SESSION[C("WEB_AUTH_KEY")];
 		$zo		= $zone->where("id=".$id)->select();
 		if($uid!=$zo[0]["uid"]){ // 判断编辑代码位网站主与代码位网站主是否为同一个人
-			$this	->error("数据异常！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
+			$this	->error("数据异常！",'WEB_URL?m=ZoneWeb&a=index');
 		}elseif(empty($name)){
 			$this	->error("代码位名称不能为空！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
 		}else{
