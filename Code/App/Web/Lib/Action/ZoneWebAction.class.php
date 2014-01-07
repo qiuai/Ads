@@ -88,7 +88,7 @@ class ZoneWebAction extends CommonAction {
 		$id		= (int)($_POST["zone_id"]);
 		$name	= $_POST["zone_name"];
 		$uid1	= $_SESSION[C("WEB_AUTH_KEY")];
-		$uid2	= $zone->field("uid")->where("id=".$id)->find();var_dump($uid1.$uid2);
+		$uid2	= $zone->field("uid")->where("id=".$id)->find();var_dump($uid2);
 		if($uid1!=$uid2){ // 判断编辑代码位网站主与代码位网站主是否为同一个人
 			$this	->error("数据异常！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
 		}elseif(empty($name)){
