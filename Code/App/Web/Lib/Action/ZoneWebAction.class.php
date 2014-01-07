@@ -85,14 +85,15 @@ class ZoneWebAction extends CommonAction {
 	// 处理编辑代码位
 	public function editCheck(){
 		$zone 	= M('zone');
+		$id0	= (int)($_GET["zone_id"]);
 		$id		= (int)($_POST["zone_id"]);
 		$name	= $_POST["zone_name"];
 		$uid1	= $_SESSION[C("WEB_AUTH_KEY")];
 		$uid2	= $zone->field("uid")->where("id=".$id)->find();
 		if($uid1!=$uid2){ // 判断编辑代码位网站主与代码位网站主是否为同一个人
-			$this	->error("数据异常！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
+			$this	->error("数据异常！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id0);
 		}elseif(empty($name)){
-			$this	->error("代码位名称不能为空！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
+			$this	->error("代码位名称不能为空！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id0);
 		}else{
 			$zone	->where("id =".$id)->setField("name",$name);
 			$this	->success('代码位更改成功','WEB_URL?m=ZoneWeb&a=index');
