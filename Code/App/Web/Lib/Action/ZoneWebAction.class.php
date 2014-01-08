@@ -17,7 +17,9 @@ class ZoneWebAction extends CommonAction {
 	// 代码位列表
     public function index(){ 
 		$this		->assign("title","代码位管理");
+		$uid		= $_SESSION[C("WEB_AUTH_KEY")];
 		$zo 		= M('zone');
+		$where		= "uid=".$uid;
 		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id desc'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$as			= M('ad_size');
 		foreach($zone as $key=>$val){
@@ -85,7 +87,11 @@ class ZoneWebAction extends CommonAction {
 		$zone 	= M('zone');
 		$id		= (int)($_POST["zone_id"]);
 		$name	= $_POST["zone_name"];
-		if(empty($name)){
+		$uid	= $_SESSION[C("WEB_AUTH_KEY")];
+		$zo		= $zone->where("id=".$id)->select();
+		if($uid!=$zo[0]["uid"]){ // 判断编辑代码位网站主与代码位网站主是否为同一个人
+			$this	->error("数据异常！",'WEB_URL?m=ZoneWeb&a=index');
+		}elseif(empty($name)){
 			$this	->error("代码位名称不能为空！",'WEB_URL?m=ZoneWeb&a=zoneEdit&zone_id='.$id);
 		}else{
 			$zone	->where("id =".$id)->setField("name",$name);

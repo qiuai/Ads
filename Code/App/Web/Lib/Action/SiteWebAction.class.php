@@ -33,7 +33,7 @@ class SiteWebAction extends CommonAction {
 	public function siteAdd(){
 		$this		->assign("title","新增网站");
 		$site_type	= M("site_type");
-		$site		= $site_type->select(); // 获取网站类型
+		$site		= $site_type->where("status=0")->select(); // 获取网站类型
 		$this		->assign("site",$site);
 		$this		->display();
 	}
@@ -62,7 +62,7 @@ class SiteWebAction extends CommonAction {
 		$st 				= M('site');
 		$site				= $st->where("id =".$id)->select();
 		$stp				= M("site_type");
-		$site_type			= $stp->select();
+		$site_type			= $stp->where("status=0")->select();
 		$this				->assign("site",$site);
 		$this				->assign("site_type",$site_type);
 		$this				->assign("title","编辑网站");
