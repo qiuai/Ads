@@ -18,6 +18,23 @@ class AdImageAction extends AdServiceAction{
 	 */
 	public function createCode($adManageInfo){
 		
+		// 产生随机的唯一session值
+		$sessionFlag = md5(time().rand(1,100000).$this->zoneId);
+		
+		// 为sessionFlag产生随机的唯一值
+		$sessionFlagValue =  md5(time().rand(1,100000).$this->zoneId);
+		
+		// 往验证数据表中添加一条数据 (以后这里绝对要放到内存缓存)
+		$adShowVerify = M("adShowVerify");
+		$data['session_flag'] = $sessionFlag; 
+		$data['session_flag_value'] = $sessionFlagValue;
+		$adShowVerify->add($data);
+	
+		
+		$this->assign("sessionFlagValue",$sessionFlagValue);
+		$this->assign("sessionFlag",$sessionFlag);
+		$this->assign("zoneId",$this->zoneId);
+		$this->assign("aid",$this->aid);
 		// 组装URL
 		$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
 		
@@ -53,17 +70,6 @@ class AdImageAction extends AdServiceAction{
 				
 				$this->createCode($adManageInfo);
 		
-				// 往数据表zhts_zone_visit中添加数据
-				$this->addZoneVisit(1);	 // 参数值为1代表的是展示
-		
-				// 往数据表zhts_zone_visit_count中添加数据
-				$this->addZoneVisitCount(1); // 参数值为1代表的是展示
-				
-				// 往zhts_plan_site_visit_count表中添加数据
-				$this->addPlanSiteVisitCount(1); // 参数值为1代表的是展示
-				
-				// 往zhts_plan_all_site_visit_count表中添加数据
-				$this->addPlanAllSiteVisitCount(1);
 			}else{
 				echo '/**没有合适的广告*/';
 			}
@@ -71,5 +77,10 @@ class AdImageAction extends AdServiceAction{
 			echo "当前代码位有误 或未启用";
 			exit;
 		}		
+	}
+	
+	public function jishu(){
+		
+		
 	}
 }

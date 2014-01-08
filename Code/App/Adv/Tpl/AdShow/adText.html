@@ -7,9 +7,47 @@
 <style>
 * {margin:0px;padding:0px;border:0px;}
 </style>
+<script src="STATIC_URL/adv/js/jquery-1.4.2.min.js"></script>
 <body>
-<div style="z-index:99999999;">
+<div style="z-index:99999999;position:absolute;" id="{$sessionFlag}">
 	<a href="{$jumpUrl}" target="_blank" ><div style="width={$width}px;height={$height}px;text-align:center;margin:0 auto;float:left;">{$adManageInfo['content']}</div></a>
 </div>
+<script>
+		/**
+		 * 判断当前div是否显示
+		 */
+		
+		function jishu(){
+			var sessionFlag = "{$sessionFlag}";
+			
+			var sessionFlagValue = "{$sessionFlagValue}";
+			
+			var zoneId = "{$zoneId}";
+			
+			var aid = "{$aid}";
+			
+			$.ajax({
+				url:"SITE_URL?m=AdService&a=jishu",
+				dataType:'jsonp', 
+				type:"post",	
+				data:{"sessionFlag":sessionFlag,"sessionFlagValue":sessionFlagValue,"zoneId":zoneId,"aid":aid},
+				jsonp:'callback',
+				
+				success:function(returnInfo){
+				
+					
+				}
+			})
+			
+		}
+		$(function(){
+			
+			if($("#{$sessionFlag}").is(":visible")){
+				setTimeout("jishu()",5000);
+				
+			}
+			
+		})
+</script>
 </body>
 </html>

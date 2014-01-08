@@ -67,11 +67,12 @@ class AdServiceAction extends Action {
    	if($view_or_click==1){
    		$data['zid'] = $this->zoneId; // 当前广告为的id
    	}elseif ($view_or_click==2){
-   		$data['zid'] = intval($_GET['zoneId']);
+   		$data['zid'] = intval($_REQUEST['zoneId']);
    	}
    
    	// 往zone_visit表添加记录
    	$zoneVisit->add($data);  
+   	
    }
    
    /**
@@ -229,7 +230,7 @@ class AdServiceAction extends Action {
    	if($view_or_click==1){
    		$data['zid'] = $this->zoneId; // 当前广告为的id
    	}elseif ($view_or_click==2){
-   		$data['zid'] = intval($_GET['zoneId']);
+   		$data['zid'] = intval($_REQUEST['zoneId']);
    	}
    	$data['aid'] = $this->aid;
    	$data['pid'] = $this->planId;
@@ -826,7 +827,7 @@ or
 	   	// 保存当前的广告代码所对应的域名id
 	   	$this->sid = $zoneInfo['sid'];
 	   	
-	
+		$this->zoneId = $_REQUEST['zoneId'];
 	   	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
 		// $this->verifyVisitSource($zoneInfo);
 	   	// dump($_SERVER['HTTP_REFERER']);
@@ -859,6 +860,67 @@ or
 	   	}
    		
    }
+   
+   /**
+    * 
+    * 计数广告相对应的方法
+    * @author Yumao <815227173@qq.com>
+    * @CreateDate: 2014-1-8 下午6:08:12
+    */
+   function jishu(){
+   		$sessionFlagValue = $_POST['sessionFlagValue'];
+   		$sessionFlag = $_POST['sessionFlag'];
+   		
+   		// 查询数据库中是否存在session_flag为$sessionFlag的值
+   		$adShowVerify = M("adShowVerify");
+   		$data['session_flag'] = $sessionFlag;
+   		$adShowVerifyInfo = $adShowVerify->where($data)->find(); 
+   		
+   		if($adShowVerifyInfo && ($adShowVerifyInfo['session_flag_value'] == $sessionFlagValue)){
+   			
+   			$this->zoneId = $_REQUEST['zoneId'];
+   			
+   			//  说明验证成立 开始计数
+   			// 查询相关的信息随机生成广告信息
+   			$zone = M("Zone");
+   			// 查询代码位相关的信息必须是启用状态的代码位
+   			$zoneInfo = $zone->where("id = ".intval($_POST['zoneId'])." and status = 1")->find();
+   			// 保存当前的广告代码所对应的域名id
+   			$this->sid = $zoneInfo['sid'];
+   			// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
+   			// $this->verifyVisitSource($zoneInfo);
+   			// dump($_SERVER['HTTP_REFERER']);
+   			// 获取当前的广告的信息
+   			$adManage = M("adManage");
+   			$adManageInfo = $adManage->where("aid = ".intval($_POST['aid'])." and status = 2")->find();
+   			if($adManageInfo){
+   				 
+   				
+   				// 保存计划id 广告id
+   				$this->planId = $adManageInfo['pid'];
+   				$this->aid = $adManageInfo['aid'];
+   				// 接下来做点击计数
+   				$this->addZoneVisit(1);  // 往zone_visit数据表中添加点击的记录的信息
+   				 
+   				// 往zone_visit_count 表中添加数据
+   				$this->addZoneVisitCount(1);
+   				 
+   				// 往zhts_plan_site_visit_count表中添加数据
+   				$this->addPlanSiteVisitCount(1); // 参数值为1代表的是展示
+   				 
+   				// 往zhts_plan_all_site_visit_count表中添加数据
+   				$this->addPlanAllSiteVisitCount(1);
+   				
+   			}
+   			
+   		}
+   		
+   		// 在验证的数据表中删除当前的数据
+   		$adShowVerify->where("id = ".$adShowVerifyInfo['id'])->delete();
+   		
+   }
+   
+   
    /**
     * 广告投放数量限制 
     *
