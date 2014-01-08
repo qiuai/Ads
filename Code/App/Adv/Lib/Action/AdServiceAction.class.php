@@ -130,12 +130,8 @@ class AdServiceAction extends Action {
    	 		}
    	 		
    	 		// 更改数据
-   	 		$planSiteVisitCount->save($updateData);
-   	 		
-   	 	}
-   	 	
-   	 	
-   	 	
+   	 		$planSiteVisitCount->save($updateData);   	 		
+   	 	}   	 	   	 	   	 	
    	 }
    	 
    }
@@ -676,9 +672,133 @@ class AdServiceAction extends Action {
 	   	// 根据尺寸id值查询相关的广告信息
 	   	$this->adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
 	   	 
+	  // 调用函数创建当天0时0分0秒的时间戳
+   		$dayStartTime = $this->createDayStartTime();
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
 	   	$adManage = M("adManage");
-	   	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
+	   	
+	   	// 获取当前天为星期几
+	   	$weekDayIndex = date("w");
+	   	
+	   	// 获取现在的时间点
+	   	$hourminute = date("H");
+	   	 $hourminuteKey = intval($hourminute)+1;
+	   	
+	   // 连表查询符合条件的数据  广告尺寸符合  广告状态符合  广告计划状态符合 广告计划展现或点击未超量 广告计划时间定向 网站类型定向 星期定向符合
+	   //	$adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>'admanage',$this->table_pre."ad_plan"=>'adplan',$this->table_pre."plan_site_visit_count"=>'plansitevisitcount'))->where("admanage.pid = adplan.id and adplan.plan_status = 2 and  ( (adplan.id = plansitevisitcount.pid or plansitevisitcount.pid is null) and ( plansitevisitcount.sid=".$this->sid." or   plansitevisitcount.sid is null )  and (plansitevisitcount.view_num < adplan.max_per_site or plansitevisitcount.view_num is null) and (plansitevisitcount.day_start_time = ".$dayStartTime." or plansitevisitcount.day_start_time is null )) and admanage.show_type = ".$this->sizeId." and admanage.status=2")->order("rand()")->find();
+	  //	$adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>'admanage',$this->table_pre."ad_plan"=>'adplan'))->join("left join zhts_plan_site_visit_count plansitevisitcount  on adplan.id = plansitevisitcount.pid" )->join("left join zhts_plan_all_site_visit_count planallsitevisitcount on adplan.id = planallsitevisitcount.pid")->where("admanage.pid = adplan.id AND adplan.plan_status =2 AND (plansitevisitcount.sid =22 OR plansitevisitcount.sid IS NULL) AND (plansitevisitcount.view_num < adplan.max_per_site OR plansitevisitcount.view_num IS NULL OR adplan.max_per_site = 0 OR  plansitevisitcount.day_start_time != ".$dayStartTime."  OR plansitevisitcount.day_start_time IS NULL ) AND (plansitevisitcount.day_start_time =".$dayStartTime." OR plansitevisitcount.day_start_time IS NULL) AND (planallsitevisitcount.day_start_time = ".$dayStartTime." OR planallsitevisitcount.day_start_time IS NULL) AND (planallsitevisitcount.view_num < adplan.max_per_day OR planallsitevisitcount.view_num IS NULL OR adplan.max_per_day = 0 OR planallsitevisitcount.day_start_time != ".$dayStartTime." OR planallsitevisitcount.day_start_time IS NULL ) AND admanage.show_type =".$this->sizeId." AND admanage.status =2")->field("admanage.*")->order("rand()")->find();
+	   /*	$adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>'admanage',$this->table_pre."ad_plan"=>'adplan'))->join("left join zhts_plan_site_visit_count plansitevisitcount  on adplan.id = plansitevisitcount.pid" )->join("left join zhts_plan_all_site_visit_count planallsitevisitcount on adplan.id = planallsitevisitcount.pid")->where("admanage.pid = adplan.id AND adplan.plan_status =2 AND (plansitevisitcount.sid =".$this->sid." OR plansitevisitcount.sid IS NULL) 
+	   			AND 
+	   			(
+		   			(
+		   		
+		   			plansitevisitcount.day_start_time = ".$dayStartTime." and	
+					plansitevisitcount.view_num < adplan.max_per_site 
+	
+					) 
+				or
+					(	
+					
+					plansitevisitcount.day_start_time IS NULL 
+							
+					)
+				or
+				(
+					adplan.max_per_site = 0
+					
+				)
+		   	 )
+	   	   AND ((
+	   				
+	   		planallsitevisitcount.day_start_time = ".$dayStartTime." and
+	planallsitevisitcount.view_num < adplan.max_per_day 
+
+) 
+or
+(	
+	planallsitevisitcount.day_start_time IS NULL
+		
+)
+or
+(
+	adplan.max_per_day = 0
+) ) 
+		AND admanage.show_type =".$this->sizeId." AND admanage.status =2")->field("admanage.*,plansitevisitcount.day_start_time as daystarttime")->order("rand()")->find();*/
+	   	
+	   	
+	   	// 先查询当前ad_plan 表中所有展现没有超过单日限额的广告计划 
+	   /*	$adPlan = M("AdPlan");
+	   	$adPlanInfo = $adPlan->table(array($this->table_pre."ad_plan"=>'adplan'))->join("left join zhts_plan_all_site_visit_count planallsitevisitcount on adplan.id = planallsitevisitcount.pid")->where("
+	   				adplan.plan_status =2 AND 
+	   				(
+	   					planallsitevisitcount.view_num 	
+	   				)
+	   			
+	   			
+	   			")->select();*/
+	   	// 根据当天的时间戳zhts_plan_all_site_visit_count查询当天超过限额的计划
+	   	$planAllSiteVisitCount = M("PlanAllSiteVisitCount");
+	   	$planoverfulfilInfo = $planAllSiteVisitCount -> table(array($this->table_pre."plan_all_site_visit_count"=>'planallsitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("planallsitevisitcount.pid = adplan.id and planallsitevisitcount.day_start_time = ".$dayStartTime." and planallsitevisitcount.view_num >= adplan.max_per_day and adplan.max_per_day != 0")->field("planallsitevisitcount.pid,planallsitevisitcount.view_num")->select();
+	   	
+	   	// 根据当天的时间戳和当前的代码位的域名id值找出在当前域名下超过没站每日限额的广告计划
+	   	$planSiteVisitCount = M('PlanSiteVisitCount');
+	   	$planoverfulfilPersiteInfo = $planSiteVisitCount  -> table(array($this->table_pre."plan_site_visit_count"=>'plansitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("plansitevisitcount.pid = adplan.id and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.view_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0 ")->field("plansitevisitcount.pid,plansitevisitcount.view_num")->select();
+	   	
+	   	// 根据现在的sid值查看网站的类型
+	   	$site = M("Site");
+	   	$siteInfo = $site->where("id = ".$this->sid)->find();
+	  // 	dump($siteInfo);
+	   	// 查看广告计划中有网站类型定向但是不包含当前网站内型的 
+	   	$adPlan = M("AdPlan");
+	   	$adPlanInfo = $adPlan->where("(directional_site_type = 1 and directional_site_type_arr not like '%\"".$siteInfo['site_type']."\"%') or (directional_week = 1 and directional_week_arr not like '%\"".$weekDayIndex."\"%') or (directional_time = 1 and directional_time_arr  not like '%\"". $hourminuteKey."\"%')")->select();
+	   	
+	   	//echo $adPlan->getLastSql();
+	  	//dump($adPlanInfo);
+	   	// 组装超额的计划id
+	   	$overfulfilPid = "0";
+	   	$overPidArr = array();
+	   	foreach($planoverfulfilInfo as $key=>$val){
+	   		if(!in_array($val['pid'], $overPidArr)){
+	   			$overPidArr[] = $val['pid']; 
+	   			$overfulfilPid = $val['pid'].",".$overfulfilPid;
+	   		} 		
+	   	}
+	   	
+	   	foreach($planoverfulfilPersiteInfo as $key=>$val){
+	  	 	if(!in_array($val['pid'], $overPidArr)){
+	   			$overPidArr[] = $val['pid']; 
+	   			$overfulfilPid = $val['pid'].",".$overfulfilPid;
+	   		}   		
+	   	}
+	   	
+	   	//  去除定向不符合的广告计划
+	   	foreach ($adPlanInfo as $key=>$val){
+	   		
+	   		if(!in_array($val['id'], $overPidArr)){
+	   			$overPidArr[] = $val['id']; 
+	   			$overfulfilPid = $val['id'].",".$overfulfilPid;
+	   		}   		
+	   	}
+	   	//  去除多余的逗号
+	   	$overfulfilPid = trim($overfulfilPid,",");
+	   	
+	   	// 连表获取适合的广告查询数据
+	   	$adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>"admanage",$this->table_pre."ad_plan"=>"adplan"))->where("admanage.pid = adplan.id and admanage.show_type = ".$this->sizeId." and admanage.status = 2  and adplan.plan_status=2 and adplan.id not in (".$overfulfilPid.")" )->field("admanage.*")->order("rand()")->find();
+	   	/*echo $overfulfilPid."<br/>";
+	   	echo $planAllSiteVisitCount->getLastSql();
+	   	dump($planoverfulfilInfo);
+	   	echo $planSiteVisitCount->getLastSql();
+	   	dump($planoverfulfilPersiteInfo);*/
+	   	// 组装数据
+	   	/*$data = array();
+	   	$data['day_start_time'] = $dayStartTime;
+	   	$planAllSiteVisitCount->where($where)->select();
+	   	echo $adPlan->getLastSql();
+	   	dump($adPlanInfo);
+	   	echo $this->sid; */
+	   //	$adManageInfo = $adManage->where("show_type = ".$this->sizeId." and status = 2")->order("rand()")->find();
+	  	//echo $adManage->getLastSql();
+	 //  dump($adManageInfo);
 	   	
 	   	// 把广告id和广告计划id保存下来
 	   	$this->planId = $adManageInfo['pid'];
