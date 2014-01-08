@@ -66,6 +66,8 @@ class AdTextAction extends AdServiceAction{
 				
 				// 往zhts_plan_all_site_visit_count表中添加数据
 				$this->addPlanAllSiteVisitCount(1);  
+			}else{
+				echo "/**没有合适的广告*/";
 			}
 		}else{
 			echo "当前代码位有误 或未启用";
