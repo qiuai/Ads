@@ -18,23 +18,8 @@ class AdImageAction extends AdServiceAction{
 	 */
 	public function createCode($adManageInfo){
 		
-		// 产生随机的唯一session值
-		$sessionFlag = md5(time().rand(1,100000).$this->zoneId);
-		
-		// 为sessionFlag产生随机的唯一值
-		$sessionFlagValue =  md5(time().rand(1,100000).$this->zoneId);
-		
-		// 往验证数据表中添加一条数据 (以后这里绝对要放到内存缓存)
-		$adShowVerify = M("adShowVerify");
-		$data['session_flag'] = $sessionFlag; 
-		$data['session_flag_value'] = $sessionFlagValue;
-		$adShowVerify->add($data);
-	
-		
-		$this->assign("sessionFlagValue",$sessionFlagValue);
-		$this->assign("sessionFlag",$sessionFlag);
-		$this->assign("zoneId",$this->zoneId);
-		$this->assign("aid",$this->aid);
+		// 创建动态的验证信息
+		$this->createVerifyInfo();
 		// 组装URL
 		$jumpUrl = C('SITE_URL').'?m=AdService&a=clickAdJump&zoneId='.$this->zoneId.'&aid='.$adManageInfo['aid'];
 		
@@ -79,8 +64,5 @@ class AdImageAction extends AdServiceAction{
 		}		
 	}
 	
-	public function jishu(){
-		
-		
-	}
+	
 }
