@@ -947,6 +947,10 @@ or
    		// 在验证的数据表中删除当前的数据
    		$adShowVerify->where("id = ".$adShowVerifyInfo['id'])->delete();
    		
+   		// 删除一小时之前的数据  		 
+   		$oneHourPreTime = time()-3600;
+   		$adShowVerify->where("create_time < ".$oneHourPreTime)->delete();
+   		
    }
    
    
