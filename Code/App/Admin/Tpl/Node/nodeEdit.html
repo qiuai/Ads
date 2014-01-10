@@ -10,7 +10,6 @@
 <script>
 $(document).ready(function(){
 	$("#group").change(function(){
-		alert("SITE_URL/?m=Node&a=getCat");
 		$.ajax({
 			url:"SITE_URL/?m=Node&a=getCat",
 			dataType: "json",
@@ -22,6 +21,7 @@ $(document).ready(function(){
 				item = data[level];
 				for(i=0; i<item.length; i++){
 					$("#menu").append("<option value='" + item[i]['id'] + "'>" + item[i]['module_name'] + "</option>");   //为Select追
+					alert(item[i]['id']);
 				}
 			}
 		});
