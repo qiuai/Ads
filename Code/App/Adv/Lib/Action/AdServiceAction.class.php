@@ -771,11 +771,12 @@ or
 	   			")->select();*/
 	   	// 根据当天的时间戳zhts_plan_all_site_visit_count查询当天超过限额的计划
 	   	$planAllSiteVisitCount = M("PlanAllSiteVisitCount");
-	   	$planoverfulfilInfo = $planAllSiteVisitCount -> table(array($this->table_pre."plan_all_site_visit_count"=>'planallsitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("planallsitevisitcount.pid = adplan.id and planallsitevisitcount.day_start_time = ".$dayStartTime." and planallsitevisitcount.view_num >= adplan.max_per_day and adplan.max_per_day != 0")->field("planallsitevisitcount.pid,planallsitevisitcount.view_num")->select();
+	   	
+	   	$planoverfulfilInfo = $planAllSiteVisitCount -> table(array($this->table_pre."plan_all_site_visit_count"=>'planallsitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("(planallsitevisitcount.pid = adplan.id) and ((adplan.pay_type = 1 and planallsitevisitcount.day_start_time = ".$dayStartTime." and planallsitevisitcount.view_num >= adplan.max_per_day and adplan.max_per_day != 0) or (adplan.pay_type = 2 and planallsitevisitcount.day_start_time = ".$dayStartTime." and planallsitevisitcount.click_num >= adplan.max_per_day and adplan.max_per_day != 0))")->field("planallsitevisitcount.pid,planallsitevisitcount.view_num")->select();
 	   	
 	   	// 根据当天的时间戳和当前的代码位的域名id值找出在当前域名下超过没站每日限额的广告计划
 	   	$planSiteVisitCount = M('PlanSiteVisitCount');
-	   	$planoverfulfilPersiteInfo = $planSiteVisitCount  -> table(array($this->table_pre."plan_site_visit_count"=>'plansitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("plansitevisitcount.pid = adplan.id and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.view_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0 ")->field("plansitevisitcount.pid,plansitevisitcount.view_num")->select();
+	   	$planoverfulfilPersiteInfo = $planSiteVisitCount  -> table(array($this->table_pre."plan_site_visit_count"=>'plansitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("(plansitevisitcount.pid = adplan.id) and ((adplan.pay_type = 1 and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.view_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0) or (adplan.pay_type = 2 and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.click_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0))")->field("plansitevisitcount.pid,plansitevisitcount.view_num")->select();
 	   	
 	   	// 根据现在的sid值查看网站的类型
 	   	$site = M("Site");

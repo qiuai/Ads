@@ -27,10 +27,7 @@ class AdTextAction extends AdServiceAction{
 		$this->assign('jumpUrl',$jumpUrl);
 	
 		$this->assign('adManageInfo',$adManageInfo);
-		// 查询广告的尺寸分配到前端
-		$adSizeInfo = $this->adSizeInfo;
-		$this->assign("width",$adSizeInfo['width']);
-		$this->assign("height",$adSizeInfo['height']);
+		
 		$rs = $this->view->fetch('adText');
 	
 		$code = "document.write(\"". $this->jsformat($rs) . "\");";
@@ -52,7 +49,7 @@ class AdTextAction extends AdServiceAction{
 	
 			$this->sizeId = $zoneInfo['size'];
 	
-			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
+			if($adManageInfo = $this->getAdManageInfo()){		// // 服务器端查询是否有合适的广告如果有创建广告
 	
 				// 调用进行过滤所用的函数 比如有些代码的代码位没有 启用 有些代码位已经超过他的当天的
 	

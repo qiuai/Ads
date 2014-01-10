@@ -49,7 +49,7 @@ class AdImageAction extends AdServiceAction{
 				
 			$this->sizeId = $zoneInfo['size'];
 		
-			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端开始计录本次访问
+			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端查询是否有合适的广告如果有创建广告
 				
 				// 调用进行过滤所用的函数 比如有些代码的代码位没有
 				
