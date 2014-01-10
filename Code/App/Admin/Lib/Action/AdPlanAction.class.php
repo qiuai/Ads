@@ -40,9 +40,14 @@ class AdPlanAction extends CommonAction{
 		// 获取广告计划的计费形式
 		$this->getAdPayTypeInfo();
 		
+		$where = 'ad_plan_category.id = adplan.category_id';
+		if(intval($_GET['uid'])){
+			$where = $where." and  uid = ".intval($_GET['uid']);			
+		}
+		
 		// 查询相关的数据
 		//$AdPlanInfo = $this->AdPlan->table(array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'))->field('adplan.*,ad_plan_category.name')->where('ad_plan_category.id = adplan.category_id')->select();
-		$AdPlanInfo  = $this->memberLinkPage($this->AdPlan,'ad_plan_category.id = adplan.category_id',$pageNum,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
+		$AdPlanInfo  = $this->memberLinkPage($this->AdPlan,$where,$pageNum,'id desc',array($this->table_pre.'ad_plan'=> 'adplan',$this->table_pre.'ad_plan_category'=>'ad_plan_category'),'adplan.*,ad_plan_category.name as category_name');
 		//dump($AdPlanInfo);
 		
 		// 处理数据

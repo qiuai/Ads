@@ -38,6 +38,9 @@ class AdManageAction  extends CommonAction{
 		// 查询所有的数据
 		$AdManage = D('AdManage');
 		$where = 'admanage.show_type = adsize.id';
+		if(intval($_GET['sid'])){
+			$where = $where." and sid = ".intval($_GET['sid']);
+		}
 		if($_GET['isSearch']){ // 代表是搜索状态
 			$_GET['status'] = intval($_GET['status']);
 			// 组装条件查询的条件
