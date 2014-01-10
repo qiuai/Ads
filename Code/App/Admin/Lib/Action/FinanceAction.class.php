@@ -85,11 +85,18 @@ class FinanceAction extends CommonAction {
 			$this				->error("交易备注不能为空！","SITE_URL?m=Finance&a=withdraw&id=".$id."&uid=".$uid);
 		}else{
 			$finance			= $finance_apply->where("id =".$id)->select();
-			$data["amount_payable"]	= $finance[0]["withdraw_balance"]-$finance[0]["deductible_amount"]-$finance[0]["fee"];
-			$finance_apply		->where("id=".$id)->data($data)->save();
-			$web_balance		->where("uid=".$uid)->setInc("settlement_balance",$finance[0]["withdraw_balance"]);
-			$web_balance		->where("uid=".$uid)->setDec("total_balance",$finance[0]["withdraw_balance"]);
-			$this				->success("提现处理成功！","SITE_URL?m=Finance&a=index");
+			$wb					= $web_balance->where("uid=".$uid)->select();
+			if($finance[0]["withdraw_balance"] > $wb[0]["total_balance"]){
+				$data["status"]	= 3; // 支付状态：异常
+				$finance_apply	->where("id=".$id)->data($data)->save();
+				$this			->error("该用户账户余额不足！","SITE_URL?m=Finance&a=index");
+			}else{
+				$data["amount_payable"]	= $finance[0]["pre_tax"]-$finance[0]["deductible_amount"]-$finance[0]["fee"];
+				$finance_apply	->where("id=".$id)->data($data)->save();
+				$web_balance	->where("uid=".$uid)->setInc("settlement_balance",$finance[0]["withdraw_balance"]);
+				$web_balance	->where("uid=".$uid)->setDec("total_balance",$finance[0]["withdraw_balance"]);
+				$this			->success("提现处理成功！","SITE_URL?m=Finance&a=index");
+			}
 		}
 	}
 	// 申请提现状态报表
