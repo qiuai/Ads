@@ -51,12 +51,15 @@ $(document).ready(function(){
 					    <tr>
 							<td>所属栏目：</td>
 							<td>
+								<!-- 
 								<select id="group" name="group_id">
 									<option value="0">所属应用</option>
 									<Volist name="groupList" id="vo">
 						            	<option value="{$vo.id}">{$vo.title}</option>
 									</Volist>
 								</select>
+								-->
+								<input type="hidden" name="group_id" value="1"/>
 								
 								<select id="menu" name="pid">
 									<option value="0">顶级栏目</option>
