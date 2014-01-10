@@ -10,6 +10,7 @@
 <script>
 $(document).ready(function(){
 	$("#group").change(function(){
+		alert("SITE_URL/?m=Node&a=getCat");
 		$.ajax({
 			url:"SITE_URL/?m=Node&a=getCat",
 			dataType: "json",
