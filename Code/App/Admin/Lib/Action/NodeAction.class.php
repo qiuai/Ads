@@ -95,6 +95,7 @@ class NodeAction extends CommonAction {
 			}
 		}else{
 			$this->getGroup();
+			$this->getCat();
 			
 			$model	=	M();
 			$sql = "select * from ".C('DB_PREFIX')."node where id = ".$_GET['id'];
@@ -122,7 +123,7 @@ class NodeAction extends CommonAction {
 	
 		$this->assign("noleList",$data);
 		
-		echo json_encode($data);
+// 		echo json_encode($data);
 	}
 	/**
 	 * 获得子节点
