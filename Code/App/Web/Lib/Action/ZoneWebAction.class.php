@@ -20,12 +20,12 @@ class ZoneWebAction extends CommonAction {
 		$uid		= $_SESSION[C("WEB_AUTH_KEY")];
 		$zo 		= M('zone');
 		$where		= "uid=".$uid;
-		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id desc'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
+		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='sid asc,id desc'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$as			= M('ad_size');
 		$st			= M('site');
 		foreach($zone as $key=>$val){
 			$site	= $st->where("id=".$zone[$key]["sid"])->select();
-			$zone[$key]["site"]			=	$site[0]["site_name"];
+			$zone[$key]["site"]			=	$site[0]["site_domain"];
 			$zone[$key]["refresh_time"]	= date("Y-m-d",$val["refresh_time"]); // 更新时间
 			$adsize	= $as->where("id=".$val['size'])->select(); // 查询代码位类型表
 			foreach($adsize as $keys=>$value){
