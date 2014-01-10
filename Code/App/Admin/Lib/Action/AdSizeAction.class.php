@@ -33,8 +33,9 @@ class AdSizeAction extends CommonAction{
 		// 创建数据库对象
 		$AdSize = M('AdSize');
 				
-		// 查询相关的数据
-		$AdSizeInfo = $AdSize->select();
+		// 查询出所有的信息
+		$AdSizeInfo = $this->memberPage($AdSize);
+		
 		
 		$AdSizeInfo = $this->dealDataArr($AdSizeInfo);
 		// 数据分配到前端模版
@@ -101,7 +102,7 @@ class AdSizeAction extends CommonAction{
 			}else{
 				
 				// 数据修改失败
-				$this->error("数据修改失败!",C('SITE_URL')."?m=".$this->actionName.'&a=edit&id'.$_POST['id']);
+				$this->error("数据修改失败!",C('SITE_URL')."?m=".$this->actionName.'&a=edit&id='.$_POST['id']);
 			}
 		}
 		

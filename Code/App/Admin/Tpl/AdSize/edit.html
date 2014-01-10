@@ -45,8 +45,8 @@
 					    <tr>
 							<td>是否启用：</td>
 							<td>
-							    <input type="radio" name="display" value="启用" <if condition="$AdSizeInfo['display'] eq 0">checked="checked"</if> />启用
-							    <input type="radio" name="display" value="不启用"  <if condition="$AdSizeInfo['display'] eq 1"></if> />不启用
+							    <input type="radio" name="enable" value="0" <if condition="$AdSizeInfo['enable'] eq 0">checked="checked"</if> />启用
+							    <input type="radio" name="enable" value="1"  <if condition="$AdSizeInfo['enable'] eq 1">checked="checked"</if> />不启用
 							</td>
 						</tr>
 					</table>

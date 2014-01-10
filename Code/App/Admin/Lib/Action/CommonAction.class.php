@@ -123,9 +123,9 @@ class CommonAction extends Action {
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     
     	$list = $model->table($table)->where($where)->field($field)->order($order)->page($_GET['p'].','.$pageNum)->select();
-//     	echo $model->getLastSql();
+    	//echo $model->getLastSql();
     	$this->assign('list',$list);// 赋值数据集
-    	//     	echo $model->getLastSql();
+    	    //	echo $model->getLastSql();
     	import("ORG.Util.Page");// 导入分页类
     	$count      = $model->table($table)->where($where)->count();// 查询满足要求的总记录数
     	$Page       = new Page($count,$pageNum);// 实例化分页类 传入总记录数和每页显示的记录数
