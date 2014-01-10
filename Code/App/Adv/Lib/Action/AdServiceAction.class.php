@@ -27,7 +27,7 @@ class AdServiceAction extends Action {
 	protected $adSizeInfo;	// 广告尺寸信息
 	protected $sid	;		// 当前代码为所对应的域名的id
 	protected $viewOrClickFlag = 0;// 当前广告在当前代码位在当天是否被当前客户端ip浏览或者被点击 为0表是没有 1表示有
-	
+	protected $payType;	// 广告计费类型1 cpm 2 cpc
 	/**
 	 * 
 	 *
@@ -385,7 +385,7 @@ class AdServiceAction extends Action {
 
 	   		$this->typeId = $this->zoneIdToSizeType();
 	   		$this->sid = $zoneInfo['sid'];
-	   		
+	   		$this->payType = $zoneInfo['pay_type']; 
 	   		return $zoneInfo;
 	   	}else{
 	   		return false;
@@ -786,7 +786,7 @@ or
 	  // 	dump($siteInfo);
 	   	// 查看广告计划中有网站类型定向但是不包含当前网站内型的  或者已经过期的广告
 	   	$adPlan = M("AdPlan");
-	   	$adPlanInfo = $adPlan->where("(end_date < ".$nowTime.") or (start_date > ".$nowTime.") or (directional_site_type = 1 and directional_site_type_arr not like '%\"".$siteInfo['site_type']."\"%') or (directional_week = 1 and directional_week_arr not like '%\"".$weekDayIndex."\"%') or (directional_time = 1 and directional_time_arr  not like '%\"". $hourminuteKey."\"%')")->select();
+	   	$adPlanInfo = $adPlan->where("(end_date < ".$nowTime.") or (start_date > ".$nowTime.") or (directional_site_type = 1 and directional_site_type_arr not like '%\"".$siteInfo['site_type']."\"%') or (directional_week = 1 and directional_week_arr not like '%\"".$weekDayIndex."\"%') or (directional_time = 1 and directional_time_arr  not like '%\"". $hourminuteKey."\"%') or (pay_type != ".$this->payType.")")->select();
 	   	
 	   	//echo $adPlan->getLastSql();
 	  	//dump($adPlanInfo);
