@@ -139,6 +139,35 @@ class AdServiceAction extends Action {
    
    /**
     * 
+    * 在数据库中动态创建验证信息
+    * @author Yumao <815227173@qq.com>
+    * @CreateDate: 2014-1-9 上午10:00:03
+    */
+   protected  function createVerifyInfo(){
+   	
+	   	// 产生随机的唯一session值
+	   	$sessionFlag = md5(time().rand(1,100000).$this->zoneId);
+	   	
+	   	// 为sessionFlag产生随机的唯一值
+	   	$sessionFlagValue =  md5(time().rand(1,100000).$this->zoneId);
+	   	
+	   	// 往验证数据表中添加一条数据 (以后这里绝对要放到内存缓存)
+	   	$adShowVerify = M("adShowVerify");
+	   	$data['session_flag'] = $sessionFlag;
+	   	$data['session_flag_value'] = $sessionFlagValue;
+	   	$data['create_time'] = time();
+	   	$adShowVerify->add($data);
+	   	
+	   	
+	   	$this->assign("sessionFlagValue",$sessionFlagValue);
+	   	$this->assign("sessionFlag",$sessionFlag);
+	   	$this->assign("zoneId",$this->zoneId);
+	   	$this->assign("aid",$this->aid);
+   	
+   }
+   
+   /**
+    * 
     * 广告计划记录表中添加访问或展示的数据 一天一个广告计划只在数据库表中有一条数据记录
     * @author Yumao <815227173@qq.com>
     * @CreateDate: 2014-1-6 下午2:45:48
@@ -917,6 +946,10 @@ or
    		
    		// 在验证的数据表中删除当前的数据
    		$adShowVerify->where("id = ".$adShowVerifyInfo['id'])->delete();
+   		
+   		// 删除一小时之前的数据  		 
+   		$oneHourPreTime = time()-3600;
+   		$adShowVerify->where("create_time < ".$oneHourPreTime)->delete();
    		
    }
    
