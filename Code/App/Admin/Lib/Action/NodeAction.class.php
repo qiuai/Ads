@@ -121,9 +121,7 @@ class NodeAction extends CommonAction {
 			$data[$value['group_id']][] = $value;
 		}
 	
-		$this->assign("aaaa",$data[1]);
-		
-		var_dump($data[1]);
+		$this->assign("nodeListx",$data[1]);
 		
 // 		echo json_encode($data);
 	}
