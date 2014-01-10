@@ -1,7 +1,7 @@
 <?php
 return array(
-    'URL_MODEL'     =>  0,		// 如果你的环境不支持PATHINFO 请设置为3
-	'APP_STATUS'	=> 'debug',	// 调试模式
+    'URL_MODEL'					=>  0,		// 如果你的环境不支持PATHINFO 请设置为3
+	'APP_STATUS'				=> 'false',	// 调试模式
 
 	'APP_AUTOLOAD_PATH'         =>  '@.TagLib',
     'SESSION_AUTO_START'        =>  true,
@@ -29,6 +29,5 @@ return array(
     'RBAC_ACCESS_TABLE'         =>  'zhts_access',
     'RBAC_NODE_TABLE'           =>  'zhts_node',
     'SHOW_PAGE_TRACE'           =>  0,//显示调试信息
-	'SESSION_ID'		    =>  'PHPSESSID', // 定义sessionid的下标
 );
 ?>
