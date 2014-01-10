@@ -123,6 +123,8 @@ class NodeAction extends CommonAction {
 	
 		$this->assign("noleList",$data);
 		
+		var_dump($data);
+		
 // 		echo json_encode($data);
 	}
 	/**
