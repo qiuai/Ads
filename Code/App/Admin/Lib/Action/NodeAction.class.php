@@ -28,6 +28,7 @@ class NodeAction extends CommonAction {
 			$this->insert($_REQUEST, C('SITE_URL')."?m=Node&a=nodeList");
 		}else{
 			$this->getGroup();
+			$this->getCat();
 			$this->assign('location',"新增权限");
 			$this->display();
 		}
@@ -95,6 +96,7 @@ class NodeAction extends CommonAction {
 			}
 		}else{
 			$this->getGroup();
+			$this->getCat();
 			
 			$model	=	M();
 			$sql = "select * from ".C('DB_PREFIX')."node where id = ".$_GET['id'];
@@ -120,9 +122,9 @@ class NodeAction extends CommonAction {
 			$data[$value['group_id']][] = $value;
 		}
 	
-		$this->assign("noleList",$data);
+		$this->assign("nodeListx",$data[1]);
 		
-		echo json_encode($data);
+// 		echo json_encode($data);
 	}
 	/**
 	 * 获得子节点

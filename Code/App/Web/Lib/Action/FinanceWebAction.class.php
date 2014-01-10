@@ -65,6 +65,8 @@ class FinanceWebAction extends CommonAction {
 		$data["apply_date"] 		= time(); // 申请时间
 		$data["withdraw_date"]		= time(); // 提现时间
 		$data["withdraw_balance"] 	= $_POST["balance"]; // 申请提现金额
+		$data["pre_tax"] 			= $_POST["balance"]; // 申请提现金额==税前总收入
+		$data["after_tax"] 			= $data["pre_tax"]; // 税后==税前总收入
 		$data["withdraw_auto"]		= (int)($_POST["withdraw_auto"]); // 是否托管
 		$web_balance				= M("web_balance");
 		$web						= $web_balance->where("uid =".$uid)->select();
