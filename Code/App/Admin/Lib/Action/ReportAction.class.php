@@ -204,23 +204,43 @@ class ReportAction extends CommonAction {
 	public function tenDaysBefore($uid=''){
 		// 会员报表
 		if($uid){
-			$where = " and uid = ". intval($uid);
+			$where = " and p.uid = ". intval($uid);
 		}
 	
 		// 查询中心 当日时间或者选择时间
-		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : date('d');
+		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : (date('d',time())-1);
 	
 		// 获取数据
-		$model = M('Income');
+		$model = M();
 		for($i=9; $i>=0; $i--){
 			$day = mktime(0,0,0,date("m") ,$today-($i+1),date("Y"));
 			$yestoday = mktime(0,0,0,date("m") ,$today-$i,date("Y"));
-			$data = $model->query("select sum(click) as click, sum(pv) as pv, sum(cpm) as cpm, sum(cpc) as cpc, sum(real_income) as income, count(ip) as ip from " . C('DB_PREFIX') . "income where settlement_time < $yestoday and settlement_time >= $day $where");
-			foreach($data[0] as $key=>$value){
-				$data[0][$key] = $value ? $value : 0;
+			$data = $model->query("select zv.click_ip_num as click, zv.view_pv_num as pv, p.pay_type, p.price, p.site_master_display_price, p.site_master_pay_price, zv.view_pv_num as ip from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid where zv.day_start_time < $yestoday and zv.day_start_time >= $day $where");
+			
+			$report = array();
+			$report['day'] = date('md', $yestoday);
+			
+			if($data){
+			    foreach($data as $k=>$v){
+			        $report['income'] = ($data[$k]['price'] - $data[$k]['site_master_pay_price']) * $data[$k]['ip'] + $report['income'];	// 联盟收入
+			        $report['click'] = $v['click'] + $report['click'];
+			        $report['pv'] = $v['pv'] + $report['pv'];
+			        $report['ip'] = $v['ip'] + $report['ip'];
+			        if($v['pay_type'] == 1){	// CPM
+			            $report['cpm'] = $v['pv'] + $report['cpm'];
+			        }else if($v['pay_type'] == 2){	// CPC
+			            $report['cpc'] = $v['pv'] + $report['cpc'];
+			        }
+			    }
+			}else{
+			    $report['income'] = 0;	// 预计收入
+			    $report['click'] = 0;
+			    $report['pv'] = 0;
+			    $report['ip'] = 0;
+			    $report['cpm'] = 0;
+			    $report['cpc'] = 0;
 			}
-			$data[0]['day'] = date('md', $yestoday);
-			$list[] = $data[0];
+			$list[] = $report;
 		}
 	
 		$json = json_encode($list);
