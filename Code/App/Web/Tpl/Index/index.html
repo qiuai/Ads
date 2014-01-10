@@ -20,7 +20,7 @@ AmCharts.ready(function() {
 	// column graph
 	var graph1 = new AmCharts.AmGraph();
 	graph1.type = "column";
-	graph1.title = "联盟收入(￥)";
+	graph1.title = "预计收入(￥)";
 	graph1.valueField = "income";
 	graph1.lineAlpha = 0;
 	graph1.fillAlphas = 1;
@@ -52,26 +52,7 @@ AmCharts.ready(function() {
 	graph2.lineThickness = 2;
 	graph2.bullet = "round";
 	chart.addGraph(graph2);
-
-	// line
-	var graph2 = new AmCharts.AmGraph();
-	graph2.type = "line";
-	graph2.title = "cpc";
-	graph2.valueField = "cpc";
-	graph2.lineThickness = 2;
-	graph2.bullet = "round";
-	chart.addGraph(graph2);
-
-	// line
-	var graph2 = new AmCharts.AmGraph();
-	graph2.type = "line";
-	graph2.title = "cpm";
-	graph2.valueField = "cpm";
-	graph2.lineThickness = 2;
-	graph2.bullet = "round";
-	chart.addGraph(graph2);
 	
-
 	// LEGEND                
 	var legend = new AmCharts.AmLegend();
 	chart.addLegend(legend);
