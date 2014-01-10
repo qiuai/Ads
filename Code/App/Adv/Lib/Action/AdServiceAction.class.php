@@ -774,17 +774,19 @@ or
 	   	
 	   	$planoverfulfilInfo = $planAllSiteVisitCount -> table(array($this->table_pre."plan_all_site_visit_count"=>'planallsitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("(planallsitevisitcount.pid = adplan.id) and ((adplan.pay_type = 1 and planallsitevisitcount.day_start_time = ".$dayStartTime." and planallsitevisitcount.view_num >= adplan.max_per_day and adplan.max_per_day != 0) or (adplan.pay_type = 2 and planallsitevisitcount.day_start_time = ".$dayStartTime." and planallsitevisitcount.click_num >= adplan.max_per_day and adplan.max_per_day != 0))")->field("planallsitevisitcount.pid,planallsitevisitcount.view_num")->select();
 	   	
-	   	// 根据当天的时间戳和当前的代码位的域名id值找出在当前域名下超过没站每日限额的广告计划
+	   	// 根据当天的时间戳和当前的代码位的域名id值找出在当前域名下超过每站每日限额的广告计划
 	   	$planSiteVisitCount = M('PlanSiteVisitCount');
 	   	$planoverfulfilPersiteInfo = $planSiteVisitCount  -> table(array($this->table_pre."plan_site_visit_count"=>'plansitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("(plansitevisitcount.pid = adplan.id) and ((adplan.pay_type = 1 and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.view_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0) or (adplan.pay_type = 2 and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.click_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0))")->field("plansitevisitcount.pid,plansitevisitcount.view_num")->select();
 	   	
 	   	// 根据现在的sid值查看网站的类型
 	   	$site = M("Site");
 	   	$siteInfo = $site->where("id = ".$this->sid)->find();
+	   	
+	   	$nowTime = time();
 	  // 	dump($siteInfo);
-	   	// 查看广告计划中有网站类型定向但是不包含当前网站内型的 
+	   	// 查看广告计划中有网站类型定向但是不包含当前网站内型的  或者已经过期的广告
 	   	$adPlan = M("AdPlan");
-	   	$adPlanInfo = $adPlan->where("(directional_site_type = 1 and directional_site_type_arr not like '%\"".$siteInfo['site_type']."\"%') or (directional_week = 1 and directional_week_arr not like '%\"".$weekDayIndex."\"%') or (directional_time = 1 and directional_time_arr  not like '%\"". $hourminuteKey."\"%')")->select();
+	   	$adPlanInfo = $adPlan->where("(end_date < ".$nowTime.") or (start_date > ".$nowTime.") or (directional_site_type = 1 and directional_site_type_arr not like '%\"".$siteInfo['site_type']."\"%') or (directional_week = 1 and directional_week_arr not like '%\"".$weekDayIndex."\"%') or (directional_time = 1 and directional_time_arr  not like '%\"". $hourminuteKey."\"%')")->select();
 	   	
 	   	//echo $adPlan->getLastSql();
 	  	//dump($adPlanInfo);
