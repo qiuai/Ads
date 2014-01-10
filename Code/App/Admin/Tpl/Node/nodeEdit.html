@@ -19,9 +19,9 @@ $(document).ready(function(){
 				$("#menu").append("<option value=\"0\">顶级栏目</option>");   //为Select追
 				level = $("#group").val();
 				item = data[level];
+				alert(item);
 				for(i=0; i<item.length; i++){
 					$("#menu").append("<option value='" + item[i]['id'] + "'>" + item[i]['module_name'] + "</option>");   //为Select追
-					alert(item[i]['id']);
 				}
 			}
 		});
