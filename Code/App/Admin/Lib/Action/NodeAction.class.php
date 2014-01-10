@@ -28,6 +28,7 @@ class NodeAction extends CommonAction {
 			$this->insert($_REQUEST, C('SITE_URL')."?m=Node&a=nodeList");
 		}else{
 			$this->getGroup();
+			$this->getCat();
 			$this->assign('location',"新增权限");
 			$this->display();
 		}
