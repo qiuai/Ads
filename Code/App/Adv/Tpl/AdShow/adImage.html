@@ -7,16 +7,14 @@
 <style>
 * {margin:0px;padding:0px;border:0px;}
 </style>
-<script src="STATIC_URL/adv/js/jquery-1.4.2.min.js"></script>
+<script src="STATIC_URL/adv/js/jquery-1.4.2.min.js" ></script>
 <body>
-<div style="z-index:99999999;position:absolute;" id="{$sessionFlag}">
+<div style="z-index:99999999;position:absolute;" id="{$sessionFlag}" >
 	<a href="{$jumpUrl}" target="_blank" >{$adManageInfo['content']}</a>
 </div>
 <script>
-		/**
-		 * 判断当前div是否显示
-		 */
 		
+		setTimeout("",3000);	
 		function jishu(){
 			var sessionFlag = "{$sessionFlag}";
 			
@@ -26,28 +24,61 @@
 			
 			var aid = "{$aid}";
 			
+			
 			$.ajax({
 				url:"SITE_URL?m=AdService&a=jishu",
 				dataType:'jsonp', 
-				type:"post",	
+				type:"get",	
 				data:{"sessionFlag":sessionFlag,"sessionFlagValue":sessionFlagValue,"zoneId":zoneId,"aid":aid},
 				jsonp:'callback',
 				
 				success:function(returnInfo){
 				
-					
 				}
 			})
 			
 		}
-		$(function(){
+		
+		/**
+		 * 判断是否为顶级的iframe框
+		 */
+		 window.onload=function(){
+			/**
+			 * 定义变量判断广告div是否完全显示
+			 */
+			var showCompleteFlag = 1;
+			var currentDom = $(("#{$sessionFlag}"));
+			var width = {$width};
+			var height = {$height};
+			width =parseInt(width);
+			height =parseInt(height);
 			
-			if($("#{$sessionFlag}").is(":visible")){
-				setTimeout("jishu()",5000);
+			while(true){
 				
+				
+				
+				if(currentDom.get(0).tagName == $("body").get(0).tagName){
+					break;
+				}else if((currentDom.height() < height || currentDom.width() < width) && (currentDom.css("overflow")== 'hidden')){
+					
+					/**
+					* 说明广告主限制了高度恶意隐藏广告
+					*/
+					showCompleteFlag = 0;
+					break;
+				}else{
+					
+					currentDom = currentDom.parent();
+				}
 			}
 			
-		})
+			if(window == window.parent && showCompleteFlag == 1){
+				if($("#{$sessionFlag}").is(":visible")){
+					setTimeout("jishu()",5000);				
+				}			
+			}
+		}
+														
 </script>
 </body>
 </html>

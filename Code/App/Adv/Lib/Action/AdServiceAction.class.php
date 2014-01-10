@@ -158,7 +158,9 @@ class AdServiceAction extends Action {
 	   	$data['create_time'] = time();
 	   	$adShowVerify->add($data);
 	   	
-	   	
+	   	$adSizeInfo = $this->adSizeInfo;
+	   	$this->assign("width",$adSizeInfo['width']);
+	   	$this->assign("height",$adSizeInfo['height']);
 	   	$this->assign("sessionFlagValue",$sessionFlagValue);
 	   	$this->assign("sessionFlag",$sessionFlag);
 	   	$this->assign("zoneId",$this->zoneId);
@@ -701,6 +703,7 @@ class AdServiceAction extends Action {
 	   	 
 	   	// 根据尺寸id值查询相关的广告信息
 	   	$this->adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
+	   	
 	   	 
 	  // 调用函数创建当天0时0分0秒的时间戳
    		$dayStartTime = $this->createDayStartTime();
@@ -897,8 +900,8 @@ or
     * @CreateDate: 2014-1-8 下午6:08:12
     */
    function jishu(){
-   		$sessionFlagValue = $_POST['sessionFlagValue'];
-   		$sessionFlag = $_POST['sessionFlag'];
+   		$sessionFlagValue = $_GET['sessionFlagValue'];
+   		$sessionFlag = $_GET['sessionFlag'];
    		
    		// 查询数据库中是否存在session_flag为$sessionFlag的值
    		$adShowVerify = M("adShowVerify");
@@ -913,7 +916,7 @@ or
    			// 查询相关的信息随机生成广告信息
    			$zone = M("Zone");
    			// 查询代码位相关的信息必须是启用状态的代码位
-   			$zoneInfo = $zone->where("id = ".intval($_POST['zoneId'])." and status = 1")->find();
+   			$zoneInfo = $zone->where("id = ".intval($_GET['zoneId'])." and status = 1")->find();
    			// 保存当前的广告代码所对应的域名id
    			$this->sid = $zoneInfo['sid'];
    			// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
@@ -921,7 +924,7 @@ or
    			// dump($_SERVER['HTTP_REFERER']);
    			// 获取当前的广告的信息
    			$adManage = M("adManage");
-   			$adManageInfo = $adManage->where("aid = ".intval($_POST['aid'])." and status = 2")->find();
+   			$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
    			if($adManageInfo){
    				 
    				
@@ -950,6 +953,11 @@ or
    		// 删除一小时之前的数据  		 
    		$oneHourPreTime = time()-3600;
    		$adShowVerify->where("create_time < ".$oneHourPreTime)->delete();
+   		/*$jsonData['returnFlag'] = "yes";
+   		$jsonData = json_encode($jsonData);
+   		
+   		$callback = $_REQUEST['callback'];
+   		echo $callback."($jsonData)";*/
    		
    }
    
