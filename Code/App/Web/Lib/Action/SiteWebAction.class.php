@@ -75,6 +75,7 @@ class SiteWebAction extends CommonAction {
 		$data['site_name']	= $_POST["site_name"];
 		$data['site_domain']= $_POST["site_domain"];
 		$data['site_type']	= $_POST["site_type"];
+		$data['status']		= 2;
 		$data['description']= $_POST["description"];
 		if(empty($data["site_name"])){
 			$this		->error("网站名称不能为空！",'WEB_URL?m=SiteWeb&a=siteEdit&site_id='.$data['id']);
