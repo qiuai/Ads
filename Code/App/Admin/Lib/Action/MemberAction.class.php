@@ -34,7 +34,7 @@ class MemberAction extends CommonAction {
 				$this->error('验证码必须！');
 			}elseif($_POST['password'] != $_POST['confirm_password']){
 				$this->error("密码不一致！");
-			}elseif($Member->where("username = ".$_POST['username'])->find()){
+			}elseif($Member->where("username = '".$_POST['username'] ."'")->find()){
 			    $this->error("用户名已注册！");
 			}
 			
