@@ -196,7 +196,13 @@ class WebAction extends CommonAction {
 	// 代码位列表
 	public function zone(){
 		$zo 		= M('zone');
-		$ad_size_type= C("AD_SIZE_TYPE"); // 获取代码位类型 
+		$ad_size_type= C("AD_SIZE_TYPE"); // 获取代码位类型
+		$site_id	= (int)($_GET["site_id"]); // 获取所属网站id
+		if(empty($site_id)){
+			$where	= "";
+		}else{
+			$where	= "sid=".$site_id;
+		}
 		$zone		= $this->memberPage($zo, $where, $pageNum=15, $order='id'); // 分页方法(数据库对象,查询条件,每页显示个数,排序字段)
 		$ads		= M("ad_size"); // 查询广告尺寸表
 		foreach($zone as $key =>$val){
