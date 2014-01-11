@@ -28,7 +28,7 @@
     <tr>
     	<td style="width:120px"><em class="red">*</em>广告主UID：</td>
     	<td class="textbox_td">
-    		<input class="" type="text" name="uid">
+    		<input class="" type="text" name="uid" <if condition="$Think.get.uid neq ''">value="{$Think.get.uid}"</if> >
     		<div class="onShow">请填写正确的广告主ID，广告主ID不能为空</div>				
     	</td>
     </tr>
