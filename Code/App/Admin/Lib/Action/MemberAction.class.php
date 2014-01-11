@@ -34,22 +34,10 @@ class MemberAction extends CommonAction {
 				$this->error('验证码必须！');
 			}elseif($_POST['password'] != $_POST['confirm_password']){
 				$this->error("密码不一致！");
-			}elseif($Member->where("username = ".$_POST['username'])->find()){
+			}elseif($Member->where("username = ".$_POST['username']."'")->find()){
 			    $this->error("用户名已注册！");
 			}
 			
-// 			if(!$Member->create()) {
-// 				$this->error($User->getError());
-// 			}else{
-// 				if($Member->add()){
-// 					echo $Member->getLastSql();
-// // 					$this->success("注册成功！");
-// 				}else{
-// 					echo $Member->getLastSql();
-// 					//$this->error("注册失败！");
-// 				}
-// 			}
-
 			$_POST['status'] = 1; // 状态
 			$_POST['legal_status'] = 0; // 法律身份
 			$_POST['is_feed'] = 1; // 是否接受邮件订阅
