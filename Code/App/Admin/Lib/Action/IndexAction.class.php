@@ -188,6 +188,7 @@ class IndexAction extends CommonAction {
 	public function getWithdraw(){
 		// 待处理提现数
 	    $model = M('ad_manage');
+	    $where['status'] = 1;
 	    $where['apply_date'] = array('egt',mktime(0,0,0,date("m") ,(date('d',date('d'))-1),date("Y")));
 	    $count = $model->where($where)->count();
 		$this->assign('withdrawCount', $count);
