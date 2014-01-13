@@ -96,7 +96,7 @@ class ReportAction extends CommonAction {
 	 */
 	public function todayDetailReport(){
 		$yestoday = mktime(0,0,0,date("m") ,date('d')-1,date("Y"));
-		$where = " z. visit_time > $yestoday ";
+		$where = " z.visit_time > $yestoday ";
 		$this->getPlanData($where);
 		$this->display();
 	}
@@ -119,7 +119,7 @@ class ReportAction extends CommonAction {
 	 */
 	public function historyDetailReport(){
 		$yestoday = mktime(0,0,0,date("m") ,date('d')-1,date("Y"));
-		$where = " z. visit_time <= $yestoday ";
+		$where = " z.visit_time <= $yestoday ";
 		$this->getPlanData();	
 		$this->display('todayDetailReport');
 	}
@@ -148,7 +148,6 @@ class ReportAction extends CommonAction {
 	 */
 	public function getPlanData($where='', $order=''){
 		if(!$_GET['plan_id'] && !$_SESSION['pid']){
-// 			$this->assign('msgTitle',"提示信息");
 			$this->error("请选择要查看的计划！",C('SITE_URL') . "?m=Report&a=choosePlan&aa=" . ACTION_NAME);
 			exit;
 		}else{
@@ -163,7 +162,6 @@ class ReportAction extends CommonAction {
 			// 排序	结算时间降序
 			$order = " order by z.visit_time desc ";
 		}
-		
 		
 		// 分页
 		$p = $_GET['p'] ? $_GET['p'] : 1;
@@ -185,16 +183,28 @@ class ReportAction extends CommonAction {
 	 */
 	public function getReportData($where, $num=10, $order=''){
 		// 排序	结算时间降序
-		$order = " order by i.settlement_time desc ";
+		$order = " order by zv.day_start_time desc ";
 		
 		// 分页
 		$p = $_GET['p'] ? $_GET['p'] : 1;
 		$limit = " limit ". ($p-1)*$num .",".$num;
 		
-		$sql = "select * from " . C('DB_PREFIX') . "ad_plan p join " . C('DB_PREFIX') . "income i on p.id = i.pid join " . C('DB_PREFIX') . "ad_plan_category c on p.category_id = c.id $where $order $limit";
-		$count = "select count(i.id) as num from " . C('DB_PREFIX') . "ad_plan p join " . C('DB_PREFIX') . "income i on p.id = i.pid $where limit 1";
+		$sql = "select p.plan_name, p.site_master_pay_price, p.price, p.pay_type, zv.click_ip_num as cpc, zv.view_ip_num as cpm, zv.click_ip_num as click, zv.view_pv_num as pv from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where $limit";
+		$count = "select count(zv.id) as num from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where";
 		
-		$this->pageList($sql, $count, $num);
+		$list = $this->pageList($sql, $count, $num);
+		foreach($list as $key=>$value){
+		    if($value['pay_type'] == 1){	// cpm
+		        $list[$key]['income'] = ($value['price'] - $value['site_master_pay_price']) * $value['cpm'];
+		        $list[$key]['adfee'] = $value['price'] * $value['cpm'];
+		        $list[$key]['ip'] = $value['cpm'];
+		    }else{
+		        $list[$key]['income'] = ($value['site_master_pay_price'] - $value['price']) * $value['cpc'];
+		        $list[$key]['adfee'] = $value['price'] * $value['cpc'];
+		        $list[$key]['ip'] = $value['cpc'];
+		    }
+		}
+		$this->assign('list',$list);// 赋值数据集
 	}
 	/**
 	 * 最近十天数据

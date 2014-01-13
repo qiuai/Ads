@@ -61,15 +61,15 @@
     <Volist name='list' id='vo'>
    	<tr>
         <td>{$vo.plan_name}</td>
-        <td>{$vo.name}</td>
+        <td><if condition="$vo.pay_type">CPM<else/>CPC</if></td>
         <td>{$vo.ip}</td>
         <td>{$vo.pv}</td>
         <td>{$vo.click}</td>
-        <td><?php echo sprintf("%.2f", (intval($vo['click'])/intval($vo['impressions']))); ?></td>
+        <td><?php echo sprintf("%.2f", (intval($vo['click'])/intval($vo['price']))); ?></td>
         <td>{$vo.cpm}</td>      
         <td>{$vo.cpc}</td> 
-        <td>{$vo.real_income}</td>     
-        <td>{$vo.balance_income}</td>
+        <td>{$vo.adfee}</td>     
+        <td>{$vo.income}</td>
     </tr>
    	</Volist>
    	<else />
