@@ -156,7 +156,7 @@ class PublicAction extends CommonAction {
 				
 			}else{
 				$_SESSION[C('ADV_AUTH_KEY')]	=	$authInfo['id'];
-				$_SESSION['loginWebName']	=	$authInfo['username']; // 登入账号
+				$_SESSION['loginAdvName']	=	$authInfo['username']; // 登入账号
 				unset($_SESSION[C('WEB_AUTH_KEY')]);
 				redirect(C("ADV_URL"));
 			}
