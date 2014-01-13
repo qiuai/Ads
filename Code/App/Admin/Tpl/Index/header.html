@@ -79,7 +79,7 @@ a:hover {font-size:12px; color:#00CCFF;text-decoration:none;}
         </style>
 			<ul class="head_menu_ul">
 			<foreach name="role_navs" item="nav">
-				<li class=""><a target="menu" href="{:U('Index/left',array('id'=>$nav['id']))}" onclick="javascript:parent.main.location.href='SITE_URL?m={$nav.module}&a=m={$nav.action}'">{$nav.module_name}</a></li>
+				<li class=""><a target="menu" href="{:U('Index/left',array('id'=>$nav['id']))}" onclick="javascript:parent.main.location.href='SITE_URL?m={$nav.module}&a={$nav.action}'">{$nav.module_name}</a></li>
 			</foreach>
 			</ul>
 		</div>
