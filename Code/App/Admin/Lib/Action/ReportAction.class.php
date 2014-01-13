@@ -14,6 +14,9 @@
  * Vonwey   2013-11-25 上午9:58:45      todo
  */
 class ReportAction extends CommonAction {
+    public function index(){
+        $this->planReport();
+    }
 	/**
 	 * 网站主报表
 	 *
@@ -74,7 +77,7 @@ class ReportAction extends CommonAction {
 		$this->assign('pid', $pid);
 		$this->assign('start_date', $_REQUEST['start_date']);
 		$this->assign('end_date', $_REQUEST['end_date']);
-		$this->display();
+		$this->display('planReport');
 	}
 	/**
 	 * CPM今日订单
