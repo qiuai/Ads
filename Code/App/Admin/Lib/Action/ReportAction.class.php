@@ -208,17 +208,17 @@ class ReportAction extends CommonAction {
 		}
 	
 		// 查询中心 当日时间或者选择时间
-		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : (date('d',time())-1);
+		$today = ($_REQUEST['day'] <= date('d') && $_REQUEST['day'] > 0 ) ? $_REQUEST['day'] : date('d');
 	
 		// 获取数据
 		$model = M();
 		for($i=9; $i>=0; $i--){
 			$day = mktime(0,0,0,date("m") ,$today-($i+1),date("Y"));
-			$yestoday = mktime(0,0,0,date("m") ,$today-$i,date("Y"));
+			$yestoday = mktime(0,0,0,date("m") ,$today-($i+0),date("Y"));
 			$data = $model->query("select zv.click_ip_num as click, zv.view_pv_num as pv, p.pay_type, p.price, p.site_master_display_price, p.site_master_pay_price, zv.view_pv_num as ip from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid where zv.day_start_time < $yestoday and zv.day_start_time >= $day $where");
 			
 			$report = array();
-			$report['day'] = date('md', $yestoday);
+			$report['day'] = date('md', $day);
 			
 			if($data){
 			    foreach($data as $k=>$v){

@@ -125,7 +125,7 @@ class IndexAction extends CommonAction {
 		
 		// 最近十天数据显示
 		$this->tenDaysBefore();
-		
+
 		// 日历输出
 		$this->getCalendar();
 		

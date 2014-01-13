@@ -135,7 +135,7 @@ class ReportAction extends CommonAction {
 				$data = $model->query("select zv.click_ip_num as click, zv.view_pv_num as pv, p.site_master_pay_price as price, zv.view_pv_num as ip from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid where zv.day_start_time < $yestoday and zv.day_start_time >= $day $where");
 
 				$report = array();
-				$report['day'] = date('Ymd', $yestoday);
+				$report['day'] = date('Ymd', $day);
 				
 				if($data){
 				    foreach($data as $k=>$v){
