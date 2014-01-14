@@ -365,7 +365,7 @@ class AdServiceAction extends Action {
    	}
    }
    /**
-    * 检测广告是否存在
+    * 检测广告位是否存在
     *
     * @author Vonwey <VonweyWang@gmail.com>
     * @CreateDate: 2013-12-30 下午5:32:43
@@ -386,6 +386,7 @@ class AdServiceAction extends Action {
 	   		$this->typeId = $this->zoneIdToSizeType();
 	   		$this->sid = $zoneInfo['sid'];
 	   		$this->payType = $zoneInfo['pay_type']; 
+	   		$this->sizeId = $zoneInfo['size'];
 	   		return $zoneInfo;
 	   	}else{
 	   		return false;

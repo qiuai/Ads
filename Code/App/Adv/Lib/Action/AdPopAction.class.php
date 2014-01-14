@@ -50,12 +50,7 @@ class AdPopAction extends AdServiceAction {
 		$this->zoneId = $id;	// 广告位ID
 		
 		if($zoneInfo = ($this->checkAdExsit())){
-			
-			$this->sizeId = $zoneInfo['size'];
-			//$code = $this->createCode($this->getAdManageInfo());
-			 
 			if($adManageInfo = $this->getAdManageInfo()){		// 服务器端查询是否有合适的广告如果有创建广告
-				
 				// 调用进行过滤所用的函数 比如有些代码的代码位没有				
 				$this->createCode($adManageInfo);
 			}else{
