@@ -30,7 +30,10 @@ class AdImageAction extends AdServiceAction{
 		
 		$rs = $this->view->fetch('adImage');
 		
-		$code = "document.write(\"". $this->jsformat($rs) . "\");";
+		// 统计代码添加
+		$tongji = "<script type=\"text/javascript\" src=\"http://js.tongji.linezing.com/3399130/tongji.js\"></script><noscript><a href=\"http://www.linezing.com\"><img src=\"http://img.tongji.linezing.com/3399130/tongji.gif\"/></a></noscript>";
+		
+		$code = "document.write(\"". $this->jsformat($rs.$tongji) . "\");";
 		
 		echo $code;
 	}
