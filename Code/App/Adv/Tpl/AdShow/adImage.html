@@ -41,42 +41,7 @@
 		/**
 		 * 判断是否为顶级的iframe框
 		 */
-		 window.onload=function(){
-			/**
-			 * 定义变量判断广告div是否完全显示
-			 */
-			var showCompleteFlag = 1;
-			var currentDom = $(("#{$sessionFlag}"));
-			var width = {$width};
-			var height = {$height};
-			width =parseInt(width);
-			height =parseInt(height);
-			
-			while(true){
-				
-	
-				if(currentDom.get(0).tagName == $("body").get(0).tagName){
-					break;
-				}else if((currentDom.height() < height || currentDom.width() < width) && (currentDom.css("overflow")== 'hidden')){
-					
-					/**
-					* 说明广告主限制了高度恶意隐藏广告
-					*/
-					showCompleteFlag = 0;
-					break;
-				}else{
-					
-					currentDom = currentDom.parent();
-				}
-			}
-			
-			if(window == window.parent && showCompleteFlag == 1){
-				if($("#{$sessionFlag}").is(":visible")){
-					setTimeout("jishu()",5000);				
-				}			
-			}
-		}
-														
+		jishu();											
 </script>
 </body>
 </html>
