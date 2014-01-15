@@ -373,15 +373,21 @@ class AdServiceAction extends Action {
    function checkAdExsit(){
 	   	$this->dealSubmitData();
 	   	
-	   	// 查询相关的信息随机生成广告信息
-	   	$zone = M("Zone");
-	   	
-	   	// 查询代码位相关的信息必须是启用状态的代码位
-	   	$zoneInfo = $zone->where("id = ".$this->zoneId." and status = 1")->find();
+	   	if($zoneInfo = S('zoneId_'.$this->zoneId)){
+	   	    // 缓存 广告位信息
+	   	}else{
+	   	    // 查询相关的信息随机生成广告信息
+	   	    $zone = M("Zone");
+	   	     
+	   	    // 查询代码位相关的信息必须是启用状态的代码位
+	   	    $zoneInfo = $zone->where("id = ".$this->zoneId." and status = 1")->find();
+	   	    
+	   	    S('zoneId_'.$this->zoneId, $zoneInfo);
+	   	}
 	   	 
 	   	if($zoneInfo){
 	   		// 处理客户端访问的来源问题 如果和申请广告时的来源地址不同则不能投放
-// 	   		$this->verifyVisitSource($zoneInfo);
+	   		$this->verifyVisitSource($zoneInfo);
 
 	   		$this->typeId = $this->zoneIdToSizeType();
 	   		$this->sid = $zoneInfo['sid'];
@@ -667,13 +673,19 @@ class AdServiceAction extends Action {
     * @CreateDate: 2013-12-18 下午5:23:52
     */
    function verifyVisitSource($zoneInfo){
-   
-	   	// 根据$zoneInfo中的sid值查询网站的信息
-	   	$site = M("Site");
-	   
-	   	// 查询当前代码位所对应的网站域名
-	   	$siteInfo = $site->where("id = ".$zoneInfo['sid'])->find();
-	   
+       
+       if(S('zone_sid_'.$zoneInfo['sid'])){
+           // 缓存
+       }else{
+           // 根据$zoneInfo中的sid值查询网站的信息
+           $site = M("Site");
+           
+           // 查询当前代码位所对应的网站域名
+           $siteInfo = $site->where("id = ".$zoneInfo['sid'])->find();
+           
+           // 缓存数据
+           S('zone_sid_'.$zoneInfo['sid'], $siteInfo);
+       }
 	   
 	   	if(!$siteInfo['site_domain']){
 	   			
@@ -699,13 +711,20 @@ class AdServiceAction extends Action {
     * @CreateDate: 2013-12-31 上午11:29:47
     */
    function getAdManageInfo(){
-	   	// 查询当前广告的宽度和高度
-	   	$adSize = M("AdSize");
-	   	 
-	   	// 根据尺寸id值查询相关的广告信息
-	   	$this->adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
+       
+       if($this->adSizeInfo = S('ad_size_'.$this->sizeId)){
+           // 缓存
+       }else{
+           // 查询当前广告的宽度和高度
+           $adSize = M("AdSize");
+           
+           // 根据尺寸id值查询相关的广告信息
+           $this->adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
+           
+           // 创建缓存
+           S('ad_size_'.$this->sizeId,$this->adSizeInfo);
+       }
 	   	
-	   	 
 	  // 调用函数创建当天0时0分0秒的时间戳
    		$dayStartTime = $this->createDayStartTime();
 	   	// 根据查询出代码位中的信息中的尺寸值随机查询当前尺寸的广告
