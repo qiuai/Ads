@@ -408,13 +408,20 @@ class AdServiceAction extends Action {
    */
    private function zoneIdToSizeType(){
 		
-   		// 创建数据库对象
-   		$zone = M("Zone");
+       if($sizeTypeInfo = S('adSizeType_'.$this->zoneId)){
+           //
+       }else{
+           // 创建数据库对象
+           $zone = M("Zone");
+            
+           // 连接表ad_size查询数据
+           $sizeTypeInfo = $zone->table(array($this->table_pre.'zone'=>'zone',$this->table_pre.'ad_size'=>'adsize'))->field('adsize.size_type as sizeType')->where("adsize.id = zone.size and zone.id = ".$this->zoneId)->find();
+           //echo $zone->getLastSql();
+           //    		dump($sizeTypeInfo);
+           
+           S('adSizeType_'.$this->zoneId, $sizeTypeInfo, $this->cacheTime);
+       }
    		
-   		// 连接表ad_size查询数据
-   		$sizeTypeInfo = $zone->table(array($this->table_pre.'zone'=>'zone',$this->table_pre.'ad_size'=>'adsize'))->field('adsize.size_type as sizeType')->where("adsize.id = zone.size and zone.id = ".$this->zoneId)->find();
-   		//echo $zone->getLastSql();
-//    		dump($sizeTypeInfo);
    		return $sizeTypeInfo['sizeType'];
    }
    /**
