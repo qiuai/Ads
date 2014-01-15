@@ -853,7 +853,7 @@ or
 	   	    // 连表获取适合的广告查询数据
 	   	    $adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>"admanage",$this->table_pre."ad_plan"=>"adplan"))->where("admanage.pid = adplan.id and admanage.show_type = ".$this->sizeId." and admanage.status = 2  and adplan.plan_status=2 and adplan.id not in (".$overfulfilPid.")" )->field("admanage.*")->order("rand()")->find();
 	   	     
-	   	    S('ad_id_'.$pidstr,$adManageInfo, $this->cacheTime);
+	   	    S('ad_id_'.$pidstr,$adManageInfo, ceil($this->cacheTime/30));
 	   	}
 	   	/*echo $overfulfilPid."<br/>";
 	   	echo $planAllSiteVisitCount->getLastSql();
