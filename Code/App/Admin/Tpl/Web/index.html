@@ -107,7 +107,10 @@
 </div>
 </div>
 <div id="layer" style="display:none;"></div>
-<script type="text/javascript" src="STATIC_URL/admin/js/config.js"></script>
+<script type="text/javascript">
+var $CONFIG={};
+$CONFIG['url'] = "SITE_URL";
+</script>
 <script language="javascript" type="text/javascript">
 //全选、全不选
 $('#check_box').toggle(function(){

@@ -125,7 +125,7 @@ class IndexAction extends CommonAction {
 		
 		// 最近十天数据显示
 		$this->tenDaysBefore();
-		
+
 		// 日历输出
 		$this->getCalendar();
 		
@@ -173,7 +173,10 @@ class IndexAction extends CommonAction {
 	 */
 	public function getAdAdd(){
 		// 新增广告
-		$count = 0;
+		$model = M('ad_manage');
+		$where['time'] = array('egt',mktime(0,0,0,date("m") ,(date('d',date('d'))-1),date("Y")));
+		$count = $model->where($where)->count();
+		
 		$this->assign('adAddCount', $count);
 	}
 	/**
@@ -184,7 +187,10 @@ class IndexAction extends CommonAction {
 	 */
 	public function getWithdraw(){
 		// 待处理提现数
-		$count = 0;
+	    $model = M('ad_manage');
+	    $where['status'] = 1;
+	    $where['apply_date'] = array('egt',mktime(0,0,0,date("m") ,(date('d',date('d'))-1),date("Y")));
+	    $count = $model->where($where)->count();
 		$this->assign('withdrawCount', $count);
 	}
 	/**

@@ -81,9 +81,9 @@ AmCharts.ready(function() {
             </div>
             <div class="gb_m">
             	<p class="income_desc" style="text-align:center;">
-            	    <span>总佣金：<b class="orange f14">900.00</b></span>
-            	    <span style="margin:auto 100px;">账户余额：<b class="orange f14">0.00</b><a style="margin-left:30px" class="diy_links_btn" href="SITE_URL?m=FinanceWeb&a=financePay">申请提现</a></span>
-            	    <span>昨日佣金：<b class="orange f14">0</b></span>
+            	    <span>总佣金：<b class="orange f14">{$balance.real_income}</b></span>
+            	    <span style="margin:auto 100px;">账户余额：<b class="orange f14">{$balance.balance_income}</b><a style="margin-left:30px" class="diy_links_btn" href="SITE_URL?m=FinanceWeb&a=financePay">申请提现</a></span>
+            	    <span>昨日佣金：<b class="orange f14">{$yestodayBalance}</b></span>
             	</p>
             </div>
         </div>
