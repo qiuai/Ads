@@ -159,7 +159,7 @@ class AdServiceAction extends Action {
 	   	$data['create_time'] = time();
 	   	$adShowVerify->add($data);
 	   	
-	   	$adSizeInfo = $this->adSizeInfo;
+	   	$adSizeInfo = S('ad_size_'.$this->sizeId);
 	   	$this->assign("width",$adSizeInfo['width']);
 	   	$this->assign("height",$adSizeInfo['height']);
 	   	$this->assign("sessionFlagValue",$sessionFlagValue);
@@ -733,7 +733,7 @@ class AdServiceAction extends Action {
            S('ad_size_'.$this->sizeId, $adSizeInfo, $this->cacheTime);
        }
        
-       $this->adSizeInfo = $adSizeInfo;
+//        $this->adSizeInfo = $adSizeInfo;
 	   	
 	  // 调用函数创建当天0时0分0秒的时间戳
    		$dayStartTime = $this->createDayStartTime();
