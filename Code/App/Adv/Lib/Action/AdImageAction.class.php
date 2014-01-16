@@ -43,9 +43,7 @@ class AdImageAction extends AdServiceAction{
 	 * (non-PHPdoc)
 	 * @see AdServiceAction::adShow()
 	 */
-	public function adShow($id){
-		
-
+	public function adShow($id){		
 		$this->zoneId = $id;	// 广告位ID
 		
 		if($zoneInfo = ($this->checkAdExsit())){
