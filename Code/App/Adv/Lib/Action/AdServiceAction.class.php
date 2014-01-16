@@ -28,6 +28,7 @@ class AdServiceAction extends Action {
 	protected $sid	;		// 当前代码为所对应的域名的id
 	protected $viewOrClickFlag = 0;// 当前广告在当前代码位在当天是否被当前客户端ip浏览或者被点击 为0表是没有 1表示有
 	protected $payType;	// 广告计费类型1 cpm 2 cpc
+	protected $cacheTime = 120; // 缓存时间 120s
 	/**
 	 * 
 	 *
@@ -382,7 +383,7 @@ class AdServiceAction extends Action {
 	   	    // 查询代码位相关的信息必须是启用状态的代码位
 	   	    $zoneInfo = $zone->where("id = ".$this->zoneId." and status = 1")->find();
 	   	    
-	   	    S('zoneId_'.$this->zoneId, $zoneInfo);
+	   	    S('zoneId_'.$this->zoneId, $zoneInfo, $this->cacheTime);
 	   	}
 	   	 
 	   	if($zoneInfo){
@@ -407,13 +408,20 @@ class AdServiceAction extends Action {
    */
    private function zoneIdToSizeType(){
 		
-   		// 创建数据库对象
-   		$zone = M("Zone");
+       if($sizeTypeInfo = S('adSizeType_'.$this->zoneId)){
+           //
+       }else{
+           // 创建数据库对象
+           $zone = M("Zone");
+            
+           // 连接表ad_size查询数据
+           $sizeTypeInfo = $zone->table(array($this->table_pre.'zone'=>'zone',$this->table_pre.'ad_size'=>'adsize'))->field('adsize.size_type as sizeType')->where("adsize.id = zone.size and zone.id = ".$this->zoneId)->find();
+           //echo $zone->getLastSql();
+           //    		dump($sizeTypeInfo);
+           
+           S('adSizeType_'.$this->zoneId, $sizeTypeInfo, $this->cacheTime);
+       }
    		
-   		// 连接表ad_size查询数据
-   		$sizeTypeInfo = $zone->table(array($this->table_pre.'zone'=>'zone',$this->table_pre.'ad_size'=>'adsize'))->field('adsize.size_type as sizeType')->where("adsize.id = zone.size and zone.id = ".$this->zoneId)->find();
-   		//echo $zone->getLastSql();
-//    		dump($sizeTypeInfo);
    		return $sizeTypeInfo['sizeType'];
    }
    /**
@@ -684,7 +692,7 @@ class AdServiceAction extends Action {
            $siteInfo = $site->where("id = ".$zoneInfo['sid'])->find();
            
            // 缓存数据
-           S('zone_sid_'.$zoneInfo['sid'], $siteInfo);
+           S('zone_sid_'.$zoneInfo['sid'], $siteInfo, $this->cacheTime);
        }
 	   
 	   	if(!$siteInfo['site_domain']){
@@ -722,7 +730,7 @@ class AdServiceAction extends Action {
            $this->adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
            
            // 创建缓存
-           S('ad_size_'.$this->sizeId,$this->adSizeInfo);
+           S('ad_size_'.$this->sizeId,$this->adSizeInfo, $this->cacheTime);
        }
 	   	
 	  // 调用函数创建当天0时0分0秒的时间戳
@@ -798,9 +806,16 @@ or
 	   	$planSiteVisitCount = M('PlanSiteVisitCount');
 	   	$planoverfulfilPersiteInfo = $planSiteVisitCount  -> table(array($this->table_pre."plan_site_visit_count"=>'plansitevisitcount',$this->table_pre."ad_plan"=>'adplan'))->where("(plansitevisitcount.pid = adplan.id) and ((adplan.pay_type = 1 and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.view_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0) or (adplan.pay_type = 2 and plansitevisitcount.day_start_time = ".$dayStartTime." and plansitevisitcount.click_num >= adplan.max_per_site and plansitevisitcount.sid =".$this->sid." and adplan.max_per_site != 0))")->field("plansitevisitcount.pid,plansitevisitcount.view_num")->select();
 	   	
-	   	// 根据现在的sid值查看网站的类型
-	   	$site = M("Site");
-	   	$siteInfo = $site->where("id = ".$this->sid)->find();
+	   	if($siteInfo = S('site_id_'.$this->sid)){
+	   	    // 
+	   	}else{
+	   	    // 根据现在的sid值查看网站的类型
+	   	    $site = M("Site");
+	   	    $siteInfo = $site->where("id = ".$this->sid)->find();
+	   	    
+	   	    S('site_id_'.$this->sid,$siteInfo, $this->cacheTime);
+	   	}
+	   	
 	   	
 	   	$nowTime = time();
 	  // 	dump($siteInfo);
@@ -838,8 +853,15 @@ or
 	   	//  去除多余的逗号
 	   	$overfulfilPid = trim($overfulfilPid,",");
 	   	
-	   	// 连表获取适合的广告查询数据
-	   	$adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>"admanage",$this->table_pre."ad_plan"=>"adplan"))->where("admanage.pid = adplan.id and admanage.show_type = ".$this->sizeId." and admanage.status = 2  and adplan.plan_status=2 and adplan.id not in (".$overfulfilPid.")" )->field("admanage.*")->order("rand()")->find();
+	   	$pidstr = str_replace(',', '-', $overfulfilPid);
+	   	if($adManageInfo = S('ad_id_'.$pidstr)){
+	   	    //
+	   	}else{
+	   	    // 连表获取适合的广告查询数据
+	   	    $adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>"admanage",$this->table_pre."ad_plan"=>"adplan"))->where("admanage.pid = adplan.id and admanage.show_type = ".$this->sizeId." and admanage.status = 2  and adplan.plan_status=2 and adplan.id not in (".$overfulfilPid.")" )->field("admanage.*")->order("rand()")->find();
+	   	     
+	   	    S('ad_id_'.$pidstr,$adManageInfo, ceil($this->cacheTime/30));
+	   	}
 	   	/*echo $overfulfilPid."<br/>";
 	   	echo $planAllSiteVisitCount->getLastSql();
 	   	dump($planoverfulfilInfo);
@@ -872,26 +894,31 @@ or
     * @CreateDate: 2013-12-19 上午11:04:04
     */
    function clickAdJump(){
+       
+       if($adManageInfo = S('click_info_'.$_GET['zoneId'].'_'.$_GET['aid'])){
+           // 
+       }else{
+           // 查询相关的信息随机生成广告信息
+           $zone = M("Zone");
+           
+           // 查询代码位相关的信息必须是启用状态的代码位
+           $zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
+            
+           // 保存当前的广告代码所对应的域名id
+           $this->sid = $zoneInfo['sid'];
+            
+           $this->zoneId = $_REQUEST['zoneId'];
+           // 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
+           // $this->verifyVisitSource($zoneInfo);
+           // dump($_SERVER['HTTP_REFERER']);
+           
+           // 获取当前的广告的信息
+           $adManage = M("adManage");
+           $adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
+            
+           S('click_info_'.$_GET['zoneId'].'_'.$_GET['aid'], $adManageInfo, $this->cacheTime);
+       }
    
-	   	// 查询相关的信息随机生成广告信息
-	   	$zone = M("Zone");
-	   
-	   	// 查询代码位相关的信息必须是启用状态的代码位
-	   	$zoneInfo = $zone->where("id = ".$_GET['zoneId']." and status = 1")->find();
-	   	
-	   	// 保存当前的广告代码所对应的域名id
-	   	$this->sid = $zoneInfo['sid'];
-	   	
-		$this->zoneId = $_REQUEST['zoneId'];
-	   	// 处理客户端访问的来源问题 如果和申请广告代码位时的网站地址不同则不能投放
-		// $this->verifyVisitSource($zoneInfo);
-	   	// dump($_SERVER['HTTP_REFERER']);
-	   
-	   	// 获取当前的广告的信息
-	   	$adManage = M("adManage");
-	   	$adManageInfo = $adManage->where("aid = ".intval($_GET['aid'])." and status = 2")->find();
-	   	
-	   	
 	   	if($adManageInfo){
 
 	   		// 保存计划id 广告id 
