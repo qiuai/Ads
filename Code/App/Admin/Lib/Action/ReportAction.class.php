@@ -189,7 +189,7 @@ class ReportAction extends CommonAction {
 		$p = $_GET['p'] ? $_GET['p'] : 1;
 		$limit = " limit ". ($p-1)*$num .",".$num;
 		
-		$sql = "select p.plan_name, p.site_master_pay_price, p.price, p.pay_type, zv.day_start_time as day, zv.click_ip_num as cpc, zv.view_ip_num as cpm, zv.click_ip_num as click, zv.view_pv_num as pv from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where $limit";
+		$sql = "select p.plan_name, p.site_master_pay_price, p.price, p.pay_type, zv.day_start_time as day, zv.click_ip_num as cpc, zv.view_ip_num as cpm, zv.click_ip_num as click, zv.view_pv_num as pv from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where $order $limit";
 		$count = "select count(zv.id) as num from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where";
 		
 		$list = $this->pageList($sql, $count, $num);
