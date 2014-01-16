@@ -159,7 +159,7 @@ class AdServiceAction extends Action {
 	   	$data['create_time'] = time();
 	   	$adShowVerify->add($data);
 	   	
-	   	$adSizeInfo = $this->adSizeInfo;
+	   	$adSizeInfo = S('ad_size_'.$this->sizeId.'_'.$this->zoneId);
 	   	$this->assign("width",$adSizeInfo['width']);
 	   	$this->assign("height",$adSizeInfo['height']);
 	   	$this->assign("sessionFlagValue",$sessionFlagValue);
@@ -720,18 +720,20 @@ class AdServiceAction extends Action {
     */
    function getAdManageInfo(){
        
-       if($this->adSizeInfo = S('ad_size_'.$this->sizeId)){
+       if($adSizeInfo = S('ad_size_'.$this->sizeId.'_'.$this->zoneId)){
            // 缓存
        }else{
            // 查询当前广告的宽度和高度
            $adSize = M("AdSize");
            
            // 根据尺寸id值查询相关的广告信息
-           $this->adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
+           $adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
            
            // 创建缓存
-           S('ad_size_'.$this->sizeId,$this->adSizeInfo, $this->cacheTime);
+           S('ad_size_'.$this->sizeId.'_'.$this->zoneId, $adSizeInfo, $this->cacheTime);
        }
+       
+//        $this->adSizeInfo = $adSizeInfo;
 	   	
 	  // 调用函数创建当天0时0分0秒的时间戳
    		$dayStartTime = $this->createDayStartTime();

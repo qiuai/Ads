@@ -60,15 +60,15 @@ class ReportAction extends CommonAction {
 	
 		// 搜索PID
 		if($pid){
-			$where = " where pid = " . intval($pid);
+			$where = " where zv.pid = " . intval($pid);
 		}else{
-			$where = " where pid != " . intval($pid);
+			$where = " where zv.pid != " . intval($pid);
 		}
 	
 		// 搜索日期
 		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
-			$where .= " and i.start_date >= " . strtotime(intval($_REQUEST['start_date']));
-			$where .= " and i.end_date < " . strtotime(intval($_REQUEST['end_date']));
+			$where .= " and zv.day_start_time >= " . strtotime(intval($_REQUEST['start_date']));
+			$where .= " and zv.day_start_time < " . strtotime(intval($_REQUEST['end_date']));
 		}
 	
 		// 列表数据
@@ -189,7 +189,7 @@ class ReportAction extends CommonAction {
 		$p = $_GET['p'] ? $_GET['p'] : 1;
 		$limit = " limit ". ($p-1)*$num .",".$num;
 		
-		$sql = "select p.plan_name, p.site_master_pay_price, p.price, p.pay_type, zv.click_ip_num as cpc, zv.view_ip_num as cpm, zv.click_ip_num as click, zv.view_pv_num as pv from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where $limit";
+		$sql = "select p.plan_name, p.site_master_pay_price, p.price, p.pay_type, zv.day_start_time as day, zv.click_ip_num as cpc, zv.view_ip_num as cpm, zv.click_ip_num as click, zv.view_pv_num as pv from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where $order $limit";
 		$count = "select count(zv.id) as num from " . C('DB_PREFIX') . "zone_visit_count zv join " . C('DB_PREFIX') . "zone z on z.id = zv.zid join " . C('DB_PREFIX') . "ad_plan p on p.id = zv.pid $where";
 		
 		$list = $this->pageList($sql, $count, $num);
@@ -203,6 +203,7 @@ class ReportAction extends CommonAction {
 		        $list[$key]['adfee'] = $value['price'] * $value['cpc'];
 		        $list[$key]['ip'] = $value['cpc'];
 		    }
+		    $list[$key]['day'] = date('Y-m-d',$value['day']);
 		}
 		$this->assign('list',$list);// 赋值数据集
 	}

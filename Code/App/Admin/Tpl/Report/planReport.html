@@ -45,6 +45,7 @@
 </table>		
 <table align="center" cellspacing="0" class="list" style="text-align:center">
 	<tr class="tb_title">
+        <td>统计时间</td>
         <td>计划名称</td>
         <td>计划类型</td>
         <td>IP</td>
@@ -60,6 +61,7 @@
     <if condition="$list">
     <Volist name='list' id='vo'>
    	<tr>
+        <td>{$vo.day}</td>
         <td>{$vo.plan_name}</td>
         <td><if condition="$vo.pay_type">CPM<else/>CPC</if></td>
         <td>{$vo.ip}</td>
