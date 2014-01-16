@@ -60,15 +60,15 @@ class ReportAction extends CommonAction {
 	
 		// 搜索PID
 		if($pid){
-			$where = " where pid = " . intval($pid);
+			$where = " where zv.pid = " . intval($pid);
 		}else{
-			$where = " where pid != " . intval($pid);
+			$where = " where zv.pid != " . intval($pid);
 		}
 	
 		// 搜索日期
 		if(intval($_REQUEST['start_date']) && intval($_REQUEST['end_date'])){
-			$where .= " and i.start_date >= " . strtotime(intval($_REQUEST['start_date']));
-			$where .= " and i.end_date < " . strtotime(intval($_REQUEST['end_date']));
+			$where .= " and zv.day_start_time >= " . strtotime(intval($_REQUEST['start_date']));
+			$where .= " and zv.day_start_time < " . strtotime(intval($_REQUEST['end_date']));
 		}
 	
 		// 列表数据
