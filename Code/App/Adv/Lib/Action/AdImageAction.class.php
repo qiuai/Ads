@@ -31,9 +31,12 @@ class AdImageAction extends AdServiceAction{
 		$rs = $this->view->fetch('adImage');
 		
 		// 统计代码添加
-		$tongji = "<script type=\"text/javascript\" src=\"http://js.tongji.linezing.com/3399130/tongji.js\"></script><noscript><a href=\"http://www.linezing.com\"><img src=\"http://img.tongji.linezing.com/3399130/tongji.gif\"/></a></noscript>";
+		$tongji_jmb = "<script type=\"text/javascript\" src=\"http://js.tongji.linezing.com/3399130/tongji.js\"></script><noscript><a href=\"http://www.linezing.com\"><img src=\"http://img.tongji.linezing.com/3399130/tongji.gif\"/></a></noscript>";
 		
-		$code = "document.write(\"". $this->jsformat($rs.$tongji) . "\");";
+		// 统计代码添加
+		$tongji_kcl = "<script type=\"text/javascript\" src=\"http://js.tongji.linezing.com/3399590/tongji.js\"></script><noscript><a href=\"http://www.linezing.com\"><img src=\"http://img.tongji.linezing.com/3399590/tongji.gif\"/></a></noscript>";
+		
+		$code = "document.write(\"". $this->jsformat($rs.$tongji_jmb.$tongji_kcl) . "\");";
 		
 		echo $code;
 	}

@@ -682,7 +682,7 @@ class AdServiceAction extends Action {
     */
    function verifyVisitSource($zoneInfo){
        
-       if(S('zone_sid_'.$zoneInfo['sid'])){
+       if(S('zone_sid_'.$zoneInfo['sid'].'_'.$this->zoneId)){
            // 缓存
        }else{
            // 根据$zoneInfo中的sid值查询网站的信息
@@ -692,7 +692,7 @@ class AdServiceAction extends Action {
            $siteInfo = $site->where("id = ".$zoneInfo['sid'])->find();
            
            // 缓存数据
-           S('zone_sid_'.$zoneInfo['sid'], $siteInfo, $this->cacheTime);
+           S('zone_sid_'.$zoneInfo['sid'].'_'.$this->zoneId, $siteInfo, $this->cacheTime);
        }
 	   
 	   	if(!$siteInfo['site_domain']){
@@ -856,13 +856,13 @@ or
 	   	$overfulfilPid = trim($overfulfilPid,",");
 	   	
 	   	$pidstr = str_replace(',', '-', $overfulfilPid);
-	   	if($adManageInfo = S('ad_id_'.$pidstr)){
+	   	if($adManageInfo = S('ad_id_'.$pidstr.'_'.$this->zoneId)){
 	   	    //
 	   	}else{
 	   	    // 连表获取适合的广告查询数据
 	   	    $adManageInfo = $adManage->table(array($this->table_pre."ad_manage"=>"admanage",$this->table_pre."ad_plan"=>"adplan"))->where("admanage.pid = adplan.id and admanage.show_type = ".$this->sizeId." and admanage.status = 2  and adplan.plan_status=2 and adplan.id not in (".$overfulfilPid.")" )->field("admanage.*")->order("rand()")->find();
 	   	     
-	   	    S('ad_id_'.$pidstr,$adManageInfo, ceil($this->cacheTime/30));
+	   	    S('ad_id_'.$pidstr.'_'.$this->zoneId,$adManageInfo, ceil($this->cacheTime/30));
 	   	}
 	   	/*echo $overfulfilPid."<br/>";
 	   	echo $planAllSiteVisitCount->getLastSql();
