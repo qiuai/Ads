@@ -159,7 +159,7 @@ class AdServiceAction extends Action {
 	   	$data['create_time'] = time();
 	   	$adShowVerify->add($data);
 	   	
-	   	$adSizeInfo = S('ad_size_'.$this->sizeId);
+	   	$adSizeInfo = S('ad_size_'.$this->sizeId.'_'.$this->zoneId);
 	   	$this->assign("width",$adSizeInfo['width']);
 	   	$this->assign("height",$adSizeInfo['height']);
 	   	$this->assign("sessionFlagValue",$sessionFlagValue);
@@ -720,7 +720,7 @@ class AdServiceAction extends Action {
     */
    function getAdManageInfo(){
        
-       if($adSizeInfo = S('ad_size_'.$this->sizeId)){
+       if($adSizeInfo = S('ad_size_'.$this->sizeId.'_'.$this->zoneId)){
            // 缓存
        }else{
            // 查询当前广告的宽度和高度
@@ -730,7 +730,7 @@ class AdServiceAction extends Action {
            $adSizeInfo = $adSize->where('id = '.$this->sizeId)->find();
            
            // 创建缓存
-           S('ad_size_'.$this->sizeId, $adSizeInfo, $this->cacheTime);
+           S('ad_size_'.$this->sizeId.'_'.$this->zoneId, $adSizeInfo, $this->cacheTime);
        }
        
 //        $this->adSizeInfo = $adSizeInfo;
